@@ -76,7 +76,7 @@ public class Post {
         }
 
         this.tags.add(tag);
-        this.modifiedDateTime = LocalDateTime.now();
+        setModifiedDateTime(LocalDateTime.now());
     }
 
     public LocalDateTime getCreatedDateTime() {
@@ -94,7 +94,7 @@ public class Post {
     public void setTitle(String title) {
         assert (title.equals("") != true);
         this.title = title;
-        this.modifiedDateTime = LocalDateTime.now();
+        setModifiedDateTime(LocalDateTime.now());
     }
 
     public String getBody() {
@@ -104,7 +104,7 @@ public class Post {
     public void setBody(String body) {
         assert (body.equals("") != true);
         this.body = body;
-        this.modifiedDateTime = LocalDateTime.now();
+        setModifiedDateTime(LocalDateTime.now());
     }
 
 
@@ -194,5 +194,9 @@ public class Post {
     public void print() {
         System.out.format("author: %s, created date: %s, modified date: %s,, tag: %s, title: %s, body: %s\n",
                 this.getAuthorName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
+    }
+
+    private void setModifiedDateTime(LocalDateTime modifiedDateTime) {
+        this.modifiedDateTime = modifiedDateTime;
     }
 }
