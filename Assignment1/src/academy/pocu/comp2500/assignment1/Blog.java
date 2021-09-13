@@ -16,11 +16,8 @@ public class Blog {
         this.posts = new LinkedList<Post>();
     }
 
-    public Post addPost(User author, LinkedList<String> tags, String title, String body) {
-        Post newPost = new Post(author, tags, title, body);
-        this.posts.add(newPost);
-
-        return newPost;
+    public void addPost(Post post) {
+        this.posts.add(post);
     }
 
     public ArrayList<Post> getFilteredPosts(User authorOrNull, LinkedList<String> tags, EPostSorting sorting) {
