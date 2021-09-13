@@ -28,16 +28,16 @@ public class Blog {
         return newPost;
     }
 
-    public ArrayList<Post> getPosts(String authorNameFilterOrNull, LinkedList<String> tagFilters) {
+    public ArrayList<Post> getPosts(String authorNameOrNull, LinkedList<String> tagFilters) {
         ArrayList<Post> filteredPosts = new ArrayList<Post>(posts.size());
 
         for (Post post : posts) {
-            if (authorNameFilterOrNull != null && post.getAuthorName().equals(authorNameFilterOrNull) == false) {
+            if (authorNameOrNull != null && post.getAuthorName().equals(authorNameOrNull) == false) {
                 continue;
             }
 
-            for(String tagFilter : tagFilters){
-                if(post.getTags().contains(tagFilter) == false){
+            for (String tagFilter : tagFilters) {
+                if (post.getTags().contains(tagFilter) == false) {
                     continue;
                 }
             }

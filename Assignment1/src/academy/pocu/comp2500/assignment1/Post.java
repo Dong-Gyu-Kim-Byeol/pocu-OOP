@@ -1,6 +1,8 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 public class Post {
@@ -55,7 +57,7 @@ public class Post {
     }
 
     public void addTag(String tag) {
-        if(tag.equals("")){
+        if (tag.equals("")) {
             return;
         }
 
@@ -93,6 +95,7 @@ public class Post {
 
 
     public LinkedList<PostComment> getComments() {
+        PostComment.sort(comments);
         return comments;
     }
 

@@ -24,7 +24,7 @@ public class User {
         return name;
     }
 
-    public void setAuthorFilterName(String authorNameOrNull) {
+    public void setAuthorNameFilter(String authorNameOrNull) {
         this.authorNameFilterOrNull = authorNameOrNull;
     }
 

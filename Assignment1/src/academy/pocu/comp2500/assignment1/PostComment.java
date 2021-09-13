@@ -1,5 +1,7 @@
 package academy.pocu.comp2500.assignment1;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 public class PostComment {
@@ -8,6 +10,17 @@ public class PostComment {
     private LinkedList<User> upvotes;
     private LinkedList<User> downvotes;
     private LinkedList<PostComment> subcomments;
+
+    public static void sort(LinkedList<PostComment> comments) {
+        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore));
+    }
+
+    public static void printComments(LinkedList<PostComment> comments) {
+        for (PostComment comment : comments) {
+            System.out.println(comment.getPrintString());
+            PostComment.printSubcomments(comment.getSubcomments());
+        }
+    }
 
     public PostComment(User author, String body) {
         this.author = author;
@@ -39,6 +52,7 @@ public class PostComment {
     }
 
     public LinkedList<PostComment> getSubcomments() {
+        PostComment.sort(subcomments);
         return subcomments;
     }
 
@@ -47,6 +61,10 @@ public class PostComment {
         this.subcomments.add(newSubcomment);
 
         return newSubcomment;
+    }
+
+    public int getVoteScore() {
+        return getUpvoteCount() - getDownvoteCount();
     }
 
     public int getUpvoteCount() {
@@ -81,11 +99,8 @@ public class PostComment {
         downvotes.add(user);
     }
 
-    public static void printComments(LinkedList<PostComment> comments) {
-        for (PostComment comment : comments) {
-            System.out.println(comment.getPrintString());
-            PostComment.printSubcomments(comment.getSubcomments());
-        }
+    public String getPrintString() {
+        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthorName(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
     }
 
     private static void printSubcomments(LinkedList<PostComment> subcomments) {
@@ -94,7 +109,5 @@ public class PostComment {
         }
     }
 
-    public String getPrintString() {
-        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthorName(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
-    }
+
 }
