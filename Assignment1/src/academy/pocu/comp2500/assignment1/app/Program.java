@@ -30,12 +30,14 @@ public class Program {
         newComment = newPost.addComment(read1, "comment21");
         newComment.addSubcomment(read2, "subcom211");
         newComment.addSubcomment(read2, "subcom212");
-        newComment.upvote(read1);
 
         newComment = newPost.addComment(read1, "comment22");
         newComment.addSubcomment(read2, "subcom221");
+        newComment.upvote(read1);
+
         newPost.addReaction(read1, EPostReaction.GREAT);
         newPost.addReaction(read2, EPostReaction.FUN);
+
 
 
         read1.visitBlog(blog);

@@ -51,8 +51,7 @@ public class User {
             post.print();
 
             System.out.println("\n-------- comments --------");
-            LinkedList<PostComment> comments = post.getComments();
-            PostComment.printComments(comments);
+            post.printComments();
         }
     }
 }

@@ -11,16 +11,6 @@ public class PostComment {
     private LinkedList<User> downvotes;
     private LinkedList<PostComment> subcomments;
 
-    public static void sort(LinkedList<PostComment> comments) {
-        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
-    }
-
-    public static void printComments(LinkedList<PostComment> comments) {
-        for (PostComment comment : comments) {
-            System.out.println(comment.getPrintString());
-            PostComment.printSubcomments(comment.getSubcomments());
-        }
-    }
 
     public PostComment(User author, String body) {
         this.author = author;
@@ -52,8 +42,12 @@ public class PostComment {
     }
 
     public LinkedList<PostComment> getSubcomments() {
-        PostComment.sort(subcomments);
+        sort();
         return subcomments;
+    }
+
+    public void sort() {
+        Collections.sort(subcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 
     public PostComment addSubcomment(User author, String body) {
@@ -103,7 +97,7 @@ public class PostComment {
         return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthorName(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
     }
 
-    private static void printSubcomments(LinkedList<PostComment> subcomments) {
+    public void printSubcomments() {
         for (PostComment subcomment : subcomments) {
             System.out.format(" - %s\n", subcomment.getPrintString());
         }

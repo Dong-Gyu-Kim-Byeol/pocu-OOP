@@ -113,7 +113,7 @@ public class Post {
 
 
     public LinkedList<PostComment> getComments() {
-        PostComment.sort(comments);
+        sort();
         return comments;
     }
 
@@ -180,6 +180,18 @@ public class Post {
         if (this.loveReactions.contains(user) == true) {
             this.loveReactions.remove(user);
             return;
+        }
+    }
+
+    public void sort() {
+        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
+    }
+
+    public void printComments() {
+        sort();
+        for (PostComment comment : comments) {
+            System.out.println(comment.getPrintString());
+            comment.printSubcomments();
         }
     }
 
