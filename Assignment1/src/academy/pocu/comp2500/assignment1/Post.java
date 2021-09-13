@@ -87,6 +87,10 @@ public class Post {
         return modifiedDateTime;
     }
 
+    public void setModifiedDateTime() {
+        this.modifiedDateTime = LocalDateTime.now();
+    }
+
     public String getTitle() {
         return title;
     }
@@ -194,9 +198,5 @@ public class Post {
     public void print() {
         System.out.format("author: %s, created date: %s, modified date: %s,, tag: %s, title: %s, body: %s\n",
                 this.getAuthorName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
-    }
-
-    private void setModifiedDateTime() {
-        this.modifiedDateTime = LocalDateTime.now();
     }
 }
