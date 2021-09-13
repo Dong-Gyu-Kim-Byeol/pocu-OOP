@@ -94,8 +94,8 @@ public class Post {
         return newComment;
     }
 
-    public void addReaction(User user, EPostReaction reactionType) {
-        switch (reactionType) {
+    public void addReaction(User user, EPostReaction reaction) {
+        switch (reaction) {
             case GREAT:
                 if (this.greatReactions.contains(user) != true) {
                     this.greatReactions.add(user);

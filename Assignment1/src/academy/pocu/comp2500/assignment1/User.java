@@ -27,8 +27,8 @@ public class User {
         this.tagFilterOrNull = tagOrNull;
     }
 
-    public void setPostSorting(EPostSorting postSorting) {
-        this.postSorting = postSorting;
+    public void setPostSorting(EPostSorting sorting) {
+        this.postSorting = sorting;
     }
 
     public void visitBlog(Blog blog) {
