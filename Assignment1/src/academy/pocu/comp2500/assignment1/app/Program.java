@@ -19,13 +19,13 @@ public class Program {
         User read1 = new User("read1");
         User read2 = new User("read2");
 
-        Post newPost = blog.addPost(author1, "tt11", "bb11");
+        Post newPost = blog.addPost(author1, new LinkedList<String>(), "tt11", "bb11");
         newPost.addTag("tag11");
         newPost.addReaction(read1, EPostReaction.FUN);
         PostComment newComment = newPost.addComment(read1, "comment11");
         newComment.addSubcomment(read2, "subcom111");
 
-        newPost = blog.addPost(author2, "tt22", "bb22");
+        newPost = blog.addPost(author2, new LinkedList<String>(), "tt22", "bb22");
         newPost.addTag("tag22");
         newComment = newPost.addComment(read1, "comment21");
         newComment.addSubcomment(read2, "subcom211");

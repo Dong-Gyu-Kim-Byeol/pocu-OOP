@@ -32,7 +32,11 @@ public class PostComment {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBody(User author, String body) {
+        if (this.author != author) {
+            return;
+        }
+
         assert (body.equals(""));
         if (body.equals("") == true) {
             return;

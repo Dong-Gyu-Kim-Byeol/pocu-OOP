@@ -23,13 +23,6 @@ public class Blog {
         return newPost;
     }
 
-    public Post addPost(User author, String title, String body) {
-        Post newPost = new Post(author, title, body);
-        this.posts.add(newPost);
-
-        return newPost;
-    }
-
     public ArrayList<Post> getFilteredPosts(User authorOrNull, LinkedList<String> tags, EPostSorting sorting) {
         User authorFilterOrNull = authorOrNull;
         LinkedList<String> tagFilters = tags;

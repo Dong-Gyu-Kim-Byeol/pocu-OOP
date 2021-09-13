@@ -21,10 +21,6 @@ public class Post {
     private LinkedList<User> funReactions;
     private LinkedList<User> loveReactions;
 
-    public Post(User author, String title, String body) {
-        this(author, new LinkedList<String>(), title, body);
-    }
-
     public Post(User author, LinkedList<String> tags, String title, String body) {
         this.author = author;
 
