@@ -22,23 +22,21 @@ public class App {
         registry.registerSubcommentListGetter("PostComment", "getSubcomments"); //: 댓글에 달린 하위 댓글들을 가져오는 메서드를 등록한다.
         registry.registerSubcommentUpvoter("PostComment", "upvote"); //: 하위 댓글을 추천하는 메서드를 등록한다.
         registry.registerSubcommentDownvoter("PostComment", "downvote"); //: 하위 댓글을 비추천하는 메서드를 등록한다.
+        registry.registerAuthorFilterSetter("User", "setAuthorFilterName"); //: 작성자 필터를 설정하는 메서드를 등록한다.
+        registry.registerTagFilterSetter("User", "setTagFilter"); //: 태그 필터를 설정하는 메서드를 등록한다.
+        registry.registerPostTagAdder("Post", "setTag"); //: 블로그 글에 태그를 추가하는 메서드를 등록한다.
+        registry.registerPostOrderSetter("User", "setPostSorting"); //: 블로그 글의 정렬 방법을 설정하는 메서드를 등록한다.
+        registry.registerReactionAdder("Post", "addReaction"); //: 블로그 글에 리액션을 추가하는 메서드를 등록한다.
+        registry.registerReactionRemover("Post", "deleteReaction"); //: 블로그 글로부터 리액션을 제거하는 메서드를 등록한다.
 
-
-        registry.registerPostListGetter("Blog", "getPosts"); // 블로그 글 목록을 가져오는 메서드를 등록한다.
+        registry.registerPostListGetter("User", "visitBlog"); // 블로그 글 목록을 가져오는 메서드를 등록한다.
         /*
-registerTagFilterSetter(): 태그 필터를 설정하는 메서드를 등록한다.
-registerAuthorFilterSetter(): 작성자 필터를 설정하는 메서드를 등록한다.
-registerPostOrderSetter(): 블로그 글의 정렬 방법을 설정하는 메서드를 등록한다.
 
 
 
 
-registerPostTagAdder(): 블로그 글에 태그를 추가하는 메서드를 등록한다.
 
 
-
-registerReactionAdder(): 블로그 글에 리액션을 추가하는 메서드를 등록한다.
-registerReactionRemover(): 블로그 글로부터 리액션을 제거하는 메서드를 등록한다.
 
 
 

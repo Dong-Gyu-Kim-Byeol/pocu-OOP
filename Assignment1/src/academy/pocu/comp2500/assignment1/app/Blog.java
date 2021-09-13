@@ -12,9 +12,11 @@ public class Blog {
         this.posts = new LinkedList<Post>();
     }
 
-    public void addPost(User author, String title, String body) {
+    public Post addPost(User author, String title, String body) {
         Post newPost = new Post(author, title, body);
         this.posts.add(newPost);
+
+        return newPost;
     }
 
     public LinkedList<Post> getPosts() {

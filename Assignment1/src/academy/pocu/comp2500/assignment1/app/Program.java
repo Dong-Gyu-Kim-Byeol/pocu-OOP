@@ -7,10 +7,33 @@ public class Program {
 
         User author1 = new User("author1");
         User author2 = new User("author2");
-
         User read1 = new User("read1");
+        User read2 = new User("read2");
 
-        blog.addPost(author1, "tt11", "bb11");
+        Post newPost = blog.addPost(author1, "tt11", "bb11");
+        newPost.setTag("tag11");
+        PostComment newComment = newPost.addComment(read1, "comment11");
+        newComment.addSubcomment(read2, "subcom111");
+
+        newPost = blog.addPost(author2, "tt22", "bb22");
+        newPost.setTag("tag22");
+        newComment = newPost.addComment(read1, "comment21");
+        newComment.addSubcomment(read2, "subcom211");
+        newComment.addSubcomment(read2, "subcom212");
+        newComment = newPost.addComment(read1, "comment22");
+        newComment.addSubcomment(read2, "subcom221");
+        newPost.addReaction(read1, EPostReaction.GREAT);
+        newPost.addReaction(read2, EPostReaction.FUN);
+
+
+        read1.visitBlog(blog);
+        newPost.deleteReaction(read1);
+
+        System.out.println("\n\n------------- Filter ---------------\n");
+//        read1.setAuthorFilterName(author1.getName());
+//        read1.setTagFilter("tag11");
+        read1.setPostSorting(EPostSorting.TITLE_ASCENGIND);
+
 
         read1.visitBlog(blog);
 
