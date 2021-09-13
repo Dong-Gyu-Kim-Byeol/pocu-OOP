@@ -9,8 +9,8 @@ public class Post {
     private User author;
     private LinkedList<String> tags;
 
-    private LocalDateTime postDateTime;
-    private LocalDateTime editDateTime;
+    private LocalDateTime createdDateTime;
+    private LocalDateTime modifiedDateTime;
     private String title;
     private String body;
     private LinkedList<PostComment> comments;
@@ -32,8 +32,8 @@ public class Post {
         assert (body.equals("") != true);
         this.body = body;
 
-        this.postDateTime = LocalDateTime.now();
-        this.editDateTime = LocalDateTime.now();
+        this.createdDateTime = LocalDateTime.now();
+        this.modifiedDateTime = LocalDateTime.now();
 
         comments = new LinkedList<PostComment>();
 
@@ -76,15 +76,15 @@ public class Post {
         }
 
         this.tags.add(tag);
-        this.editDateTime = LocalDateTime.now();
+        this.modifiedDateTime = LocalDateTime.now();
     }
 
-    public LocalDateTime getPostDateTime() {
-        return postDateTime;
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
     }
 
-    public LocalDateTime getEditDateTime() {
-        return editDateTime;
+    public LocalDateTime getModifiedDateTime() {
+        return modifiedDateTime;
     }
 
     public String getTitle() {
@@ -94,7 +94,7 @@ public class Post {
     public void setTitle(String title) {
         assert (title.equals("") != true);
         this.title = title;
-        this.editDateTime = LocalDateTime.now();
+        this.modifiedDateTime = LocalDateTime.now();
     }
 
     public String getBody() {
@@ -104,7 +104,7 @@ public class Post {
     public void setBody(String body) {
         assert (body.equals("") != true);
         this.body = body;
-        this.editDateTime = LocalDateTime.now();
+        this.modifiedDateTime = LocalDateTime.now();
     }
 
 
@@ -192,7 +192,7 @@ public class Post {
     }
 
     public void print() {
-        System.out.format("author: %s, post date: %s, edit date: %s,, tag: %s, title: %s, body: %s\n",
-                this.getAuthorName(), this.getPostDateTime(), this.getEditDateTime(), this.getTags(), this.getTitle(), this.getBody());
+        System.out.format("author: %s, created date: %s, modified date: %s,, tag: %s, title: %s, body: %s\n",
+                this.getAuthorName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
     }
 }

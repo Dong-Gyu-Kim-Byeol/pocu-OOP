@@ -47,16 +47,16 @@ public class Blog {
     private static void sortingPost(EPostSorting sorting, ArrayList<Post> posts) {
         switch (sorting) {
             case POST_DATE_ASCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getPostDateTime));
+                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime));
                 break;
             case POST_DATE_DESCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getPostDateTime).reversed());
+                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime).reversed());
                 break;
             case EDIT_DATE_ASCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getEditDateTime));
+                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime));
                 break;
             case EDIT_DATE_DESCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getEditDateTime).reversed());
+                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime).reversed());
                 break;
             case TITLE_ASCENGIND:
                 Collections.sort(posts, Comparator.comparing(Post::getTitle));
