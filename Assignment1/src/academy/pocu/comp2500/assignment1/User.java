@@ -19,12 +19,12 @@ public class User {
         return name;
     }
 
-    public void setAuthorFilterName(String authorNameFilterOrNull) {
-        this.authorNameFilterOrNull = authorNameFilterOrNull;
+    public void setAuthorFilterName(String authorNameOrNull) {
+        this.authorNameFilterOrNull = authorNameOrNull;
     }
 
-    public void setTagFilter(String tagFilterOrNull) {
-        this.tagFilterOrNull = tagFilterOrNull;
+    public void setTagFilter(String tagOrNull) {
+        this.tagFilterOrNull = tagOrNull;
     }
 
     public void setPostSorting(EPostSorting postSorting) {

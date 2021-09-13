@@ -7,7 +7,6 @@ public class App {
         // Register like this
         // registry.registerPostAdder("Foo", "bar");
 
-
         registry.registerBlogCreator("Blog"); // : 블로그를 생성하는 생성자를 등록한다.
         registry.registerPostAdder("Blog", "addPost"); // 블로그에 글을 추가하는 메서드를 등록한다.
         registry.registerPostTitleUpdater("Post", "setTitle"); //: 발행된 블로그 글의 제목을 바꾸는 메서드를 등록한다.
@@ -28,18 +27,6 @@ public class App {
         registry.registerPostOrderSetter("User", "setPostSorting"); //: 블로그 글의 정렬 방법을 설정하는 메서드를 등록한다.
         registry.registerReactionAdder("Post", "addReaction"); //: 블로그 글에 리액션을 추가하는 메서드를 등록한다.
         registry.registerReactionRemover("Post", "deleteReaction"); //: 블로그 글로부터 리액션을 제거하는 메서드를 등록한다.
-
         registry.registerPostListGetter("User", "visitBlog"); // 블로그 글 목록을 가져오는 메서드를 등록한다.
-        /*
-
-
-
-
-
-
-
-
-
-        * */
     }
 }
