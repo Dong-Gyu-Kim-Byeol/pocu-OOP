@@ -1,17 +1,22 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 public class User {
     private String name;
     private String authorNameFilterOrNull;
-    private String tagFilterOrNull;
+    private LinkedList<String> tagFilters;
     private EPostSorting postSorting;
 
     public User(String name) {
         assert (name.equals("") != true);
         this.name = name;
+
+        tagFilters = new LinkedList<String>();
+
         postSorting = EPostSorting.POST_DATE_ASCENGIND;
     }
 
@@ -23,8 +28,8 @@ public class User {
         this.authorNameFilterOrNull = authorNameOrNull;
     }
 
-    public void setTagFilter(String tagOrNull) {
-        this.tagFilterOrNull = tagOrNull;
+    public void setTagFilters(LinkedList<String> tags) {
+        this.tagFilters = tags;
     }
 
     public void setPostSorting(EPostSorting sorting) {
@@ -32,21 +37,7 @@ public class User {
     }
 
     public void visitBlog(Blog blog) {
-        LinkedList<Post> posts = blog.getPosts();
-        ArrayList<Post> filteredPosts = new ArrayList<Post>(posts.size());
-
-        for (Post post : posts) {
-            if (authorNameFilterOrNull != null && post.getAuthorName().equals(this.authorNameFilterOrNull) == false) {
-                continue;
-            }
-
-            if (tagFilterOrNull != null && post.getTagOrNull() != null && post.getTagOrNull().equals(tagFilterOrNull) == false) {
-                continue;
-            }
-
-            filteredPosts.add(post);
-        }
-
+        ArrayList<Post> filteredPosts = blog.getPosts(authorNameFilterOrNull, tagFilters);
         ArrayList<Post> sortedPosts = sortingPost(filteredPosts);
         visitPrint(sortedPosts);
     }
@@ -54,19 +45,19 @@ public class User {
     private ArrayList<Post> sortingPost(ArrayList<Post> filteredPosts) {
         switch (postSorting) {
             case POST_DATE_ASCENGIND:
-                filteredPosts.sort(new PostPostDateComparator());
+                Collections.sort(filteredPosts, Comparator.comparing(Post::getPostDateTime));
                 break;
             case POST_DATE_DESCENGIND:
-                filteredPosts.sort(new PostPostDateComparator().reversed());
+                Collections.sort(filteredPosts, Comparator.comparing(Post::getPostDateTime).reversed());
                 break;
             case EDIT_DATE_ASCENGIND:
-                filteredPosts.sort(new PostEditDateComparator());
+                Collections.sort(filteredPosts, Comparator.comparing(Post::getEditDateTime));
                 break;
             case EDIT_DATE_DESCENGIND:
-                filteredPosts.sort(new PostEditDateComparator().reversed());
+                Collections.sort(filteredPosts, Comparator.comparing(Post::getEditDateTime).reversed());
                 break;
             case TITLE_ASCENGIND:
-                filteredPosts.sort(new PostTitleComparator());
+                Collections.sort(filteredPosts, Comparator.comparing(Post::getTitle));
                 break;
             default:
                 assert (false);

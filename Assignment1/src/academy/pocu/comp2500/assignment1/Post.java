@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Post {
     private User author;
-    private String tagOrNull;
+    private LinkedList<String> tags;
 
     private LocalDateTime postDateTime;
     private LocalDateTime editDateTime;
@@ -19,9 +19,14 @@ public class Post {
     private LinkedList<User> funReactions;
     private LinkedList<User> loveReactions;
 
-
     public Post(User author, String title, String body) {
+        this(author, new LinkedList<String>(), title, body);
+    }
+
+    public Post(User author, LinkedList<String> tags, String title, String body) {
         this.author = author;
+
+        this.tags = tags;
 
         assert (title.equals("") != true);
         this.title = title;
@@ -45,12 +50,16 @@ public class Post {
         return author.getName();
     }
 
-    public String getTagOrNull() {
-        return this.tagOrNull;
+    public LinkedList<String> getTags() {
+        return this.tags;
     }
 
-    public void setTag(String tagOrNull) {
-        this.tagOrNull = tagOrNull;
+    public void addTag(String tag) {
+        if(tag.equals("")){
+            return;
+        }
+
+        this.tags.add(tag);
         this.editDateTime = LocalDateTime.now();
     }
 
@@ -154,6 +163,7 @@ public class Post {
     }
 
     public void print() {
-        System.out.format("author: %s, post date: %s, edit date: %s,, tag: %s, title: %s, body: %s\n", this.getAuthorName(), this.getPostDateTime(), this.getEditDateTime(), this.getTagOrNull(), this.getTitle(), this.getBody());
+        System.out.format("author: %s, post date: %s, edit date: %s,, tag: %s, title: %s, body: %s\n",
+                this.getAuthorName(), this.getPostDateTime(), this.getEditDateTime(), this.getTags(), this.getTitle(), this.getBody());
     }
 }
