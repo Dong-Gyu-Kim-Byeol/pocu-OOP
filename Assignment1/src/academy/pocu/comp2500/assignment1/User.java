@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class User {
     private String name;
-    private String authorNameFilterOrNull;
+    private User authorFilterOrNull;
     private LinkedList<String> tagFilters;
     private EPostSorting postSorting;
 
@@ -24,12 +24,16 @@ public class User {
         return name;
     }
 
-    public void setAuthorNameFilter(String authorNameOrNull) {
-        this.authorNameFilterOrNull = authorNameOrNull;
+    public void setAuthorFilter(User authorOrNull) {
+        this.authorFilterOrNull = authorOrNull;
     }
 
     public void setTagFilters(LinkedList<String> tags) {
         this.tagFilters = tags;
+    }
+
+    public EPostSorting getPostSorting() {
+        return postSorting;
     }
 
     public void setPostSorting(EPostSorting sorting) {
@@ -37,33 +41,8 @@ public class User {
     }
 
     public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = blog.getPosts(authorNameFilterOrNull, tagFilters);
-        ArrayList<Post> sortedPosts = sortingPost(filteredPosts);
-        visitPrint(sortedPosts);
-    }
-
-    private ArrayList<Post> sortingPost(ArrayList<Post> filteredPosts) {
-        switch (postSorting) {
-            case POST_DATE_ASCENGIND:
-                Collections.sort(filteredPosts, Comparator.comparing(Post::getPostDateTime));
-                break;
-            case POST_DATE_DESCENGIND:
-                Collections.sort(filteredPosts, Comparator.comparing(Post::getPostDateTime).reversed());
-                break;
-            case EDIT_DATE_ASCENGIND:
-                Collections.sort(filteredPosts, Comparator.comparing(Post::getEditDateTime));
-                break;
-            case EDIT_DATE_DESCENGIND:
-                Collections.sort(filteredPosts, Comparator.comparing(Post::getEditDateTime).reversed());
-                break;
-            case TITLE_ASCENGIND:
-                Collections.sort(filteredPosts, Comparator.comparing(Post::getTitle));
-                break;
-            default:
-                assert (false);
-        }
-
-        return filteredPosts;
+        ArrayList<Post> filteredPosts = blog.getFilteredPosts(authorFilterOrNull, tagFilters, postSorting);
+        visitPrint(filteredPosts);
     }
 
     private void visitPrint(ArrayList<Post> posts) {

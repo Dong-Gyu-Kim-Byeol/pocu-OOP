@@ -12,7 +12,7 @@ public class PostComment {
     private LinkedList<PostComment> subcomments;
 
     public static void sort(LinkedList<PostComment> comments) {
-        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore));
+        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 
     public static void printComments(LinkedList<PostComment> comments) {

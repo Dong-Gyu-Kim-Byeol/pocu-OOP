@@ -52,9 +52,27 @@ public class Post {
         return author.getName();
     }
 
+    public boolean isAuthor(User user) {
+        if (this.author == user) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public LinkedList<String> getTags() {
         return this.tags;
     }
+
+    public boolean isTagsContain(LinkedList<String> tags) {
+        for (String tag : tags) {
+            if (this.getTags().contains(tag) == false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public void addTag(String tag) {
         if (tag.equals("")) {

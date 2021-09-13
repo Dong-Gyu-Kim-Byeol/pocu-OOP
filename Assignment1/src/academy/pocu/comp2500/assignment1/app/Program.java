@@ -7,6 +7,8 @@ import academy.pocu.comp2500.assignment1.Post;
 import academy.pocu.comp2500.assignment1.PostComment;
 import academy.pocu.comp2500.assignment1.User;
 
+import java.util.LinkedList;
+
 public class Program {
 
     public static void main(String[] args) {
@@ -19,6 +21,7 @@ public class Program {
 
         Post newPost = blog.addPost(author1, "tt11", "bb11");
         newPost.addTag("tag11");
+        newPost.addReaction(read1, EPostReaction.FUN);
         PostComment newComment = newPost.addComment(read1, "comment11");
         newComment.addSubcomment(read2, "subcom111");
 
@@ -27,6 +30,8 @@ public class Program {
         newComment = newPost.addComment(read1, "comment21");
         newComment.addSubcomment(read2, "subcom211");
         newComment.addSubcomment(read2, "subcom212");
+        newComment.upvote(read1);
+
         newComment = newPost.addComment(read1, "comment22");
         newComment.addSubcomment(read2, "subcom221");
         newPost.addReaction(read1, EPostReaction.GREAT);
@@ -37,8 +42,12 @@ public class Program {
         newPost.deleteReaction(read1);
 
         System.out.println("\n\n------------- Filter ---------------\n");
-//        read1.setAuthorFilterName(author1.getName());
-//        read1.setTagFilter("tag11");
+        read1.setAuthorFilter(author2);
+
+        var tags = new LinkedList<String>();
+        tags.add("tag22");
+        read1.setTagFilters(tags);
+
         read1.setPostSorting(EPostSorting.TITLE_ASCENGIND);
 
 
