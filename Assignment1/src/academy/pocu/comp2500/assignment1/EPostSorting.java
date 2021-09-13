@@ -1,4 +1,4 @@
-package academy.pocu.comp2500.assignment1.app;
+package academy.pocu.comp2500.assignment1;
 
 public enum EPostSorting {
     TITLE_ASCENGIND,

@@ -1,4 +1,4 @@
-package academy.pocu.comp2500.assignment1.app;
+package academy.pocu.comp2500.assignment1;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;

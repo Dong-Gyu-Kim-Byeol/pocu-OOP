@@ -1,5 +1,12 @@
 package academy.pocu.comp2500.assignment1.app;
 
+import academy.pocu.comp2500.assignment1.Blog;
+import academy.pocu.comp2500.assignment1.EPostReaction;
+import academy.pocu.comp2500.assignment1.EPostSorting;
+import academy.pocu.comp2500.assignment1.Post;
+import academy.pocu.comp2500.assignment1.PostComment;
+import academy.pocu.comp2500.assignment1.User;
+
 public class Program {
 
     public static void main(String[] args) {
