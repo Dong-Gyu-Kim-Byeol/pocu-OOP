@@ -1,5 +1,6 @@
 package academy.pocu.comp2500.assignment1;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -45,12 +46,12 @@ public class Post {
         loveReactions = new LinkedList<User>();
     }
 
-    public String getCreatedDateTime() {
-        return createdDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime.toLocalDateTime();
     }
 
-    public String getModifiedDateTime() {
-        return modifiedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    public LocalDateTime getModifiedDateTime() {
+        return modifiedDateTime.toLocalDateTime();
     }
 
     public String getAuthorName() {
