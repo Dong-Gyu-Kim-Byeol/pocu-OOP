@@ -20,9 +20,9 @@ public class Blog {
         this.posts.add(post);
     }
 
-    public ArrayList<Post> getFilteredPosts(User authorOrNull, LinkedList<String> tags, EPostSorting sorting) {
-        User authorFilterOrNull = authorOrNull;
-        LinkedList<String> tagFilters = tags;
+    public ArrayList<Post> getFilteredPosts(User reader) {
+        User authorFilterOrNull = reader.getAuthorFilterOrNull();
+        LinkedList<String> tagFilters = reader.getTagFilters();
 
         ArrayList<Post> filteredPosts = new ArrayList<Post>(posts.size());
 
@@ -40,7 +40,7 @@ public class Blog {
             filteredPosts.add(post);
         }
 
-        sortingPost(sorting, filteredPosts);
+        sortingPost(reader.getPostSorting(), filteredPosts);
         return filteredPosts;
     }
 

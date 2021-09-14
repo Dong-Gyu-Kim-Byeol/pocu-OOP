@@ -22,8 +22,16 @@ public class User {
         return name;
     }
 
+    public User getAuthorFilterOrNull() {
+        return authorFilterOrNull;
+    }
+
     public void setAuthorFilter(User authorOrNull) {
         this.authorFilterOrNull = authorOrNull;
+    }
+
+    public LinkedList<String> getTagFilters() {
+        return tagFilters;
     }
 
     public void setTagFilters(LinkedList<String> tags) {
@@ -39,7 +47,7 @@ public class User {
     }
 
     public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = blog.getFilteredPosts(authorFilterOrNull, tagFilters, postSorting);
+        ArrayList<Post> filteredPosts = blog.getFilteredPosts(this);
         visitPrint(filteredPosts);
     }
 
