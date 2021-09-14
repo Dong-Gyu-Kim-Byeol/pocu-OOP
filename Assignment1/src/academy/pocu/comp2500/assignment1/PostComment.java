@@ -1,5 +1,6 @@
 package academy.pocu.comp2500.assignment1;
 
+import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -7,6 +8,10 @@ import java.util.LinkedList;
 public class PostComment {
     private User author;
     private String body;
+
+    private OffsetDateTime createdDateTime;
+    private OffsetDateTime modifiedDateTime;
+
     private LinkedList<User> upvotes;
     private LinkedList<User> downvotes;
     private LinkedList<PostComment> subcomments;
@@ -17,6 +22,9 @@ public class PostComment {
 
         assert (body.equals("") != true);
         this.body = body;
+
+        this.createdDateTime = OffsetDateTime.now();
+        this.modifiedDateTime = createdDateTime;
 
         this.upvotes = new LinkedList<User>();
         this.downvotes = new LinkedList<User>();
@@ -50,6 +58,15 @@ public class PostComment {
         }
 
         this.body = body;
+        nowSetModifiedDateTime();
+    }
+
+    public OffsetDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public OffsetDateTime getModifiedDateTime() {
+        return modifiedDateTime;
     }
 
     public LinkedList<PostComment> getSubcomments() {
@@ -109,5 +126,9 @@ public class PostComment {
         for (PostComment subcomment : subcomments) {
             System.out.format(" - %s\n", subcomment.getPrintString());
         }
+    }
+
+    private void nowSetModifiedDateTime() {
+        this.modifiedDateTime = OffsetDateTime.now();
     }
 }
