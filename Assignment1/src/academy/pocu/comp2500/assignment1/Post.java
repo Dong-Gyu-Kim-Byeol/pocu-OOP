@@ -10,8 +10,10 @@ public class Post {
     private User author;
     private LinkedList<String> tags;
 
-    private String createdDateTime;
-    private String modifiedDateTime;
+    private String createdDate;
+    private String createdTime;
+    private String modifiedDate;
+    private String modifiedTime;
     private String title;
     private String body;
     private LinkedList<PostComment> comments;
@@ -33,8 +35,8 @@ public class Post {
         assert (body.equals("") != true);
         this.body = body;
 
-        this.createdDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        this.modifiedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        nowSetCreatedDateTime();
+        nowSetModifiedDateTime();
 
         comments = new LinkedList<PostComment>();
 
@@ -49,12 +51,20 @@ public class Post {
         return author.getName();
     }
 
-    public String getCreatedDateTime() {
-        return createdDateTime;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public String getModifiedDateTime() {
-        return modifiedDateTime;
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    public String getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public String getModifiedTime() {
+        return modifiedTime;
     }
 
     public String getTitle() {
@@ -191,11 +201,20 @@ public class Post {
     }
 
     public void print() {
-        System.out.format("author: %s, created date: %s, modified date: %s,, tag: %s, title: %s, body: %s\n",
-                this.getAuthorName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
+        System.out.format("author: %s, created date: %s %s, modified date: %s %s,, tag: %s, title: %s, body: %s\n",
+                this.getAuthorName(),
+                this.getCreatedDate(), this.getCreatedTime(),
+                this.getModifiedDate(), this.getModifiedTime(),
+                this.getTags(), this.getTitle(), this.getBody());
+    }
+
+    private void nowSetCreatedDateTime() {
+        this.createdDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.createdTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 
     private void nowSetModifiedDateTime() {
-        this.modifiedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.modifiedDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.modifiedTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 }
