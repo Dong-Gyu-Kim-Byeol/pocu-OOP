@@ -48,6 +48,39 @@ public class Post {
         return author.getName();
     }
 
+    public String getCreatedDateTime() {
+        return createdDateTime.toString();
+    }
+
+    public String getModifiedDateTime() {
+        return modifiedDateTime.toString();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        assert (title.equals("") != true);
+        this.title = title;
+        nowSetModifiedDateTime();
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        assert (body.equals("") != true);
+        this.body = body;
+        nowSetModifiedDateTime();
+    }
+
+    public LinkedList<PostComment> getComments() {
+        sort();
+        return comments;
+    }
+
     public boolean isAuthor(User user) {
         if (this.author == user) {
             return true;
@@ -69,52 +102,13 @@ public class Post {
         return true;
     }
 
-
     public void addTag(String tag) {
         if (tag.equals("")) {
             return;
         }
 
         this.tags.add(tag);
-        setModifiedDateTime();
-    }
-
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public LocalDateTime getModifiedDateTime() {
-        return modifiedDateTime;
-    }
-
-    public void setModifiedDateTime() {
-        this.modifiedDateTime = LocalDateTime.now();
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        assert (title.equals("") != true);
-        this.title = title;
-        setModifiedDateTime();
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        assert (body.equals("") != true);
-        this.body = body;
-        setModifiedDateTime();
-    }
-
-
-    public LinkedList<PostComment> getComments() {
-        sort();
-        return comments;
+        nowSetModifiedDateTime();
     }
 
     public PostComment addComment(User author, String body) {
@@ -198,5 +192,9 @@ public class Post {
     public void print() {
         System.out.format("author: %s, created date: %s, modified date: %s,, tag: %s, title: %s, body: %s\n",
                 this.getAuthorName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
+    }
+
+    private void nowSetModifiedDateTime() {
+        this.modifiedDateTime = LocalDateTime.now();
     }
 }
