@@ -1,6 +1,7 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -9,8 +10,8 @@ public class Post {
     private User author;
     private LinkedList<String> tags;
 
-    private LocalDateTime createdDateTime;
-    private LocalDateTime modifiedDateTime;
+    private String createdDateTime;
+    private String modifiedDateTime;
     private String title;
     private String body;
     private LinkedList<PostComment> comments;
@@ -32,8 +33,8 @@ public class Post {
         assert (body.equals("") != true);
         this.body = body;
 
-        this.createdDateTime = LocalDateTime.now();
-        this.modifiedDateTime = LocalDateTime.now();
+        this.createdDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.modifiedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         comments = new LinkedList<PostComment>();
 
@@ -49,11 +50,11 @@ public class Post {
     }
 
     public String getCreatedDateTime() {
-        return createdDateTime.toString();
+        return createdDateTime;
     }
 
     public String getModifiedDateTime() {
-        return modifiedDateTime.toString();
+        return modifiedDateTime;
     }
 
     public String getTitle() {
@@ -195,6 +196,6 @@ public class Post {
     }
 
     private void nowSetModifiedDateTime() {
-        this.modifiedDateTime = LocalDateTime.now();
+        this.modifiedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }
