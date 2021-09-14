@@ -48,7 +48,7 @@ public class User {
     }
 
     public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = blog.getPosts(getAuthorFilterOrNull(), getTagFilters(), getPostSortingType());
+        ArrayList<Post> filteredPosts = blog.getFilteredPosts(getAuthorFilterOrNull(), getTagFilters(), getPostSortingType());
         visitPrint(filteredPosts);
     }
 

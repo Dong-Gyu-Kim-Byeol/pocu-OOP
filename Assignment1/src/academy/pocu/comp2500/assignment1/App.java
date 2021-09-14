@@ -13,7 +13,7 @@ public class App {
 
         registry.registerBlogCreator("Blog"); // : 블로그를 생성하는 생성자를 등록한다.
         registry.registerPostAdder("Blog", "addPost"); // 블로그에 글을 추가하는 메서드를 등록한다.
-        registry.registerPostListGetter("Blog", "getPosts"); // 블로그 글 목록을 가져오는 메서드를 등록한다.
+        registry.registerPostListGetter("Blog", "getFilteredPosts"); // 블로그 글 목록을 가져오는 메서드를 등록한다.
 
         registry.registerPostTitleUpdater("Post", "setTitle"); //: 발행된 블로그 글의 제목을 바꾸는 메서드를 등록한다.
         registry.registerPostBodyUpdater("Post", "setBody"); //: 발행된 블로그 글의 본문을 바꾸는 메서드를 등록한다.

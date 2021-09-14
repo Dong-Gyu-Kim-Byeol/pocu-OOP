@@ -25,10 +25,14 @@ public class Blog {
         this.name = name;
     }
 
-    public ArrayList<Post> getPosts(User authorOrNull, HashSet<String> tags, EPostSorting sortingType) {
-        ArrayList<Post> filteredPosts = new ArrayList<Post>(this.posts.size());
+    public HashSet<Post> getPosts() {
+        return posts;
+    }
 
-        for (Post post : posts) {
+    public ArrayList<Post> getFilteredPosts(User authorOrNull, HashSet<String> tags, EPostSorting sortingType) {
+        ArrayList<Post> filteredPosts = new ArrayList<Post>(this.getPosts().size());
+
+        for (Post post : getPosts()) {
             // authorNameFilterOrNull
             if (authorOrNull != null && post.isAuthor(authorOrNull) == false) {
                 continue;
@@ -47,11 +51,11 @@ public class Blog {
     }
 
     public void addPost(Post post) {
-        this.posts.add(post);
+        this.getPosts().add(post);
     }
 
     public boolean isContainPost(Post post) {
-        return posts.contains(post);
+        return getPosts().contains(post);
     }
 
     private void sortingPost(EPostSorting sortingType, ArrayList<Post> posts) {
