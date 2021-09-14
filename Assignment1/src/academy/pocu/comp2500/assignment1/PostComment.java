@@ -24,8 +24,16 @@ public class PostComment {
         this.subcomments = new LinkedList<PostComment>();
     }
 
-    public String getAuthorName() {
-        return author.getName();
+    public User getAuthor() {
+        return author;
+    }
+
+    public boolean isAuthor(User user) {
+        if (this.author == user) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String getBody() {
@@ -33,7 +41,7 @@ public class PostComment {
     }
 
     public void setBody(User author, String body) {
-        if (this.author != author) {
+        if (isAuthor(author) == false) {
             return;
         }
 
@@ -95,7 +103,7 @@ public class PostComment {
     }
 
     public String getPrintString() {
-        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthorName(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
+        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthor().getName(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
     }
 
     public void printSubcomments() {

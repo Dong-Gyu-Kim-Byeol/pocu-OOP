@@ -35,7 +35,7 @@ public class Post {
         this.body = body;
 
         this.createdDateTime = OffsetDateTime.now();
-        this.modifiedDateTime = OffsetDateTime.now();
+        this.modifiedDateTime = createdDateTime;
 
         comments = new LinkedList<PostComment>();
 
@@ -46,45 +46,8 @@ public class Post {
         loveReactions = new LinkedList<User>();
     }
 
-    public OffsetDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public OffsetDateTime getModifiedDateTime() {
-        return modifiedDateTime;
-    }
-
-    public String getAuthorName() {
-        return author.getName();
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        assert (title.equals("") != true);
-        this.title = title;
-        nowSetModifiedDateTime();
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public LinkedList<String> getTags() {
-        return this.tags;
-    }
-
-    public LinkedList<PostComment> getComments() {
-        sortComments();
-        return comments;
-    }
-
-    public void setBody(String body) {
-        assert (body.equals("") != true);
-        this.body = body;
-        nowSetModifiedDateTime();
+    public User getAuthor() {
+        return author;
     }
 
     public boolean isAuthor(User user) {
@@ -104,13 +67,68 @@ public class Post {
         return true;
     }
 
-    public void addTag(String tag) {
+    public LinkedList<String> getTags() {
+        return this.tags;
+    }
+
+    public void addTag(User author, String tag) {
+        if (isAuthor(author) == false) {
+            return;
+        }
+
         if (tag.equals("")) {
             return;
         }
 
         this.tags.add(tag);
         nowSetModifiedDateTime();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(User author, String title) {
+        if (isAuthor(author) == false) {
+            return;
+        }
+
+        if (title.equals("")) {
+            return;
+        }
+
+        this.title = title;
+        nowSetModifiedDateTime();
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(User author, String body) {
+        if (isAuthor(author) == false) {
+            return;
+        }
+
+        if (title.equals("")) {
+            return;
+        }
+
+        this.body = body;
+        nowSetModifiedDateTime();
+    }
+
+    public OffsetDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public OffsetDateTime getModifiedDateTime() {
+        return modifiedDateTime;
+    }
+
+    public LinkedList<PostComment> getComments() {
+        sortComments();
+        return comments;
     }
 
     public void addComment(PostComment comment) {
@@ -185,7 +203,7 @@ public class Post {
 
     public void print() {
         System.out.format("author: %s, created date: %s, modified date: %s, tag: %s, title: %s, body: %s\n",
-                this.getAuthorName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
+                this.getAuthor().getName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
     }
 
     private void nowSetModifiedDateTime() {

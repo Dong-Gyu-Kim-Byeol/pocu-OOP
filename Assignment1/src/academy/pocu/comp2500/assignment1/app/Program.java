@@ -20,7 +20,7 @@ public class Program {
         User read2 = new User("read2");
         Post newPost = new Post(author1, new LinkedList<String>(), "tt11", "bb11");
         blog.addPost(newPost);
-        newPost.addTag("tag11");
+        newPost.addTag(author1, "tag11");
         newPost.addReaction(read1, EPostReaction.FUN);
         PostComment newComment = new PostComment(read1, "comment11");
         newPost.addComment(newComment);
@@ -28,7 +28,7 @@ public class Program {
 
         newPost = new Post(author2, new LinkedList<String>(), "tt22", "bb22");
         blog.addPost(newPost);
-        newPost.addTag("tag22");
+        newPost.addTag(author2, "tag22");
         newComment = new PostComment(read1, "comment21");
         newPost.addComment(newComment);
         newComment.addSubcomment(new PostComment(read2, "subcom211"));
