@@ -1,7 +1,6 @@
 package academy.pocu.comp2500.assignment1;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -10,10 +9,8 @@ public class Post {
     private User author;
     private LinkedList<String> tags;
 
-    private String createdDate;
-    private String createdTime;
-    private String modifiedDate;
-    private String modifiedTime;
+    private OffsetDateTime createdDateTime;
+    private OffsetDateTime modifiedDateTime;
     private String title;
     private String body;
     private LinkedList<PostComment> comments;
@@ -35,8 +32,8 @@ public class Post {
         assert (body.equals("") != true);
         this.body = body;
 
-        nowSetCreatedDateTime();
-        nowSetModifiedDateTime();
+        this.createdDateTime = OffsetDateTime.now();
+        this.modifiedDateTime = createdDateTime;
 
         comments = new LinkedList<PostComment>();
 
@@ -47,24 +44,16 @@ public class Post {
         loveReactions = new LinkedList<User>();
     }
 
+    public OffsetDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public OffsetDateTime getModifiedDateTime() {
+        return modifiedDateTime;
+    }
+
     public String getAuthorName() {
         return author.getName();
-    }
-
-    public String getCreatedDate() {
-        return createdDate;
-    }
-
-    public String getCreatedTime() {
-        return createdTime;
-    }
-
-    public String getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public String getModifiedTime() {
-        return modifiedTime;
     }
 
     public String getTitle() {
@@ -201,20 +190,11 @@ public class Post {
     }
 
     public void print() {
-        System.out.format("author: %s, created date: %s %s, modified date: %s %s,, tag: %s, title: %s, body: %s\n",
-                this.getAuthorName(),
-                this.getCreatedDate(), this.getCreatedTime(),
-                this.getModifiedDate(), this.getModifiedTime(),
-                this.getTags(), this.getTitle(), this.getBody());
-    }
-
-    private void nowSetCreatedDateTime() {
-        this.createdDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.createdTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        System.out.format("author: %s, created date: %s, modified date: %s,, tag: %s, title: %s, body: %s\n",
+                this.getAuthorName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
     }
 
     private void nowSetModifiedDateTime() {
-        this.modifiedDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.modifiedTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        this.modifiedDateTime = OffsetDateTime.now();
     }
 }
