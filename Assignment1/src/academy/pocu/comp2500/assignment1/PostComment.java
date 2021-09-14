@@ -45,7 +45,6 @@ public class PostComment {
             return;
         }
 
-        assert (body.equals(""));
         if (body.equals("") == true) {
             return;
         }

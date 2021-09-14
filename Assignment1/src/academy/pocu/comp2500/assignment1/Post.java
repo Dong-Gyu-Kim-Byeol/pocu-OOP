@@ -135,6 +135,24 @@ public class Post {
         this.comments.add(comment);
     }
 
+    public LinkedList<User> getReactionsOrNull(EPostReaction reaction) {
+        switch (reaction) {
+            case GREAT:
+                return this.greatReactions;
+            case SAD:
+                return this.sadReactions;
+            case ANGRY:
+                return this.angryReactions;
+            case FUN:
+                return this.funReactions;
+            case LOVE:
+                return this.loveReactions;
+            default:
+                assert (false);
+                return null;
+        }
+    }
+
     public void addReaction(User user, EPostReaction reaction) {
         switch (reaction) {
             case GREAT:

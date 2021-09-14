@@ -16,55 +16,23 @@ public class Blog {
         this.posts = new LinkedList<Post>();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LinkedList<Post> getPosts() {
+        return posts;
+    }
+
     public void addPost(Post post) {
         this.posts.add(post);
     }
 
-    public ArrayList<Post> getFilteredPosts(User user) {
-        User authorFilterOrNull = user.getAuthorFilterOrNull();
-        LinkedList<String> tagFilters = user.getTagFilters();
-
-        ArrayList<Post> filteredPosts = new ArrayList<Post>(posts.size());
-
-        for (Post post : posts) {
-            // authorNameFilterOrNull
-            if (authorFilterOrNull != null && post.isAuthor(authorFilterOrNull) == false) {
-                continue;
-            }
-
-            // tagFilters
-            if (tagFilters.size() != 0 && post.isTagsContain(tagFilters) == false) {
-                continue;
-            }
-
-            filteredPosts.add(post);
-        }
-
-        sortingPost(user.getPostSorting(), filteredPosts);
-        return filteredPosts;
+    public boolean isContainPost(Post post) {
+        return posts.contains(post);
     }
-
-    private static void sortingPost(EPostSorting sorting, ArrayList<Post> posts) {
-        switch (sorting) {
-            case POST_DATE_ASCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime));
-                break;
-            case POST_DATE_DESCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime).reversed());
-                break;
-            case EDIT_DATE_ASCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime));
-                break;
-            case EDIT_DATE_DESCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime).reversed());
-                break;
-            case TITLE_ASCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getTitle));
-                break;
-            default:
-                assert (false);
-        }
-    }
-
-
 }
