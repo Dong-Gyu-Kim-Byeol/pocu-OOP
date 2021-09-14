@@ -8,7 +8,7 @@ public class App {
         // registry.registerPostAdder("Foo", "bar");
 
         registry.registerAuthorFilterSetter("User", "setAuthorFilterOrNull"); //: 작성자 필터를 설정하는 메서드를 등록한다.
-        registry.registerTagFilterSetter("User", "setTagFiltersOrNull"); //: 태그 필터를 설정하는 메서드를 등록한다.
+        registry.registerTagFilterSetter("User", "setTagFilters"); //: 태그 필터를 설정하는 메서드를 등록한다.
         registry.registerPostOrderSetter("User", "setPostSorting"); //: 블로그 글의 정렬 방법을 설정하는 메서드를 등록한다.
 
         registry.registerBlogCreator("Blog"); // : 블로그를 생성하는 생성자를 등록한다.

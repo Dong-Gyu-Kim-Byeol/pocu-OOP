@@ -52,7 +52,7 @@ public class Program {
 
         var tags = new HashSet<String>();
         tags.add("tag22");
-        read1.setTagFiltersOrNull(tags);
+        read1.setTagFilters(tags);
 
         read1.setPostSorting(EPostSorting.TITLE_ASCENGIND);
 
