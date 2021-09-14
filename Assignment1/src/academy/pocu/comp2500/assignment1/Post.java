@@ -1,6 +1,5 @@
 package academy.pocu.comp2500.assignment1;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Comparator;
@@ -45,12 +44,12 @@ public class Post {
         loveReactions = new LinkedList<User>();
     }
 
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime.toLocalDateTime();
+    public OffsetDateTime getCreatedDateTime() {
+        return createdDateTime;
     }
 
-    public LocalDateTime getModifiedDateTime() {
-        return modifiedDateTime.toLocalDateTime();
+    public OffsetDateTime getModifiedDateTime() {
+        return modifiedDateTime;
     }
 
     public String getAuthorName() {
@@ -77,21 +76,12 @@ public class Post {
         nowSetModifiedDateTime();
     }
 
-    public LinkedList<PostComment> getComments() {
-        sort();
-        return comments;
-    }
-
     public boolean isAuthor(User user) {
         if (this.author == user) {
             return true;
         } else {
             return false;
         }
-    }
-
-    public LinkedList<String> getTags() {
-        return this.tags;
     }
 
     public boolean isTagsContain(LinkedList<String> tags) {
@@ -178,13 +168,8 @@ public class Post {
         }
     }
 
-    public void sort() {
-        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
-    }
-
     public void printComments() {
-        sort();
-        for (PostComment comment : comments) {
+        for (PostComment comment : getComments()) {
             System.out.println(comment.getPrintString());
             comment.printSubcomments();
         }
@@ -197,5 +182,18 @@ public class Post {
 
     private void nowSetModifiedDateTime() {
         this.modifiedDateTime = OffsetDateTime.now();
+    }
+
+    private LinkedList<String> getTags() {
+        return this.tags;
+    }
+
+    private LinkedList<PostComment> getComments() {
+        sortCcomments();
+        return comments;
+    }
+
+    private void sortCcomments() {
+        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 }
