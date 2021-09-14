@@ -8,13 +8,13 @@ import java.util.LinkedList;
 
 public class Blog {
     private String name;
-    private LinkedList<Post> posts;
+    private HashSet<Post> posts;
 
     public Blog(String name) {
         assert (name.equals("") != true);
         this.name = name;
 
-        this.posts = new LinkedList<Post>();
+        this.posts = new HashSet<Post>();
     }
 
     public String getName() {
@@ -25,7 +25,7 @@ public class Blog {
         this.name = name;
     }
 
-    public ArrayList<Post> getPosts(User authorOrNull, HashSet<String> tags, EPostSorting sorting) {
+    public ArrayList<Post> getPosts(User authorOrNull, HashSet<String> tags, EPostSorting sortingType) {
         ArrayList<Post> filteredPosts = new ArrayList<Post>(this.posts.size());
 
         for (Post post : posts) {
@@ -42,7 +42,7 @@ public class Blog {
             filteredPosts.add(post);
         }
 
-        sortingPost(sorting, filteredPosts);
+        sortingPost(sortingType, filteredPosts);
         return filteredPosts;
     }
 
@@ -54,8 +54,8 @@ public class Blog {
         return posts.contains(post);
     }
 
-    private void sortingPost(EPostSorting sorting, ArrayList<Post> posts) {
-        switch (sorting) {
+    private void sortingPost(EPostSorting sortingType, ArrayList<Post> posts) {
+        switch (sortingType) {
             case POST_DATE_ASCENGIND:
                 Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime));
                 break;

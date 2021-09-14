@@ -9,14 +9,14 @@ public class User {
     private String name;
     private User authorFilterOrNull;
     private HashSet<String> tagFilters;
-    private EPostSorting postSorting;
+    private EPostSorting postSortingType;
 
     public User(String name) {
         assert (name.equals("") != true);
         this.name = name;
 
         tagFilters = new HashSet<String>();
-        postSorting = EPostSorting.POST_DATE_ASCENGIND;
+        postSortingType = EPostSorting.POST_DATE_ASCENGIND;
     }
 
     public String getName() {
@@ -39,16 +39,16 @@ public class User {
         this.tagFilters = tags;
     }
 
-    public EPostSorting getPostSorting() {
-        return postSorting;
+    public EPostSorting getPostSortingType() {
+        return postSortingType;
     }
 
-    public void setPostSorting(EPostSorting sorting) {
-        this.postSorting = sorting;
+    public void setPostSortingType(EPostSorting sortingType) {
+        this.postSortingType = sortingType;
     }
 
     public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = blog.getPosts(getAuthorFilterOrNull(), getTagFilters(), getPostSorting());
+        ArrayList<Post> filteredPosts = blog.getPosts(getAuthorFilterOrNull(), getTagFilters(), getPostSortingType());
         visitPrint(filteredPosts);
     }
 
