@@ -8,14 +8,12 @@ import java.util.HashSet;
 public class User {
     private String name;
     private User authorFilterOrNull;
-    private HashSet<String> tagFilters;
+    private HashSet<String> tagFiltersOrNull;
     private EPostSorting postSorting;
 
     public User(String name) {
         assert (name.equals("") != true);
         this.name = name;
-
-        tagFilters = new HashSet<String>();
 
         postSorting = EPostSorting.POST_DATE_ASCENGIND;
     }
@@ -28,16 +26,16 @@ public class User {
         return authorFilterOrNull;
     }
 
-    public void setAuthorFilter(User authorOrNull) {
+    public void setAuthorFilterOrNull(User authorOrNull) {
         this.authorFilterOrNull = authorOrNull;
     }
 
-    public HashSet<String> getTagFilters() {
-        return tagFilters;
+    public HashSet<String> getTagFiltersOrNull() {
+        return tagFiltersOrNull;
     }
 
-    public void setTagFilters(HashSet<String> tags) {
-        this.tagFilters = tags;
+    public void setTagFiltersOrNull(HashSet<String> tagsOrNull) {
+        this.tagFiltersOrNull = tagsOrNull;
     }
 
     public EPostSorting getPostSorting() {
@@ -49,7 +47,7 @@ public class User {
     }
 
     public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = blog.getPosts(getAuthorFilterOrNull(), getTagFilters(), getPostSorting());
+        ArrayList<Post> filteredPosts = blog.getPosts(getAuthorFilterOrNull(), getTagFiltersOrNull(), getPostSorting());
         visitPrint(filteredPosts);
     }
 

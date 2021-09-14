@@ -48,11 +48,11 @@ public class Program {
         newPost.deleteReaction(read1);
 
         System.out.println("\n\n------------- Filter ---------------\n");
-        read1.setAuthorFilter(author2);
+        read1.setAuthorFilterOrNull(author2);
 
         var tags = new HashSet<String>();
         tags.add("tag22");
-        read1.setTagFilters(tags);
+        read1.setTagFiltersOrNull(tags);
 
         read1.setPostSorting(EPostSorting.TITLE_ASCENGIND);
 

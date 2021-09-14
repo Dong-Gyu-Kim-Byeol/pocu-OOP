@@ -25,7 +25,7 @@ public class Blog {
         this.name = name;
     }
 
-    public ArrayList<Post> getPosts(User authorOrNull, HashSet<String> tags, EPostSorting sorting) {
+    public ArrayList<Post> getPosts(User authorOrNull, HashSet<String> tagsOrNull, EPostSorting sorting) {
         ArrayList<Post> filteredPosts = new ArrayList<Post>(this.posts.size());
 
         for (Post post : posts) {
@@ -35,7 +35,7 @@ public class Blog {
             }
 
             // tagFilters
-            if (tags.size() != 0 && post.isTagsContain(tags) == false) {
+            if (tagsOrNull != null && tagsOrNull.size() != 0 && post.isTagsContain(tagsOrNull) == false) {
                 continue;
             }
 
