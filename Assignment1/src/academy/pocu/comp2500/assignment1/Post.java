@@ -3,6 +3,7 @@ package academy.pocu.comp2500.assignment1;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Post {
@@ -17,11 +18,11 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
-    private LinkedList<User> greatReactions;
-    private LinkedList<User> sadReactions;
-    private LinkedList<User> angryReactions;
-    private LinkedList<User> funReactions;
-    private LinkedList<User> loveReactions;
+    private HashSet<User> greatReactions;
+    private HashSet<User> sadReactions;
+    private HashSet<User> angryReactions;
+    private HashSet<User> funReactions;
+    private HashSet<User> loveReactions;
 
     public Post(User author, LinkedList<String> tags, String title, String body) {
         this.author = author;
@@ -39,11 +40,11 @@ public class Post {
 
         comments = new LinkedList<PostComment>();
 
-        greatReactions = new LinkedList<User>();
-        sadReactions = new LinkedList<User>();
-        angryReactions = new LinkedList<User>();
-        funReactions = new LinkedList<User>();
-        loveReactions = new LinkedList<User>();
+        greatReactions = new HashSet<User>();
+        sadReactions = new HashSet<User>();
+        angryReactions = new HashSet<User>();
+        funReactions = new HashSet<User>();
+        loveReactions = new HashSet<User>();
     }
 
     public User getAuthor() {
@@ -135,7 +136,7 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public LinkedList<User> getReactionsOrNull(EPostReaction reaction) {
+    public HashSet<User> getReactionsOrNull(EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
                 return this.greatReactions;
