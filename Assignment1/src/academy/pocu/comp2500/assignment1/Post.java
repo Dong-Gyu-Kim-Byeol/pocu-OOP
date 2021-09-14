@@ -128,7 +128,7 @@ public class Post {
     }
 
     public LinkedList<PostComment> getComments() {
-        sortComments();
+        sortingComments();
         return comments;
     }
 
@@ -229,7 +229,7 @@ public class Post {
         this.modifiedDateTime = OffsetDateTime.now();
     }
 
-    private void sortComments() {
+    private void sortingComments() {
         Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 }

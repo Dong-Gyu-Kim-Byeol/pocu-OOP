@@ -72,11 +72,11 @@ public class PostComment {
     }
 
     public LinkedList<PostComment> getSubcomments() {
-        sortSubcomments();
+        sortingSubcomments();
         return subcomments;
     }
 
-    public void sortSubcomments() {
+    public void sortingSubcomments() {
         Collections.sort(subcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 
