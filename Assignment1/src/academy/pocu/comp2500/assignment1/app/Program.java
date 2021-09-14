@@ -22,23 +22,25 @@ public class Program {
         blog.addPost(newPost);
         newPost.addTag("tag11");
         newPost.addReaction(read1, EPostReaction.FUN);
-        PostComment newComment = newPost.addComment(read1, "comment11");
-        newComment.addSubcomment(read2, "subcom111");
+        PostComment newComment = new PostComment(read1, "comment11");
+        newPost.addComment(newComment);
+        newComment.addSubcomment(new PostComment(read2, "subcom111"));
 
         newPost = new Post(author2, new LinkedList<String>(), "tt22", "bb22");
         blog.addPost(newPost);
         newPost.addTag("tag22");
-        newComment = newPost.addComment(read1, "comment21");
-        newComment.addSubcomment(read2, "subcom211");
-        newComment.addSubcomment(read2, "subcom212");
+        newComment = new PostComment(read1, "comment21");
+        newPost.addComment(newComment);
+        newComment.addSubcomment(new PostComment(read2, "subcom211"));
+        newComment.addSubcomment(new PostComment(read2, "subcom212"));
 
-        newComment = newPost.addComment(read1, "comment22");
-        newComment.addSubcomment(read2, "subcom221");
+        newComment = new PostComment(read1, "comment22");
+        newPost.addComment(newComment);
+        newComment.addSubcomment(new PostComment(read2, "subcom221"));
         newComment.upvote(read1);
 
         newPost.addReaction(read1, EPostReaction.GREAT);
         newPost.addReaction(read2, EPostReaction.FUN);
-
 
 
         read1.visitBlog(blog);

@@ -9,10 +9,12 @@ public class Post {
     private User author;
     private LinkedList<String> tags;
 
-    private OffsetDateTime createdDateTime;
-    private OffsetDateTime modifiedDateTime;
     private String title;
     private String body;
+
+    private OffsetDateTime createdDateTime;
+    private OffsetDateTime modifiedDateTime;
+
     private LinkedList<PostComment> comments;
 
     private LinkedList<User> greatReactions;
@@ -33,7 +35,7 @@ public class Post {
         this.body = body;
 
         this.createdDateTime = OffsetDateTime.now();
-        this.modifiedDateTime = createdDateTime;
+        this.modifiedDateTime = OffsetDateTime.now();
 
         comments = new LinkedList<PostComment>();
 
@@ -70,6 +72,15 @@ public class Post {
         return body;
     }
 
+    public LinkedList<String> getTags() {
+        return this.tags;
+    }
+
+    public LinkedList<PostComment> getComments() {
+        sortComments();
+        return comments;
+    }
+
     public void setBody(String body) {
         assert (body.equals("") != true);
         this.body = body;
@@ -102,11 +113,8 @@ public class Post {
         nowSetModifiedDateTime();
     }
 
-    public PostComment addComment(User author, String body) {
-        PostComment newComment = new PostComment(author, body);
-        this.comments.add(newComment);
-
-        return newComment;
+    public void addComment(PostComment comment) {
+        this.comments.add(comment);
     }
 
     public void addReaction(User user, EPostReaction reaction) {
@@ -184,16 +192,7 @@ public class Post {
         this.modifiedDateTime = OffsetDateTime.now();
     }
 
-    private LinkedList<String> getTags() {
-        return this.tags;
-    }
-
-    private LinkedList<PostComment> getComments() {
-        sortCcomments();
-        return comments;
-    }
-
-    private void sortCcomments() {
+    private void sortComments() {
         Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 }

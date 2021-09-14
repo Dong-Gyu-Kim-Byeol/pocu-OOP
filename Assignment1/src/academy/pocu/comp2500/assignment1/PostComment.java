@@ -46,19 +46,16 @@ public class PostComment {
     }
 
     public LinkedList<PostComment> getSubcomments() {
-        sort();
+        sortSubcomments();
         return subcomments;
     }
 
-    public void sort() {
+    public void sortSubcomments() {
         Collections.sort(subcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 
-    public PostComment addSubcomment(User author, String body) {
-        PostComment newSubcomment = new PostComment(author, body);
-        this.subcomments.add(newSubcomment);
-
-        return newSubcomment;
+    public void addSubcomment(PostComment subcomment) {
+        this.subcomments.add(subcomment);
     }
 
     public int getVoteScore() {
@@ -106,6 +103,4 @@ public class PostComment {
             System.out.format(" - %s\n", subcomment.getPrintString());
         }
     }
-
-
 }
