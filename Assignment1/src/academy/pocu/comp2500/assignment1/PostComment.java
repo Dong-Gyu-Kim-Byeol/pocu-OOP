@@ -62,8 +62,8 @@ public class PostComment {
         Collections.sort(subcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 
-    public void addSubcomment(PostComment subcomment) {
-        this.subcomments.add(subcomment);
+    public void addSubcomment(PostComment comment) {
+        this.subcomments.add(comment);
     }
 
     public int getVoteScore() {
