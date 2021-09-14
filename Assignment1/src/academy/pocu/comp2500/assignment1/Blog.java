@@ -11,8 +11,8 @@ public class Blog {
 
     public Blog(String name) {
         assert (name.equals("") != true);
-
         this.name = name;
+
         this.posts = new LinkedList<Post>();
     }
 
