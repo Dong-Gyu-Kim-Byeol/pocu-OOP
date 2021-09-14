@@ -1,6 +1,7 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -44,12 +45,12 @@ public class Post {
         loveReactions = new LinkedList<User>();
     }
 
-    public OffsetDateTime getCreatedDateTime() {
-        return createdDateTime;
+    public String getCreatedDateTime() {
+        return createdDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
-    public OffsetDateTime getModifiedDateTime() {
-        return modifiedDateTime;
+    public String getModifiedDateTime() {
+        return modifiedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     public String getAuthorName() {
@@ -190,7 +191,7 @@ public class Post {
     }
 
     public void print() {
-        System.out.format("author: %s, created date: %s, modified date: %s,, tag: %s, title: %s, body: %s\n",
+        System.out.format("author: %s, created date: %s, modified date: %s, tag: %s, title: %s, body: %s\n",
                 this.getAuthorName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
     }
 
