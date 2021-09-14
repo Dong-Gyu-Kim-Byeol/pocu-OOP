@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 public class Post {
     private User author;
-    private LinkedList<String> tags;
+    private HashSet<String> tags;
 
     private String title;
     private String body;
@@ -24,7 +24,7 @@ public class Post {
     private HashSet<User> funReactions;
     private HashSet<User> loveReactions;
 
-    public Post(User author, LinkedList<String> tags, String title, String body) {
+    public Post(User author, HashSet<String> tags, String title, String body) {
         this.author = author;
 
         this.tags = tags;
@@ -59,7 +59,7 @@ public class Post {
         }
     }
 
-    public boolean isTagsContain(LinkedList<String> tags) {
+    public boolean isTagsContain(HashSet<String> tags) {
         for (String tag : tags) {
             if (this.getTags().contains(tag) == false) {
                 return false;
@@ -68,7 +68,7 @@ public class Post {
         return true;
     }
 
-    public LinkedList<String> getTags() {
+    public HashSet<String> getTags() {
         return this.tags;
     }
 

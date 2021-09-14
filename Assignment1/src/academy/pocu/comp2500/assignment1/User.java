@@ -3,19 +3,19 @@ package academy.pocu.comp2500.assignment1;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.HashSet;
 
 public class User {
     private String name;
     private User authorFilterOrNull;
-    private LinkedList<String> tagFilters;
+    private HashSet<String> tagFilters;
     private EPostSorting postSorting;
 
     public User(String name) {
         assert (name.equals("") != true);
         this.name = name;
 
-        tagFilters = new LinkedList<String>();
+        tagFilters = new HashSet<String>();
 
         postSorting = EPostSorting.POST_DATE_ASCENGIND;
     }
@@ -32,11 +32,11 @@ public class User {
         this.authorFilterOrNull = authorOrNull;
     }
 
-    public LinkedList<String> getTagFilters() {
+    public HashSet<String> getTagFilters() {
         return tagFilters;
     }
 
-    public void setTagFilters(LinkedList<String> tags) {
+    public void setTagFilters(HashSet<String> tags) {
         this.tagFilters = tags;
     }
 
@@ -49,29 +49,8 @@ public class User {
     }
 
     public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = getPosts(blog);
+        ArrayList<Post> filteredPosts = blog.getPosts(authorFilterOrNull, tagFilters);
         visitPrint(filteredPosts);
-    }
-
-    public ArrayList<Post> getPosts(Blog blog) {
-        ArrayList<Post> filteredPosts = new ArrayList<Post>(blog.getPosts().size());
-
-        for (Post post : blog.getPosts()) {
-            // authorNameFilterOrNull
-            if (getAuthorFilterOrNull() != null && post.isAuthor(authorFilterOrNull) == false) {
-                continue;
-            }
-
-            // tagFilters
-            if (getTagFilters().size() != 0 && post.isTagsContain(tagFilters) == false) {
-                continue;
-            }
-
-            filteredPosts.add(post);
-        }
-
-        sortingPost(getPostSorting(), filteredPosts);
-        return filteredPosts;
     }
 
     private static void sortingPost(EPostSorting sorting, ArrayList<Post> posts) {
