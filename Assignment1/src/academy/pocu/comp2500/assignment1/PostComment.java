@@ -22,7 +22,6 @@ public class PostComment {
     public PostComment(User author, String body) {
         this.author = author;
 
-        assert (body.equals("") != true);
         this.body = body;
 
         this.createdDateTime = OffsetDateTime.now();
@@ -52,10 +51,6 @@ public class PostComment {
 
     public boolean setBody(User author, String body) {
         if (isAuthor(author) == false) {
-            return false;
-        }
-
-        if (body.equals("") == true) {
             return false;
         }
 

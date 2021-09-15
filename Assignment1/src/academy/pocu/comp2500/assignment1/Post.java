@@ -25,11 +25,7 @@ public class Post {
         this.author = author;
 
         this.tags = tags;
-
-        assert (title.equals("") != true);
         this.title = title;
-
-        assert (body.equals("") != true);
         this.body = body;
 
         this.createdDateTime = OffsetDateTime.now();
@@ -70,16 +66,14 @@ public class Post {
         return this.tags;
     }
 
-    public void addTag(User author, String tag) {
+    public boolean addTag(User author, String tag) {
         if (isAuthor(author) == false) {
-            return;
-        }
-
-        if (tag.equals("")) {
-            return;
+            return false;
         }
 
         this.tags.add(tag);
+        nowSetModifiedDateTime();
+        return true;
     }
 
     public String getTitle() {
@@ -88,10 +82,6 @@ public class Post {
 
     public boolean setTitle(User author, String title) {
         if (isAuthor(author) == false) {
-            return false;
-        }
-
-        if (title.equals("")) {
             return false;
         }
 
@@ -106,10 +96,6 @@ public class Post {
 
     public boolean setBody(User author, String body) {
         if (isAuthor(author) == false) {
-            return false;
-        }
-
-        if (title.equals("")) {
             return false;
         }
 

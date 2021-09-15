@@ -14,7 +14,6 @@ public class Blog {
     private EPostSorting sortingType;
 
     public Blog(String name) {
-        assert (name.equals("") != true);
         this.name = name;
 
         this.posts = new HashSet<Post>();
@@ -98,7 +97,6 @@ public class Blog {
         }
     }
 
-
     public void addPost(Post post) {
         this.posts.add(post);
     }
@@ -106,22 +104,4 @@ public class Blog {
     public boolean isContainPost(Post post) {
         return posts.contains(post);
     }
-
-    public boolean setPostTitle(Post post, User author, String title) {
-        if (posts.contains(post) == false) {
-            return false;
-        }
-
-        return post.setTitle(author, title);
-    }
-
-    public boolean setPostBody(Post post, User author, String body) {
-        if (posts.contains(post) == false) {
-            return false;
-        }
-
-        return post.setBody(author, body);
-    }
-
-
 }
