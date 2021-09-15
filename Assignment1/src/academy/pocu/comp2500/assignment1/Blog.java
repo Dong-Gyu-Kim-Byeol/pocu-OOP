@@ -29,24 +29,24 @@ public class Blog {
         return posts;
     }
 
-    public ArrayList<Post> getFilteredPosts(User authorOrNull, HashSet<String> tags, EPostSorting sortingType) {
+    public ArrayList<Post> getFilteredPosts(User user) {
         ArrayList<Post> filteredPosts = new ArrayList<Post>(this.getPosts().size());
 
         for (Post post : getPosts()) {
             // authorNameFilterOrNull
-            if (authorOrNull != null && post.isAuthor(authorOrNull) == false) {
+            if (user.getAuthorFilterOrNull() != null && post.isAuthor(user.getAuthorFilterOrNull()) == false) {
                 continue;
             }
 
             // tagFilters
-            if (tags.size() != 0 && post.isTagsContain(tags) == false) {
+            if (user.getTagFilters().size() != 0 && post.isTagsContain(user.getTagFilters()) == false) {
                 continue;
             }
 
             filteredPosts.add(post);
         }
 
-        sortingPost(sortingType, filteredPosts);
+        sortingPost(user.getPostSortingType(), filteredPosts);
         return filteredPosts;
     }
 
