@@ -1,13 +1,10 @@
 package academy.pocu.comp2500.assignment1.app;
 
-import academy.pocu.comp2500.assignment1.AuthorFilter;
 import academy.pocu.comp2500.assignment1.Blog;
 import academy.pocu.comp2500.assignment1.EPostReaction;
 import academy.pocu.comp2500.assignment1.EPostSorting;
 import academy.pocu.comp2500.assignment1.Post;
 import academy.pocu.comp2500.assignment1.PostComment;
-import academy.pocu.comp2500.assignment1.PostSort;
-import academy.pocu.comp2500.assignment1.TagFilter;
 import academy.pocu.comp2500.assignment1.User;
 
 import java.util.HashSet;
@@ -15,7 +12,7 @@ import java.util.HashSet;
 public class Program {
 
     public static void main(String[] args) {
-        Blog blog = new Blog("blog 1", new AuthorFilter(), new TagFilter(), new PostSort(EPostSorting.POST_DATE_DESCENGIND));
+        Blog blog = new Blog("blog 1", new HashSet<User>(), new HashSet<String>(), EPostSorting.POST_DATE_DESCENGIND);
 
         User author1 = new User("author1");
         User author2 = new User("author2");

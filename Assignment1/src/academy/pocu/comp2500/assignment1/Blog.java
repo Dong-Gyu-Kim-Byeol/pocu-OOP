@@ -9,19 +9,19 @@ public class Blog {
     private String name;
     private HashSet<Post> posts;
 
-    private AuthorFilter authorFilter;
-    private TagFilter tagFilter;
-    private PostSort postSort;
+    private HashSet<User> authorsFilter;
+    private HashSet<String> tagsFilter;
+    private EPostSorting sortingType;
 
-    public Blog(String name, AuthorFilter authors, TagFilter tags, PostSort sort) {
+    public Blog(String name, HashSet<User> authors, HashSet<String> tags, EPostSorting sortingType) {
         assert (name.equals("") != true);
         this.name = name;
 
         this.posts = new HashSet<Post>();
 
-        this.authorFilter = authors;
-        this.tagFilter = tags;
-        this.postSort = sort;
+        this.authorsFilter = authors;
+        this.tagsFilter = tags;
+        this.sortingType = sortingType;
     }
 
     public String getName() {
@@ -58,27 +58,45 @@ public class Blog {
     }
 
     public HashSet<User> getAuthorsFilter() {
-        return authorFilter.getAuthorsFilter();
+        return authorsFilter;
     }
 
     public void setAuthorsFilter(HashSet<User> authors) {
-        authorFilter.setAuthorsFilter(authors);
+        authorsFilter = authors;
     }
 
     public HashSet<String> getTagsFilter() {
-        return tagFilter.getTagsFilter();
+        return tagsFilter;
     }
 
     public void setTagsFilter(HashSet<String> tags) {
-        tagFilter.setTagsFilter(tags);
-    }
-
-    public void sorting(ArrayList<Post> posts) {
-        postSort.sorting(posts);
+        tagsFilter = tags;
     }
 
     public void setSortingType(EPostSorting sortingType) {
-        postSort.setSortingType(sortingType);
+        this.sortingType = sortingType;
+    }
+
+    public void sorting(ArrayList<Post> posts) {
+        switch (sortingType) {
+            case POST_DATE_ASCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime));
+                break;
+            case POST_DATE_DESCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime).reversed());
+                break;
+            case EDIT_DATE_ASCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime));
+                break;
+            case EDIT_DATE_DESCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime).reversed());
+                break;
+            case TITLE_ASCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getTitle));
+                break;
+            default:
+                assert (false);
+        }
     }
 
 
