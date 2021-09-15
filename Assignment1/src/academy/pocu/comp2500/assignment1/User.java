@@ -11,8 +11,6 @@ public class User {
     public User(String name) {
         assert (name.equals("") != true);
         this.name = name;
-
-
     }
 
     public String getName() {
