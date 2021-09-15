@@ -5,6 +5,8 @@ import academy.pocu.comp2500.assignment1.EPostReaction;
 import academy.pocu.comp2500.assignment1.EPostSorting;
 import academy.pocu.comp2500.assignment1.Post;
 import academy.pocu.comp2500.assignment1.PostComment;
+import academy.pocu.comp2500.assignment1.PostFilter;
+import academy.pocu.comp2500.assignment1.PostSort;
 import academy.pocu.comp2500.assignment1.User;
 
 import java.util.HashSet;
@@ -13,7 +15,7 @@ import java.util.LinkedList;
 public class Program {
 
     public static void main(String[] args) {
-        Blog blog = new Blog("blog 1");
+        Blog blog = new Blog("blog 1", new PostFilter(), new PostSort(EPostSorting.POST_DATE_DESCENGIND));
 
         User author1 = new User("author1");
         User author2 = new User("author2");

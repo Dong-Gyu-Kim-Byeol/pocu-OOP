@@ -12,14 +12,14 @@ public class Blog {
     private PostFilter postFilter;
     private PostSort postSort;
 
-    public Blog(String name) {
+    public Blog(String name, PostFilter at, PostSort sort) {
         assert (name.equals("") != true);
         this.name = name;
 
         this.posts = new HashSet<Post>();
 
-        this.postFilter = new PostFilter();
-        this.postSort = new PostSort(EPostSorting.POST_DATE_ASCENGIND);
+        this.postFilter = at;
+        this.postSort = sort;
     }
 
     public String getName() {
@@ -30,7 +30,11 @@ public class Blog {
         this.name = name;
     }
 
-    public ArrayList<Post> getPosts() {
+    public HashSet<Post> getPosts() {
+        return posts;
+    }
+
+    public ArrayList<Post> getPostsAtPostFilter() {
         ArrayList<Post> filteredPosts = getPostFilter().getPosts(this);
         getPostSort().sorting(filteredPosts);
         return filteredPosts;
@@ -58,11 +62,11 @@ public class Blog {
 
 
     public void addPost(Post post) {
-        this.getPosts().add(post);
+        this.posts.add(post);
     }
 
     public boolean isContainPost(Post post) {
-        return getPosts().contains(post);
+        return posts.contains(post);
     }
 
 
