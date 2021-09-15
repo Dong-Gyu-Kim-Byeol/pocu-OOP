@@ -10,7 +10,6 @@ import academy.pocu.comp2500.assignment1.PostSort;
 import academy.pocu.comp2500.assignment1.User;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 
 public class Program {
 

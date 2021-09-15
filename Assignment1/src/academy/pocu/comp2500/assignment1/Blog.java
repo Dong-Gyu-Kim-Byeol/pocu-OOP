@@ -34,7 +34,7 @@ public class Blog {
         return posts;
     }
 
-    public ArrayList<Post> getPostsAtPostFilter() {
+    public ArrayList<Post> getPostsAtPostFilterAndSort() {
         ArrayList<Post> filteredPosts = getPostFilter().getPosts(this);
         getPostSort().sorting(filteredPosts);
         return filteredPosts;
