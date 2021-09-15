@@ -10,11 +10,42 @@ public class Blog {
     private String name;
     private HashSet<Post> posts;
 
+    private User authorFilterOrNull;
+    private HashSet<String> tagFilters;
+    private EPostSorting postSortingType;
+
     public Blog(String name) {
         assert (name.equals("") != true);
         this.name = name;
 
         this.posts = new HashSet<Post>();
+
+        tagFilters = new HashSet<String>();
+        postSortingType = EPostSorting.POST_DATE_ASCENGIND;
+    }
+
+    public User getAuthorFilterOrNull() {
+        return authorFilterOrNull;
+    }
+
+    public void setAuthorFilterOrNull(User authorOrNull) {
+        this.authorFilterOrNull = authorOrNull;
+    }
+
+    public HashSet<String> getTagFilters() {
+        return tagFilters;
+    }
+
+    public void setTagFilters(HashSet<String> tags) {
+        this.tagFilters = tags;
+    }
+
+    public EPostSorting getPostSortingType() {
+        return postSortingType;
+    }
+
+    public void setPostSortingType(EPostSorting sortingType) {
+        this.postSortingType = sortingType;
     }
 
     public String getName() {
@@ -25,8 +56,25 @@ public class Blog {
         this.name = name;
     }
 
-    public HashSet<Post> getPosts() {
-        return posts;
+    public ArrayList<Post> getPosts() {
+        ArrayList<Post> filteredPosts = new ArrayList<Post>(this.getPosts().size());
+
+        for (Post post : getPosts()) {
+            // authorNameFilterOrNull
+            if (getAuthorFilterOrNull() != null && post.isAuthor(getAuthorFilterOrNull()) == false) {
+                continue;
+            }
+
+            // tagFilters
+            if (getTagFilters().size() != 0 && post.isTagsContain(getTagFilters()) == false) {
+                continue;
+            }
+
+            filteredPosts.add(post);
+        }
+
+        sortingPost(getPostSortingType(), filteredPosts);
+        return filteredPosts;
     }
 
     public void addPost(Post post) {
@@ -35,5 +83,27 @@ public class Blog {
 
     public boolean isContainPost(Post post) {
         return getPosts().contains(post);
+    }
+
+    private void sortingPost(EPostSorting sortingType, ArrayList<Post> posts) {
+        switch (sortingType) {
+            case POST_DATE_ASCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime));
+                break;
+            case POST_DATE_DESCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime).reversed());
+                break;
+            case EDIT_DATE_ASCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime));
+                break;
+            case EDIT_DATE_DESCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime).reversed());
+                break;
+            case TITLE_ASCENGIND:
+                Collections.sort(posts, Comparator.comparing(Post::getTitle));
+                break;
+            default:
+                assert (false);
+        }
     }
 }

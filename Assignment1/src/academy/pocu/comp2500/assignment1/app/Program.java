@@ -44,20 +44,20 @@ public class Program {
         newPost.addReaction(read2, EPostReaction.FUN);
 
 
-        read1.visitBlog(blog.getPosts());
+        read1.visitBlog(blog);
         newPost.deleteReaction(read1);
 
         System.out.println("\n\n------------- Filter ---------------\n");
-        read1.setAuthorFilterOrNull(author2);
+        blog.setAuthorFilterOrNull(author2);
 
         var tags = new HashSet<String>();
         tags.add("tag22");
-        read1.setTagFilters(tags);
+        blog.setTagFilters(tags);
 
-        read1.setPostSortingType(EPostSorting.TITLE_ASCENGIND);
+        blog.setPostSortingType(EPostSorting.TITLE_ASCENGIND);
 
 
-        read1.visitBlog(blog.getPosts());
+        read1.visitBlog(blog);
 
     }
 }
