@@ -48,7 +48,9 @@ public class Program {
         newPost.deleteReaction(read1);
 
         System.out.println("\n\n------------- Filter ---------------\n");
-        blog.setAuthorFilterOrNull(author2);
+        var authors = new HashSet<User>();
+        authors.add(author2);
+        blog.setAuthorFilters(authors);
 
         var tags = new HashSet<String>();
         tags.add("tag22");

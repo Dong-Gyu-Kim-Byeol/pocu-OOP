@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 public class Blog {
     private String name;
     private HashSet<Post> posts;
 
-    private User authorFilterOrNull;
+    private HashSet<User> authorFilters;
     private HashSet<String> tagFilters;
     private EPostSorting postSortingType;
 
@@ -20,16 +19,17 @@ public class Blog {
 
         this.posts = new HashSet<Post>();
 
+        authorFilters = new HashSet<User>();
         tagFilters = new HashSet<String>();
         postSortingType = EPostSorting.POST_DATE_ASCENGIND;
     }
 
-    public User getAuthorFilterOrNull() {
-        return authorFilterOrNull;
+    public HashSet<User> getAuthorFilters() {
+        return authorFilters;
     }
 
-    public void setAuthorFilterOrNull(User authorOrNull) {
-        this.authorFilterOrNull = authorOrNull;
+    public void setAuthorFilters(HashSet<User> authors) {
+        this.authorFilters = authors;
     }
 
     public HashSet<String> getTagFilters() {
@@ -61,7 +61,7 @@ public class Blog {
 
         for (Post post : getPosts()) {
             // authorNameFilterOrNull
-            if (getAuthorFilterOrNull() != null && post.isAuthor(getAuthorFilterOrNull()) == false) {
+            if (getAuthorFilters().size() != 0 && getAuthorFilters().contains(post.getAuthor()) == false) {
                 continue;
             }
 
