@@ -25,8 +25,8 @@ public class App {
         registry.registerCommentListGetter("Post", "getComments"); //: 블로그 글에 달린 댓글들을 가져오는 메서드를 등록한다.
 
         registry.registerSubcommentAdder("PostComment", "addSubcomment"); //: 댓글에 하위 댓글을 추가하는 메서드를 등록한다.
-        registry.registerCommentUpdater("PostComment", "setBodyCheckIsAuthor"); //: 댓글의 내용을 바꾸는 메서드를 등록한다.
-        registry.registerSubcommentUpdater("PostComment", "setBodyCheckIsAuthor"); //: 하위 댓글의 내용을 바꾸는 메서드를 등록한다.
+        registry.registerCommentUpdater("PostComment", "setBody"); //: 댓글의 내용을 바꾸는 메서드를 등록한다.
+        registry.registerSubcommentUpdater("PostComment", "setBody"); //: 하위 댓글의 내용을 바꾸는 메서드를 등록한다.
         registry.registerCommentUpvoter("PostComment", "upvote"); //: 댓글을 추천하는 메서드를 등록한다.
         registry.registerCommentDownvoter("PostComment", "downvote"); //: 댓글을 비추천하는 메서드를 등록한다.
         registry.registerSubcommentListGetter("PostComment", "getSubcomments"); //: 댓글에 달린 하위 댓글들을 가져오는 메서드를 등록한다.
