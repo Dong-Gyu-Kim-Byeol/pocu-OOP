@@ -50,13 +50,13 @@ public class Program {
         System.out.println("\n\n------------- Filter ---------------\n");
         var authors = new HashSet<User>();
         authors.add(author2);
-        read1.setAuthorFilters(authors);
+        blog.setAuthorFilters(authors);
 
         var tags = new HashSet<String>();
         tags.add("tag22");
-        read1.setTagFilters(tags);
+        blog.setTagFilters(tags);
 
-        read1.setSortingType(EPostSorting.TITLE_ASCENGIND);
+        blog.setSortingType(EPostSorting.TITLE_ASCENGIND);
 
 
         read1.visitBlog(blog);

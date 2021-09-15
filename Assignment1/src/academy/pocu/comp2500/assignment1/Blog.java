@@ -9,11 +9,17 @@ public class Blog {
     private String name;
     private HashSet<Post> posts;
 
+    private PostFilter postFilter;
+    private PostSort postSort;
+
     public Blog(String name) {
         assert (name.equals("") != true);
         this.name = name;
 
         this.posts = new HashSet<Post>();
+
+        this.postFilter = new PostFilter();
+        this.postSort = new PostSort(EPostSorting.POST_DATE_ASCENGIND);
     }
 
     public String getName() {
@@ -24,9 +30,32 @@ public class Blog {
         this.name = name;
     }
 
-    public HashSet<Post> getPosts() {
-        return posts;
+    public ArrayList<Post> getPosts() {
+        ArrayList<Post> filteredPosts = getPostFilter().getPosts(this);
+        getPostSort().sorting(filteredPosts);
+        return filteredPosts;
     }
+
+    public PostFilter getPostFilter() {
+        return postFilter;
+    }
+
+    public PostSort getPostSort() {
+        return postSort;
+    }
+
+    public void setAuthorFilters(HashSet<User> authors) {
+        getPostFilter().setAuthorFilters(authors);
+    }
+
+    public void setTagFilters(HashSet<String> tags) {
+        getPostFilter().setTagFilters(tags);
+    }
+
+    public void setSortingType(EPostSorting sortingType) {
+        getPostSort().setSortingType(sortingType);
+    }
+
 
     public void addPost(Post post) {
         this.getPosts().add(post);
