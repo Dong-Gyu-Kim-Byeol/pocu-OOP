@@ -107,5 +107,21 @@ public class Blog {
         return posts.contains(post);
     }
 
+    public boolean setPostTitle(Post post, User author, String title) {
+        if (posts.contains(post) == false) {
+            return false;
+        }
+
+        return post.setTitle(author, title);
+    }
+
+    public boolean setPostBody(Post post, User author, String body) {
+        if (posts.contains(post) == false) {
+            return false;
+        }
+
+        return post.setBody(author, body);
+    }
+
 
 }

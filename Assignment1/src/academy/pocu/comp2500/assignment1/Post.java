@@ -3,6 +3,7 @@ package academy.pocu.comp2500.assignment1;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -18,11 +19,7 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
-    private HashSet<User> greatReactions;
-    private HashSet<User> sadReactions;
-    private HashSet<User> angryReactions;
-    private HashSet<User> funReactions;
-    private HashSet<User> loveReactions;
+    private HashMap<EPostReaction, HashSet<User>> reactions;
 
     public Post(User author, HashSet<String> tags, String title, String body) {
         this.author = author;
@@ -40,11 +37,12 @@ public class Post {
 
         comments = new LinkedList<PostComment>();
 
-        greatReactions = new HashSet<User>();
-        sadReactions = new HashSet<User>();
-        angryReactions = new HashSet<User>();
-        funReactions = new HashSet<User>();
-        loveReactions = new HashSet<User>();
+        reactions = new HashMap<EPostReaction, HashSet<User>>();
+        reactions.put(EPostReaction.GREAT, new HashSet<User>());
+        reactions.put(EPostReaction.FUN, new HashSet<User>());
+        reactions.put(EPostReaction.ANGRY, new HashSet<User>());
+        reactions.put(EPostReaction.SAD, new HashSet<User>());
+        reactions.put(EPostReaction.LOVE, new HashSet<User>());
     }
 
     public User getAuthor() {
@@ -138,79 +136,16 @@ public class Post {
     }
 
     public HashSet<User> getReactions(EPostReaction reaction) {
-        switch (reaction) {
-            case GREAT:
-                return this.greatReactions;
-            case SAD:
-                return this.sadReactions;
-            case ANGRY:
-                return this.angryReactions;
-            case FUN:
-                return this.funReactions;
-            case LOVE:
-                return this.loveReactions;
-            default:
-                assert (false);
-                return null;
-        }
+        return this.reactions.get(reaction);
     }
 
     public void addReaction(User user, EPostReaction reaction) {
-        switch (reaction) {
-            case GREAT:
-                if (this.greatReactions.contains(user) != true) {
-                    this.greatReactions.add(user);
-                }
-                break;
-            case SAD:
-                if (this.sadReactions.contains(user) != true) {
-                    this.sadReactions.add(user);
-                }
-                break;
-            case ANGRY:
-                if (this.angryReactions.contains(user) != true) {
-                    this.angryReactions.add(user);
-                }
-                break;
-            case FUN:
-                if (this.funReactions.contains(user) != true) {
-                    this.funReactions.add(user);
-                }
-                break;
-            case LOVE:
-                if (this.loveReactions.contains(user) != true) {
-                    this.loveReactions.add(user);
-                }
-                break;
-            default:
-                assert (false);
-        }
+        this.reactions.get(reaction).add(user);
     }
 
     public void deleteReaction(User user) {
-        if (this.greatReactions.contains(user) == true) {
-            this.greatReactions.remove(user);
-            return;
-        }
-
-        if (this.sadReactions.contains(user) == true) {
-            this.sadReactions.remove(user);
-            return;
-        }
-
-        if (this.angryReactions.contains(user) == true) {
-            this.angryReactions.remove(user);
-            return;
-        }
-
-        if (this.funReactions.contains(user) == true) {
-            this.funReactions.remove(user);
-            return;
-        }
-
-        if (this.loveReactions.contains(user) == true) {
-            this.loveReactions.remove(user);
-            return;
+        for (HashSet<User> reactions : this.reactions.values()) {
+            reactions.remove(user);
         }
     }
 
