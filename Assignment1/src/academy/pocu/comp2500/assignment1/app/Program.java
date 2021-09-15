@@ -56,7 +56,7 @@ public class Program {
         tags.add("tag22");
         read1.setTagFilters(tags);
 
-        read1.setPostSortingType(EPostSorting.TITLE_ASCENGIND);
+        read1.setSortingType(EPostSorting.TITLE_ASCENGIND);
 
 
         read1.visitBlog(blog);
