@@ -20,7 +20,11 @@ public class Post {
     private LinkedList<PostComment> comments;
 
     private HashMap<User, EPostReaction> reactions;
-    private HashMap<EPostReaction, Integer> reactionCounts;
+    private int greatReactionCount;
+    private int sadReactionCount;
+    private int angryReactionCount;
+    private int funReactionCount;
+    private int loveReactionCount;
 
     public Post(User author, HashSet<String> tags, String title, String body) {
         this.author = author;
@@ -35,12 +39,6 @@ public class Post {
         comments = new LinkedList<PostComment>();
 
         reactions = new HashMap<User, EPostReaction>();
-        reactionCounts = new HashMap<EPostReaction, Integer>();
-        reactionCounts.put(EPostReaction.GREAT, 0);
-        reactionCounts.put(EPostReaction.SAD, 0);
-        reactionCounts.put(EPostReaction.ANGRY, 0);
-        reactionCounts.put(EPostReaction.FUN, 0);
-        reactionCounts.put(EPostReaction.LOVE, 0);
     }
 
     public User getAuthor() {
@@ -66,10 +64,6 @@ public class Post {
 
     public HashSet<String> getTags() {
         return this.tags;
-    }
-
-    public void setTags(HashSet<String> tags) {
-        this.tags = tags;
     }
 
     public void addTag(String tag) {
@@ -122,7 +116,21 @@ public class Post {
     }
 
     public int getReactionCount(EPostReaction reaction) {
-        return this.reactionCounts.get(reaction);
+        switch (reaction) {
+            case GREAT:
+                return greatReactionCount;
+            case SAD:
+                return sadReactionCount;
+            case ANGRY:
+                return angryReactionCount;
+            case FUN:
+                return funReactionCount;
+            case LOVE:
+                return loveReactionCount;
+            default:
+                assert (false);
+                return -1;
+        }
     }
 
     public void addReaction(User user, EPostReaction reaction) {
@@ -130,9 +138,25 @@ public class Post {
 
         this.reactions.put(user, reaction);
 
-        int count = this.reactionCounts.get(reaction);
-        count++;
-        this.reactionCounts.put(reaction, count);
+        switch (reaction) {
+            case GREAT:
+                greatReactionCount++;
+                break;
+            case SAD:
+                sadReactionCount++;
+                break;
+            case ANGRY:
+                angryReactionCount++;
+                break;
+            case FUN:
+                funReactionCount++;
+                break;
+            case LOVE:
+                loveReactionCount++;
+                break;
+            default:
+                assert (false);
+        }
     }
 
     public void removeReaction(User user) {
@@ -144,9 +168,25 @@ public class Post {
 
         this.reactions.remove(user);
 
-        int count = this.reactionCounts.get(reaction);
-        count--;
-        this.reactionCounts.put(reaction, count);
+        switch (reaction) {
+            case GREAT:
+                greatReactionCount--;
+                break;
+            case SAD:
+                sadReactionCount--;
+                break;
+            case ANGRY:
+                angryReactionCount--;
+                break;
+            case FUN:
+                funReactionCount--;
+                break;
+            case LOVE:
+                loveReactionCount--;
+                break;
+            default:
+                assert (false);
+        }
     }
 
     public void printComments() {
