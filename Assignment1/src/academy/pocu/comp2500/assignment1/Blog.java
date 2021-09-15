@@ -39,12 +39,12 @@ public class Blog {
         ArrayList<Post> filteredPosts = new ArrayList<Post>(getPosts().size());
 
         for (Post post : getPosts()) {
-            // authorNameFilterOrNull
+            // authorFilter
             if (getAuthorFilterOrNull() != null && post.isAuthor(getAuthorFilterOrNull()) == false) {
                 continue;
             }
 
-            // tagFilters
+            // tagFilter
             if (getTagsFilter().size() != 0 && post.isTagsContain(getTagsFilter()) == false) {
                 continue;
             }

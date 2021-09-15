@@ -82,41 +82,42 @@ public class Post {
         }
 
         this.tags.add(tag);
-        nowSetModifiedDateTime();
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(User author, String title) {
+    public boolean setTitle(User author, String title) {
         if (isAuthor(author) == false) {
-            return;
+            return false;
         }
 
         if (title.equals("")) {
-            return;
+            return false;
         }
 
         this.title = title;
         nowSetModifiedDateTime();
+        return true;
     }
 
     public String getBody() {
         return body;
     }
 
-    public void setBody(User author, String body) {
+    public boolean setBody(User author, String body) {
         if (isAuthor(author) == false) {
-            return;
+            return false;
         }
 
         if (title.equals("")) {
-            return;
+            return false;
         }
 
         this.body = body;
         nowSetModifiedDateTime();
+        return true;
     }
 
     public OffsetDateTime getCreatedDateTime() {
@@ -136,7 +137,7 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public HashSet<User> getReactionsOrNull(EPostReaction reaction) {
+    public HashSet<User> getReactions(EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
                 return this.greatReactions;

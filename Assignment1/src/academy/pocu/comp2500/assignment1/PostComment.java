@@ -50,17 +50,18 @@ public class PostComment {
         return body;
     }
 
-    public void setBody(User author, String body) {
+    public boolean setBody(User author, String body) {
         if (isAuthor(author) == false) {
-            return;
+            return false;
         }
 
         if (body.equals("") == true) {
-            return;
+            return false;
         }
 
         this.body = body;
         nowSetModifiedDateTime();
+        return true;
     }
 
     public OffsetDateTime getCreatedDateTime() {
