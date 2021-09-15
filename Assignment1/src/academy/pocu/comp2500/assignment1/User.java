@@ -7,18 +7,40 @@ import java.util.HashSet;
 
 public class User {
     private String name;
+    private PostFilter postFilter;
 
     public User(String name) {
         assert (name.equals("") != true);
         this.name = name;
+        this.postFilter = new PostFilter();
     }
 
     public String getName() {
         return name;
     }
 
+    public PostFilter getPostFilter() {
+        return postFilter;
+    }
+
+    public void setAuthorFilters(HashSet<User> authorFilters) {
+        getPostFilter().setAuthorFilters(authorFilters);
+    }
+
+    public void setTagFilters(HashSet<String> tagFilters) {
+        getPostFilter().setTagFilters(tagFilters);
+    }
+
+    public void setPostSortingType(EPostSorting postSortingType) {
+        getPostFilter().setPostSortingType(postSortingType);
+    }
+
+    public ArrayList<Post> getPosts(Blog blog) {
+        return getPostFilter().getPosts(blog);
+    }
+
     public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = blog.getPosts();
+        ArrayList<Post> filteredPosts = getPosts(blog);
         visitPrint(filteredPosts);
     }
 
