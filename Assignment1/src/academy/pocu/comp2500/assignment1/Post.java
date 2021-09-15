@@ -36,6 +36,11 @@ public class Post {
 
         reactions = new HashMap<User, EPostReaction>();
         reactionCounts = new HashMap<EPostReaction, Integer>();
+        reactionCounts.put(EPostReaction.GREAT, 0);
+        reactionCounts.put(EPostReaction.SAD, 0);
+        reactionCounts.put(EPostReaction.ANGRY, 0);
+        reactionCounts.put(EPostReaction.FUN, 0);
+        reactionCounts.put(EPostReaction.LOVE, 0);
     }
 
     public User getAuthor() {
@@ -67,17 +72,19 @@ public class Post {
         this.tags = tags;
     }
 
-    public boolean addTag(String tag) {
+    public void addTag(String tag) {
         this.tags.add(tag);
-        nowSetModifiedDateTime();
-        return true;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public boolean setTitle(String title) {
+    public boolean setTitleCheckIsAuthor(User user, String title) {
+        if (isAuthor(user) == false) {
+            return false;
+        }
+
         this.title = title;
         nowSetModifiedDateTime();
         return true;
@@ -87,7 +94,11 @@ public class Post {
         return body;
     }
 
-    public boolean setBody(User author, String body) {
+    public boolean setBodyCheckIsAuthor(User user, String body) {
+        if (isAuthor(user) == false) {
+            return false;
+        }
+
         this.body = body;
         nowSetModifiedDateTime();
         return true;

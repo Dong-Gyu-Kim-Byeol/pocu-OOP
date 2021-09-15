@@ -49,7 +49,11 @@ public class PostComment {
         return body;
     }
 
-    public boolean setBody(User author, String body) {
+    public boolean setBodyCheckIsAuthor(User user, String body) {
+        if (isAuthor(user) == false) {
+            return false;
+        }
+
         this.body = body;
         nowSetModifiedDateTime();
         return true;

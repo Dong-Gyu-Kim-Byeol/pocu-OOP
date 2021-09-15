@@ -20,7 +20,9 @@ public class Program {
         User read2 = new User("read2");
         Post newPost = new Post(author1, new HashSet<String>(), "tt11", "bb11");
         blog.addPost(newPost);
-        newPost.addTag(author1, "tag11");
+        newPost.addTag(new String("tag11"));
+        newPost.addTag(new String("tag11"));
+        newPost.addTag(new String("tag12"));
         newPost.addReaction(read1, EPostReaction.FUN);
         PostComment newComment = new PostComment(read1, "comment11");
         newPost.addComment(newComment);
@@ -28,7 +30,7 @@ public class Program {
 
         newPost = new Post(author2, new HashSet<String>(), "tt22", "bb22");
         blog.addPost(newPost);
-        newPost.addTag(author2, "tag22");
+        newPost.addTag("tag22");
         newComment = new PostComment(read1, "comment21");
         newPost.addComment(newComment);
         newComment.addSubcomment(new PostComment(read2, "subcom211"));
@@ -44,7 +46,7 @@ public class Program {
 
 
         read1.visitBlog(blog);
-        newPost.deleteReaction(read1);
+        newPost.removeReaction(read1);
 
         System.out.println("\n\n------------- Filter ---------------\n");
         blog.setAuthorFilterOrNull(author2);
