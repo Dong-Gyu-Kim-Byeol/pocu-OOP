@@ -66,6 +66,10 @@ public class Post {
         return this.tags;
     }
 
+    public void setTags(HashSet<String> tags) {
+        this.tags = tags;
+    }
+
     public boolean addTag(User author, String tag) {
         if (isAuthor(author) == false) {
             return false;
@@ -121,17 +125,22 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public HashSet<User> getReactions(EPostReaction reaction) {
+    public int getReactionCount(EPostReaction reaction) {
+        return this.reactions.get(reaction).size();
+    }
+
+    public HashSet<User> getReaction(EPostReaction reaction) {
         return this.reactions.get(reaction);
     }
 
     public void addReaction(User user, EPostReaction reaction) {
+        removeReaction(user);
         this.reactions.get(reaction).add(user);
     }
 
-    public void deleteReaction(User user) {
-        for (HashSet<User> reactions : this.reactions.values()) {
-            reactions.remove(user);
+    public void removeReaction(User user) {
+        for (HashSet<User> reaction : this.reactions.values()) {
+            reaction.remove(user);
         }
     }
 

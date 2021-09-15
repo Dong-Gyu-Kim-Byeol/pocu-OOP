@@ -20,7 +20,7 @@ public class App {
 
         registry.registerPostTagAdder("Post", "addTag"); //: 블로그 글에 태그를 추가하는 메서드를 등록한다.
         registry.registerReactionAdder("Post", "addReaction"); //: 블로그 글에 리액션을 추가하는 메서드를 등록한다.
-        registry.registerReactionRemover("Post", "deleteReaction"); //: 블로그 글로부터 리액션을 제거하는 메서드를 등록한다.
+        registry.registerReactionRemover("Post", "removeReaction"); //: 블로그 글로부터 리액션을 제거하는 메서드를 등록한다.
         registry.registerCommentAdder("Post", "addComment"); //: 블로그 글에 댓글을 추가하는 메서드를 등록한다.
         registry.registerCommentListGetter("Post", "getComments"); //: 블로그 글에 달린 댓글들을 가져오는 메서드를 등록한다.
 
