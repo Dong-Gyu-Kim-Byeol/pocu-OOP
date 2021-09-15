@@ -24,16 +24,8 @@ public class Blog {
         postSortingType = EPostSorting.POST_DATE_ASCENGIND;
     }
 
-    public HashSet<User> getAuthorFilters() {
-        return authorFilters;
-    }
-
     public void setAuthorFilters(HashSet<User> authors) {
         this.authorFilters = authors;
-    }
-
-    public HashSet<String> getTagFilters() {
-        return tagFilters;
     }
 
     public void setTagFilters(HashSet<String> tags) {
@@ -61,12 +53,12 @@ public class Blog {
 
         for (Post post : getPosts()) {
             // authorNameFilterOrNull
-            if (getAuthorFilters().size() != 0 && getAuthorFilters().contains(post.getAuthor()) == false) {
+            if (authorFilters.size() != 0 && authorFilters.contains(post.getAuthor()) == false) {
                 continue;
             }
 
             // tagFilters
-            if (getTagFilters().size() != 0 && post.isTagsContain(getTagFilters()) == false) {
+            if (tagFilters.size() != 0 && post.isTagsContain(tagFilters) == false) {
                 continue;
             }
 
