@@ -50,10 +50,6 @@ public class PostComment {
     }
 
     public boolean setBody(User author, String body) {
-        if (isAuthor(author) == false) {
-            return false;
-        }
-
         this.body = body;
         nowSetModifiedDateTime();
         return true;

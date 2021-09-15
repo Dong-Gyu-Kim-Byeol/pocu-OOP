@@ -67,11 +67,7 @@ public class Post {
         this.tags = tags;
     }
 
-    public boolean addTag(User author, String tag) {
-        if (isAuthor(author) == false) {
-            return false;
-        }
-
+    public boolean addTag(String tag) {
         this.tags.add(tag);
         nowSetModifiedDateTime();
         return true;
@@ -81,11 +77,7 @@ public class Post {
         return title;
     }
 
-    public boolean setTitle(User author, String title) {
-        if (isAuthor(author) == false) {
-            return false;
-        }
-
+    public boolean setTitle(String title) {
         this.title = title;
         nowSetModifiedDateTime();
         return true;
@@ -96,10 +88,6 @@ public class Post {
     }
 
     public boolean setBody(User author, String body) {
-        if (isAuthor(author) == false) {
-            return false;
-        }
-
         this.body = body;
         nowSetModifiedDateTime();
         return true;
