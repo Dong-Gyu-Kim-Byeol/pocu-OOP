@@ -29,54 +29,11 @@ public class Blog {
         return posts;
     }
 
-    public ArrayList<Post> getFilteredPosts(User user) {
-        ArrayList<Post> filteredPosts = new ArrayList<Post>(this.getPosts().size());
-
-        for (Post post : getPosts()) {
-            // authorNameFilterOrNull
-            if (user.getAuthorFilterOrNull() != null && post.isAuthor(user.getAuthorFilterOrNull()) == false) {
-                continue;
-            }
-
-            // tagFilters
-            if (user.getTagFilters().size() != 0 && post.isTagsContain(user.getTagFilters()) == false) {
-                continue;
-            }
-
-            filteredPosts.add(post);
-        }
-
-        sortingPost(user.getPostSortingType(), filteredPosts);
-        return filteredPosts;
-    }
-
     public void addPost(Post post) {
         this.getPosts().add(post);
     }
 
     public boolean isContainPost(Post post) {
         return getPosts().contains(post);
-    }
-
-    private void sortingPost(EPostSorting sortingType, ArrayList<Post> posts) {
-        switch (sortingType) {
-            case POST_DATE_ASCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime));
-                break;
-            case POST_DATE_DESCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime).reversed());
-                break;
-            case EDIT_DATE_ASCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime));
-                break;
-            case EDIT_DATE_DESCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getModifiedDateTime).reversed());
-                break;
-            case TITLE_ASCENGIND:
-                Collections.sort(posts, Comparator.comparing(Post::getTitle));
-                break;
-            default:
-                assert (false);
-        }
     }
 }

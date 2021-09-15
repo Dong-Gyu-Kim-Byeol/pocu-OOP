@@ -10,10 +10,10 @@ public class App {
         registry.registerAuthorFilterSetter("User", "setAuthorFilterOrNull"); //: 작성자 필터를 설정하는 메서드를 등록한다.
         registry.registerTagFilterSetter("User", "setTagFilters"); //: 태그 필터를 설정하는 메서드를 등록한다.
         registry.registerPostOrderSetter("User", "setPostSortingType"); //: 블로그 글의 정렬 방법을 설정하는 메서드를 등록한다.
+        registry.registerPostListGetter("User", "filterPosts"); // 블로그 글 목록을 가져오는 메서드를 등록한다.
 
         registry.registerBlogCreator("Blog"); // : 블로그를 생성하는 생성자를 등록한다.
         registry.registerPostAdder("Blog", "addPost"); // 블로그에 글을 추가하는 메서드를 등록한다.
-        registry.registerPostListGetter("Blog", "getFilteredPosts"); // 블로그 글 목록을 가져오는 메서드를 등록한다.
 
         registry.registerPostTitleUpdater("Post", "setTitle"); //: 발행된 블로그 글의 제목을 바꾸는 메서드를 등록한다.
         registry.registerPostBodyUpdater("Post", "setBody"); //: 발행된 블로그 글의 본문을 바꾸는 메서드를 등록한다.
