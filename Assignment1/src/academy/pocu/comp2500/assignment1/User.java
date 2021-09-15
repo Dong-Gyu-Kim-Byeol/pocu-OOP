@@ -23,7 +23,7 @@ public class User {
     }
 
     public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = blog.getPostsAtPostFilterAndSort();
+        ArrayList<Post> filteredPosts = blog.getFilteredPostsAndSort();
         visitPrint(filteredPosts);
     }
 

@@ -9,16 +9,18 @@ public class Blog {
     private String name;
     private HashSet<Post> posts;
 
-    private PostFilter postFilter;
+    private AuthorFilter authorFilter;
+    private TagFilter tagFilter;
     private PostSort postSort;
 
-    public Blog(String name, PostFilter at, PostSort sort) {
+    public Blog(String name, AuthorFilter authors, TagFilter tags, PostSort sort) {
         assert (name.equals("") != true);
         this.name = name;
 
         this.posts = new HashSet<Post>();
 
-        this.postFilter = at;
+        this.authorFilter = authors;
+        this.tagFilter = tags;
         this.postSort = sort;
     }
 
@@ -34,26 +36,49 @@ public class Blog {
         return posts;
     }
 
-    public ArrayList<Post> getPostsAtPostFilterAndSort() {
-        ArrayList<Post> filteredPosts = getPostFilter().getPosts(this);
-        getPostSort().sorting(filteredPosts);
-        return filteredPosts;
-    }
+    public ArrayList<Post> getFilteredPostsAndSort() {
+        ArrayList<Post> filteredPosts = new ArrayList<Post>(getPosts().size());
 
-    public PostFilter getPostFilter() {
-        return postFilter;
+        for (Post post : getPosts()) {
+            // authorNameFilterOrNull
+            if (getAuthorsFilter().size() != 0 && getAuthorsFilter().contains(post.getAuthor()) == false) {
+                continue;
+            }
+
+            // tagFilters
+            if (getTagsFilter().size() != 0 && post.isTagsContain(getTagsFilter()) == false) {
+                continue;
+            }
+
+            sorting(filteredPosts);
+            filteredPosts.add(post);
+        }
+
+        return filteredPosts;
     }
 
     public PostSort getPostSort() {
         return postSort;
     }
 
-    public void setAuthorFilters(HashSet<User> authors) {
-        getPostFilter().setAuthorFilters(authors);
+    public void sorting(ArrayList<Post> posts) {
+        getPostSort().sorting(posts);
     }
 
-    public void setTagFilters(HashSet<String> tags) {
-        getPostFilter().setTagFilters(tags);
+    public HashSet<User> getAuthorsFilter() {
+        return authorFilter.getAuthorsFilter();
+    }
+
+    public void setAuthorsFilter(HashSet<User> authors) {
+        authorFilter.setAuthorsFilter(authors);
+    }
+
+    public HashSet<String> getTagsFilter() {
+        return tagFilter.getTagsFilter();
+    }
+
+    public void setTagsFilter(HashSet<String> tags) {
+        tagFilter.setTagsFilter(tags);
     }
 
     public void setSortingType(EPostSorting sortingType) {
