@@ -57,14 +57,6 @@ public class Blog {
         return filteredPosts;
     }
 
-    public PostSort getPostSort() {
-        return postSort;
-    }
-
-    public void sorting(ArrayList<Post> posts) {
-        getPostSort().sorting(posts);
-    }
-
     public HashSet<User> getAuthorsFilter() {
         return authorFilter.getAuthorsFilter();
     }
@@ -81,8 +73,12 @@ public class Blog {
         tagFilter.setTagsFilter(tags);
     }
 
+    public void sorting(ArrayList<Post> posts) {
+        postSort.sorting(posts);
+    }
+
     public void setSortingType(EPostSorting sortingType) {
-        getPostSort().setSortingType(sortingType);
+        postSort.setSortingType(sortingType);
     }
 
 
