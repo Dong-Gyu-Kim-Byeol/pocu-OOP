@@ -12,7 +12,7 @@ import java.util.HashSet;
 public class Program {
 
     public static void main(String[] args) {
-        Blog blog = new Blog("blog 1", new HashSet<User>(), new HashSet<String>(), EPostSorting.POST_DATE_DESCENGIND);
+        Blog blog = new Blog("blog 1");
 
         User author1 = new User("author1");
         User author2 = new User("author2");
@@ -47,9 +47,7 @@ public class Program {
         newPost.deleteReaction(read1);
 
         System.out.println("\n\n------------- Filter ---------------\n");
-        var authors = new HashSet<User>();
-        authors.add(author2);
-        blog.setAuthorsFilter(authors);
+        blog.setAuthorFilterOrNull(author2);
 
         var tags = new HashSet<String>();
         tags.add("tag22");

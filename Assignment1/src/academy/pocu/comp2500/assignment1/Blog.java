@@ -9,19 +9,18 @@ public class Blog {
     private String name;
     private HashSet<Post> posts;
 
-    private HashSet<User> authorsFilter;
+    private User authorFilterOrNull;
     private HashSet<String> tagsFilter;
     private EPostSorting sortingType;
 
-    public Blog(String name, HashSet<User> authors, HashSet<String> tags, EPostSorting sortingType) {
+    public Blog(String name) {
         assert (name.equals("") != true);
         this.name = name;
 
         this.posts = new HashSet<Post>();
 
-        this.authorsFilter = authors;
-        this.tagsFilter = tags;
-        this.sortingType = sortingType;
+        this.tagsFilter = new HashSet<String>();
+        this.sortingType = EPostSorting.POST_DATE_DESCENGIND;
     }
 
     public String getName() {
@@ -41,7 +40,7 @@ public class Blog {
 
         for (Post post : getPosts()) {
             // authorNameFilterOrNull
-            if (getAuthorsFilter().size() != 0 && getAuthorsFilter().contains(post.getAuthor()) == false) {
+            if (getAuthorFilterOrNull() != null && post.isAuthor(getAuthorFilterOrNull()) == false) {
                 continue;
             }
 
@@ -57,12 +56,12 @@ public class Blog {
         return filteredPosts;
     }
 
-    public HashSet<User> getAuthorsFilter() {
-        return authorsFilter;
+    public User getAuthorFilterOrNull() {
+        return authorFilterOrNull;
     }
 
-    public void setAuthorsFilter(HashSet<User> authors) {
-        authorsFilter = authors;
+    public void setAuthorFilterOrNull(User authorOrNull) {
+        this.authorFilterOrNull = authorOrNull;
     }
 
     public HashSet<String> getTagsFilter() {
