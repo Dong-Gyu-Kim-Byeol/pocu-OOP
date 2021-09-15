@@ -19,7 +19,8 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
-    private HashMap<EPostReaction, HashSet<User>> reactions;
+    private HashMap<User, EPostReaction> reactions;
+    private HashMap<EPostReaction, Integer> reactionCounts;
 
     public Post(User author, HashSet<String> tags, String title, String body) {
         this.author = author;
@@ -33,12 +34,8 @@ public class Post {
 
         comments = new LinkedList<PostComment>();
 
-        reactions = new HashMap<EPostReaction, HashSet<User>>();
-        reactions.put(EPostReaction.GREAT, new HashSet<User>());
-        reactions.put(EPostReaction.FUN, new HashSet<User>());
-        reactions.put(EPostReaction.ANGRY, new HashSet<User>());
-        reactions.put(EPostReaction.SAD, new HashSet<User>());
-        reactions.put(EPostReaction.LOVE, new HashSet<User>());
+        reactions = new HashMap<User, EPostReaction>();
+        reactionCounts = new HashMap<EPostReaction, Integer>();
     }
 
     public User getAuthor() {
@@ -126,22 +123,31 @@ public class Post {
     }
 
     public int getReactionCount(EPostReaction reaction) {
-        return this.reactions.get(reaction).size();
-    }
-
-    public HashSet<User> getReaction(EPostReaction reaction) {
-        return this.reactions.get(reaction);
+        return this.reactionCounts.get(reaction);
     }
 
     public void addReaction(User user, EPostReaction reaction) {
         removeReaction(user);
-        this.reactions.get(reaction).add(user);
+
+        this.reactions.put(user, reaction);
+
+        int count = this.reactionCounts.get(reaction);
+        count++;
+        this.reactionCounts.put(reaction, count);
     }
 
     public void removeReaction(User user) {
-        for (HashSet<User> reaction : this.reactions.values()) {
-            reaction.remove(user);
+        if (this.reactions.containsKey(user) == false) {
+            return;
         }
+
+        EPostReaction reaction = this.reactions.get(user);
+
+        this.reactions.remove(user);
+
+        int count = this.reactionCounts.get(reaction);
+        count--;
+        this.reactionCounts.put(reaction, count);
     }
 
     public void printComments() {
