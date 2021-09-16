@@ -43,18 +43,19 @@ public class Program {
         newComment.upvote(read1);
 
         newPost.addReaction(read1, EPostReaction.GREAT);
+        newPost.addReaction(read1, EPostReaction.GREAT);
         newPost.addReaction(read2, EPostReaction.FUN);
 
 
         read1.visitBlog(blog);
-        newPost.removeReaction(read1);
+        newPost.removeReaction(read1, EPostReaction.GREAT);
 
         System.out.println("\n\n------------- Filter ---------------\n");
-        blog.setAuthorFilterOrNull(author2);
+        blog.setAuthorFilterOrNull(author1);
 
         var tags = new HashSet<String>();
         tags.add("tag22");
-        blog.setTagsFilter(tags);
+//        blog.setTagsFilter(tags);
 
         blog.setSortingType(EPostSorting.TITLE_ASCENGIND);
 
