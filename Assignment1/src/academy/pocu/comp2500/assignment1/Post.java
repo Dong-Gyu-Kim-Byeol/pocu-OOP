@@ -158,47 +158,47 @@ public class Post {
         return loveReactions.size();
     }
 
-    public HashSet<User> getReactions(EPostReaction reaction) {
-        switch (reaction) {
-            case GREAT:
-                return greatReactions;
-            case SAD:
-                return sadReactions;
-            case ANGRY:
-                return angryReactions;
-            case FUN:
-                return funReactions;
-            case LOVE:
-                return loveReactions;
-            default:
-                assert (false);
-                throw new IllegalArgumentException("unknown EPostReaction type");
-        }
-    }
-
-    public EPostReaction getUserReactionOrNull(User user) {
-        if (greatReactions.contains(user)) {
-            return EPostReaction.GREAT;
-        }
-
-        if (sadReactions.contains(user)) {
-            return EPostReaction.SAD;
-        }
-
-        if (angryReactions.contains(user)) {
-            return EPostReaction.ANGRY;
-        }
-
-        if (funReactions.contains(user)) {
-            return EPostReaction.FUN;
-        }
-
-        if (loveReactions.contains(user)) {
-            return EPostReaction.LOVE;
-        }
-
-        return null;
-    }
+//    public HashSet<User> getReactions(EPostReaction reaction) {
+//        switch (reaction) {
+//            case GREAT:
+//                return greatReactions;
+//            case SAD:
+//                return sadReactions;
+//            case ANGRY:
+//                return angryReactions;
+//            case FUN:
+//                return funReactions;
+//            case LOVE:
+//                return loveReactions;
+//            default:
+//                assert (false);
+//                throw new IllegalArgumentException("unknown EPostReaction type");
+//        }
+//    }
+//
+//    public EPostReaction getUserReactionOrNull(User user) {
+//        if (greatReactions.contains(user)) {
+//            return EPostReaction.GREAT;
+//        }
+//
+//        if (sadReactions.contains(user)) {
+//            return EPostReaction.SAD;
+//        }
+//
+//        if (angryReactions.contains(user)) {
+//            return EPostReaction.ANGRY;
+//        }
+//
+//        if (funReactions.contains(user)) {
+//            return EPostReaction.FUN;
+//        }
+//
+//        if (loveReactions.contains(user)) {
+//            return EPostReaction.LOVE;
+//        }
+//
+//        return null;
+//    }
 
     public int getReactionCount(EPostReaction reaction) {
         switch (reaction) {
