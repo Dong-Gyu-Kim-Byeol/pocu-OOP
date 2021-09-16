@@ -148,88 +148,46 @@ public class Post {
         return loveReactions;
     }
 
-    public int getGreatReactionCount() {
-        return greatReactions.size();
-    }
-
-    public int getSadReactionCount() {
-        return sadReactions.size();
-    }
-
-    public int getAngryReactionCount() {
-        return angryReactions.size();
-    }
-
-    public int getFunReactionCount() {
-        return funReactions.size();
-    }
-
-    public int getLoveReactionCount() {
-        return loveReactions.size();
-    }
-
-//    public HashSet<User> getReactions(EPostReaction reaction) {
-//        switch (reaction) {
-//            case GREAT:
-//                return greatReactions;
-//            case SAD:
-//                return sadReactions;
-//            case ANGRY:
-//                return angryReactions;
-//            case FUN:
-//                return funReactions;
-//            case LOVE:
-//                return loveReactions;
-//            default:
-//                assert (false);
-//                throw new IllegalArgumentException("unknown EPostReaction type");
-//        }
+//    public int getGreatReactionCount() {
+//        return greatReactions.size();
 //    }
 //
-//    public EPostReaction getUserReactionOrNull(User user) {
-//        if (greatReactions.contains(user)) {
-//            return EPostReaction.GREAT;
-//        }
-//
-//        if (sadReactions.contains(user)) {
-//            return EPostReaction.SAD;
-//        }
-//
-//        if (angryReactions.contains(user)) {
-//            return EPostReaction.ANGRY;
-//        }
-//
-//        if (funReactions.contains(user)) {
-//            return EPostReaction.FUN;
-//        }
-//
-//        if (loveReactions.contains(user)) {
-//            return EPostReaction.LOVE;
-//        }
-//
-//        return null;
+//    public int getSadReactionCount() {
+//        return sadReactions.size();
 //    }
 //
-//    public int getReactionCount(EPostReaction reaction) {
-//        switch (reaction) {
-//            case GREAT:
-//                return greatReactions.size();
-//            case SAD:
-//                return sadReactions.size();
-//            case ANGRY:
-//                return angryReactions.size();
-//            case FUN:
-//                return funReactions.size();
-//            case LOVE:
-//                return loveReactions.size();
-//            default:
-//                assert (false);
-//                throw new IllegalArgumentException("unknown EPostReaction type");
-//        }
+//    public int getAngryReactionCount() {
+//        return angryReactions.size();
 //    }
+//
+//    public int getFunReactionCount() {
+//        return funReactions.size();
+//    }
+//
+//    public int getLoveReactionCount() {
+//        return loveReactions.size();
+//    }
+
+    public int getReactionCount(EPostReaction reaction) {
+        switch (reaction) {
+            case GREAT:
+                return greatReactions.size();
+            case SAD:
+                return sadReactions.size();
+            case ANGRY:
+                return angryReactions.size();
+            case FUN:
+                return funReactions.size();
+            case LOVE:
+                return loveReactions.size();
+            default:
+                assert (false);
+                return -1;
+        }
+    }
 
     public void addReaction(User user, EPostReaction reaction) {
-        removeReaction(user);
+        removeAllReaction(user);
 
         switch (reaction) {
             case GREAT:
@@ -252,12 +210,26 @@ public class Post {
         }
     }
 
-    public void removeReaction(User user) {
-        greatReactions.remove(user);
-        sadReactions.remove(user);
-        angryReactions.remove(user);
-        funReactions.remove(user);
-        loveReactions.remove(user);
+    public void removeReaction(User user, EPostReaction reaction) {
+        switch (reaction) {
+            case GREAT:
+                greatReactions.remove(user);
+                break;
+            case SAD:
+                sadReactions.remove(user);
+                break;
+            case ANGRY:
+                angryReactions.remove(user);
+                break;
+            case FUN:
+                funReactions.remove(user);
+                break;
+            case LOVE:
+                loveReactions.remove(user);
+                break;
+            default:
+                assert (false);
+        }
     }
 
     public void printComments() {
@@ -274,5 +246,13 @@ public class Post {
 
     private void nowSetModifiedDateTime() {
         this.modifiedDateTime = OffsetDateTime.now();
+    }
+
+    private void removeAllReaction(User user) {
+        greatReactions.remove(user);
+        sadReactions.remove(user);
+        angryReactions.remove(user);
+        funReactions.remove(user);
+        loveReactions.remove(user);
     }
 }
