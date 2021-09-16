@@ -20,12 +20,11 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
-    private HashMap<User, EPostReaction> reactions;
-    private int greatReactionCount;
-    private int sadReactionCount;
-    private int angryReactionCount;
-    private int funReactionCount;
-    private int loveReactionCount;
+    private HashSet<User> greatReactions;
+    private HashSet<User> sadReactions;
+    private HashSet<User> angryReactions;
+    private HashSet<User> funReactions;
+    private HashSet<User> loveReactions;
 
     public Post(User author, HashSet<String> tags, String title, String body) {
         this.author = author;
@@ -39,7 +38,11 @@ public class Post {
 
         comments = new LinkedList<PostComment>();
 
-        reactions = new HashMap<User, EPostReaction>();
+        greatReactions = new HashSet<User>();
+        sadReactions = new HashSet<User>();
+        angryReactions = new HashSet<User>();
+        funReactions = new HashSet<User>();
+        loveReactions = new HashSet<User>();
     }
 
     public User getAuthor() {
@@ -120,42 +123,38 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public HashMap<User, EPostReaction> getReactions() {
-        return reactions;
+    public HashSet<User> getGreatReactions() {
+        return greatReactions;
     }
 
-    public int getAngryReactionCount() {
-        return angryReactionCount;
+    public HashSet<User> getSadReactions() {
+        return sadReactions;
     }
 
-    public int getFunReactionCount() {
-        return funReactionCount;
+    public HashSet<User> getAngryReactions() {
+        return angryReactions;
     }
 
-    public int getGreatReactionCount() {
-        return greatReactionCount;
+    public HashSet<User> getFunReactions() {
+        return funReactions;
     }
 
-    public int getLoveReactionCount() {
-        return loveReactionCount;
-    }
-
-    public int getSadReactionCount() {
-        return sadReactionCount;
+    public HashSet<User> getLoveReactions() {
+        return loveReactions;
     }
 
     public int getReactionCount(EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
-                return greatReactionCount;
+                return greatReactions.size();
             case SAD:
-                return sadReactionCount;
+                return sadReactions.size();
             case ANGRY:
-                return angryReactionCount;
+                return angryReactions.size();
             case FUN:
-                return funReactionCount;
+                return funReactions.size();
             case LOVE:
-                return loveReactionCount;
+                return loveReactions.size();
             default:
                 assert (false);
                 return -1;
@@ -163,55 +162,43 @@ public class Post {
     }
 
     public void addReaction(User user, EPostReaction reaction) {
-        removeReaction(user);
-
-        this.reactions.put(user, reaction);
-
         switch (reaction) {
             case GREAT:
-                greatReactionCount++;
+                greatReactions.add(user);
                 break;
             case SAD:
-                sadReactionCount++;
+                sadReactions.add(user);
                 break;
             case ANGRY:
-                angryReactionCount++;
+                angryReactions.add(user);
                 break;
             case FUN:
-                funReactionCount++;
+                funReactions.add(user);
                 break;
             case LOVE:
-                loveReactionCount++;
+                loveReactions.add(user);
                 break;
             default:
                 assert (false);
         }
     }
 
-    public void removeReaction(User user) {
-        if (this.reactions.containsKey(user) == false) {
-            return;
-        }
-
-        EPostReaction reaction = this.reactions.get(user);
-
-        this.reactions.remove(user);
-
+    public void removeReaction(User user, EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
-                greatReactionCount--;
+                greatReactions.remove(user);
                 break;
             case SAD:
-                sadReactionCount--;
+                sadReactions.remove(user);
                 break;
             case ANGRY:
-                angryReactionCount--;
+                angryReactions.remove(user);
                 break;
             case FUN:
-                funReactionCount--;
+                funReactions.remove(user);
                 break;
             case LOVE:
-                loveReactionCount--;
+                loveReactions.remove(user);
                 break;
             default:
                 assert (false);
