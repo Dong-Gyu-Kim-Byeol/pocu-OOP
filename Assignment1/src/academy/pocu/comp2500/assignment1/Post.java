@@ -8,8 +8,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Post {
-    private int authorId;
-    private String authorName;
+    private User author;
 
     private HashSet<String> tags;
 
@@ -21,16 +20,15 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
-    private HashMap<Integer, EPostReaction> reactions;
+    private HashMap<User, EPostReaction> reactions;
     private int greatReactionCount;
     private int sadReactionCount;
     private int angryReactionCount;
     private int funReactionCount;
     private int loveReactionCount;
 
-    public Post(int authorId, String authorName, HashSet<String> tags, String title, String body) {
-        this.authorId = authorId;
-        this.authorName = authorName;
+    public Post(User author, HashSet<String> tags, String title, String body) {
+        this.author = author;
 
         this.tags = tags;
         this.title = title;
@@ -41,23 +39,19 @@ public class Post {
 
         comments = new LinkedList<PostComment>();
 
-        reactions = new HashMap<Integer, EPostReaction>();
+        reactions = new HashMap<User, EPostReaction>();
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public boolean isAuthor(int userId) {
-        if (this.authorId == userId) {
+    public boolean isAuthor(User user) {
+        if (this.author == user) {
             return true;
         } else {
             return false;
         }
-    }
-
-    public String getAuthorName() {
-        return authorName;
     }
 
     public HashSet<String> getTags() {
@@ -85,8 +79,8 @@ public class Post {
         return title;
     }
 
-    public boolean setTitleCheckIsAuthor(int userId, String title) {
-        if (isAuthor(userId) == false) {
+    public boolean setTitleCheckIsAuthor(User user, String title) {
+        if (isAuthor(user) == false) {
             return false;
         }
 
@@ -99,8 +93,8 @@ public class Post {
         return body;
     }
 
-    public boolean setBodyCheckIsAuthor(int userId, String body) {
-        if (isAuthor(userId) == false) {
+    public boolean setBodyCheckIsAuthor(User user, String body) {
+        if (isAuthor(user) == false) {
             return false;
         }
 
@@ -126,8 +120,28 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public HashMap<Integer, EPostReaction> getReactions() {
+    public HashMap<User, EPostReaction> getReactions() {
         return reactions;
+    }
+
+    public int getAngryReactionCount() {
+        return angryReactionCount;
+    }
+
+    public int getFunReactionCount() {
+        return funReactionCount;
+    }
+
+    public int getGreatReactionCount() {
+        return greatReactionCount;
+    }
+
+    public int getLoveReactionCount() {
+        return loveReactionCount;
+    }
+
+    public int getSadReactionCount() {
+        return sadReactionCount;
     }
 
     public int getReactionCount(EPostReaction reaction) {
@@ -148,10 +162,10 @@ public class Post {
         }
     }
 
-    public void addReaction(int userId, EPostReaction reaction) {
-        removeReaction(userId);
+    public void addReaction(User user, EPostReaction reaction) {
+        removeReaction(user);
 
-        this.reactions.put(userId, reaction);
+        this.reactions.put(user, reaction);
 
         switch (reaction) {
             case GREAT:
@@ -174,14 +188,14 @@ public class Post {
         }
     }
 
-    public void removeReaction(int userId) {
-        if (this.reactions.containsKey(userId) == false) {
+    public void removeReaction(User user) {
+        if (this.reactions.containsKey(user) == false) {
             return;
         }
 
-        EPostReaction reaction = this.reactions.get(userId);
+        EPostReaction reaction = this.reactions.get(user);
 
-        this.reactions.remove(userId);
+        this.reactions.remove(user);
 
         switch (reaction) {
             case GREAT:
@@ -213,7 +227,7 @@ public class Post {
 
     public void print() {
         System.out.format("author: %s, created date: %s, modified date: %s, tag: %s, title: %s, body: %s\n",
-                this.authorName, this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
+                this.getAuthor().getName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
     }
 
     private void nowSetModifiedDateTime() {

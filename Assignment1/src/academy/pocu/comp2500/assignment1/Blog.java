@@ -9,18 +9,14 @@ import java.util.HashSet;
 public class Blog {
     private String name;
 
-    private int userIdCount;
-    private HashMap<Integer, User> userMap;
-
     private HashSet<Post> posts;
 
-    private int authorIdFilter;
+    private User authorFilterOrNull;
     private HashSet<String> tagsFilter;
     private EPostSorting sortingType;
 
     public Blog(String name) {
         this.name = name;
-        this.userMap = new HashMap<Integer, User>();
 
         this.posts = new HashSet<Post>();
 
@@ -36,19 +32,6 @@ public class Blog {
         this.name = name;
     }
 
-    public User getUserOrNull(int userId) {
-        return this.userMap.get(userId);
-    }
-
-    public User createUser(String name) {
-        int newUserId = getNewUserId();
-        User newUser = new User(this, newUserId, name);
-
-        this.userMap.put(newUser.getUserId(), newUser);
-
-        return newUser;
-    }
-
     public HashSet<Post> getPosts() {
         return posts;
     }
@@ -58,7 +41,7 @@ public class Blog {
 
         for (Post post : getPosts()) {
             // authorFilter
-            if (getAuthorIdFilter() <= 0 && post.isAuthor(getAuthorIdFilter()) == false) {
+            if (getAuthorFilterOrNull() != null && post.isAuthor(getAuthorFilterOrNull()) == false) {
                 continue;
             }
 
@@ -74,12 +57,12 @@ public class Blog {
         return filteredPosts;
     }
 
-    public int getAuthorIdFilter() {
-        return authorIdFilter;
+    public User getAuthorFilterOrNull() {
+        return authorFilterOrNull;
     }
 
-    public void setAuthorIdFilter(int authorId) {
-        this.authorIdFilter = authorId;
+    public void setAuthorFilterOrNull(User authorOrNull) {
+        this.authorFilterOrNull = authorOrNull;
     }
 
     public HashSet<String> getTagsFilter() {
@@ -126,34 +109,5 @@ public class Blog {
 
     public boolean isContainPost(Post post) {
         return posts.contains(post);
-    }
-
-    private int getNewUserId() {
-        userIdCount++;
-        while (true) {
-            if (userIdCount <= 0) {
-                userIdCount = 1;
-            }
-
-            if (userMap.containsKey(userIdCount)) {
-                userIdCount++;
-                continue;
-            }
-
-            assert (isValidUserId(userIdCount) == true);
-            return userIdCount;
-        }
-    }
-
-    private boolean isValidUserId(int id) {
-        if (userIdCount <= 0) {
-            return false;
-        }
-
-        if (userMap.containsKey(userIdCount) == true) {
-            return false;
-        }
-
-        return true;
     }
 }

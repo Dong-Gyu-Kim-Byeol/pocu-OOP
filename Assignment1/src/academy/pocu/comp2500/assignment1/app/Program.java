@@ -13,44 +13,44 @@ public class Program {
     public static void main(String[] args) {
         Blog blog = new Blog("blog 1");
 
-        User author1 = blog.createUser("author1");
-        User author2 = blog.createUser("author2");
-        User read1 = blog.createUser("read1");
-        User read2 = blog.createUser("read2");
+        User author1 = new User("author1");
+        User author2 = new User("author2");
+        User read1 = new User("read1");
+        User read2 = new User("read2");
 
-        Post newPost = new Post(author1.getUserId(), author1.getName(), new HashSet<String>(), "tt11", "bb11");
+        Post newPost = new Post(author1, new HashSet<String>(), "tt11", "bb11");
         blog.addPost(newPost);
         newPost.addTag(new String("tag11"));
         newPost.addTag(new String("tag11"));
         newPost.addTag(new String("tag12"));
-        newPost.addReaction(read1.getUserId(), EPostReaction.FUN);
-        PostComment newComment = new PostComment(read1.getUserId(), read1.getName(), "comment11");
+        newPost.addReaction(read1, EPostReaction.FUN);
+        PostComment newComment = new PostComment(read1, "comment11");
         newPost.addComment(newComment);
-        newComment.addSubcomment(new PostComment(read2.getUserId(), read2.getName(), "subcom111"));
+        newComment.addSubcomment(new PostComment(read2, "subcom111"));
 
-        newPost = new Post(author2.getUserId(), author2.getName(), new HashSet<String>(), "tt22", "bb22");
+        newPost = new Post(author2, new HashSet<String>(), "tt22", "bb22");
         blog.addPost(newPost);
         newPost.addTag("tag22");
-        newComment = new PostComment(read1.getUserId(), read1.getName(), "comment21");
+        newComment = new PostComment(read1, "comment21");
         newPost.addComment(newComment);
-        newComment.addSubcomment(new PostComment(read2.getUserId(), read2.getName(), "subcom211"));
-        newComment.addSubcomment(new PostComment(read2.getUserId(), read2.getName(), "subcom212"));
-        newComment.setBodyCheckIsAuthor(read1.getUserId(), "setbody");
+        newComment.addSubcomment(new PostComment(read2, "subcom211"));
+        newComment.addSubcomment(new PostComment(read2, "subcom212"));
+        newComment.setBodyCheckIsAuthor(read1, "setbody");
 
-        newComment = new PostComment(read1.getUserId(), read1.getName(), "comment22");
+        newComment = new PostComment(read1, "comment22");
         newPost.addComment(newComment);
-        newComment.addSubcomment(new PostComment(read2.getUserId(), read2.getName(), "subcom221"));
-        newComment.upvote(read1.getUserId());
+        newComment.addSubcomment(new PostComment(read2, "subcom221"));
+        newComment.upvote(read1);
 
-        newPost.addReaction(read1.getUserId(), EPostReaction.GREAT);
-        newPost.addReaction(read2.getUserId(), EPostReaction.FUN);
+        newPost.addReaction(read1, EPostReaction.GREAT);
+        newPost.addReaction(read2, EPostReaction.FUN);
 
 
         read1.visitBlog(blog);
-        newPost.removeReaction(read1.getUserId());
+        newPost.removeReaction(read1);
 
         System.out.println("\n\n------------- Filter ---------------\n");
-        blog.setAuthorIdFilter(author2.getUserId());
+        blog.setAuthorFilterOrNull(author2);
 
         var tags = new HashSet<String>();
         tags.add("tag22");
