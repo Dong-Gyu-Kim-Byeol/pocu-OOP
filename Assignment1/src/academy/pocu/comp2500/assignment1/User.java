@@ -19,6 +19,18 @@ public class User {
         this.name = name;
     }
 
+    public boolean setPostTitle(Post post, String title) {
+        return post.setTitleCheckIsAuthor(this, title);
+    }
+
+    public boolean setPostBody(Post post, String body) {
+        return post.setBodyCheckIsAuthor(this, body);
+    }
+
+    public boolean setCommentBody(PostComment comment, String body) {
+        return comment.setBodyCheckIsAuthor(this, body);
+    }
+
     public void visitBlog(Blog blog) {
         ArrayList<Post> filteredPosts = blog.getFilteredPostsAndSort();
         visitPrint(filteredPosts);
