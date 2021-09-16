@@ -128,47 +128,25 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public HashSet<User> getGreatReactions() {
-        return greatReactions;
+    public HashSet<User> getReactions(EPostReaction reaction) {
+        switch (reaction) {
+            case GREAT:
+                return greatReactions;
+            case SAD:
+                return sadReactions;
+            case ANGRY:
+                return angryReactions;
+            case FUN:
+                return funReactions;
+            case LOVE:
+                return loveReactions;
+            default:
+                assert (false);
+                throw new IllegalArgumentException("unknown EPostReaction type");
+        }
     }
 
-    public int getGreatReactionCount() {
-        return greatReactions.size();
-    }
-
-    public HashSet<User> getSadReactions() {
-        return sadReactions;
-    }
-
-    public int getSadReactionCount() {
-        return sadReactions.size();
-    }
-
-    public HashSet<User> getAngryReactions() {
-        return angryReactions;
-    }
-
-    public int getAngryReactionCount() {
-        return angryReactions.size();
-    }
-
-    public HashSet<User> getFunReactions() {
-        return funReactions;
-    }
-
-    public int getFunReactionCount() {
-        return funReactions.size();
-    }
-
-    public HashSet<User> getLoveReactions() {
-        return loveReactions;
-    }
-
-    public int getLoveReactionCount() {
-        return loveReactions.size();
-    }
-
-    public EPostReaction getUserReaction(User user) {
+    public EPostReaction getUserReactionOrNull(User user) {
         if (greatReactions.contains(user)) {
             return EPostReaction.GREAT;
         }
@@ -185,9 +163,11 @@ public class Post {
             return EPostReaction.FUN;
         }
 
-//        if (loveReactions.contains(user)) {
-        return EPostReaction.LOVE;
-//        }
+        if (loveReactions.contains(user)) {
+            return EPostReaction.LOVE;
+        }
+
+        return null;
     }
 
     public int getReactionCount(EPostReaction reaction) {
