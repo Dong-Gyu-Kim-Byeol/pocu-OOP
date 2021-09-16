@@ -51,9 +51,14 @@ public class PostComment {
         return body;
     }
 
-    public void setBody(String body) {
+    public boolean updateBodyCheckIsAuthor(User user, String body) {
+        if (this.isAuthor(user) == true) {
+            return false;
+        }
+
         this.body = body;
         nowSetModifiedDateTime();
+        return true;
     }
 
     public OffsetDateTime getCreatedDateTime() {

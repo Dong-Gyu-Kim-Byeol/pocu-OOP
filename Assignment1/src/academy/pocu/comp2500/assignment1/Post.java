@@ -83,18 +83,28 @@ public class Post {
         return title;
     }
 
-    public void setTitle(String title) {
+    public boolean updateTitleCheckIsAuthor(User user, String title) {
+        if (this.isAuthor(user) == true) {
+            return false;
+        }
+
         this.title = title;
         nowSetModifiedDateTime();
+        return true;
     }
 
     public String getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public boolean updateBodyCheckIsAuthor(User user, String body) {
+        if (this.isAuthor(user) == true) {
+            return false;
+        }
+
         this.body = body;
         nowSetModifiedDateTime();
+        return true;
     }
 
     public OffsetDateTime getCreatedDateTime() {
