@@ -10,12 +10,12 @@ public class User {
         this.name = name;
     }
 
-    public boolean equals(User other) {
-        if (other == this) {
+    public boolean equals(User user) {
+        if (user == this) {
             return true;
         }
 
-        return this.name.equals(other.getName());
+        return this.name.equals(user.getName());
     }
 
 //    @Override
