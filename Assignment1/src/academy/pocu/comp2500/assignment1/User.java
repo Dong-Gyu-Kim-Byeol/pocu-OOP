@@ -24,6 +24,17 @@ public class User {
         return this.name.equals(otherUser.getName());
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hash = 1;
+
+        //        hash = prime * hash + (int) (id ^ (id >>> 32));
+        hash = prime * hash + name.hashCode();
+
+        return hash;
+    }
+
     public String getName() {
         return name;
     }
