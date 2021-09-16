@@ -3,10 +3,15 @@ package academy.pocu.comp2500.assignment1;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Blog {
     private String name;
+
+    private int userIdCount;
+    private HashMap<Integer, User> userMap;
+
     private HashSet<Post> posts;
 
     private int authorIdFilter;
@@ -15,6 +20,7 @@ public class Blog {
 
     public Blog(String name) {
         this.name = name;
+        this.userMap = new HashMap<Integer, User>();
 
         this.posts = new HashSet<Post>();
 
@@ -28,6 +34,19 @@ public class Blog {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getUserOrNull(int userId) {
+        return this.userMap.get(userId);
+    }
+
+    public User createUser(String name) {
+        int newUserId = getNewUserId();
+        User newUser = new User(newUserId, name);
+
+        this.userMap.put(newUser.getUserId(), newUser);
+
+        return newUser;
     }
 
     public HashSet<Post> getPosts() {
@@ -107,5 +126,34 @@ public class Blog {
 
     public boolean isContainPost(Post post) {
         return posts.contains(post);
+    }
+
+    private int getNewUserId() {
+        userIdCount++;
+        while (true) {
+            if (userIdCount <= 0) {
+                userIdCount = 1;
+            }
+
+            if (userMap.containsKey(userIdCount)) {
+                userIdCount++;
+                continue;
+            }
+
+            assert (isValidUserId(userIdCount) == true);
+            return userIdCount;
+        }
+    }
+
+    private boolean isValidUserId(int id) {
+        if (userIdCount <= 0) {
+            return false;
+        }
+
+        if (userMap.containsKey(userIdCount) == true) {
+            return false;
+        }
+
+        return true;
     }
 }

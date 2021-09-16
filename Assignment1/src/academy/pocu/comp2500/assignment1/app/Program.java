@@ -1,6 +1,7 @@
 package academy.pocu.comp2500.assignment1.app;
 
 import academy.pocu.comp2500.assignment1.Blog;
+import academy.pocu.comp2500.assignment1.BlogSystemManager;
 import academy.pocu.comp2500.assignment1.EPostReaction;
 import academy.pocu.comp2500.assignment1.EPostSorting;
 import academy.pocu.comp2500.assignment1.Post;
@@ -10,32 +11,17 @@ import academy.pocu.comp2500.assignment1.User;
 import java.util.HashSet;
 
 public class Program {
-    private static int userIdCount = 0;
-    private static HashSet<Integer> userIdSet = new HashSet<Integer>();
 
-    private static int getNewUserId() {
-        userIdCount++;
-        while (true) {
-            if (userIdCount <= 0) {
-                userIdCount = 1;
-            }
-
-            if (userIdSet.contains(userIdCount)) {
-                userIdCount++;
-                continue;
-            }
-
-            return userIdCount;
-        }
-    }
 
     public static void main(String[] args) {
+        BlogSystemManager blogSystemManager = new BlogSystemManager();
+
         Blog blog = new Blog("blog 1");
 
-        User author1 = new User(getNewUserId(), "author1");
-        User author2 = new User(getNewUserId(), "author2");
-        User read1 = new User(getNewUserId(), "read1");
-        User read2 = new User(getNewUserId(), "read2");
+        User author1 = blog.createUser("author1");
+        User author2 = blog.createUser("author2");
+        User read1 = blog.createUser("read1");
+        User read2 = blog.createUser("read2");
 
         Post newPost = new Post(author1.getUserId(), author1.getName(), new HashSet<String>(), "tt11", "bb11");
         blog.addPost(newPost);
