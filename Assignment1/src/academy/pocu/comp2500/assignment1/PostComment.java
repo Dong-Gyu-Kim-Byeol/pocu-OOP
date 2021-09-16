@@ -8,39 +8,39 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class PostComment {
-    private User author;
+    private String authorId;
 
     private String body;
 
     private OffsetDateTime createdDateTime;
     private OffsetDateTime modifiedDateTime;
 
-    private HashSet<User> upvotes;
-    private HashSet<User> downvotes;
+    private HashSet<String> upvoteUserIds;
+    private HashSet<String> downvoteUserIds;
 
     private LinkedList<PostComment> subcomments;
 
 
-    public PostComment(User author, String body) {
-        this.author = author;
+    public PostComment(String authorId, String body) {
+        this.authorId = authorId;
 
         this.body = body;
 
         this.createdDateTime = OffsetDateTime.now();
         this.modifiedDateTime = createdDateTime;
 
-        this.upvotes = new HashSet<User>();
-        this.downvotes = new HashSet<User>();
+        this.upvoteUserIds = new HashSet<String>();
+        this.downvoteUserIds = new HashSet<String>();
 
         this.subcomments = new LinkedList<PostComment>();
     }
 
-    public User getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public boolean isAuthor(User user) {
-        if (this.author.isEqual(user)) {
+    public boolean isAuthor(String userId) {
+        if (this.authorId.equals(userId)) {
             return true;
         } else {
             return false;
@@ -51,8 +51,8 @@ public class PostComment {
         return body;
     }
 
-    public boolean updateBodyCheckIsAuthor(User user, String body) {
-        if (this.isAuthor(user) == false) {
+    public boolean updateBodyCheckIsAuthor(String userId, String body) {
+        if (this.isAuthor(userId) == false) {
             return false;
         }
 
@@ -86,40 +86,34 @@ public class PostComment {
         return getUpvoteCount() - getDownvoteCount();
     }
 
-    public HashSet<User> getUpvotes() {
-        return upvotes;
+    public HashSet<String> getUpvoteUserIds() {
+        return upvoteUserIds;
     }
 
     public int getUpvoteCount() {
-        return upvotes.size();
+        return upvoteUserIds.size();
     }
 
-    public void upvote(User user) {
-        if (downvotes.contains(user) == true) {
-            downvotes.remove(user);
-        }
-
-        upvotes.add(user);
+    public void upvote(String userId) {
+        downvoteUserIds.remove(userId);
+        upvoteUserIds.add(userId);
     }
 
-    public HashSet<User> getDownvotes() {
-        return downvotes;
+    public HashSet<String> getDownvoteUserIds() {
+        return downvoteUserIds;
     }
 
     public int getDownvoteCount() {
-        return downvotes.size();
+        return downvoteUserIds.size();
     }
 
-    public void downvote(User user) {
-        if (upvotes.contains(user) == true) {
-            upvotes.remove(user);
-        }
-
-        downvotes.add(user);
+    public void downvote(String userId) {
+        upvoteUserIds.remove(userId);
+        downvoteUserIds.add(userId);
     }
 
     public String printString() {
-        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthor().getName(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
+        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthorId(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
     }
 
     public void printSubcomments() {

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Post {
-    private User author;
+    private String authorId;
 
     private HashSet<String> tags;
 
@@ -19,14 +19,14 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
-    private HashSet<User> greatReactions;
-    private HashSet<User> sadReactions;
-    private HashSet<User> angryReactions;
-    private HashSet<User> funReactions;
-    private HashSet<User> loveReactions;
+    private HashSet<String> greatUserIdReactions;
+    private HashSet<String> sadUserIdReactions;
+    private HashSet<String> angryUserIdReactions;
+    private HashSet<String> funUserIdReactions;
+    private HashSet<String> loveUserIdReactions;
 
-    public Post(User author, HashSet<String> tags, String title, String body) {
-        this.author = author;
+    public Post(String authorId, HashSet<String> tags, String title, String body) {
+        this.authorId = authorId;
 
         this.tags = tags;
         this.title = title;
@@ -37,19 +37,19 @@ public class Post {
 
         comments = new LinkedList<PostComment>();
 
-        greatReactions = new HashSet<User>();
-        sadReactions = new HashSet<User>();
-        angryReactions = new HashSet<User>();
-        funReactions = new HashSet<User>();
-        loveReactions = new HashSet<User>();
+        greatUserIdReactions = new HashSet<String>();
+        sadUserIdReactions = new HashSet<String>();
+        angryUserIdReactions = new HashSet<String>();
+        funUserIdReactions = new HashSet<String>();
+        loveUserIdReactions = new HashSet<String>();
     }
 
-    public User getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public boolean isAuthor(User user) {
-        if (this.author.isEqual(user)) {
+    public boolean isAuthor(String userId) {
+        if (this.authorId.equals(userId) == true) {
             return true;
         } else {
             return false;
@@ -81,8 +81,8 @@ public class Post {
         return title;
     }
 
-    public boolean updateTitleCheckIsAuthor(User user, String title) {
-        if (this.isAuthor(user) == false) {
+    public boolean updateTitleCheckIsAuthor(String userId, String title) {
+        if (this.isAuthor(userId) == false) {
             return false;
         }
 
@@ -95,8 +95,8 @@ public class Post {
         return body;
     }
 
-    public boolean updateBodyCheckIsAuthor(User user, String body) {
-        if (this.isAuthor(user) == false) {
+    public boolean updateBodyCheckIsAuthor(String userId, String body) {
+        if (this.isAuthor(userId) == false) {
             return false;
         }
 
@@ -126,104 +126,84 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public HashSet<User> getGreatReactions() {
-        return greatReactions;
+    public HashSet<String> getGreatUserIdReactions() {
+        return greatUserIdReactions;
     }
 
-    public HashSet<User> getSadReactions() {
-        return sadReactions;
+    public HashSet<String> getSadUserIdReactions() {
+        return sadUserIdReactions;
     }
 
-    public HashSet<User> getAngryReactions() {
-        return angryReactions;
+    public HashSet<String> getAngryUserIdReactions() {
+        return angryUserIdReactions;
     }
 
-    public HashSet<User> getFunReactions() {
-        return funReactions;
+    public HashSet<String> getFunUserIdReactions() {
+        return funUserIdReactions;
     }
 
-    public HashSet<User> getLoveReactions() {
-        return loveReactions;
+    public HashSet<String> getLoveUserIdReactions() {
+        return loveUserIdReactions;
     }
-
-//    public int getGreatReactionCount() {
-//        return greatReactions.size();
-//    }
-//
-//    public int getSadReactionCount() {
-//        return sadReactions.size();
-//    }
-//
-//    public int getAngryReactionCount() {
-//        return angryReactions.size();
-//    }
-//
-//    public int getFunReactionCount() {
-//        return funReactions.size();
-//    }
-//
-//    public int getLoveReactionCount() {
-//        return loveReactions.size();
-//    }
 
     public int getReactionCount(EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
-                return greatReactions.size();
+                return greatUserIdReactions.size();
             case SAD:
-                return sadReactions.size();
+                return sadUserIdReactions.size();
             case ANGRY:
-                return angryReactions.size();
+                return angryUserIdReactions.size();
             case FUN:
-                return funReactions.size();
+                return funUserIdReactions.size();
             case LOVE:
-                return loveReactions.size();
+                return loveUserIdReactions.size();
             default:
                 assert (false);
                 return -1;
         }
     }
 
-    public void addReaction(User user, EPostReaction reaction) {
-        removeAllReaction(user);
+    public void addReaction(String userId, EPostReaction reaction) {
+        removeAllReaction(userId);
 
         switch (reaction) {
             case GREAT:
-                greatReactions.add(user);
+                greatUserIdReactions.add(userId);
                 break;
             case SAD:
-                sadReactions.add(user);
+                sadUserIdReactions.add(userId);
                 break;
             case ANGRY:
-                angryReactions.add(user);
+                angryUserIdReactions.add(userId);
                 break;
             case FUN:
-                funReactions.add(user);
+                funUserIdReactions.add(userId);
                 break;
             case LOVE:
-                loveReactions.add(user);
+                loveUserIdReactions.add(userId);
                 break;
             default:
                 assert (false);
         }
     }
 
-    public void removeReaction(User user, EPostReaction reaction) {
+    public void removeReaction(String userId, EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
-                greatReactions.remove(user);
+                greatUserIdReactions.remove(userId);
                 break;
             case SAD:
-                sadReactions.remove(user);
+                sadUserIdReactions.remove(userId);
                 break;
             case ANGRY:
-                angryReactions.remove(user);
+                angryUserIdReactions.remove(userId);
                 break;
             case FUN:
-                funReactions.remove(user);
+                funUserIdReactions.remove(userId);
                 break;
             case LOVE:
-                loveReactions.remove(user);
+                loveUserIdReactions.remove(userId);
                 break;
             default:
                 assert (false);
@@ -239,26 +219,18 @@ public class Post {
 
     public void print() {
         System.out.format("author: %s, created date: %s, modified date: %s, tag: %s, title: %s, body: %s\n",
-                this.getAuthor().getName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
+                this.getAuthorId(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
     }
 
     private void nowSetModifiedDateTime() {
         this.modifiedDateTime = OffsetDateTime.now();
     }
 
-    private void removeAllReaction(User user) {
-        userHashSetRemove(user, greatReactions);
-        userHashSetRemove(user, sadReactions);
-        userHashSetRemove(user, angryReactions);
-        userHashSetRemove(user, funReactions);
-        userHashSetRemove(user, loveReactions);
-    }
-
-    private void userHashSetRemove(User removeUser, HashSet<User> set) {
-        for (User user : set) {
-            if (removeUser.isEqual(user) == true) {
-                set.remove(user);
-            }
-        }
+    private void removeAllReaction(String userId) {
+        greatUserIdReactions.remove(userId);
+        sadUserIdReactions.remove(userId);
+        angryUserIdReactions.remove(userId);
+        funUserIdReactions.remove(userId);
+        loveUserIdReactions.remove(userId);
     }
 }
