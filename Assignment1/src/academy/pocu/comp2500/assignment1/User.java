@@ -10,7 +10,7 @@ public class User {
         this.name = name;
     }
 
-    public boolean equals(User user) {
+    public boolean isEqual(User user) {
         if (user == this) {
             return true;
         }
