@@ -31,15 +31,15 @@ public class Program {
         newPost = new Post(author2, new HashSet<String>(), "tt22", "bb22");
         blog.addPost(newPost);
         newPost.addTag("tag22");
-        newPost.changeBodyCheckIsAuthor(author1, "change body1");
-        newPost.changeBodyCheckIsAuthor(author2, "change body2");
+        newPost.updateBodyCheckIsAuthor(author1, "change body1");
+        newPost.updateBodyCheckIsAuthor(author2, "change body2");
         newComment = new PostComment(read1, "comment21");
         newPost.addComment(newComment);
         newComment.addSubcomment(new PostComment(read2, "subcom211"));
         newComment.addSubcomment(new PostComment(read2, "subcom212"));
-        newComment.changeBodyCheckIsAuthor(read2, "setbody1");
-        newComment.changeBodyCheckIsAuthor(read1, "setbody2");
-        newComment.changeBodyCheckIsAuthor(read1, "setbody3");
+        newComment.updateBodyCheckIsAuthor(read2, "setbody1");
+        newComment.updateBodyCheckIsAuthor(read1, "setbody2");
+        newComment.updateBodyCheckIsAuthor(read1, "setbody3");
 
         newComment = new PostComment(read1, "comment22");
         newPost.addComment(newComment);
