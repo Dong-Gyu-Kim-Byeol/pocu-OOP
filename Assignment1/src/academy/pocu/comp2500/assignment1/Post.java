@@ -83,7 +83,11 @@ public class Post {
         return title;
     }
 
-    public boolean updateTitleCheckIsAuthor(User user, String title) {
+    public boolean updateTitleCheckIsAuthor(User user, String titleOrNull) {
+        if (titleOrNull == null) {
+            return false;
+        }
+
         if (isAuthor(user) == false) {
             return false;
         }
@@ -97,7 +101,11 @@ public class Post {
         return body;
     }
 
-    public boolean updateBodyCheckIsAuthor(User user, String body) {
+    public boolean updateBodyCheckIsAuthor(User user, String bodyOrNull) {
+        if (bodyOrNull == null) {
+            return false;
+        }
+
         if (isAuthor(user) == false) {
             return false;
         }
