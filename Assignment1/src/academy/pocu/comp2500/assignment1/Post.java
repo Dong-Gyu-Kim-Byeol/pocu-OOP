@@ -1,6 +1,7 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class Post {
     private OffsetDateTime createdDateTime;
     private OffsetDateTime modifiedDateTime;
 
-    private LinkedList<PostComment> comments;
+    private HashSet<PostComment> comments;
 
     private HashSet<User> greatReactions;
     private HashSet<User> sadReactions;
@@ -36,7 +37,7 @@ public class Post {
         this.createdDateTime = OffsetDateTime.now();
         this.modifiedDateTime = createdDateTime;
 
-        comments = new LinkedList<PostComment>();
+        comments = new HashSet<PostComment>();
 
         greatReactions = new HashSet<User>();
         sadReactions = new HashSet<User>();
@@ -114,9 +115,14 @@ public class Post {
         return modifiedDateTime;
     }
 
-    public LinkedList<PostComment> getComments() {
-        sortingComments();
+    public HashSet<PostComment> getComments() {
         return comments;
+    }
+
+    private ArrayList<PostComment> getSortedComments() {
+        ArrayList<PostComment> sortedComments = new ArrayList<PostComment>(comments);
+        Collections.sort(sortedComments, Comparator.comparing(PostComment::getVoteScore).reversed());
+        return sortedComments;
     }
 
     public void addComment(PostComment comment) {
@@ -206,7 +212,7 @@ public class Post {
     }
 
     public void printComments() {
-        for (PostComment comment : getComments()) {
+        for (PostComment comment : getSortedComments()) {
             System.out.println(comment.printString());
             comment.printSubcomments();
         }
@@ -219,9 +225,5 @@ public class Post {
 
     private void nowSetModifiedDateTime() {
         this.modifiedDateTime = OffsetDateTime.now();
-    }
-
-    private void sortingComments() {
-        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
     }
 }

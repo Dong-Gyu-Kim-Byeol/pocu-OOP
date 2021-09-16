@@ -39,7 +39,7 @@ public class Blog {
     public ArrayList<Post> getFilteredPostsAndSort() {
         ArrayList<Post> filteredPosts = new ArrayList<Post>(getPosts().size());
 
-        for (Post post : getPosts()) {
+        for (Post post : this.posts) {
             // authorFilter
             if (getAuthorFilterOrNull() != null && post.isAuthor(getAuthorFilterOrNull()) == false) {
                 continue;

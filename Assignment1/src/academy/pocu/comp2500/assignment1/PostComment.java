@@ -1,6 +1,7 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ public class PostComment {
     private HashSet<User> upvotes;
     private HashSet<User> downvotes;
 
-    private LinkedList<PostComment> subcomments;
+    private HashSet<PostComment> subcomments;
 
 
     public PostComment(User author, String body) {
@@ -31,7 +32,7 @@ public class PostComment {
         this.upvotes = new HashSet<User>();
         this.downvotes = new HashSet<User>();
 
-        this.subcomments = new LinkedList<PostComment>();
+        this.subcomments = new HashSet<PostComment>();
     }
 
     public User getAuthor() {
@@ -68,13 +69,14 @@ public class PostComment {
         return modifiedDateTime;
     }
 
-    public LinkedList<PostComment> getSubcomments() {
-        sortingSubcomments();
+    public HashSet<PostComment> getSubcomments() {
         return subcomments;
     }
 
-    public void sortingSubcomments() {
-        Collections.sort(subcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
+    public ArrayList<PostComment> getSortedSubcomments() {
+        ArrayList<PostComment> sortedSubcomments = new ArrayList<PostComment>(subcomments);
+        Collections.sort(sortedSubcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
+        return sortedSubcomments;
     }
 
     public void addSubcomment(PostComment comment) {
