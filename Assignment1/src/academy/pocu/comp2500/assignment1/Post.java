@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Post {
-    private Blog blog;
     private User author;
 
     private HashSet<String> tags;
@@ -20,7 +19,7 @@ public class Post {
     private OffsetDateTime createdDateTime;
     private OffsetDateTime modifiedDateTime;
 
-    private HashSet<PostComment> comments;
+    private LinkedList<PostComment> comments;
 
     private HashSet<User> greatReactions;
     private HashSet<User> sadReactions;
@@ -28,8 +27,7 @@ public class Post {
     private HashSet<User> funReactions;
     private HashSet<User> loveReactions;
 
-    public Post(Blog blog, User author, HashSet<String> tags, String title, String body) {
-        this.blog = blog;
+    public Post(User author, HashSet<String> tags, String title, String body) {
         this.author = author;
 
         this.tags = tags;
@@ -39,17 +37,13 @@ public class Post {
         this.createdDateTime = OffsetDateTime.now();
         this.modifiedDateTime = createdDateTime;
 
-        comments = new HashSet<PostComment>();
+        comments = new LinkedList<PostComment>();
 
         greatReactions = new HashSet<User>();
         sadReactions = new HashSet<User>();
         angryReactions = new HashSet<User>();
         funReactions = new HashSet<User>();
         loveReactions = new HashSet<User>();
-    }
-
-    public Blog getBlog() {
-        return blog;
     }
 
     public User getAuthor() {
@@ -90,10 +84,6 @@ public class Post {
     }
 
     public boolean changeTitleCheckIsAuthor(User user, String title) {
-        if (getBlog().isContainPost(this) == false) {
-            return false;
-        }
-
         if (isAuthor(user) == false) {
             return false;
         }
@@ -108,10 +98,6 @@ public class Post {
     }
 
     public boolean changeBodyCheckIsAuthor(User user, String body) {
-        if (blog.isContainPost(this) == false) {
-            return false;
-        }
-
         if (isAuthor(user) == false) {
             return false;
         }
@@ -129,14 +115,13 @@ public class Post {
         return modifiedDateTime;
     }
 
-    public HashSet<PostComment> getComments() {
+    public LinkedList<PostComment> getComments() {
         return comments;
     }
 
-    private ArrayList<PostComment> getSortedComments() {
-        ArrayList<PostComment> sortedComments = new ArrayList<PostComment>(comments);
-        Collections.sort(sortedComments, Comparator.comparing(PostComment::getVoteScore).reversed());
-        return sortedComments;
+    public LinkedList<PostComment> getSortedComments() {
+        Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
+        return comments;
     }
 
     public void addComment(PostComment comment) {
@@ -147,20 +132,40 @@ public class Post {
         return greatReactions;
     }
 
+    public int getGreatReactionCount() {
+        return greatReactions.size();
+    }
+
     public HashSet<User> getSadReactions() {
         return sadReactions;
+    }
+
+    public int getSadReactionCount() {
+        return sadReactions.size();
     }
 
     public HashSet<User> getAngryReactions() {
         return angryReactions;
     }
 
+    public int getAngryReactionCount() {
+        return angryReactions.size();
+    }
+
     public HashSet<User> getFunReactions() {
         return funReactions;
     }
 
+    public int getFunReactionCount() {
+        return funReactions.size();
+    }
+
     public HashSet<User> getLoveReactions() {
         return loveReactions;
+    }
+
+    public int getLoveReactionCount() {
+        return loveReactions.size();
     }
 
     public int getReactionCount(EPostReaction reaction) {

@@ -18,7 +18,7 @@ public class PostComment {
     private HashSet<User> upvotes;
     private HashSet<User> downvotes;
 
-    private HashSet<PostComment> subcomments;
+    private LinkedList<PostComment> subcomments;
 
 
     public PostComment(User author, String body) {
@@ -32,7 +32,7 @@ public class PostComment {
         this.upvotes = new HashSet<User>();
         this.downvotes = new HashSet<User>();
 
-        this.subcomments = new HashSet<PostComment>();
+        this.subcomments = new LinkedList<PostComment>();
     }
 
     public User getAuthor() {
@@ -69,14 +69,13 @@ public class PostComment {
         return modifiedDateTime;
     }
 
-    public HashSet<PostComment> getSubcomments() {
+    public LinkedList<PostComment> getSubcomments() {
         return subcomments;
     }
 
-    public ArrayList<PostComment> getSortedSubcomments() {
-        ArrayList<PostComment> sortedSubcomments = new ArrayList<PostComment>(subcomments);
-        Collections.sort(sortedSubcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
-        return sortedSubcomments;
+    public LinkedList<PostComment> getSortedSubcomments() {
+        Collections.sort(subcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
+        return subcomments;
     }
 
     public void addSubcomment(PostComment comment) {

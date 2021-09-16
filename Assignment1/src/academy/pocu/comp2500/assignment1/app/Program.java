@@ -18,7 +18,7 @@ public class Program {
         User read1 = new User("read1");
         User read2 = new User("read2");
 
-        Post newPost = new Post(blog, author1, new HashSet<String>(), "tt11", "bb11");
+        Post newPost = new Post(author1, new HashSet<String>(), "tt11", "bb11");
         blog.addPost(newPost);
         newPost.addTag(new String("tag11"));
         newPost.addTag(new String("tag11"));
@@ -28,7 +28,7 @@ public class Program {
         newPost.addComment(newComment);
         newComment.addSubcomment(new PostComment(read2, "subcom111"));
 
-        newPost = new Post(blog, author2, new HashSet<String>(), "tt22", "bb22");
+        newPost = new Post(author2, new HashSet<String>(), "tt22", "bb22");
         blog.addPost(newPost);
         newPost.addTag("tag22");
         newComment = new PostComment(read1, "comment21");
