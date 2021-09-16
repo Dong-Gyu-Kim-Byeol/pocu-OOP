@@ -118,6 +118,46 @@ public class Post {
         this.comments.add(comment);
     }
 
+    public HashSet<User> getGreatReactions() {
+        return greatReactions;
+    }
+
+    public HashSet<User> getSadReactions() {
+        return sadReactions;
+    }
+
+    public HashSet<User> getAngryReactions() {
+        return angryReactions;
+    }
+
+    public HashSet<User> getFunReactions() {
+        return funReactions;
+    }
+
+    public HashSet<User> getLoveReactions() {
+        return loveReactions;
+    }
+
+    public int getGreatReactionCount() {
+        return greatReactions.size();
+    }
+
+    public int getSadReactionCount() {
+        return sadReactions.size();
+    }
+
+    public int getAngryReactionCount() {
+        return angryReactions.size();
+    }
+
+    public int getFunReactionCount() {
+        return funReactions.size();
+    }
+
+    public int getLoveReactionCount() {
+        return loveReactions.size();
+    }
+
     public HashSet<User> getReactions(EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
