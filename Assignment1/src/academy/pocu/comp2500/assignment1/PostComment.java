@@ -73,10 +73,6 @@ public class PostComment {
         return modifiedDateTime;
     }
 
-    public LinkedList<PostComment> getSubcomments() {
-        return subcomments;
-    }
-
     public LinkedList<PostComment> getSortedSubcomments() {
         Collections.sort(subcomments, Comparator.comparing(PostComment::getVoteScore).reversed());
         return subcomments;
@@ -90,10 +86,6 @@ public class PostComment {
         return getUpvoteCount() - getDownvoteCount();
     }
 
-    public HashSet<String> getUpvoteUserIds() {
-        return upvoteUserIds;
-    }
-
     public int getUpvoteCount() {
         return upvoteUserIds.size();
     }
@@ -101,10 +93,6 @@ public class PostComment {
     public void upvote(String userId) {
         downvoteUserIds.remove(userId);
         upvoteUserIds.add(userId);
-    }
-
-    public HashSet<String> getDownvoteUserIds() {
-        return downvoteUserIds;
     }
 
     public int getDownvoteCount() {

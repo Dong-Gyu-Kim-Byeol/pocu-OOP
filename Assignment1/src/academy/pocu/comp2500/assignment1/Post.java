@@ -117,10 +117,6 @@ public class Post {
         return modifiedDateTime;
     }
 
-    public LinkedList<PostComment> getComments() {
-        return comments;
-    }
-
     public LinkedList<PostComment> getSortedComments() {
         Collections.sort(comments, Comparator.comparing(PostComment::getVoteScore).reversed());
         return comments;
@@ -128,26 +124,6 @@ public class Post {
 
     public void addComment(PostComment comment) {
         this.comments.add(comment);
-    }
-
-    public HashSet<String> getGreatUserIdReactions() {
-        return greatUserIdReactions;
-    }
-
-    public HashSet<String> getSadUserIdReactions() {
-        return sadUserIdReactions;
-    }
-
-    public HashSet<String> getAngryUserIdReactions() {
-        return angryUserIdReactions;
-    }
-
-    public HashSet<String> getFunUserIdReactions() {
-        return funUserIdReactions;
-    }
-
-    public HashSet<String> getLoveUserIdReactions() {
-        return loveUserIdReactions;
     }
 
     public int getReactionCount(EPostReaction reaction) {

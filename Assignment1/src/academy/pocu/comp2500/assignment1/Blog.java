@@ -31,21 +31,17 @@ public class Blog {
         this.name = name;
     }
 
-    public HashSet<Post> getPosts() {
-        return posts;
-    }
-
     public ArrayList<Post> getFilteredPostsAndSort() {
-        ArrayList<Post> filteredPosts = new ArrayList<Post>(getPosts().size());
+        ArrayList<Post> filteredPosts = new ArrayList<Post>(this.posts.size());
 
         for (Post post : this.posts) {
             // authorFilter
-            if (getAuthorIdFilterOrNull() != null && post.isAuthor(getAuthorIdFilterOrNull()) == false) {
+            if (authorIdFilterOrNull != null && post.isAuthor(authorIdFilterOrNull) == false) {
                 continue;
             }
 
             // tagFilter
-            if (getTagsFilter().size() != 0 && post.isTagsContainEvenOne(getTagsFilter()) == false) {
+            if (tagsFilter.size() != 0 && post.isTagsContainEvenOne(tagsFilter) == false) {
                 continue;
             }
 
@@ -56,24 +52,12 @@ public class Blog {
         return filteredPosts;
     }
 
-    public String getAuthorIdFilterOrNull() {
-        return authorIdFilterOrNull;
-    }
-
     public void setAuthorIdFilterOrNull(String authorIdOrNull) {
         this.authorIdFilterOrNull = authorIdOrNull;
     }
 
-    public HashSet<String> getTagsFilter() {
-        return tagsFilter;
-    }
-
     public void setTagsFilter(HashSet<String> tags) {
         tagsFilter = tags;
-    }
-
-    public EPostSorting getSortingType() {
-        return sortingType;
     }
 
     public void setSortingType(EPostSorting sortingType) {
@@ -104,9 +88,5 @@ public class Blog {
 
     public void addPost(Post post) {
         this.posts.add(post);
-    }
-
-    public boolean isContainPost(Post post) {
-        return posts.contains(post);
     }
 }
