@@ -21,17 +21,20 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
-//    private static final int GREAT_REACTION_INDEX = 0;
-//    private static final int SAD_REACTION_INDEX = 1;
-//    private static final int ANGRY_REACTION_INDEX = 2;
-//    private static final int FUN_REACTION_INDEX = 3;
-//    private static final int LOVE_REACTION_INDEX = 4;
+    public static final int GREAT_REACTION_INDEX = 0;
+    public static final int SAD_REACTION_INDEX = 1;
+    public static final int ANGRY_REACTION_INDEX = 2;
+    public static final int FUN_REACTION_INDEX = 3;
+    public static final int LOVE_REACTION_INDEX = 4;
+    public static final int REACTION_COUNT = 5;
 
-    private HashSet<User> greatReactions;
-    private HashSet<User> sadReactions;
-    private HashSet<User> angryReactions;
-    private HashSet<User> funReactions;
-    private HashSet<User> loveReactions;
+    private ArrayList<HashSet<User>> reactions;
+
+//    private ArrayList<HashSet<User>> greatReactions;
+//    private HashSet<User> sadReactions;
+//    private HashSet<User> angryReactions;
+//    private HashSet<User> funReactions;
+//    private HashSet<User> loveReactions;
 
     public Post(User author, HashSet<String> tags, String title, String body) {
         this.author = author;
@@ -45,11 +48,16 @@ public class Post {
 
         comments = new LinkedList<PostComment>();
 
-        greatReactions = new HashSet<User>();
-        sadReactions = new HashSet<User>();
-        angryReactions = new HashSet<User>();
-        funReactions = new HashSet<User>();
-        loveReactions = new HashSet<User>();
+        reactions = new ArrayList<HashSet<User>>(REACTION_COUNT);
+        for (int i = 0; i < REACTION_COUNT; i++) {
+            reactions.add(new HashSet<User>());
+        }
+
+//        greatReactions = new HashSet<User>();
+//        sadReactions = new HashSet<User>();
+//        angryReactions = new HashSet<User>();
+//        funReactions = new HashSet<User>();
+//        loveReactions = new HashSet<User>();
     }
 
     public User getAuthor() {
@@ -124,18 +132,40 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public HashSet<User> getReactions(EPostReaction reaction) {
+    public ArrayList<HashSet<User>> getReactions() {
+        return reactions;
+    }
+
+    public EPostReaction reactionIndexToEnum(int reaction) {
+        switch (reaction) {
+            case GREAT_REACTION_INDEX:
+                return EPostReaction.GREAT;
+            case SAD_REACTION_INDEX:
+                return EPostReaction.SAD;
+            case ANGRY_REACTION_INDEX:
+                return EPostReaction.ANGRY;
+            case FUN_REACTION_INDEX:
+                return EPostReaction.FUN;
+            case LOVE_REACTION_INDEX:
+                return EPostReaction.LOVE;
+            default:
+                assert (false);
+                throw new IllegalArgumentException("unknown EPostReaction type");
+        }
+    }
+
+    public int reactionEnumToIndex(EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
-                return greatReactions;
+                return GREAT_REACTION_INDEX;
             case SAD:
-                return sadReactions;
+                return SAD_REACTION_INDEX;
             case ANGRY:
-                return angryReactions;
+                return ANGRY_REACTION_INDEX;
             case FUN:
-                return funReactions;
+                return FUN_REACTION_INDEX;
             case LOVE:
-                return loveReactions;
+                return LOVE_REACTION_INDEX;
             default:
                 assert (false);
                 throw new IllegalArgumentException("unknown EPostReaction type");
@@ -143,77 +173,28 @@ public class Post {
     }
 
     public EPostReaction getUserReactionOrNull(User user) {
-        if (greatReactions.contains(user)) {
-            return EPostReaction.GREAT;
-        }
-
-        if (sadReactions.contains(user)) {
-            return EPostReaction.SAD;
-        }
-
-        if (angryReactions.contains(user)) {
-            return EPostReaction.ANGRY;
-        }
-
-        if (funReactions.contains(user)) {
-            return EPostReaction.FUN;
-        }
-
-        if (loveReactions.contains(user)) {
-            return EPostReaction.LOVE;
+        for (int i = 0; i < REACTION_COUNT; i++) {
+            if (reactions.get(i).contains(user)) {
+                return reactionIndexToEnum(i);
+            }
         }
 
         return null;
     }
 
     public int getReactionCount(EPostReaction reaction) {
-        switch (reaction) {
-            case GREAT:
-                return greatReactions.size();
-            case SAD:
-                return sadReactions.size();
-            case ANGRY:
-                return angryReactions.size();
-            case FUN:
-                return funReactions.size();
-            case LOVE:
-                return loveReactions.size();
-            default:
-                assert (false);
-                throw new IllegalArgumentException("unknown EPostReaction type");
-        }
+        return reactions.get(reactionEnumToIndex(reaction)).size();
     }
 
     public void addReaction(User user, EPostReaction reaction) {
         removeReaction(user);
-
-        switch (reaction) {
-            case GREAT:
-                greatReactions.add(user);
-                break;
-            case SAD:
-                sadReactions.add(user);
-                break;
-            case ANGRY:
-                angryReactions.add(user);
-                break;
-            case FUN:
-                funReactions.add(user);
-                break;
-            case LOVE:
-                loveReactions.add(user);
-                break;
-            default:
-                assert (false);
-        }
+        reactions.get(reactionEnumToIndex(reaction)).add(user);
     }
 
     public void removeReaction(User user) {
-        greatReactions.remove(user);
-        sadReactions.remove(user);
-        angryReactions.remove(user);
-        funReactions.remove(user);
-        loveReactions.remove(user);
+        for (int i = 0; i < REACTION_COUNT; i++) {
+            reactions.get(i).remove(user);
+        }
     }
 
     public void printComments() {
