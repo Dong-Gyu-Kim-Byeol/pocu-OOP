@@ -42,7 +42,7 @@ public class Blog {
 
     public User createUser(String name) {
         int newUserId = getNewUserId();
-        User newUser = new User(newUserId, name);
+        User newUser = new User(this, newUserId, name);
 
         this.userMap.put(newUser.getUserId(), newUser);
 

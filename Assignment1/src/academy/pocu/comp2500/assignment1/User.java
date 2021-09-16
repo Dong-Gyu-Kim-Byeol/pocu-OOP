@@ -3,10 +3,13 @@ package academy.pocu.comp2500.assignment1;
 import java.util.ArrayList;
 
 public class User {
+    private Blog blog;
     private int userId;
     private String name;
 
-    public User(int userId, String name) {
+    public User(Blog blog, int userId, String name) {
+        this.blog = blog;
+
         this.userId = userId;
 
         assert (name.equals("") != true);
