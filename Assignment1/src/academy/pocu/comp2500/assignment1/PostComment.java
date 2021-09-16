@@ -15,8 +15,8 @@ public class PostComment {
     private OffsetDateTime createdDateTime;
     private OffsetDateTime modifiedDateTime;
 
-    private HashSet<User> upvotes;
-    private HashSet<User> downvotes;
+    private HashSet<Integer> upvotes;
+    private HashSet<Integer> downvotes;
 
     private LinkedList<PostComment> subcomments;
 
@@ -30,8 +30,8 @@ public class PostComment {
         this.createdDateTime = OffsetDateTime.now();
         this.modifiedDateTime = createdDateTime;
 
-        this.upvotes = new HashSet<User>();
-        this.downvotes = new HashSet<User>();
+        this.upvotes = new HashSet<>();
+        this.downvotes = new HashSet<>();
 
         this.subcomments = new LinkedList<PostComment>();
     }
@@ -46,6 +46,10 @@ public class PostComment {
         } else {
             return false;
         }
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
     public String getBody() {
@@ -91,32 +95,32 @@ public class PostComment {
         return upvotes.size();
     }
 
-    public void upvote(User user) {
-        if (upvotes.contains(user) == true) {
+    public void upvote(int userId) {
+        if (upvotes.contains(userId) == true) {
             return;
         }
 
-        if (downvotes.contains(user) == true) {
-            downvotes.remove(user);
+        if (downvotes.contains(userId) == true) {
+            downvotes.remove(userId);
         }
 
-        upvotes.add(user);
+        upvotes.add(userId);
     }
 
     public int getDownvoteCount() {
         return downvotes.size();
     }
 
-    public void downvote(User user) {
-        if (downvotes.contains(user) == true) {
+    public void downvote(int userId) {
+        if (downvotes.contains(userId) == true) {
             return;
         }
 
-        if (upvotes.contains(user) == true) {
-            upvotes.remove(user);
+        if (upvotes.contains(userId) == true) {
+            upvotes.remove(userId);
         }
 
-        downvotes.add(user);
+        downvotes.add(userId);
     }
 
     public String getPrintString() {

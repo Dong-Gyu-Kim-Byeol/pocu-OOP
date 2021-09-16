@@ -71,6 +71,10 @@ public class Blog {
         tagsFilter = tags;
     }
 
+    public EPostSorting getSortingType() {
+        return sortingType;
+    }
+
     public void setSortingType(EPostSorting sortingType) {
         this.sortingType = sortingType;
     }

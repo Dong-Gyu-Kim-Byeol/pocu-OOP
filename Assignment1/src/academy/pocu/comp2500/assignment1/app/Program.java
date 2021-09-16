@@ -10,20 +10,39 @@ import academy.pocu.comp2500.assignment1.User;
 import java.util.HashSet;
 
 public class Program {
+    private static int userIdCount = 0;
+    private static HashSet<Integer> userIdSet = new HashSet<Integer>();
+
+    private static int getNewUserId() {
+        userIdCount++;
+        while (true) {
+            if (userIdCount <= 0) {
+                userIdCount = 1;
+            }
+
+            if (userIdSet.contains(userIdCount)) {
+                userIdCount++;
+                continue;
+            }
+
+            return userIdCount;
+        }
+    }
 
     public static void main(String[] args) {
         Blog blog = new Blog("blog 1");
 
-        User author1 = new User("author1");
-        User author2 = new User("author2");
-        User read1 = new User("read1");
-        User read2 = new User("read2");
+        User author1 = new User(getNewUserId(), "author1");
+        User author2 = new User(getNewUserId(), "author2");
+        User read1 = new User(getNewUserId(), "read1");
+        User read2 = new User(getNewUserId(), "read2");
+
         Post newPost = new Post(author1.getUserId(), author1.getName(), new HashSet<String>(), "tt11", "bb11");
         blog.addPost(newPost);
         newPost.addTag(new String("tag11"));
         newPost.addTag(new String("tag11"));
         newPost.addTag(new String("tag12"));
-        newPost.addReaction(read1, EPostReaction.FUN);
+        newPost.addReaction(read1.getUserId(), EPostReaction.FUN);
         PostComment newComment = new PostComment(read1.getUserId(), read1.getName(), "comment11");
         newPost.addComment(newComment);
         newComment.addSubcomment(new PostComment(read2.getUserId(), read2.getName(), "subcom111"));
@@ -40,14 +59,14 @@ public class Program {
         newComment = new PostComment(read1.getUserId(), read1.getName(), "comment22");
         newPost.addComment(newComment);
         newComment.addSubcomment(new PostComment(read2.getUserId(), read2.getName(), "subcom221"));
-        newComment.upvote(read1);
+        newComment.upvote(read1.getUserId());
 
-        newPost.addReaction(read1, EPostReaction.GREAT);
-        newPost.addReaction(read2, EPostReaction.FUN);
+        newPost.addReaction(read1.getUserId(), EPostReaction.GREAT);
+        newPost.addReaction(read2.getUserId(), EPostReaction.FUN);
 
 
         read1.visitBlog(blog);
-        newPost.removeReaction(read1);
+        newPost.removeReaction(read1.getUserId());
 
         System.out.println("\n\n------------- Filter ---------------\n");
         blog.setAuthorIdFilter(author2.getUserId());

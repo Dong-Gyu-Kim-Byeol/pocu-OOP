@@ -1,17 +1,13 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class User {
     private int userId;
     private String name;
 
-    private static int userIdCount = 0;
-    private static HashSet<Integer> userIdSet = new HashSet<Integer>();
-
-    public User(String name) {
-        this.userId = getNewId();
+    public User(int userId, String name) {
+        this.userId = userId;
 
         assert (name.equals("") != true);
         this.name = name;
@@ -41,22 +37,6 @@ public class User {
 
             System.out.println("\n-------- comments --------");
             post.printComments();
-        }
-    }
-
-    private static int getNewId() {
-        userIdCount++;
-        while (true) {
-            if (userIdCount <= 0) {
-                userIdCount = 1;
-            }
-
-            if (userIdSet.contains(userIdCount)) {
-                userIdCount++;
-                continue;
-            }
-
-            return userIdCount;
         }
     }
 }

@@ -21,7 +21,7 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
-    private HashMap<User, EPostReaction> reactions;
+    private HashMap<Integer, EPostReaction> reactions;
     private int greatReactionCount;
     private int sadReactionCount;
     private int angryReactionCount;
@@ -41,7 +41,7 @@ public class Post {
 
         comments = new LinkedList<PostComment>();
 
-        reactions = new HashMap<User, EPostReaction>();
+        reactions = new HashMap<Integer, EPostReaction>();
     }
 
     public int getAuthorId() {
@@ -56,6 +56,14 @@ public class Post {
         }
     }
 
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public HashSet<String> getTags() {
+        return this.tags;
+    }
+
     public boolean isTagsContain(HashSet<String> tags) {
         for (String tag : tags) {
             if (this.getTags().contains(tag) == false) {
@@ -65,12 +73,12 @@ public class Post {
         return true;
     }
 
-    public HashSet<String> getTags() {
-        return this.tags;
-    }
-
     public void addTag(String tag) {
         this.tags.add(tag);
+    }
+
+    public void removeTag(String tag) {
+        this.tags.remove(tag);
     }
 
     public String getTitle() {
@@ -118,6 +126,10 @@ public class Post {
         this.comments.add(comment);
     }
 
+    public HashMap<Integer, EPostReaction> getReactions() {
+        return reactions;
+    }
+
     public int getReactionCount(EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
@@ -136,10 +148,10 @@ public class Post {
         }
     }
 
-    public void addReaction(User user, EPostReaction reaction) {
-        removeReaction(user);
+    public void addReaction(int userId, EPostReaction reaction) {
+        removeReaction(userId);
 
-        this.reactions.put(user, reaction);
+        this.reactions.put(userId, reaction);
 
         switch (reaction) {
             case GREAT:
@@ -162,14 +174,14 @@ public class Post {
         }
     }
 
-    public void removeReaction(User user) {
-        if (this.reactions.containsKey(user) == false) {
+    public void removeReaction(int userId) {
+        if (this.reactions.containsKey(userId) == false) {
             return;
         }
 
-        EPostReaction reaction = this.reactions.get(user);
+        EPostReaction reaction = this.reactions.get(userId);
 
-        this.reactions.remove(user);
+        this.reactions.remove(userId);
 
         switch (reaction) {
             case GREAT:
