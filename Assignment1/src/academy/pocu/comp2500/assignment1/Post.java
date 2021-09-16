@@ -247,10 +247,18 @@ public class Post {
     }
 
     private void removeAllReaction(User user) {
-        greatReactions.remove(user);
-        sadReactions.remove(user);
-        angryReactions.remove(user);
-        funReactions.remove(user);
-        loveReactions.remove(user);
+        userHashSetRemove(user, greatReactions);
+        userHashSetRemove(user, sadReactions);
+        userHashSetRemove(user, angryReactions);
+        userHashSetRemove(user, funReactions);
+        userHashSetRemove(user, loveReactions);
+    }
+
+    private void userHashSetRemove(User removeUser, HashSet<User> set) {
+        for (User user : set) {
+            if (removeUser.isEqual(user) == true) {
+                set.remove(user);
+            }
+        }
     }
 }
