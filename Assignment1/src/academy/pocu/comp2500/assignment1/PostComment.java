@@ -40,7 +40,7 @@ public class PostComment {
     }
 
     public boolean isAuthor(User user) {
-        if (this.author == user) {
+        if (this.author.equals(user)) {
             return true;
         } else {
             return false;

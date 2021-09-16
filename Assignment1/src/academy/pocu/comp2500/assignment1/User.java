@@ -10,6 +10,20 @@ public class User {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if ((other instanceof User) == false) {
+            return false;
+        }
+
+        User otherUser = (User) other;
+        return this.name.equals(otherUser.getName());
+    }
+
     public String getName() {
         return name;
     }

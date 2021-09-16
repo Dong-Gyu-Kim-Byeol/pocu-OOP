@@ -47,7 +47,7 @@ public class Program {
 
 
         read1.visitBlog(blog);
-        newPost.removeReaction(read1);
+        newPost.removeReaction(read1, EPostReaction.GREAT);
 
         System.out.println("\n\n------------- Filter ---------------\n");
         blog.setAuthorFilterOrNull(author1);

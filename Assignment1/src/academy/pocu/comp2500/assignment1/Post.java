@@ -1,10 +1,8 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -51,7 +49,7 @@ public class Post {
     }
 
     public boolean isAuthor(User user) {
-        if (this.author == user) {
+        if (this.author.equals(user)) {
             return true;
         } else {
             return false;
@@ -187,7 +185,7 @@ public class Post {
     }
 
     public void addReaction(User user, EPostReaction reaction) {
-//        removeAllReaction(user);
+        removeAllReaction(user);
 
         switch (reaction) {
             case GREAT:
@@ -248,11 +246,11 @@ public class Post {
         this.modifiedDateTime = OffsetDateTime.now();
     }
 
-//    private void removeAllReaction(User user) {
-//        greatReactions.remove(user);
-//        sadReactions.remove(user);
-//        angryReactions.remove(user);
-//        funReactions.remove(user);
-//        loveReactions.remove(user);
-//    }
+    private void removeAllReaction(User user) {
+        greatReactions.remove(user);
+        sadReactions.remove(user);
+        angryReactions.remove(user);
+        funReactions.remove(user);
+        loveReactions.remove(user);
+    }
 }
