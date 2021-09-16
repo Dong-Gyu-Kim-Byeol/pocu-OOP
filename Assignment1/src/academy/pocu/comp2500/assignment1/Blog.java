@@ -46,7 +46,7 @@ public class Blog {
             }
 
             // tagFilter
-            if (getTagsFilter().size() != 0 && post.isTagsContain(getTagsFilter()) == false) {
+            if (getTagsFilter().size() != 0 && post.isTagsContainEvenOne(getTagsFilter()) == false) {
                 continue;
             }
 

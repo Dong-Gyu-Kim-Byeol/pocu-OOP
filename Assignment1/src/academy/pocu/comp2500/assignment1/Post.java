@@ -58,13 +58,13 @@ public class Post {
         return this.tags;
     }
 
-    public boolean isTagsContain(HashSet<String> tags) {
+    public boolean isTagsContainEvenOne(HashSet<String> tags) {
         for (String tag : tags) {
-            if (this.getTags().contains(tag) == false) {
-                return false;
+            if (this.getTags().contains(tag) == true) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void addTag(String tag) {
@@ -220,7 +220,7 @@ public class Post {
 
     public void printComments() {
         for (PostComment comment : getComments()) {
-            System.out.println(comment.getPrintString());
+            System.out.println(comment.printString());
             comment.printSubcomments();
         }
     }
