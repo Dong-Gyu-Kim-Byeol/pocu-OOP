@@ -9,7 +9,7 @@ public class Blog {
     private String name;
     private HashSet<Post> posts;
 
-    private User authorFilterOrNull;
+    private int authorIdFilter;
     private HashSet<String> tagsFilter;
     private EPostSorting sortingType;
 
@@ -39,7 +39,7 @@ public class Blog {
 
         for (Post post : getPosts()) {
             // authorFilter
-            if (getAuthorFilterOrNull() != null && post.isAuthor(getAuthorFilterOrNull()) == false) {
+            if (getAuthorIdFilter() <= 0 && post.isAuthor(getAuthorIdFilter()) == false) {
                 continue;
             }
 
@@ -55,12 +55,12 @@ public class Blog {
         return filteredPosts;
     }
 
-    public User getAuthorFilterOrNull() {
-        return authorFilterOrNull;
+    public int getAuthorIdFilter() {
+        return authorIdFilter;
     }
 
-    public void setAuthorFilterOrNull(User authorOrNull) {
-        this.authorFilterOrNull = authorOrNull;
+    public void setAuthorIdFilter(int authorId) {
+        this.authorIdFilter = authorId;
     }
 
     public HashSet<String> getTagsFilter() {

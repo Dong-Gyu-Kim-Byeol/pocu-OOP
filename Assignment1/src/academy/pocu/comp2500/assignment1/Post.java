@@ -8,7 +8,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Post {
-    private User author;
+    private int authorId;
+    private String authorName;
+
     private HashSet<String> tags;
 
     private String title;
@@ -26,8 +28,9 @@ public class Post {
     private int funReactionCount;
     private int loveReactionCount;
 
-    public Post(User author, HashSet<String> tags, String title, String body) {
-        this.author = author;
+    public Post(int authorId, String authorName, HashSet<String> tags, String title, String body) {
+        this.authorId = authorId;
+        this.authorName = authorName;
 
         this.tags = tags;
         this.title = title;
@@ -41,12 +44,12 @@ public class Post {
         reactions = new HashMap<User, EPostReaction>();
     }
 
-    public User getAuthor() {
-        return author;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public boolean isAuthor(User user) {
-        if (this.author == user) {
+    public boolean isAuthor(int userId) {
+        if (this.authorId == userId) {
             return true;
         } else {
             return false;
@@ -74,8 +77,8 @@ public class Post {
         return title;
     }
 
-    public boolean setTitleCheckIsAuthor(User user, String title) {
-        if (isAuthor(user) == false) {
+    public boolean setTitleCheckIsAuthor(int userId, String title) {
+        if (isAuthor(userId) == false) {
             return false;
         }
 
@@ -88,8 +91,8 @@ public class Post {
         return body;
     }
 
-    public boolean setBodyCheckIsAuthor(User user, String body) {
-        if (isAuthor(user) == false) {
+    public boolean setBodyCheckIsAuthor(int userId, String body) {
+        if (isAuthor(userId) == false) {
             return false;
         }
 
@@ -198,7 +201,7 @@ public class Post {
 
     public void print() {
         System.out.format("author: %s, created date: %s, modified date: %s, tag: %s, title: %s, body: %s\n",
-                this.getAuthor().getName(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
+                this.authorName, this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
     }
 
     private void nowSetModifiedDateTime() {

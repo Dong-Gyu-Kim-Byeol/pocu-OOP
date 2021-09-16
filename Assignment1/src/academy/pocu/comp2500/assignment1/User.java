@@ -1,14 +1,24 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class User {
+    private int userId;
     private String name;
 
+    private static int userIdCount = 0;
+    private static HashSet<Integer> userIdSet = new HashSet<Integer>();
 
     public User(String name) {
+        this.userId = getNewId();
+
         assert (name.equals("") != true);
         this.name = name;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     public String getName() {
@@ -17,18 +27,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean setPostTitle(Post post, String title) {
-        return post.setTitleCheckIsAuthor(this, title);
-    }
-
-    public boolean setPostBody(Post post, String body) {
-        return post.setBodyCheckIsAuthor(this, body);
-    }
-
-    public boolean setCommentBody(PostComment comment, String body) {
-        return comment.setBodyCheckIsAuthor(this, body);
     }
 
     public void visitBlog(Blog blog) {
@@ -43,6 +41,22 @@ public class User {
 
             System.out.println("\n-------- comments --------");
             post.printComments();
+        }
+    }
+
+    private static int getNewId() {
+        userIdCount++;
+        while (true) {
+            if (userIdCount <= 0) {
+                userIdCount = 1;
+            }
+
+            if (userIdSet.contains(userIdCount)) {
+                userIdCount++;
+                continue;
+            }
+
+            return userIdCount;
         }
     }
 }

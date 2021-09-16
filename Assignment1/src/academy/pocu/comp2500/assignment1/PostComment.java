@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class PostComment {
-    private User author;
+    private int authorId;
+    private String authorName;
+
     private String body;
 
     private OffsetDateTime createdDateTime;
@@ -19,8 +21,9 @@ public class PostComment {
     private LinkedList<PostComment> subcomments;
 
 
-    public PostComment(User author, String body) {
-        this.author = author;
+    public PostComment(int authorId, String authorName, String body) {
+        this.authorId = authorId;
+        this.authorName = authorName;
 
         this.body = body;
 
@@ -33,12 +36,12 @@ public class PostComment {
         this.subcomments = new LinkedList<PostComment>();
     }
 
-    public User getAuthor() {
-        return author;
+    public int getAuthor() {
+        return authorId;
     }
 
-    public boolean isAuthor(User user) {
-        if (this.author == user) {
+    public boolean isAuthor(int userId) {
+        if (this.authorId == userId) {
             return true;
         } else {
             return false;
@@ -49,8 +52,8 @@ public class PostComment {
         return body;
     }
 
-    public boolean setBodyCheckIsAuthor(User user, String body) {
-        if (isAuthor(user) == false) {
+    public boolean setBodyCheckIsAuthor(int userId, String body) {
+        if (isAuthor(userId) == false) {
             return false;
         }
 
@@ -117,7 +120,7 @@ public class PostComment {
     }
 
     public String getPrintString() {
-        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthor().getName(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
+        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.authorName, this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
     }
 
     public void printSubcomments() {
