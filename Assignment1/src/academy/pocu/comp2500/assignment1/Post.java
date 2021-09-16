@@ -187,7 +187,7 @@ public class Post {
     }
 
     public void addReaction(User user, EPostReaction reaction) {
-        removeAllReaction(user);
+//        removeAllReaction(user);
 
         switch (reaction) {
             case GREAT:
@@ -248,11 +248,11 @@ public class Post {
         this.modifiedDateTime = OffsetDateTime.now();
     }
 
-    private void removeAllReaction(User user) {
-        greatReactions.remove(user);
-        sadReactions.remove(user);
-        angryReactions.remove(user);
-        funReactions.remove(user);
-        loveReactions.remove(user);
-    }
+//    private void removeAllReaction(User user) {
+//        greatReactions.remove(user);
+//        sadReactions.remove(user);
+//        angryReactions.remove(user);
+//        funReactions.remove(user);
+//        loveReactions.remove(user);
+//    }
 }
