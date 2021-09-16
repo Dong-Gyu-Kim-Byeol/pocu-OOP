@@ -51,14 +51,10 @@ public class PostComment {
         return body;
     }
 
-    public boolean updateBodyCheckIsAuthor(User user, String body) {
-        if (body == null) {
-            return false;
-        }
-
-        if (isAuthor(user) == false) {
-            return false;
-        }
+    public boolean updateBodyCheckIsAuthor(String body) {
+//        if (isAuthor(user) == false) {
+//            return false;
+//        }
 
         this.body = body;
         nowSetModifiedDateTime();

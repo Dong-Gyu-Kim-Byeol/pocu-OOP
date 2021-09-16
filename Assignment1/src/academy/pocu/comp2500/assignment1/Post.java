@@ -83,14 +83,10 @@ public class Post {
         return title;
     }
 
-    public boolean updateTitleCheckIsAuthor(User user, String title) {
-        if (title == null) {
-            return false;
-        }
-
-        if (isAuthor(user) == false) {
-            return false;
-        }
+    public boolean updateTitleCheckIsAuthor(String title) {
+//        if (isAuthor(user) == false) {
+//            return false;
+//        }
 
         this.title = title;
         nowSetModifiedDateTime();
@@ -101,14 +97,10 @@ public class Post {
         return body;
     }
 
-    public boolean updateBodyCheckIsAuthor(User user, String body) {
-        if (body == null) {
-            return false;
-        }
-
-        if (isAuthor(user) == false) {
-            return false;
-        }
+    public boolean updateBodyCheckIsAuthor(String body) {
+//        if (isAuthor(user) == false) {
+//            return false;
+//        }
 
         this.body = body;
         nowSetModifiedDateTime();
@@ -176,6 +168,28 @@ public class Post {
         return loveReactions.size();
     }
 
+    public EPostReaction getUserReaction(User user) {
+        if (greatReactions.contains(user)) {
+            return EPostReaction.GREAT;
+        }
+
+        if (sadReactions.contains(user)) {
+            return EPostReaction.SAD;
+        }
+
+        if (angryReactions.contains(user)) {
+            return EPostReaction.ANGRY;
+        }
+
+        if (funReactions.contains(user)) {
+            return EPostReaction.FUN;
+        }
+
+//        if (loveReactions.contains(user)) {
+        return EPostReaction.LOVE;
+//        }
+    }
+
     public int getReactionCount(EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
@@ -195,6 +209,8 @@ public class Post {
     }
 
     public void addReaction(User user, EPostReaction reaction) {
+        removeReaction(user);
+
         switch (reaction) {
             case GREAT:
                 greatReactions.add(user);
@@ -216,26 +232,12 @@ public class Post {
         }
     }
 
-    public void removeReaction(User user, EPostReaction reaction) {
-        switch (reaction) {
-            case GREAT:
-                greatReactions.remove(user);
-                break;
-            case SAD:
-                sadReactions.remove(user);
-                break;
-            case ANGRY:
-                angryReactions.remove(user);
-                break;
-            case FUN:
-                funReactions.remove(user);
-                break;
-            case LOVE:
-                loveReactions.remove(user);
-                break;
-            default:
-                assert (false);
-        }
+    public void removeReaction(User user) {
+        greatReactions.remove(user);
+        sadReactions.remove(user);
+        angryReactions.remove(user);
+        funReactions.remove(user);
+        loveReactions.remove(user);
     }
 
     public void printComments() {
