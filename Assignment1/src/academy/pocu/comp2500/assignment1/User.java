@@ -10,28 +10,38 @@ public class User {
         this.name = name;
     }
 
-    public boolean equals(Object other) {
+    public boolean equals(User other) {
         if (other == this) {
             return true;
         }
 
-        if ((other instanceof User) == false) {
-            return false;
-        }
-
-        User otherUser = (User) other;
-        return this.name.equals(otherUser.getName());
+        return this.name.equals(other.getName());
     }
 
-    public int hashCode() {
-        final int PRIME = 31;
-        int hash = 1;
-
-        //        hash = PRIME * hash + (int) (id ^ (id >>> 32));
-        hash = PRIME * hash + name.hashCode();
-
-        return hash;
-    }
+//    @Override
+//    public boolean equals(Object other) {
+//        if (other == this) {
+//            return true;
+//        }
+//
+//        if ((other instanceof User) == false) {
+//            return false;
+//        }
+//
+//        User otherUser = (User) other;
+//        return this.name.equals(otherUser.getName());
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        final int PRIME = 31;
+//        int hash = 1;
+//
+//        //        hash = PRIME * hash + (int) (id ^ (id >>> 32));
+//        hash = PRIME * hash + name.hashCode();
+//
+//        return hash;
+//    }
 
     public String getName() {
         return name;
