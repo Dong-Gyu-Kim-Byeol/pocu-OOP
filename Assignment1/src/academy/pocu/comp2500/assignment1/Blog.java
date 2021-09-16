@@ -110,4 +110,30 @@ public class Blog {
     public boolean isContainPost(Post post) {
         return posts.contains(post);
     }
+
+    public boolean updatePostTitleCheckIsAuthor(Post post, User user, String title) {
+        if (isContainPost(post) == false) {
+            return false;
+        }
+
+        if (post.isAuthor(user) == false) {
+            return false;
+        }
+
+        post.setTitle(title);
+        return true;
+    }
+
+    public boolean updatePostBodyCheckIsAuthor(Post post, User user, String body) {
+        if (isContainPost(post) == false) {
+            return false;
+        }
+
+        if (post.isAuthor(user) == false) {
+            return false;
+        }
+
+        post.setBody(body);
+        return true;
+    }
 }
