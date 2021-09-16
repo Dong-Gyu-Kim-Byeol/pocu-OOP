@@ -107,6 +107,22 @@ public class Blog {
         this.posts.add(post);
     }
 
+    public boolean changeTitleCheckIsAuthor(Post post, User author, String title) {
+        if (getPosts().contains(post) == false) {
+            return false;
+        }
+
+        return post.setTitleCheckIsAuthor(author, title);
+    }
+
+    public boolean changeBodyCheckIsAuthor(Post post, User author, String body) {
+        if (getPosts().contains(post) == false) {
+            return false;
+        }
+
+        return post.setBodyCheckIsAuthor(author, body);
+    }
+
     public boolean isContainPost(Post post) {
         return posts.contains(post);
     }
