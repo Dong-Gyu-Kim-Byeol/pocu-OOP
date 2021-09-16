@@ -52,7 +52,7 @@ public class PostComment {
     }
 
     public boolean updateBodyCheckIsAuthor(User user, String body) {
-        if (this.isAuthor(user) == true) {
+        if (this.isAuthor(user) == false) {
             return false;
         }
 

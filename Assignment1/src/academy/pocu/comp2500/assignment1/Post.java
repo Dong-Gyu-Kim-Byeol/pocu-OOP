@@ -84,7 +84,7 @@ public class Post {
     }
 
     public boolean updateTitleCheckIsAuthor(User user, String title) {
-        if (this.isAuthor(user) == true) {
+        if (this.isAuthor(user) == false) {
             return false;
         }
 
@@ -98,7 +98,7 @@ public class Post {
     }
 
     public boolean updateBodyCheckIsAuthor(User user, String body) {
-        if (this.isAuthor(user) == true) {
+        if (this.isAuthor(user) == false) {
             return false;
         }
 
@@ -209,24 +209,24 @@ public class Post {
 //
 //        return null;
 //    }
-
-    public int getReactionCount(EPostReaction reaction) {
-        switch (reaction) {
-            case GREAT:
-                return greatReactions.size();
-            case SAD:
-                return sadReactions.size();
-            case ANGRY:
-                return angryReactions.size();
-            case FUN:
-                return funReactions.size();
-            case LOVE:
-                return loveReactions.size();
-            default:
-                assert (false);
-                throw new IllegalArgumentException("unknown EPostReaction type");
-        }
-    }
+//
+//    public int getReactionCount(EPostReaction reaction) {
+//        switch (reaction) {
+//            case GREAT:
+//                return greatReactions.size();
+//            case SAD:
+//                return sadReactions.size();
+//            case ANGRY:
+//                return angryReactions.size();
+//            case FUN:
+//                return funReactions.size();
+//            case LOVE:
+//                return loveReactions.size();
+//            default:
+//                assert (false);
+//                throw new IllegalArgumentException("unknown EPostReaction type");
+//        }
+//    }
 
     public void addReaction(User user, EPostReaction reaction) {
         removeReaction(user);
