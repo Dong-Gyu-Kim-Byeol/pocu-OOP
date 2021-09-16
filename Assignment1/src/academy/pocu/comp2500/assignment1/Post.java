@@ -184,7 +184,7 @@ public class Post {
                 return loveReactions.size();
             default:
                 assert (false);
-                return -1;
+                throw new IllegalArgumentException("unknown EPostReaction type");
         }
     }
 
