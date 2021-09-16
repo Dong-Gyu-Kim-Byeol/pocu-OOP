@@ -21,6 +21,12 @@ public class Post {
 
     private LinkedList<PostComment> comments;
 
+//    private static final int GREAT_REACTION_INDEX = 0;
+//    private static final int SAD_REACTION_INDEX = 1;
+//    private static final int ANGRY_REACTION_INDEX = 2;
+//    private static final int FUN_REACTION_INDEX = 3;
+//    private static final int LOVE_REACTION_INDEX = 4;
+
     private HashSet<User> greatReactions;
     private HashSet<User> sadReactions;
     private HashSet<User> angryReactions;
