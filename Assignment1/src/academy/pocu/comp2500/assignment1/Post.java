@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Post {
-    private String authorId;
+    private User author;
 
     private HashSet<String> tags;
 
@@ -25,8 +25,8 @@ public class Post {
     private HashSet<String> funUserIdReactions;
     private HashSet<String> loveUserIdReactions;
 
-    public Post(String authorId, HashSet<String> tags, String title, String body) {
-        this.authorId = authorId;
+    public Post(User author, HashSet<String> tags, String title, String body) {
+        this.author = author;
 
         this.tags = tags;
         this.title = title;
@@ -44,12 +44,16 @@ public class Post {
         loveUserIdReactions = new HashSet<String>();
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
     public String getAuthorId() {
-        return authorId;
+        return author.getId();
     }
 
     public boolean isAuthor(String userId) {
-        if (this.authorId.equals(userId) == true) {
+        if (this.getAuthorId().equals(userId) == true) {
             return true;
         } else {
             return false;

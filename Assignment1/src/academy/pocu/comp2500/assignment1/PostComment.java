@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class PostComment {
-    private String authorId;
+    private User author;
 
     private String body;
 
@@ -21,8 +21,8 @@ public class PostComment {
     private LinkedList<PostComment> subcomments;
 
 
-    public PostComment(String authorId, String body) {
-        this.authorId = authorId;
+    public PostComment(User author, String body) {
+        this.author = author;
 
         this.body = body;
 
@@ -35,12 +35,16 @@ public class PostComment {
         this.subcomments = new LinkedList<PostComment>();
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
     public String getAuthorId() {
-        return authorId;
+        return author.getId();
     }
 
     public boolean isAuthor(String userId) {
-        if (this.authorId.equals(userId)) {
+        if (this.getAuthorId().equals(userId)) {
             return true;
         } else {
             return false;
