@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Post {
+    private Blog blog;
     private User author;
 
     private HashSet<String> tags;
@@ -27,7 +28,8 @@ public class Post {
     private HashSet<User> funReactions;
     private HashSet<User> loveReactions;
 
-    public Post(User author, HashSet<String> tags, String title, String body) {
+    public Post(Blog blog, User author, HashSet<String> tags, String title, String body) {
+        this.blog = blog;
         this.author = author;
 
         this.tags = tags;
@@ -44,6 +46,10 @@ public class Post {
         angryReactions = new HashSet<User>();
         funReactions = new HashSet<User>();
         loveReactions = new HashSet<User>();
+    }
+
+    public Blog getBlog() {
+        return blog;
     }
 
     public User getAuthor() {
@@ -83,7 +89,11 @@ public class Post {
         return title;
     }
 
-    public boolean setTitleCheckIsAuthor(User user, String title) {
+    public boolean changeTitleCheckIsAuthor(User user, String title) {
+        if (getBlog().isContainPost(this) == false) {
+            return false;
+        }
+
         if (isAuthor(user) == false) {
             return false;
         }
@@ -97,7 +107,11 @@ public class Post {
         return body;
     }
 
-    public boolean setBodyCheckIsAuthor(User user, String body) {
+    public boolean changeBodyCheckIsAuthor(User user, String body) {
+        if (blog.isContainPost(this) == false) {
+            return false;
+        }
+
         if (isAuthor(user) == false) {
             return false;
         }
