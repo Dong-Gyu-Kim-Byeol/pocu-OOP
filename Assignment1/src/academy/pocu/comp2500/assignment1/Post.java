@@ -7,23 +7,23 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Post {
-    private User author;
+    private final User author;
 
-    private HashSet<String> tags;
+    private final HashSet<String> tags;
 
     private String title;
     private String body;
 
-    private OffsetDateTime createdDateTime;
+    private final OffsetDateTime createdDateTime;
     private OffsetDateTime modifiedDateTime;
 
-    private LinkedList<PostComment> comments;
+    private final LinkedList<PostComment> comments;
 
-    private HashSet<String> greatUserIdReactions;
-    private HashSet<String> sadUserIdReactions;
-    private HashSet<String> angryUserIdReactions;
-    private HashSet<String> funUserIdReactions;
-    private HashSet<String> loveUserIdReactions;
+    private final HashSet<String> greatUserIdReactions;
+    private final HashSet<String> sadUserIdReactions;
+    private final HashSet<String> angryUserIdReactions;
+    private final HashSet<String> funUserIdReactions;
+    private final HashSet<String> loveUserIdReactions;
 
     public Post(User author, HashSet<String> tags, String title, String body) {
         this.author = author;

@@ -3,7 +3,7 @@ package academy.pocu.comp2500.assignment1;
 import java.util.ArrayList;
 
 public class User {
-    private String id;
+    private final String id;
 
     public User(String id) {
         assert (id.equals("") != true);

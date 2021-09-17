@@ -8,7 +8,7 @@ import java.util.HashSet;
 public class Blog {
     private String name;
 
-    private HashSet<Post> posts;
+    private final HashSet<Post> posts;
 
     private String authorIdFilterOrNull;
     private HashSet<String> tagsFilter;

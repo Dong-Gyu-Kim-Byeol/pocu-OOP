@@ -1,24 +1,23 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 
 public class PostComment {
-    private User author;
+    private final User author;
 
     private String body;
 
-    private OffsetDateTime createdDateTime;
+    private final OffsetDateTime createdDateTime;
     private OffsetDateTime modifiedDateTime;
 
-    private HashSet<String> upvoteUserIds;
-    private HashSet<String> downvoteUserIds;
+    private final HashSet<String> upvoteUserIds;
+    private final HashSet<String> downvoteUserIds;
 
-    private LinkedList<PostComment> subcomments;
+    private final LinkedList<PostComment> subcomments;
 
 
     public PostComment(User author, String body) {
