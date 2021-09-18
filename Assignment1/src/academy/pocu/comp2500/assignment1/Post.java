@@ -25,7 +25,7 @@ public class Post {
     private final HashSet<String> funUserIdReactions;
     private final HashSet<String> loveUserIdReactions;
 
-    public Post(User author, HashSet<String> tags, String title, String body) {
+    public Post(final User author, final HashSet<String> tags, final String title, final String body) {
         this.author = author;
 
         this.tags = tags;
@@ -52,7 +52,7 @@ public class Post {
         return author.getId();
     }
 
-    public boolean isAuthor(String userId) {
+    public boolean isAuthor(final String userId) {
         if (this.getAuthorId().equals(userId) == true) {
             return true;
         } else {
@@ -64,8 +64,8 @@ public class Post {
         return this.tags;
     }
 
-    public boolean isTagsContainEvenOne(HashSet<String> tags) {
-        for (String tag : tags) {
+    public boolean isTagsContainEvenOne(final HashSet<String> tags) {
+        for (final String tag : tags) {
             if (this.getTags().contains(tag) == true) {
                 return true;
             }
@@ -73,11 +73,11 @@ public class Post {
         return false;
     }
 
-    public void addTag(String tag) {
+    public void addTag(final String tag) {
         this.tags.add(tag);
     }
 
-    public void removeTag(String tag) {
+    public void removeTag(final String tag) {
         this.tags.remove(tag);
     }
 
@@ -85,7 +85,7 @@ public class Post {
         return title;
     }
 
-    public boolean updateTitleCheckIsAuthor(String userId, String title) {
+    public boolean updateTitleCheckIsAuthor(final String userId, final String title) {
         if (this.isAuthor(userId) == false) {
             return false;
         }
@@ -99,7 +99,7 @@ public class Post {
         return body;
     }
 
-    public boolean updateBodyCheckIsAuthor(String userId, String body) {
+    public boolean updateBodyCheckIsAuthor(final String userId, final String body) {
         if (this.isAuthor(userId) == false) {
             return false;
         }
@@ -122,11 +122,11 @@ public class Post {
         return comments;
     }
 
-    public void addComment(PostComment comment) {
+    public void addComment(final PostComment comment) {
         this.comments.add(comment);
     }
 
-    public int getReactionCount(EPostReaction reaction) {
+    public int getReactionCount(final EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
                 return greatUserIdReactions.size();
@@ -144,7 +144,7 @@ public class Post {
         }
     }
 
-    public void addReaction(String userId, EPostReaction reaction) {
+    public void addReaction(final String userId, final EPostReaction reaction) {
         removeAllReaction(userId);
 
         switch (reaction) {
@@ -168,7 +168,7 @@ public class Post {
         }
     }
 
-    public void removeReaction(String userId, EPostReaction reaction) {
+    public void removeReaction(final String userId, final EPostReaction reaction) {
         switch (reaction) {
             case GREAT:
                 greatUserIdReactions.remove(userId);
@@ -191,7 +191,7 @@ public class Post {
     }
 
     public void printComments() {
-        for (PostComment comment : getSortedComments()) {
+        for (final PostComment comment : getSortedComments()) {
             System.out.println(comment.printString());
             comment.printSubcomments();
         }
@@ -206,7 +206,7 @@ public class Post {
         this.modifiedDateTime = OffsetDateTime.now();
     }
 
-    private void removeAllReaction(String userId) {
+    private void removeAllReaction(final String userId) {
         greatUserIdReactions.remove(userId);
         sadUserIdReactions.remove(userId);
         angryUserIdReactions.remove(userId);

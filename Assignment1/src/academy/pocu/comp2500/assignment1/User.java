@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class User {
     private final String id;
 
-    public User(String id) {
+    public User(final String id) {
         assert (id.equals("") != true);
         this.id = id;
     }
@@ -14,13 +14,13 @@ public class User {
         return id;
     }
 
-    public void visitBlog(Blog blog) {
-        ArrayList<Post> filteredPosts = blog.getFilteredPostsAndSort();
+    public void visitBlog(final Blog blog) {
+        final ArrayList<Post> filteredPosts = blog.getFilteredPostsAndSort();
         visitPrint(filteredPosts);
     }
 
-    private void visitPrint(ArrayList<Post> posts) {
-        for (Post post : posts) {
+    private void visitPrint(final ArrayList<Post> posts) {
+        for (final Post post : posts) {
             System.out.println("\n-------- post --------");
             post.print();
 

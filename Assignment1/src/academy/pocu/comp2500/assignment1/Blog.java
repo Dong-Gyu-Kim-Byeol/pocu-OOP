@@ -27,14 +27,14 @@ public class Blog {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
     public ArrayList<Post> getFilteredPostsAndSort() {
-        ArrayList<Post> filteredPosts = new ArrayList<Post>(this.posts.size());
+        final ArrayList<Post> filteredPosts = new ArrayList<Post>(this.posts.size());
 
-        for (Post post : this.posts) {
+        for (final Post post : this.posts) {
             // authorFilter
             if (authorIdFilterOrNull != null && post.isAuthor(authorIdFilterOrNull) == false) {
                 continue;
@@ -52,19 +52,19 @@ public class Blog {
         return filteredPosts;
     }
 
-    public void setAuthorIdFilterOrNull(String authorIdOrNull) {
+    public void setAuthorIdFilterOrNull(final String authorIdOrNull) {
         this.authorIdFilterOrNull = authorIdOrNull;
     }
 
-    public void setTagsFilter(HashSet<String> tags) {
+    public void setTagsFilter(final HashSet<String> tags) {
         tagsFilter = tags;
     }
 
-    public void setSortingType(EPostSorting sortingType) {
+    public void setSortingType(final EPostSorting sortingType) {
         this.sortingType = sortingType;
     }
 
-    public void sorting(ArrayList<Post> posts) {
+    public void sorting(final ArrayList<Post> posts) {
         switch (sortingType) {
             case POST_DATE_ASCENGIND:
                 Collections.sort(posts, Comparator.comparing(Post::getCreatedDateTime));
@@ -86,7 +86,7 @@ public class Blog {
         }
     }
 
-    public void addPost(Post post) {
+    public void addPost(final Post post) {
         this.posts.add(post);
     }
 }

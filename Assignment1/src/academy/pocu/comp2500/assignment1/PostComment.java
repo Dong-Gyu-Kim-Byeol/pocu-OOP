@@ -20,7 +20,7 @@ public class PostComment {
     private final LinkedList<PostComment> subcomments;
 
 
-    public PostComment(User author, String body) {
+    public PostComment(final User author, final String body) {
         this.author = author;
 
         this.body = body;
@@ -42,7 +42,7 @@ public class PostComment {
         return author.getId();
     }
 
-    public boolean isAuthor(String userId) {
+    public boolean isAuthor(final String userId) {
         if (this.getAuthorId().equals(userId)) {
             return true;
         } else {
@@ -54,7 +54,7 @@ public class PostComment {
         return body;
     }
 
-    public boolean updateBodyCheckIsAuthor(String userId, String body) {
+    public boolean updateBodyCheckIsAuthor(final String userId, final String body) {
         if (this.isAuthor(userId) == false) {
             return false;
         }
@@ -77,7 +77,7 @@ public class PostComment {
         return subcomments;
     }
 
-    public void addSubcomment(PostComment comment) {
+    public void addSubcomment(final PostComment comment) {
         this.subcomments.add(comment);
     }
 
@@ -89,7 +89,7 @@ public class PostComment {
         return upvoteUserIds.size();
     }
 
-    public void upvote(String userId) {
+    public void upvote(final String userId) {
         downvoteUserIds.remove(userId);
         upvoteUserIds.add(userId);
     }
@@ -98,7 +98,7 @@ public class PostComment {
         return downvoteUserIds.size();
     }
 
-    public void downvote(String userId) {
+    public void downvote(final String userId) {
         upvoteUserIds.remove(userId);
         downvoteUserIds.add(userId);
     }
@@ -108,7 +108,7 @@ public class PostComment {
     }
 
     public void printSubcomments() {
-        for (PostComment subcomment : subcomments) {
+        for (final PostComment subcomment : subcomments) {
             System.out.format(" - %s\n", subcomment.printString());
         }
     }
