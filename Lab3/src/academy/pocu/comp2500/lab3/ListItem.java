@@ -42,8 +42,10 @@ public class ListItem {
     }
 
     public void addSublistItem(final ListItem listItem) {
-        listItem.setSubCount(this.subCount);
         subListItems.add(listItem);
+        if (listItem != null) {
+            listItem.setSubCount(this.subCount);
+        }
     }
 
     public void removeSublistItem(final int index) {
@@ -53,9 +55,9 @@ public class ListItem {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        final String empty = "    ";
+        final String EMPTY = "    ";
         for (int i = 0; i < this.subCount; ++i) {
-            sb.append(empty);
+            sb.append(EMPTY);
         }
         sb.append(String.format("%c %s%s", bulletStyle, text, System.lineSeparator()));
 
