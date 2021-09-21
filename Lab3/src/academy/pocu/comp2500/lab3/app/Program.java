@@ -54,7 +54,7 @@ public class Program {
     private static String toString(ArrayList<ListItem> list) {
         StringBuilder sb = new StringBuilder();
         for (ListItem item : list) {
-            sb.append(item.toString());
+            sb.append(item);
         }
 
         return sb.toString();
