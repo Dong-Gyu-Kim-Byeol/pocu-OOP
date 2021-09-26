@@ -190,18 +190,6 @@ public class Post {
         }
     }
 
-    public void printComments() {
-        for (final PostComment comment : getSortedComments()) {
-            System.out.println(comment.printString());
-            comment.printSubcomments();
-        }
-    }
-
-    public void print() {
-        System.out.format("author: %s, created date: %s, modified date: %s, tag: %s, title: %s, body: %s\n",
-                this.getAuthorId(), this.getCreatedDateTime(), this.getModifiedDateTime(), this.getTags(), this.getTitle(), this.getBody());
-    }
-
     private void nowSetModifiedDateTime() {
         this.modifiedDateTime = OffsetDateTime.now();
     }

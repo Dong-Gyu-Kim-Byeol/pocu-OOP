@@ -103,16 +103,6 @@ public class PostComment {
         downvoteUserIds.add(userId);
     }
 
-    public String printString() {
-        return String.format("name: %s, body: %s, upvote count: %d, downvote count: %d", this.getAuthorId(), this.getBody(), this.getUpvoteCount(), this.getDownvoteCount());
-    }
-
-    public void printSubcomments() {
-        for (final PostComment subcomment : subcomments) {
-            System.out.format(" - %s\n", subcomment.printString());
-        }
-    }
-
     private void nowSetModifiedDateTime() {
         this.modifiedDateTime = OffsetDateTime.now();
     }

@@ -46,7 +46,7 @@ public class Program {
         newPost.addReaction(read2.getId(), EPostReaction.FUN);
 
 
-        read1.visitBlog(blog);
+//        read1.visitBlog(blog);
         newPost.removeReaction(read1.getId(), EPostReaction.GREAT);
 
         System.out.println("\n\n------------- Filter ---------------\n");
@@ -59,7 +59,7 @@ public class Program {
         blog.setSortingType(EPostSorting.TITLE_ASCENGIND);
 
 
-        read1.visitBlog(blog);
+//        read1.visitBlog(blog);
 
     }
 }

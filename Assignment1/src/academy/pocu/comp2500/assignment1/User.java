@@ -13,19 +13,4 @@ public class User {
     public String getId() {
         return id;
     }
-
-    public void visitBlog(final Blog blog) {
-        final ArrayList<Post> filteredPosts = blog.getFilteredPostsAndSort();
-        visitPrint(filteredPosts);
-    }
-
-    private void visitPrint(final ArrayList<Post> posts) {
-        for (final Post post : posts) {
-            System.out.println("\n-------- post --------");
-            post.print();
-
-            System.out.println("\n-------- comments --------");
-            post.printComments();
-        }
-    }
 }
