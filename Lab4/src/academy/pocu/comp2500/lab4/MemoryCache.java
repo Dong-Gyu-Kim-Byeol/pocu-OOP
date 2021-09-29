@@ -8,7 +8,7 @@ public class MemoryCache {
     private static HashMap<String, MemoryCache> instances;
     private static ArrayList<String> leastRecentlyUsedDiskNames;
 
-    private final String diskName;
+    //    private final String diskName;
     private EvictionPolicy evictionPolicy;
     private int maxEntryCount;
     private final HashMap<String, String> entries;
@@ -26,6 +26,8 @@ public class MemoryCache {
 
     public static MemoryCache getInstance(final String diskName) {
         if (instances == null) {
+            assert (MemoryCache.leastRecentlyUsedDiskNames == null);
+
             MemoryCache.maxInstanceCount = 30;
             MemoryCache.instances = new HashMap<String, MemoryCache>(MemoryCache.maxInstanceCount);
             MemoryCache.leastRecentlyUsedDiskNames = new ArrayList<String>(MemoryCache.maxInstanceCount);
@@ -37,7 +39,7 @@ public class MemoryCache {
             MemoryCache.updateLeastRecentlyUsedSortedDiskNames(diskName);
             return MemoryCache.instances.get(diskName);
         } else {
-            final MemoryCache newMemoryCache = new MemoryCache(diskName);
+            final MemoryCache newMemoryCache = new MemoryCache();
             MemoryCache.instances.put(diskName, newMemoryCache);
             MemoryCache.updateLeastRecentlyUsedSortedDiskNames(diskName);
 
@@ -48,8 +50,13 @@ public class MemoryCache {
     }
 
     public static void clear() {
-        MemoryCache.instances.clear();
-        MemoryCache.leastRecentlyUsedDiskNames.clear();
+        if (MemoryCache.instances != null) {
+            MemoryCache.instances.clear();
+        }
+
+        if (MemoryCache.leastRecentlyUsedDiskNames != null) {
+            MemoryCache.leastRecentlyUsedDiskNames.clear();
+        }
     }
 
 
@@ -82,12 +89,12 @@ public class MemoryCache {
         assert (this.inputSortedEntries.size() == this.leastRecentlyUsedSortedEntries.size());
         assert (this.inputSortedEntries.size() == this.entries.size());
 
-        MemoryCache.updateLeastRecentlyUsedSortedDiskNames(this.diskName);
+//        MemoryCache.updateLeastRecentlyUsedSortedDiskNames(this.diskName);
     }
 
     public String getEntryOrNull(final String key) {
         if (this.entries.containsKey(key)) {
-            MemoryCache.updateLeastRecentlyUsedSortedDiskNames(this.diskName);
+//            MemoryCache.updateLeastRecentlyUsedSortedDiskNames(this.diskName);
             this.updateLeastRecentlyUsedSortedEntries(key);
             return this.entries.get(key);
         } else {
@@ -113,8 +120,8 @@ public class MemoryCache {
 
 
     // private
-    private MemoryCache(final String diskName) {
-        this.diskName = diskName;
+    private MemoryCache() {
+//        this.diskName = diskName;
         this.evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
         this.maxEntryCount = 30;
         this.entries = new HashMap<String, String>(this.maxEntryCount);
