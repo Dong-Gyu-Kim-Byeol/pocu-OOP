@@ -7,9 +7,9 @@ import java.util.HashSet;
 public class MemoryCache {
     private static int maxInstanceCount = 3;
     private static EvictionPolicy evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
-    private static final HashMap<String, MemoryCache> instances = new HashMap<String, MemoryCache>(MemoryCache.maxInstanceCount);
-    private static final ArrayList<String> inputSortedDiskNames = new ArrayList<String>(maxInstanceCount);
-    private static final ArrayList<String> leastRecentlyUsedSortedDiskNames = new ArrayList<String>(maxInstanceCount);
+    private static HashMap<String, MemoryCache> instances;
+    private static ArrayList<String> inputSortedDiskNames;
+    private static ArrayList<String> leastRecentlyUsedSortedDiskNames;
 
 
     private final String diskName;
@@ -40,6 +40,13 @@ public class MemoryCache {
     }
 
     public static MemoryCache getInstance(final String diskName) {
+        if (instances == null) {
+            MemoryCache.instances = new HashMap<String, MemoryCache>(MemoryCache.maxInstanceCount);
+            MemoryCache.inputSortedDiskNames = new ArrayList<String>(maxInstanceCount);
+            MemoryCache.leastRecentlyUsedSortedDiskNames = new ArrayList<String>(maxInstanceCount);
+            MemoryCache.evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
+        }
+
         if (MemoryCache.instances.containsKey(diskName)) {
             MemoryCache.updateLeastRecentlyUsedSortedDiskNames(diskName);
             return MemoryCache.instances.get(diskName);
