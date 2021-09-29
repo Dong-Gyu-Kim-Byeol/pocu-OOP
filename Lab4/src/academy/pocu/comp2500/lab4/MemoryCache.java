@@ -26,9 +26,9 @@ public class MemoryCache {
         if (instances == null) {
             assert (MemoryCache.lruDiskNames == null);
 
-            MemoryCache.maxInstanceCount = 30;
-            MemoryCache.instances = new HashMap<String, MemoryCache>(MemoryCache.maxInstanceCount);
-            MemoryCache.lruDiskNames = new ArrayList<String>(MemoryCache.maxInstanceCount);
+            MemoryCache.maxInstanceCount = -1;
+            MemoryCache.instances = new HashMap<String, MemoryCache>();
+            MemoryCache.lruDiskNames = new ArrayList<String>();
         }
 
         assert (MemoryCache.lruDiskNames.size() == MemoryCache.instances.size());
@@ -44,6 +44,8 @@ public class MemoryCache {
     }
 
     public static void clear() {
+        MemoryCache.maxInstanceCount = -1;
+
         if (MemoryCache.instances != null) {
             MemoryCache.instances.clear();
         }
@@ -75,6 +77,9 @@ public class MemoryCache {
         this.entries.put(key, value);
         this.updateLruEntries(key);
 
+        assert (this.inputSortedEntries.size() == this.lruEntries.size());
+        assert (this.inputSortedEntries.size() == this.entries.size());
+
         this.entriesCountCheckAndRemove(true);
 
         assert (this.inputSortedEntries.size() == this.lruEntries.size());
@@ -100,7 +105,7 @@ public class MemoryCache {
     private static void instancesCountCheckAndRemove() {
         assert (MemoryCache.lruDiskNames.size() == MemoryCache.instances.size());
 
-        while (MemoryCache.instances.size() > MemoryCache.maxInstanceCount) {
+        while (MemoryCache.maxInstanceCount >= 0 && MemoryCache.instances.size() > MemoryCache.maxInstanceCount) {
             MemoryCache.instances.remove(MemoryCache.lruDiskNames.get(0));
             MemoryCache.lruDiskNames.remove(0);
         }
@@ -110,10 +115,10 @@ public class MemoryCache {
     // private
     private MemoryCache() {
         this.evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
-        this.maxEntryCount = 30;
-        this.entries = new HashMap<String, String>(this.maxEntryCount);
-        this.inputSortedEntries = new ArrayList<String>(this.maxEntryCount);
-        this.lruEntries = new ArrayList<String>(this.maxEntryCount);
+        this.maxEntryCount = -1;
+        this.entries = new HashMap<String, String>();
+        this.inputSortedEntries = new ArrayList<String>();
+        this.lruEntries = new ArrayList<String>();
     }
 
     private void updateLruEntries(final String key) {
@@ -125,7 +130,7 @@ public class MemoryCache {
         assert (this.inputSortedEntries.size() == this.lruEntries.size());
         assert (this.inputSortedEntries.size() == this.entries.size());
 
-        while (this.entries.size() > this.maxEntryCount) {
+        while (this.maxEntryCount >= 0 && this.entries.size() > this.maxEntryCount) {
             switch (this.evictionPolicy) {
                 case FIRST_IN_FIRST_OUT: {
                     this.entries.remove(this.inputSortedEntries.get(0));
