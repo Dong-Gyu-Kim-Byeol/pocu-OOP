@@ -69,8 +69,8 @@ public class MemoryCache {
     }
 
     public void addEntry(final String key, final String value) {
-        assert (this.inputSortedEntries.size() == this.lruEntries.size());
-        assert (this.inputSortedEntries.size() == this.entries.size());
+        assert (this.entries.size() == this.lruEntries.size());
+        assert (this.entries.size() == this.inputSortedEntries.size());
 
         if (this.entries.containsKey(key) == false) {
             this.inputSortedEntries.add(key);
@@ -78,13 +78,13 @@ public class MemoryCache {
         this.entries.put(key, value);
         this.updateLruEntries(key);
 
-        assert (this.inputSortedEntries.size() == this.lruEntries.size());
-        assert (this.inputSortedEntries.size() == this.entries.size());
+        assert (this.entries.size() == this.lruEntries.size());
+        assert (this.entries.size() == this.inputSortedEntries.size());
 
         this.entriesCountCheckAndRemove(true);
 
-        assert (this.inputSortedEntries.size() == this.lruEntries.size());
-        assert (this.inputSortedEntries.size() == this.entries.size());
+        assert (this.entries.size() == this.lruEntries.size());
+        assert (this.entries.size() == this.inputSortedEntries.size());
     }
 
     public String getEntryOrNull(final String key) {
@@ -110,6 +110,8 @@ public class MemoryCache {
             MemoryCache.instances.remove(MemoryCache.lruDiskNames.get(0));
             MemoryCache.lruDiskNames.remove(0);
         }
+
+        assert (MemoryCache.lruDiskNames.size() == MemoryCache.instances.size());
     }
 
 
@@ -128,8 +130,8 @@ public class MemoryCache {
     }
 
     private void entriesCountCheckAndRemove(final boolean isAfterAdd) {
-        assert (this.inputSortedEntries.size() == this.lruEntries.size());
-        assert (this.inputSortedEntries.size() == this.entries.size());
+        assert (this.entries.size() == this.lruEntries.size());
+        assert (this.entries.size() == this.inputSortedEntries.size());
 
         while (this.entries.size() > this.maxEntryCount) {
             switch (this.evictionPolicy) {
@@ -156,5 +158,8 @@ public class MemoryCache {
                     assert (false);
             }
         }
+
+        assert (this.entries.size() == this.lruEntries.size());
+        assert (this.entries.size() == this.inputSortedEntries.size());
     }
 }
