@@ -5,13 +5,11 @@ import java.util.HashMap;
 
 public class MemoryCache {
     private static int maxInstanceCount;
-    private static EvictionPolicy evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
-
     private static HashMap<String, MemoryCache> instances;
-    private static ArrayList<String> inputSortedDiskNames;
-    private static ArrayList<String> leastRecentlyUsedSortedDiskNames;
+    private static ArrayList<String> leastRecentlyUsedDiskNames;
 
     private final String diskName;
+    private EvictionPolicy evictionPolicy;
     private int maxEntryCount;
     private final HashMap<String, String> entries;
     private final ArrayList<String> inputSortedEntries;
@@ -23,21 +21,14 @@ public class MemoryCache {
         assert (maxInstanceCount > 0);
 
         MemoryCache.maxInstanceCount = maxInstanceCount;
-        MemoryCache.instancesCountCheckAndRemove(false);
-    }
-
-    public static void setEvictionPolicy(final EvictionPolicy evictionPolicy) {
-        MemoryCache.evictionPolicy = evictionPolicy;
+        MemoryCache.instancesCountCheckAndRemove();
     }
 
     public static MemoryCache getInstance(final String diskName) {
         if (instances == null) {
             MemoryCache.maxInstanceCount = 3;
-            MemoryCache.evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
-
             MemoryCache.instances = new HashMap<String, MemoryCache>(MemoryCache.maxInstanceCount);
-            MemoryCache.inputSortedDiskNames = new ArrayList<String>(MemoryCache.maxInstanceCount);
-            MemoryCache.leastRecentlyUsedSortedDiskNames = new ArrayList<String>(MemoryCache.maxInstanceCount);
+            MemoryCache.leastRecentlyUsedDiskNames = new ArrayList<String>(MemoryCache.maxInstanceCount);
         }
 
         if (MemoryCache.instances.containsKey(diskName)) {
@@ -47,22 +38,24 @@ public class MemoryCache {
 
         MemoryCache newMemoryCache = new MemoryCache(diskName);
         MemoryCache.instances.put(diskName, newMemoryCache);
-        MemoryCache.inputSortedDiskNames.add(diskName);
-        MemoryCache.leastRecentlyUsedSortedDiskNames.add(diskName);
+        MemoryCache.leastRecentlyUsedDiskNames.add(diskName);
 
-        MemoryCache.instancesCountCheckAndRemove(true);
+        MemoryCache.instancesCountCheckAndRemove();
 
         return newMemoryCache;
     }
 
     public static void clear() {
         MemoryCache.instances.clear();
-        MemoryCache.inputSortedDiskNames.clear();
-        MemoryCache.leastRecentlyUsedSortedDiskNames.clear();
+        MemoryCache.leastRecentlyUsedDiskNames.clear();
     }
 
 
     // public
+    public void setEvictionPolicy(final EvictionPolicy evictionPolicy) {
+        this.evictionPolicy = evictionPolicy;
+    }
+
     public void setMaxEntryCount(final int maxEntryCount) {
         assert (maxEntryCount > 0);
         this.maxEntryCount = maxEntryCount;
@@ -103,38 +96,18 @@ public class MemoryCache {
 
     // static private
     private static void updateLeastRecentlyUsedSortedDiskNames(final String diskName) {
-        assert (MemoryCache.leastRecentlyUsedSortedDiskNames.contains(diskName));
+        assert (MemoryCache.leastRecentlyUsedDiskNames.contains(diskName));
 
-        MemoryCache.leastRecentlyUsedSortedDiskNames.remove(diskName);
-        MemoryCache.leastRecentlyUsedSortedDiskNames.add(diskName);
+        MemoryCache.leastRecentlyUsedDiskNames.remove(diskName);
+        MemoryCache.leastRecentlyUsedDiskNames.add(diskName);
     }
 
-    private static void instancesCountCheckAndRemove(final boolean isAfterAdd) {
-        assert (MemoryCache.inputSortedDiskNames.size() == MemoryCache.leastRecentlyUsedSortedDiskNames.size());
-        assert (MemoryCache.inputSortedDiskNames.size() == MemoryCache.instances.size());
+    private static void instancesCountCheckAndRemove() {
+        assert (MemoryCache.leastRecentlyUsedDiskNames.size() == MemoryCache.instances.size());
 
         while (MemoryCache.instances.size() > MemoryCache.maxInstanceCount) {
-            switch (MemoryCache.evictionPolicy) {
-                case FIRST_IN_FIRST_OUT:
-                    MemoryCache.instances.remove(MemoryCache.inputSortedDiskNames.get(0));
-                    MemoryCache.leastRecentlyUsedSortedDiskNames.remove(MemoryCache.inputSortedDiskNames.get(0));
-                    MemoryCache.inputSortedDiskNames.remove(0);
-                    break;
-                case LAST_IN_FIRST_OUT: {
-                    final int index = isAfterAdd ? MemoryCache.inputSortedDiskNames.size() - 2 : MemoryCache.inputSortedDiskNames.size() - 1;
-                    MemoryCache.instances.remove(MemoryCache.inputSortedDiskNames.get(index));
-                    MemoryCache.leastRecentlyUsedSortedDiskNames.remove(MemoryCache.inputSortedDiskNames.get(index));
-                    MemoryCache.inputSortedDiskNames.remove(index);
-                }
-                break;
-                case LEAST_RECENTLY_USED:
-                    MemoryCache.instances.remove(MemoryCache.leastRecentlyUsedSortedDiskNames.get(0));
-                    MemoryCache.inputSortedDiskNames.remove(MemoryCache.leastRecentlyUsedSortedDiskNames.get(0));
-                    MemoryCache.leastRecentlyUsedSortedDiskNames.remove(0);
-                    break;
-                default:
-                    assert (false);
-            }
+            MemoryCache.instances.remove(MemoryCache.leastRecentlyUsedDiskNames.get(0));
+            MemoryCache.leastRecentlyUsedDiskNames.remove(0);
         }
     }
 
@@ -142,6 +115,7 @@ public class MemoryCache {
     // private
     private MemoryCache(final String diskName) {
         this.diskName = diskName;
+        this.evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
         this.maxEntryCount = 5;
         this.entries = new HashMap<String, String>(this.maxEntryCount);
         this.inputSortedEntries = new ArrayList<String>(this.maxEntryCount);
@@ -160,7 +134,7 @@ public class MemoryCache {
         assert (this.inputSortedEntries.size() == this.entries.size());
 
         while (this.entries.size() > this.maxEntryCount) {
-            switch (MemoryCache.evictionPolicy) {
+            switch (this.evictionPolicy) {
                 case FIRST_IN_FIRST_OUT:
                     this.entries.remove(this.inputSortedEntries.get(0));
                     this.leastRecentlyUsedSortedEntries.remove(this.inputSortedEntries.get(0));
