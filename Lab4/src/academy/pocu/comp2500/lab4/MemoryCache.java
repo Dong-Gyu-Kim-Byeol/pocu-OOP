@@ -25,10 +25,7 @@ public class MemoryCache {
     public static MemoryCache getInstance(final String diskName) {
         if (instances == null) {
             assert (MemoryCache.lruDiskNames == null);
-
-            MemoryCache.maxInstanceCount = Integer.MAX_VALUE;
-            MemoryCache.instances = new HashMap<String, MemoryCache>();
-            MemoryCache.lruDiskNames = new ArrayList<String>();
+            MemoryCache.clear();
         }
 
         assert (MemoryCache.lruDiskNames.size() == MemoryCache.instances.size());
@@ -48,10 +45,14 @@ public class MemoryCache {
 
         if (MemoryCache.instances != null) {
             MemoryCache.instances.clear();
+        } else {
+            MemoryCache.instances = new HashMap<String, MemoryCache>();
         }
 
         if (MemoryCache.lruDiskNames != null) {
             MemoryCache.lruDiskNames.clear();
+        } else {
+            MemoryCache.lruDiskNames = new ArrayList<String>();
         }
     }
 
