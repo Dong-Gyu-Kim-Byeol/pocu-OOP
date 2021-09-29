@@ -2,15 +2,14 @@ package academy.pocu.comp2500.lab4;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class MemoryCache {
-    private static int maxInstanceCount = 3;
+    private static int maxInstanceCount;
     private static EvictionPolicy evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
+
     private static HashMap<String, MemoryCache> instances;
     private static ArrayList<String> inputSortedDiskNames;
     private static ArrayList<String> leastRecentlyUsedSortedDiskNames;
-
 
     private final String diskName;
     private int maxEntryCount;
@@ -20,19 +19,11 @@ public class MemoryCache {
 
 
     // static public
-    public static int getMaxInstanceCount() {
-        return maxInstanceCount;
-    }
-
     public static void setMaxInstanceCount(final int maxInstanceCount) {
         assert (maxInstanceCount > 0);
 
         MemoryCache.maxInstanceCount = maxInstanceCount;
         MemoryCache.instancesCountCheckAndRemove(false);
-    }
-
-    public static EvictionPolicy getEvictionPolicy() {
-        return evictionPolicy;
     }
 
     public static void setEvictionPolicy(final EvictionPolicy evictionPolicy) {
@@ -41,10 +32,12 @@ public class MemoryCache {
 
     public static MemoryCache getInstance(final String diskName) {
         if (instances == null) {
-            MemoryCache.instances = new HashMap<String, MemoryCache>(MemoryCache.maxInstanceCount);
-            MemoryCache.inputSortedDiskNames = new ArrayList<String>(maxInstanceCount);
-            MemoryCache.leastRecentlyUsedSortedDiskNames = new ArrayList<String>(maxInstanceCount);
+            MemoryCache.maxInstanceCount = 3;
             MemoryCache.evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
+
+            MemoryCache.instances = new HashMap<String, MemoryCache>(MemoryCache.maxInstanceCount);
+            MemoryCache.inputSortedDiskNames = new ArrayList<String>(MemoryCache.maxInstanceCount);
+            MemoryCache.leastRecentlyUsedSortedDiskNames = new ArrayList<String>(MemoryCache.maxInstanceCount);
         }
 
         if (MemoryCache.instances.containsKey(diskName)) {
@@ -70,14 +63,6 @@ public class MemoryCache {
 
 
     // public
-    public String getDiskName() {
-        return diskName;
-    }
-
-    public int getMaxEntryCount() {
-        return maxEntryCount;
-    }
-
     public void setMaxEntryCount(final int maxEntryCount) {
         assert (maxEntryCount > 0);
         this.maxEntryCount = maxEntryCount;
@@ -102,12 +87,12 @@ public class MemoryCache {
         assert (this.inputSortedEntries.size() == this.leastRecentlyUsedSortedEntries.size());
         assert (this.inputSortedEntries.size() == this.entries.size());
 
-        MemoryCache.updateLeastRecentlyUsedSortedDiskNames(this.getDiskName());
+        MemoryCache.updateLeastRecentlyUsedSortedDiskNames(this.diskName);
     }
 
     public String getEntryOrNull(final String key) {
         if (this.entries.containsKey(key)) {
-            MemoryCache.updateLeastRecentlyUsedSortedDiskNames(this.getDiskName());
+            MemoryCache.updateLeastRecentlyUsedSortedDiskNames(this.diskName);
             this.updateLeastRecentlyUsedSortedEntries(key);
             return this.entries.get(key);
         } else {
