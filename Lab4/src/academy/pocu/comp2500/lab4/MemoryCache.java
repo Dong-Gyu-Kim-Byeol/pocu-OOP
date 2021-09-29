@@ -26,7 +26,7 @@ public class MemoryCache {
         if (instances == null) {
             assert (MemoryCache.lruDiskNames == null);
 
-            MemoryCache.maxInstanceCount = -1;
+            MemoryCache.maxInstanceCount = Integer.MAX_VALUE;
             MemoryCache.instances = new HashMap<String, MemoryCache>();
             MemoryCache.lruDiskNames = new ArrayList<String>();
         }
@@ -44,7 +44,7 @@ public class MemoryCache {
     }
 
     public static void clear() {
-        MemoryCache.maxInstanceCount = -1;
+        MemoryCache.maxInstanceCount = Integer.MAX_VALUE;
 
         if (MemoryCache.instances != null) {
             MemoryCache.instances.clear();
@@ -105,7 +105,7 @@ public class MemoryCache {
     private static void instancesCountCheckAndRemove() {
         assert (MemoryCache.lruDiskNames.size() == MemoryCache.instances.size());
 
-        while (MemoryCache.maxInstanceCount >= 0 && MemoryCache.instances.size() > MemoryCache.maxInstanceCount) {
+        while (MemoryCache.instances.size() > MemoryCache.maxInstanceCount) {
             MemoryCache.instances.remove(MemoryCache.lruDiskNames.get(0));
             MemoryCache.lruDiskNames.remove(0);
         }
@@ -115,7 +115,7 @@ public class MemoryCache {
     // private
     private MemoryCache() {
         this.evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
-        this.maxEntryCount = -1;
+        this.maxEntryCount = Integer.MAX_VALUE;
         this.entries = new HashMap<String, String>();
         this.inputSortedEntries = new ArrayList<String>();
         this.lruEntries = new ArrayList<String>();
@@ -130,7 +130,7 @@ public class MemoryCache {
         assert (this.inputSortedEntries.size() == this.lruEntries.size());
         assert (this.inputSortedEntries.size() == this.entries.size());
 
-        while (this.maxEntryCount >= 0 && this.entries.size() > this.maxEntryCount) {
+        while (this.entries.size() > this.maxEntryCount) {
             switch (this.evictionPolicy) {
                 case FIRST_IN_FIRST_OUT: {
                     this.entries.remove(this.inputSortedEntries.get(0));

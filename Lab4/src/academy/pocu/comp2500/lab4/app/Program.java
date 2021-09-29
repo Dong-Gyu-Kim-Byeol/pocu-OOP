@@ -110,14 +110,13 @@ public class Program {
             assert memCache.getEntryOrNull("key15") != null;
             assert memCache.getEntryOrNull("key16") != null;
         }
+
         {
             MemoryCache memCacheA = MemoryCache.getInstance("A");
             MemoryCache memCacheB = MemoryCache.getInstance("B");
             MemoryCache memCacheC = MemoryCache.getInstance("C");
             MemoryCache memCacheD = MemoryCache.getInstance("D");
             MemoryCache memCacheE = MemoryCache.getInstance("E");
-
-
 
             MemoryCache.getInstance("C");
             MemoryCache.getInstance("D");
