@@ -6,84 +6,85 @@ public class App {
     public App(Registry registry) {
         // register your classes or methods here
 
-//        registry.registerRedStampCreator(); // : 빨강 잉크 스탬프를 만드는 생성자나 메서드를 등록한다. 2개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerBlueStampCreator(); // :파랑 잉크 스탬프를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerGreenStampCreator(); // :녹색 잉크 스탬프를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//
-//        registry.registerWallCalendarCreator(); // :벽걸이 달력을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerMagnetCalendarCreator(); // :자석 달력을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerDeskCalendarCreator(); // :탁상 달력을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//
-//        registry.registerLandscapeBannerCreator(); // :가로 방향 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerPortraitBannerCreator(); // :세로 방향 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//
-//        registry.registerGlossBannerCreator(); // :반사 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerScrimBannerCreator(); // :스크림 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerMeshBannerCreator(); // :메쉬 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//
-//        registry.registerLandscapeBusinessCardCreator(); // :가로 방향 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerPortraitBusinessCardCreator(); // :세로 방향 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//
-//        registry.registerIvoryBusinessCardCreator(); // :아이보리 종이에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerGrayBusinessCardCreator(); // :회색 종이에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerWhiteBusinessCardCreator(); // :흰색 종이에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//
-//        registry.registerLaidBusinessCardCreator(); // :레이드지 인쇄용지에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerLinenBusinessCardCreator(); // :린넨커버 인쇄용지에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerSmoothBusinessCardCreator(); // :스노우지 인쇄용지에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//
-//        registry.registerSingleSidedBusinessCardCreator(); // :단면 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//        registry.registerDoubleSidedBusinessCardCreator(); // :양면 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
-//
-//        registry.registerCartCreator(); // :장바구니를 만드는 생성자를 등록한다.
-//        registry.registerProductAdder(); // :장바구니에 상품을 추가하는 메서드를 등록한다.
-//        registry.registerProductRemover(); // :장바구니에서 상품을 제거하는 메서드를 등록한다.
-//        registry.registerTotalPriceGetter(); // :장바구니에서 총액을 구해오는 메서드를 등록한다.
-//
-//        // 문구, 사진
-//        registry.registerLandscapeBannerTextApertureAdder(); // :가로 방향 배너에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerLandscapeBannerImageApertureAdder(); // :가로 방향 배너에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerPortraitBannerTextApertureAdder(); // :세로 방향 배너에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerPortraitBannerImageApertureAdder(); // :세로 방향 배너에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerGlossBannerTextApertureAdder(); // :반사 배너에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerGlossBannerImageApertureAdder(); // :반사 배너에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerScrimBannerTextApertureAdder(); // :스크림 배너에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerScrimBannerImageApertureAdder(); // :스크림 배너에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerMeshBannerTextApertureAdder(); // :메쉬 배너에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerMeshBannerImageApertureAdder(); // :메쉬 배너에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerLandscapeBusinessCardTextApertureAdder(); // :가로 방향 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerLandscapeBusinessCardImageApertureAdder(); // :가로 방향 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerPortraitBusinessCardTextApertureAdder(); // :세로 방향 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerPortraitBusinessCardImageApertureAdder(); // :세로 방향 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerIvoryBusinessCardTextApertureAdder(); // :아이보리 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerIvoryBusinessCardImageApertureAdder(); // :아이보리 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerGrayBusinessCardTextApertureAdder(); // :회색 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerGrayBusinessCardImageApertureAdder(); // :회색 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerWhiteBusinessCardTextApertureAdder(); // :흰색 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerWhiteBusinessCardImageApertureAdder(); // :흰색 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerLaidBusinessCardTextApertureAdder(); // :레이드지 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerLaidBusinessCardImageApertureAdder(); // :레이드지 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerLinenBusinessCardTextApertureAdder(); // :린넨커버 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerLinenBusinessCardImageApertureAdder(); // :린넨커버 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerSmoothBusinessCardTextApertureAdder(); // :스노우지 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerSmoothBusinessCardImageApertureAdder(); // :스노우지 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerSingleSidedBusinessCardTextApertureAdder(); // :단면 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerSingleSidedBusinessCardImageApertureAdder(); // :단면 명함에 사진을 추가하는 메서드를 등록한다.
-//
-//        registry.registerDoubleSidedBusinessCardTextApertureAdder(); // :양면 명함에 문구를 추가하는 메서드를 등록한다.
-//        registry.registerDoubleSidedBusinessCardImageApertureAdder(); // :양면 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerRedStampCreator("Stamp"); // : 빨강 잉크 스탬프를 만드는 생성자나 메서드를 등록한다. 2개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerBlueStampCreator("Stamp"); // :파랑 잉크 스탬프를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerGreenStampCreator("Stamp"); // :녹색 잉크 스탬프를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+
+        registry.registerWallCalendarCreator("Calendar"); // :벽걸이 달력을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerMagnetCalendarCreator("Calendar"); // :자석 달력을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerDeskCalendarCreator("Calendar"); // :탁상 달력을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+
+        registry.registerLandscapeBannerCreator("Banner"); // :가로 방향 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerPortraitBannerCreator("Banner"); // :세로 방향 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+
+        registry.registerGlossBannerCreator("Banner"); // :반사 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerScrimBannerCreator("Banner"); // :스크림 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerMeshBannerCreator("Banner"); // :메쉬 배너를 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+
+        registry.registerLandscapeBusinessCardCreator("BusinessCard"); // :가로 방향 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerPortraitBusinessCardCreator("BusinessCard"); // :세로 방향 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+
+        registry.registerIvoryBusinessCardCreator("BusinessCard"); // :아이보리 종이에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerGrayBusinessCardCreator("BusinessCard"); // :회색 종이에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerWhiteBusinessCardCreator("BusinessCard"); // :흰색 종이에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+
+        registry.registerLaidBusinessCardCreator("BusinessCard"); // :레이드지 인쇄용지에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerLinenBusinessCardCreator("BusinessCard"); // :린넨커버 인쇄용지에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerSmoothBusinessCardCreator("BusinessCard"); // :스노우지 인쇄용지에 찍는 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+
+        registry.registerSingleSidedBusinessCardCreator("BusinessCard"); // :단면 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+        registry.registerDoubleSidedBusinessCardCreator("BusinessCard"); // :양면 명함을 만드는 생성자나 메서드를 등록한다. 2 개의 오버로딩된 메서드가 있으니 본인의 설계에 적합한 버전을 사용할 것.
+
+        // 장바구니
+        registry.registerCartCreator("ShoppingCart"); // :장바구니를 만드는 생성자를 등록한다.
+        registry.registerProductAdder("ShoppingCart", "addShipment"); // :장바구니에 상품을 추가하는 메서드를 등록한다.
+        registry.registerProductRemover("ShoppingCart", "removeShipment"); // :장바구니에서 상품을 제거하는 메서드를 등록한다.
+        registry.registerTotalPriceGetter("ShoppingCart", "getTotalPrice"); // :장바구니에서 총액을 구해오는 메서드를 등록한다.
+
+        // 문구, 사진
+        registry.registerLandscapeBannerTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :가로 방향 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerLandscapeBannerImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :가로 방향 배너에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerPortraitBannerTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :세로 방향 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerPortraitBannerImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :세로 방향 배너에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerGlossBannerTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :반사 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerGlossBannerImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :반사 배너에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerScrimBannerTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :스크림 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerScrimBannerImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :스크림 배너에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerMeshBannerTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :메쉬 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerMeshBannerImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :메쉬 배너에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerLandscapeBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :가로 방향 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerLandscapeBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :가로 방향 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerPortraitBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :세로 방향 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerPortraitBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :세로 방향 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerIvoryBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :아이보리 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerIvoryBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :아이보리 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerGrayBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :회색 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerGrayBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :회색 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerWhiteBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :흰색 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerWhiteBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :흰색 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerLaidBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :레이드지 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerLaidBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :레이드지 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerLinenBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :린넨커버 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerLinenBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :린넨커버 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerSmoothBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :스노우지 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerSmoothBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :스노우지 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerSingleSidedBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :단면 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerSingleSidedBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :단면 명함에 사진을 추가하는 메서드를 등록한다.
+
+        registry.registerDoubleSidedBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setTexts"); // :양면 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerDoubleSidedBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImages"); // :양면 명함에 사진을 추가하는 메서드를 등록한다.
     }
 }
