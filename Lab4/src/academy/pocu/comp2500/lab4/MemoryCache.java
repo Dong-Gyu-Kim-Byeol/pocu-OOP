@@ -1,8 +1,5 @@
 package academy.pocu.comp2500.lab4;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class MemoryCache {
     private static int maxInstanceCount;
     private static LinkedHashMap<String, MemoryCache> instances;
