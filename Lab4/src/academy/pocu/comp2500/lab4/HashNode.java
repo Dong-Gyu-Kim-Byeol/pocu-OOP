@@ -1,7 +1,7 @@
 package academy.pocu.comp2500.lab4;
 
 public class HashNode<K, V> {
-    private K key;
+    private final K key;
     private V data;
     private HashNode<K, V> pre;
     private HashNode<K, V> next;
