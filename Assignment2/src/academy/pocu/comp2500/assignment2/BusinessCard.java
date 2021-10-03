@@ -2,22 +2,22 @@ package academy.pocu.comp2500.assignment2;
 
 public class BusinessCard extends ProductCanAddTextAndImage {
     private final EBusinessCardType businessCardType;
-    private final boolean isDoubleSidedBusinessCard;
+    private final EBusinessCardSides cardSides;
 
     // public
-    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final Orientation orientation, final boolean doubleSidedBusinessCard) {
+    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final Orientation orientation, final EBusinessCardSides cardSides) {
         super(businessCardType.getProductType(), orientation);
 
         final int price;
         switch (businessCardType) {
             case LINEN:
-                price = doubleSidedBusinessCard ? 140 : 110;
+                price = cardSides == EBusinessCardSides.DOUBLE_SIZE ? 140 : 110;
                 break;
             case LAID:
-                price = doubleSidedBusinessCard ? 150 : 120;
+                price = cardSides == EBusinessCardSides.DOUBLE_SIZE ? 150 : 120;
                 break;
             case SMOOTH:
-                price = doubleSidedBusinessCard ? 130 : 100;
+                price = cardSides == EBusinessCardSides.DOUBLE_SIZE ? 130 : 100;
                 break;
             default:
                 throw new IllegalArgumentException("unknown type");
@@ -28,14 +28,14 @@ public class BusinessCard extends ProductCanAddTextAndImage {
         super.setPrice(price);
 
         this.businessCardType = businessCardType;
-        this.isDoubleSidedBusinessCard = doubleSidedBusinessCard;
+        this.cardSides = cardSides;
     }
 
     public EBusinessCardType getBusinessCardType() {
         return businessCardType;
     }
 
-    public boolean isDoubleSidedBusinessCard() {
-        return isDoubleSidedBusinessCard;
+    public EBusinessCardSides getCardSides() {
+        return cardSides;
     }
 }
