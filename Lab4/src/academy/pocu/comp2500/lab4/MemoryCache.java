@@ -5,14 +5,12 @@ import java.util.HashMap;
 
 public class MemoryCache {
     private static int maxInstanceCount;
-    private static HashMap<String, MemoryCache> instances;
-    private static ArrayList<String> lruDiskNames;
+    private static LinkedHashMap<String, MemoryCache> instances;
 
     private EvictionPolicy evictionPolicy;
     private int maxEntryCount;
-    private final HashMap<String, String> entries;
-    private final ArrayList<String> inputSortedEntries;
-    private final ArrayList<String> lruEntries;
+    private final LinkedHashMap<String, String> lruEntries;
+    private final LinkedHashMap<String, String> inputEntries;
 
 
     // static public
@@ -24,17 +22,15 @@ public class MemoryCache {
 
     public static MemoryCache getInstance(final String diskName) {
         if (instances == null) {
-            assert (MemoryCache.lruDiskNames == null);
             MemoryCache.clear();
         }
-
-        assert (MemoryCache.lruDiskNames.size() == MemoryCache.instances.size());
 
         if (MemoryCache.instances.containsKey(diskName) == false) {
             final MemoryCache newMemoryCache = new MemoryCache();
             MemoryCache.instances.put(diskName, newMemoryCache);
+        } else {
+            MemoryCache.updateLruDiskNames(diskName);
         }
-        MemoryCache.updateLruDiskNames(diskName);
 
         MemoryCache.instancesCountCheckAndRemove();
         return MemoryCache.instances.get(diskName);
@@ -46,13 +42,7 @@ public class MemoryCache {
         if (MemoryCache.instances != null) {
             MemoryCache.instances.clear();
         } else {
-            MemoryCache.instances = new HashMap<String, MemoryCache>();
-        }
-
-        if (MemoryCache.lruDiskNames != null) {
-            MemoryCache.lruDiskNames.clear();
-        } else {
-            MemoryCache.lruDiskNames = new ArrayList<String>();
+            MemoryCache.instances = new LinkedHashMap<String, MemoryCache>();
         }
     }
 
@@ -69,28 +59,21 @@ public class MemoryCache {
     }
 
     public void addEntry(final String key, final String value) {
-        assert (this.entries.size() == this.lruEntries.size());
-        assert (this.entries.size() == this.inputSortedEntries.size());
+        assert (this.lruEntries.size() == this.inputEntries.size());
 
-        if (this.entries.containsKey(key) == false) {
-            this.inputSortedEntries.add(key);
-        }
-        this.entries.put(key, value);
+        this.lruEntries.put(key, value);
+        this.inputEntries.put(key, value);
         this.updateLruEntries(key);
-
-        assert (this.entries.size() == this.lruEntries.size());
-        assert (this.entries.size() == this.inputSortedEntries.size());
+        assert (this.lruEntries.size() == this.inputEntries.size());
 
         this.entriesCountCheckAndRemove(true);
-
-        assert (this.entries.size() == this.lruEntries.size());
-        assert (this.entries.size() == this.inputSortedEntries.size());
+        assert (this.lruEntries.size() == this.inputEntries.size());
     }
 
     public String getEntryOrNull(final String key) {
-        if (this.entries.containsKey(key)) {
+        if (this.lruEntries.containsKey(key)) {
             this.updateLruEntries(key);
-            return this.entries.get(key);
+            return this.lruEntries.get(key);
         } else {
             return null;
         }
@@ -99,19 +82,19 @@ public class MemoryCache {
 
     // static private
     private static void updateLruDiskNames(final String diskName) {
-        MemoryCache.lruDiskNames.remove(diskName);
-        MemoryCache.lruDiskNames.add(diskName);
+        final HashNode<String, MemoryCache> updateLru = MemoryCache.instances.getNode(diskName);
+        assert (updateLru != null);
+
+        MemoryCache.instances.remove(diskName);
+        MemoryCache.instances.putNode(diskName, updateLru);
     }
 
     private static void instancesCountCheckAndRemove() {
-        assert (MemoryCache.lruDiskNames.size() == MemoryCache.instances.size());
+        assert (MemoryCache.instances.size() == MemoryCache.instances.size());
 
         while (MemoryCache.instances.size() > MemoryCache.maxInstanceCount) {
-            MemoryCache.instances.remove(MemoryCache.lruDiskNames.get(0));
-            MemoryCache.lruDiskNames.remove(0);
+            MemoryCache.instances.remove(MemoryCache.instances.getFrontKey());
         }
-
-        assert (MemoryCache.lruDiskNames.size() == MemoryCache.instances.size());
     }
 
 
@@ -119,39 +102,37 @@ public class MemoryCache {
     private MemoryCache() {
         this.evictionPolicy = EvictionPolicy.LEAST_RECENTLY_USED;
         this.maxEntryCount = Integer.MAX_VALUE;
-        this.entries = new HashMap<String, String>();
-        this.inputSortedEntries = new ArrayList<String>();
-        this.lruEntries = new ArrayList<String>();
+        this.lruEntries = new LinkedHashMap<String, String>();
+        this.inputEntries = new LinkedHashMap<String, String>();
     }
 
     private void updateLruEntries(final String key) {
+        final HashNode<String, String> updateLru = this.lruEntries.getNode(key);
+        assert (updateLru != null);
+
         this.lruEntries.remove(key);
-        this.lruEntries.add(key);
+        this.lruEntries.putNode(key, updateLru);
     }
 
     private void entriesCountCheckAndRemove(final boolean isAfterAdd) {
-        assert (this.entries.size() == this.lruEntries.size());
-        assert (this.entries.size() == this.inputSortedEntries.size());
+        assert (this.lruEntries.size() == this.inputEntries.size());
 
-        while (this.entries.size() > this.maxEntryCount) {
+        while (this.inputEntries.size() > this.maxEntryCount) {
             switch (this.evictionPolicy) {
                 case FIRST_IN_FIRST_OUT: {
-                    this.entries.remove(this.inputSortedEntries.get(0));
-                    this.lruEntries.remove(this.inputSortedEntries.get(0));
-                    this.inputSortedEntries.remove(0);
+                    this.lruEntries.remove(this.inputEntries.getFrontKey());
+                    this.inputEntries.remove(this.inputEntries.getFrontKey());
                 }
                 break;
                 case LAST_IN_FIRST_OUT: {
-                    final int index = isAfterAdd ? this.inputSortedEntries.size() - 2 : this.inputSortedEntries.size() - 1;
-                    this.entries.remove(this.inputSortedEntries.get(index));
-                    this.lruEntries.remove(this.inputSortedEntries.get(index));
-                    this.inputSortedEntries.remove(index);
+                    final String removeKey = isAfterAdd ? this.inputEntries.getNear().getPre().getKey() : this.inputEntries.getNearKey();
+                    this.lruEntries.remove(removeKey);
+                    this.inputEntries.remove(removeKey);
                 }
                 break;
                 case LEAST_RECENTLY_USED: {
-                    this.entries.remove(this.lruEntries.get(0));
-                    this.inputSortedEntries.remove(this.lruEntries.get(0));
-                    this.lruEntries.remove(0);
+                    this.inputEntries.remove(this.lruEntries.getFrontKey());
+                    this.lruEntries.remove(this.lruEntries.getFrontKey());
                 }
                 break;
                 default:
@@ -159,7 +140,6 @@ public class MemoryCache {
             }
         }
 
-        assert (this.entries.size() == this.lruEntries.size());
-        assert (this.entries.size() == this.inputSortedEntries.size());
+        assert (this.lruEntries.size() == this.inputEntries.size());
     }
 }
