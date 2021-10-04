@@ -15,6 +15,10 @@ public class ProductCanAddApertures extends Product {
     }
 
     public void addTextAperture(final TextAperture textAperture) {
+        if (textAperture.getApertureSide() == EApertureSide.BACK && super.getProductType().canBackSideAperture() == false) {
+            return;
+        }
+
         if (0 <= textAperture.getX() && textAperture.getX() < super.getWidth()) {
             if (0 <= textAperture.getY() && textAperture.getY() < super.getHeight()) {
                 this.textApertures.add(textAperture);

@@ -17,5 +17,18 @@ public enum EProductType {
 
     LINEN_DOUBLE_SIDE_BUSINESS_CARD,
     LAID_DOUBLE_SIDE_BUSINESS_CARD,
-    SMOOTH_DOUBLE_SIDE_BUSINESS_CARD
+    SMOOTH_DOUBLE_SIDE_BUSINESS_CARD;
+
+    public boolean canBackSideAperture() {
+        switch (this) {
+            case LINEN_DOUBLE_SIDE_BUSINESS_CARD:
+                // intentional fallthrough
+            case LAID_DOUBLE_SIDE_BUSINESS_CARD:
+                // intentional fallthrough
+            case SMOOTH_DOUBLE_SIDE_BUSINESS_CARD:
+                return true;
+            default:
+                return false;
+        }
+    }
 }
