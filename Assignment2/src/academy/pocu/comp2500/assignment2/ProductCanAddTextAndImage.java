@@ -4,16 +4,16 @@ public class ProductCanAddTextAndImage extends Product {
     private static final int ADD_PRICE = 5;
 
     private final Orientation orientation;
-    private Text text;
-    private Image image;
+    private AddText text;
+    private AddImage image;
 
 
     // public
-    public Text getText() {
+    public AddText getText() {
         return text;
     }
 
-    public void setText(Text text) {
+    public void setText(AddText text) {
         if (0 <= text.getPosision().getX() && text.getPosision().getX() <= getSize().getX()) {
             if (0 <= text.getPosision().getY() && text.getPosision().getY() <= getSize().getY()) {
                 this.text = text;
@@ -21,11 +21,11 @@ public class ProductCanAddTextAndImage extends Product {
         }
     }
 
-    public Image getImage() {
+    public AddImage getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(AddImage image) {
         if (0 <= image.getPosision().getX() && image.getPosision().getX() <= getSize().getX()) {
             if (0 <= image.getPosision().getY() && image.getPosision().getY() <= getSize().getY()) {
                 this.image = image;
