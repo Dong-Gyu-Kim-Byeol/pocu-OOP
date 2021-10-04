@@ -6,7 +6,7 @@ public class BusinessCard extends ProductCanAddApertures {
 
     // public
     public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardSide sides, final EBusinessCardColor businessCardColor, final EOrientation orientation) {
-        super(businessCardType.getProductType(sides), orientation);
+        super(businessCardType.getProductType(sides), sides.canBackSideAperture(), orientation);
 
         final int basePrice;
         switch (businessCardType) {
@@ -56,7 +56,7 @@ public class BusinessCard extends ProductCanAddApertures {
         super.setWidth(90);
         super.setHeight(50);
 
-        super.setColor(businessCardColor.getR(), businessCardColor.getG(), businessCardColor.getB());
+        super.setColor(businessCardColor.getColor());
         super.setBasePrice(basePrice);
 
         this.businessCardType = businessCardType;

@@ -5,6 +5,7 @@ import java.util.HashSet;
 public class ProductCanAddApertures extends Product {
     private static final int ADD_PRICE = 5;
 
+    private final boolean canBackSideAperture;
     private final EOrientation orientation;
     private final HashSet<TextAperture> textApertures;
     private final HashSet<ImageAperture> imageApertures;
@@ -15,7 +16,7 @@ public class ProductCanAddApertures extends Product {
     }
 
     public void addTextAperture(final TextAperture textAperture) {
-        if (textAperture.getApertureSide() == EApertureSide.BACK && super.getProductType().canBackSideAperture() == false) {
+        if (textAperture.getApertureSide() == EApertureSide.BACK && this.canBackSideAperture == false) {
             return;
         }
 
@@ -45,9 +46,10 @@ public class ProductCanAddApertures extends Product {
     }
 
     // protected
-    protected ProductCanAddApertures(final EProductType productType, final EOrientation orientation) {
+    protected ProductCanAddApertures(final EProductType productType, final boolean canBackSideAperture, final EOrientation orientation) {
         super(productType);
 
+        this.canBackSideAperture = canBackSideAperture;
         this.textApertures = new HashSet<TextAperture>();
         this.imageApertures = new HashSet<ImageAperture>();
         this.orientation = orientation;

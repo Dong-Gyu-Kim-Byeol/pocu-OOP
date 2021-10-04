@@ -10,44 +10,14 @@ public enum EBusinessCardType {
         final EProductType productType;
         switch (this) {
             case LINEN:
-                switch (sides) {
-                    case SINGLE:
-                        productType = EProductType.LINEN_SINGLE_SIDE_BUSINESS_CARD;
-                        break;
-                    case DOUBLE:
-                        productType = EProductType.LINEN_DOUBLE_SIDE_BUSINESS_CARD;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("unknown type");
-                }
+                productType = EProductType.LINEN_BUSINESS_CARD;
                 break;
-
             case LAID:
-                switch (sides) {
-                    case SINGLE:
-                        productType = EProductType.LAID_SINGLE_SIDE_BUSINESS_CARD;
-                        break;
-                    case DOUBLE:
-                        productType = EProductType.LAID_DOUBLE_SIDE_BUSINESS_CARD;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("unknown type");
-                }
+                productType = EProductType.LAID_BUSINESS_CARD;
                 break;
-
             case SMOOTH:
-                switch (sides) {
-                    case SINGLE:
-                        productType = EProductType.SMOOTH_SINGLE_SIDE_BUSINESS_CARD;
-                        break;
-                    case DOUBLE:
-                        productType = EProductType.SMOOTH_DOUBLE_SIDE_BUSINESS_CARD;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("unknown type");
-                }
+                productType = EProductType.SMOOTH_BUSINESS_CARD;
                 break;
-
             default:
                 throw new IllegalArgumentException("unknown type");
         }

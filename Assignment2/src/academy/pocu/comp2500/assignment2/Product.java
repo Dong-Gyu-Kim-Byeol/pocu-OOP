@@ -5,7 +5,6 @@ public class Product {
 
     private int width;
     private int height;
-
     private int color;
 
     private int basePrice;
@@ -56,51 +55,29 @@ public class Product {
         this.shippingMethod = EShippingMethod.SHIP;
     }
 
-    protected void setWidth(int width) {
+    protected void setWidth(final int width) {
         this.width = width;
     }
 
-    protected void setHeight(int height) {
+    protected void setHeight(final int height) {
         this.height = height;
     }
 
-    protected void setColor(short r, short g, short b) {
-        if (r < 0) {
-            r = 0;
-        } else if (r > 0xff) {
-            r = 0xff;
-        } else {
-            r = r;
+    protected void setColor(int color) {
+        if (color < 0) {
+            color = 0;
+        } else if (color > 0xffffff) {
+            color = 0xffffff;
         }
 
-        if (g < 0) {
-            g = 0;
-        } else if (g > 0xff) {
-            g = 0xff;
-        } else {
-            g = g;
-        }
-
-        if (b < 0) {
-            b = 0;
-        } else if (b > 0xff) {
-            b = 0xff;
-        } else {
-            b = b;
-        }
-
-        int color = 0;
-        color |= r << 16;
-        color |= g << 8;
-        color |= b;
         this.color = color;
     }
 
-    protected void setBasePrice(int basePrice) {
+    protected void setBasePrice(final int basePrice) {
         this.basePrice = basePrice;
     }
 
-    protected void setAperturesPrice(int aperturesPrice) {
+    protected void setAperturesPrice(final int aperturesPrice) {
         this.aperturesPrice = aperturesPrice;
     }
 }
