@@ -29,7 +29,7 @@ public class Product {
     }
 
     public String getColor() {
-        return String.format("%02X%02X%02X", r, g, b);
+        return String.format("0x%02X%02X%02X", r, g, b);
     }
 
     public int getPrice() {
