@@ -1,11 +1,11 @@
 package academy.pocu.comp2500.assignment2;
 
-public class Banner extends ProductCanAddTextAndImage {
+public class Banner extends ProductCanAddApertures {
     private final EBannerType bannerType;
 
     // public
-    public Banner(final EBannerType bannerType, final EBannerSize bannerSize, final Color color, final Orientation orientation) {
-        super(bannerType.getProductType(), orientation);
+    public Banner(final String productId, final EBannerType bannerType, final EBannerSize bannerSize, final Color color, final Orientation orientation) {
+        super(productId, bannerType.getProductType(), orientation);
 
         final int price;
         switch (bannerType) {

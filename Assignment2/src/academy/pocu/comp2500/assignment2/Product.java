@@ -1,13 +1,23 @@
 package academy.pocu.comp2500.assignment2;
 
+import java.util.UUID;
+
 public class Product {
     private final EProductType productType;
+    private final String productId;
+
+    private EShippingMethod shippingMethod;
+
     private Size size;
     private Color color;
     private int price;
     private int addPrice;
 
     // public
+    public String getProductId() {
+        return productId;
+    }
+
     public EProductType getProductType() {
         return productType;
     }
@@ -24,9 +34,19 @@ public class Product {
         return price + addPrice;
     }
 
+    public EShippingMethod getShippingMethod() {
+        return shippingMethod;
+    }
+
+    public void setShippingMethod(EShippingMethod shippingMethod) {
+        this.shippingMethod = shippingMethod;
+    }
+
     // protected
-    protected Product(final EProductType productType) {
+    protected Product(final String productId, final EProductType productType) {
+        this.productId = productId;
         this.productType = productType;
+        this.shippingMethod = EShippingMethod.SHIP;
     }
 
     protected void setSize(final Size size) {

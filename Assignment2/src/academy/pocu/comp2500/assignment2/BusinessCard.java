@@ -1,12 +1,12 @@
 package academy.pocu.comp2500.assignment2;
 
-public class BusinessCard extends ProductCanAddTextAndImage {
+public class BusinessCard extends ProductCanAddApertures {
     private final EBusinessCardType businessCardType;
     private final EBusinessCardSides cardSides;
 
     // public
-    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final Orientation orientation, final EBusinessCardSides cardSides) {
-        super(businessCardType.getProductType(), orientation);
+    public BusinessCard(final String productId, final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final Orientation orientation, final EBusinessCardSides cardSides) {
+        super(productId, businessCardType.getProductType(), orientation);
 
         final int price;
         switch (businessCardType) {

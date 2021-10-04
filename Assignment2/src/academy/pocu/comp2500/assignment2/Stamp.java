@@ -4,8 +4,8 @@ public class Stamp extends Product {
     private final String text;
 
     // public
-    public Stamp(final EStampSize stampSize, final EStampColor stampColor, final String text) {
-        super(EProductType.STAMP);
+    public Stamp(final String productId, final EStampSize stampSize, final EStampColor stampColor, final String text) {
+        super(productId, EProductType.STAMP);
 
         final int price;
         switch (stampSize) {

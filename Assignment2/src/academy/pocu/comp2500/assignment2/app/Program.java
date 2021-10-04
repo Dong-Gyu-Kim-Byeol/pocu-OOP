@@ -5,10 +5,11 @@ import academy.pocu.comp2500.assignment2.Color;
 import academy.pocu.comp2500.assignment2.EShippingMethod;
 import academy.pocu.comp2500.assignment2.EStampColor;
 import academy.pocu.comp2500.assignment2.EStampSize;
-import academy.pocu.comp2500.assignment2.Shipment;
 import academy.pocu.comp2500.assignment2.ShoppingCart;
 import academy.pocu.comp2500.assignment2.Stamp;
 import academy.pocu.comp2500.assignment2.registry.Registry;
+
+import java.util.UUID;
 
 public class Program {
 
@@ -19,7 +20,7 @@ public class Program {
         registry.validate();
 
         {
-            final Stamp redStamp40x30 = new Stamp(EStampSize.MM_40_X_30, EStampColor.RED, "redStamp40x30");
+            final Stamp redStamp40x30 = new Stamp(UUID.randomUUID().toString(), EStampSize.MM_40_X_30, EStampColor.RED, "redStamp40x30");
 
             final Color color = redStamp40x30.getColor();
             assert color.getR() == EStampColor.RED.getColor().getR();
@@ -28,10 +29,10 @@ public class Program {
 
             final ShoppingCart shoppingCart = new ShoppingCart();
 
-            final Shipment redStamp40x30Shipment = new Shipment(redStamp40x30);
-            shoppingCart.addShipment(redStamp40x30Shipment);
-            redStamp40x30Shipment.setShippingMethod(EShippingMethod.PICKUP);
-            assert redStamp40x30Shipment.getShippingMethod() == EShippingMethod.PICKUP;
+            shoppingCart.addProduct(redStamp40x30);
+            redStamp40x30.setShippingMethod(EShippingMethod.PICKUP);
+            assert redStamp40x30.getShippingMethod() == EShippingMethod.PICKUP;
         }
     }
+
 }
