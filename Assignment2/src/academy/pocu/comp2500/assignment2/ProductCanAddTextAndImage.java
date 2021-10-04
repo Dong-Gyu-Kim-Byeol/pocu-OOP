@@ -1,45 +1,37 @@
 package academy.pocu.comp2500.assignment2;
 
+import java.util.ArrayList;
+
 public class ProductCanAddTextAndImage extends Product {
     private static final int ADD_PRICE = 5;
 
     private final Orientation orientation;
-    private AddText textOrNull;
-    private AddImage imageOrNull;
+    private final ArrayList<AddText> texts;
+    private final ArrayList<AddImage> images;
 
     // public
-    public AddText getTextOrNull() {
-        return textOrNull;
+    public ArrayList<AddText> getTexts() {
+        return texts;
     }
 
-    public void setText(AddText textOrNull) {
-        if (textOrNull == null) {
-            this.textOrNull = null;
-        } else {
-            if (0 <= textOrNull.getPosision().getX() && textOrNull.getPosision().getX() <= getSize().getX()) {
-                if (0 <= textOrNull.getPosision().getY() && textOrNull.getPosision().getY() <= getSize().getY()) {
-                    this.textOrNull = textOrNull;
-                }
+    public void addText(final AddText text) {
+        if (0 <= text.getPosision().getX() && text.getPosision().getX() <= getSize().getX()) {
+            if (0 <= text.getPosision().getY() && text.getPosision().getY() <= getSize().getY()) {
+                this.texts.add(text);
             }
         }
     }
 
-    public AddImage getImageOrNull() {
-        return imageOrNull;
+    public ArrayList<AddImage> getImages() {
+        return images;
     }
 
-    public void setImage(AddImage imageOrNull) {
-        if (imageOrNull == null) {
-            this.imageOrNull = null;
-        } else {
-            if (0 <= imageOrNull.getPosision().getX() && imageOrNull.getPosision().getX() <= getSize().getX()) {
-                if (0 <= imageOrNull.getPosision().getY() && imageOrNull.getPosision().getY() <= getSize().getY()) {
-                    this.imageOrNull = imageOrNull;
-                }
+    public void addImage(final AddImage image) {
+        if (0 <= image.getPosision().getX() && image.getPosision().getX() <= getSize().getX()) {
+            if (0 <= image.getPosision().getY() && image.getPosision().getY() <= getSize().getY()) {
+                this.images.add(image);
             }
         }
-
-
     }
 
     public Orientation getOrientation() {
@@ -51,11 +43,13 @@ public class ProductCanAddTextAndImage extends Product {
     protected ProductCanAddTextAndImage(final EProductType productType, final Orientation orientation) {
         super(productType);
 
+        this.texts = new ArrayList<AddText>();
+        this.images = new ArrayList<AddImage>();
         this.orientation = orientation;
     }
 
     // private
     private void setAddPrice() {
-        super.setAddPrice((this.textOrNull != null ? ADD_PRICE : 0) + (this.imageOrNull != null ? ADD_PRICE : 0));
+        super.setAddPrice(this.texts.size() * ADD_PRICE + this.images.size() * ADD_PRICE);
     }
 }
