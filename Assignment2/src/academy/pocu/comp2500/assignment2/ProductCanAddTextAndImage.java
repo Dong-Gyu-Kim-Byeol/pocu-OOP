@@ -12,10 +12,14 @@ public class ProductCanAddTextAndImage extends Product {
         return textOrNull;
     }
 
-    public void setText(AddText text) {
-        if (0 <= text.getPosision().getX() && text.getPosision().getX() <= getSize().getX()) {
-            if (0 <= text.getPosision().getY() && text.getPosision().getY() <= getSize().getY()) {
-                this.textOrNull = text;
+    public void setText(AddText textOrNull) {
+        if (textOrNull == null) {
+            this.textOrNull = null;
+        } else {
+            if (0 <= textOrNull.getPosision().getX() && textOrNull.getPosision().getX() <= getSize().getX()) {
+                if (0 <= textOrNull.getPosision().getY() && textOrNull.getPosision().getY() <= getSize().getY()) {
+                    this.textOrNull = textOrNull;
+                }
             }
         }
     }
@@ -24,12 +28,18 @@ public class ProductCanAddTextAndImage extends Product {
         return imageOrNull;
     }
 
-    public void setImage(AddImage image) {
-        if (0 <= image.getPosision().getX() && image.getPosision().getX() <= getSize().getX()) {
-            if (0 <= image.getPosision().getY() && image.getPosision().getY() <= getSize().getY()) {
-                this.imageOrNull = image;
+    public void setImage(AddImage imageOrNull) {
+        if (imageOrNull == null) {
+            this.imageOrNull = null;
+        } else {
+            if (0 <= imageOrNull.getPosision().getX() && imageOrNull.getPosision().getX() <= getSize().getX()) {
+                if (0 <= imageOrNull.getPosision().getY() && imageOrNull.getPosision().getY() <= getSize().getY()) {
+                    this.imageOrNull = imageOrNull;
+                }
             }
         }
+
+
     }
 
     public Orientation getOrientation() {
