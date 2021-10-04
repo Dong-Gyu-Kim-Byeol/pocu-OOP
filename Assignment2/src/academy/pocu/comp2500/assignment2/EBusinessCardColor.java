@@ -6,22 +6,60 @@ public enum EBusinessCardColor {
     WHITE;
 
     // public
-    public Color getColor() {
-        final Color color;
+    public short getR() {
+        final short r;
         switch (this) {
             case GRAY:
-                color = new Color((short) 0xE6, (short) 0xE6, (short) 0xE6);
+                r = (short) 0xE6;
                 break;
             case IVORY:
-                color = new Color((short) 0xff, (short) 0xff, (short) 0xf0);
+                r = (short) 0xff;
                 break;
             case WHITE:
-                color = new Color((short) 0xff, (short) 0xff, (short) 0xff);
+                r = (short) 0xff;
                 break;
             default:
                 throw new IllegalArgumentException("unknown type");
         }
 
-        return color;
+        return r;
+    }
+
+    public short getG() {
+        final short g;
+        switch (this) {
+            case GRAY:
+                g = (short) 0xE6;
+                break;
+            case IVORY:
+                g = (short) 0xff;
+                break;
+            case WHITE:
+                g = (short) 0xff;
+                break;
+            default:
+                throw new IllegalArgumentException("unknown type");
+        }
+
+        return g;
+    }
+
+    public short getB() {
+        final short b;
+        switch (this) {
+            case GRAY:
+                b = (short) 0xE6;
+                break;
+            case IVORY:
+                b = (short) 0xf0;
+                break;
+            case WHITE:
+                b = (short) 0xff;
+                break;
+            default:
+                throw new IllegalArgumentException("unknown type");
+        }
+
+        return b;
     }
 }

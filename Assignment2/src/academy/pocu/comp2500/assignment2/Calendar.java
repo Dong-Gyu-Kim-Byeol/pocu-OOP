@@ -33,7 +33,7 @@ public class Calendar extends Product {
         super.setWidth(width);
         super.setHeight(height);
 
-        super.setColor(new Color((short) 0xff, (short) 0xff, (short) 0xff));
+        super.setColor((short) 0xff, (short) 0xff, (short) 0xff);
         super.setPrice(price);
 
         this.calendarType = calendarType;

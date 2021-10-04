@@ -8,7 +8,11 @@ public class Product {
 
     private int width;
     private int height;
-    private Color color;
+
+    private short r;
+    private short g;
+    private short b;
+
     private int price;
     private int aperturesPrice;
 
@@ -31,8 +35,16 @@ public class Product {
         return height;
     }
 
-    public Color getColor() {
-        return color;
+    public short getR() {
+        return r;
+    }
+
+    public short getG() {
+        return g;
+    }
+
+    public short getB() {
+        return b;
     }
 
     public int getPrice() {
@@ -62,8 +74,14 @@ public class Product {
         this.height = height;
     }
 
-    protected void setColor(final Color color) {
-        this.color = color;
+    protected void setColor(final short r, final short g, final short b) {
+        assert (0 <= r && r <= 0xff);
+        assert (0 <= g && g <= 0xff);
+        assert (0 <= b && b <= 0xff);
+
+        this.r = r;
+        this.g = g;
+        this.b = b;
     }
 
     protected void setPrice(final int price) {

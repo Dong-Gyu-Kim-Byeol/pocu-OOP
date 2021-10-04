@@ -1,7 +1,6 @@
 package academy.pocu.comp2500.assignment2.app;
 
 import academy.pocu.comp2500.assignment2.App;
-import academy.pocu.comp2500.assignment2.Color;
 import academy.pocu.comp2500.assignment2.EShippingMethod;
 import academy.pocu.comp2500.assignment2.EStampColor;
 import academy.pocu.comp2500.assignment2.EStampSize;
@@ -21,11 +20,6 @@ public class Program {
 
         {
             final Stamp redStamp40x30 = new Stamp(UUID.randomUUID().toString(), EStampSize.MM_40_X_30, EStampColor.RED, "redStamp40x30");
-
-            final Color color = redStamp40x30.getColor();
-            assert color.getR() == EStampColor.RED.getColor().getR();
-            assert color.getG() == EStampColor.RED.getColor().getG();
-            assert color.getB() == EStampColor.RED.getColor().getB();
 
             final ShoppingCart shoppingCart = new ShoppingCart();
 

@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class ProductCanAddApertures extends Product {
     private static final int ADD_PRICE = 5;
 
-    private final Orientation orientation;
+    private final EOrientation orientation;
     private final HashMap<String, TextAperture> textApertures;
     private final HashMap<String, ImageAperture> imageApertures;
 
@@ -36,13 +36,13 @@ public class ProductCanAddApertures extends Product {
         }
     }
 
-    public Orientation getOrientation() {
+    public EOrientation getOrientation() {
         return orientation;
     }
 
 
     // protected
-    protected ProductCanAddApertures(final String productId, final EProductType productType, final Orientation orientation) {
+    protected ProductCanAddApertures(final String productId, final EProductType productType, final EOrientation orientation) {
         super(productId, productType);
 
         this.textApertures = new HashMap<String, TextAperture>();
