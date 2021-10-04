@@ -10,7 +10,8 @@ public class Stamp extends Product {
         final int price;
         switch (stampSize) {
             case MM_40_X_30:
-                // intentional fallthrough
+                price = 2300;
+                break;
             case MM_50_X_20:
                 price = 2300;
                 break;
