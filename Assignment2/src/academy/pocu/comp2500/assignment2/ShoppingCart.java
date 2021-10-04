@@ -18,16 +18,16 @@ public class ShoppingCart {
     public void addProduct(final Product product) {
         final Product previous = this.products.put(product.getProductId(), product);
         if (previous != null) {
-            this.totalPrice -= previous.getPrice();
+            this.totalPrice -= previous.getTotalPrice();
         }
-        this.totalPrice += product.getPrice();
+        this.totalPrice += product.getTotalPrice();
     }
 
     public void removeProduct(final Product product) {
         final Product previous = this.products.remove(product.getProductId());
         if (previous != null) {
-            assert (previous.getPrice() == product.getPrice());
-            this.totalPrice -= product.getPrice();
+            assert (previous.getTotalPrice() == product.getTotalPrice());
+            this.totalPrice -= product.getTotalPrice();
         }
     }
 

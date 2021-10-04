@@ -6,12 +6,12 @@ public class Product {
     private final EProductType productType;
     private final String productId;
 
-    private EShippingMethod shippingMethod;
-
     private Size size;
     private Color color;
     private int price;
-    private int addPrice;
+    private int aperturesPrice;
+
+    private EShippingMethod shippingMethod;
 
     // public
     public String getProductId() {
@@ -31,7 +31,15 @@ public class Product {
     }
 
     public int getPrice() {
-        return price + addPrice;
+        return price;
+    }
+
+    public int getAperturesPrice() {
+        return aperturesPrice;
+    }
+
+    public int getTotalPrice() {
+        return price + aperturesPrice;
     }
 
     public EShippingMethod getShippingMethod() {
@@ -61,7 +69,7 @@ public class Product {
         this.price = price;
     }
 
-    protected void setAddPrice(final int addPrice) {
-        this.addPrice = addPrice;
+    protected void setAperturesPrice(int aperturesPrice) {
+        this.aperturesPrice = aperturesPrice;
     }
 }

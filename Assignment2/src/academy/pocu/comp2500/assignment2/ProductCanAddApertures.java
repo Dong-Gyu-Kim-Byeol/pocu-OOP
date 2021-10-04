@@ -1,8 +1,6 @@
 package academy.pocu.comp2500.assignment2;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class ProductCanAddApertures extends Product {
     private static final int ADD_PRICE = 5;
@@ -20,7 +18,7 @@ public class ProductCanAddApertures extends Product {
         if (0 <= textAperture.getX() && textAperture.getX() < super.getSize().getX()) {
             if (0 <= textAperture.getY() && textAperture.getY() < super.getSize().getY()) {
                 this.textApertures.put(textAperture.getApertureId(), textAperture);
-                this.setAddPrice();
+                this.setAperturesPrice();
             }
         }
     }
@@ -33,7 +31,7 @@ public class ProductCanAddApertures extends Product {
         if (0 <= imageAperture.getX() && imageAperture.getX() < super.getSize().getX()) {
             if (0 <= imageAperture.getY() && imageAperture.getY() < super.getSize().getY()) {
                 this.imageApertures.put(imageAperture.getApertureId(), imageAperture);
-                this.setAddPrice();
+                this.setAperturesPrice();
             }
         }
     }
@@ -53,7 +51,7 @@ public class ProductCanAddApertures extends Product {
     }
 
     // private
-    private void setAddPrice() {
-        super.setAddPrice(this.textApertures.size() * ADD_PRICE + this.imageApertures.size() * ADD_PRICE);
+    private void setAperturesPrice() {
+        super.setAperturesPrice(this.textApertures.size() * ADD_PRICE + this.imageApertures.size() * ADD_PRICE);
     }
 }
