@@ -1,7 +1,6 @@
 package academy.pocu.comp2500.assignment2;
 
 public class BusinessCard extends ProductCanAddApertures {
-    private final EBusinessCardType businessCardType;
     private final EBusinessCardSides cardSides;
 
     // public
@@ -29,12 +28,7 @@ public class BusinessCard extends ProductCanAddApertures {
         super.setColor(businessCardColor.getR(), businessCardColor.getG(), businessCardColor.getB());
         super.setBasePrice(price);
 
-        this.businessCardType = businessCardType;
         this.cardSides = cardSides;
-    }
-
-    public EBusinessCardType getBusinessCardType() {
-        return businessCardType;
     }
 
     public EBusinessCardSides getCardSides() {

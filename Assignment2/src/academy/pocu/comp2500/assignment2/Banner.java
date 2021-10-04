@@ -1,8 +1,6 @@
 package academy.pocu.comp2500.assignment2;
 
 public class Banner extends ProductCanAddApertures {
-    private final EBannerType bannerType;
-
     // public
     public Banner(final EBannerType bannerType, final EBannerSize bannerSize, final short r, final short g, final short b, final EOrientation orientation) {
         super(bannerType.getProductType(), orientation);
@@ -58,11 +56,5 @@ public class Banner extends ProductCanAddApertures {
 
         super.setColor(r, g, b);
         super.setBasePrice(price);
-
-        this.bannerType = bannerType;
-    }
-
-    public EBannerType getBannerType() {
-        return bannerType;
     }
 }
