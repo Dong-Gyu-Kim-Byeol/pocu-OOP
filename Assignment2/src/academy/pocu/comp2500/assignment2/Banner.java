@@ -57,7 +57,7 @@ public class Banner extends ProductCanAddApertures {
         super.setHeight(bannerSize.getHeight());
 
         super.setColor(r, g, b);
-        super.setPrice(price);
+        super.setBasePrice(price);
 
         this.bannerType = bannerType;
     }

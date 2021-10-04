@@ -11,7 +11,7 @@ public class Product {
     private short green;
     private short blue;
 
-    private int price;
+    private int basePrice;
     private int aperturesPrice;
 
     private EShippingMethod shippingMethod;
@@ -46,7 +46,15 @@ public class Product {
     }
 
     public int getPrice() {
-        return price + aperturesPrice;
+        return basePrice + aperturesPrice;
+    }
+
+    public int getBasePrice() {
+        return basePrice;
+    }
+
+    public int getAperturesPrice() {
+        return aperturesPrice;
     }
 
     public EShippingMethod getShippingMethod() {
@@ -102,8 +110,8 @@ public class Product {
         assert (0 <= b && b <= 0xff);
     }
 
-    protected void setPrice(final int price) {
-        this.price = price;
+    protected void setBasePrice(int basePrice) {
+        this.basePrice = basePrice;
     }
 
     protected void setAperturesPrice(int aperturesPrice) {
