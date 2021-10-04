@@ -1,30 +1,30 @@
 package academy.pocu.comp2500.assignment2;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class ShoppingCart {
-    private final HashMap<String, Product> products;
+    private final HashSet<Product> products;
 
     // public
     public ShoppingCart() {
-        this.products = new HashMap<String, Product>();
+        this.products = new HashSet<Product>();
     }
 
-    public HashMap<String, Product> getProducts() {
+    public HashSet<Product> getProducts() {
         return products;
     }
 
     public void addProduct(final Product product) {
-        this.products.put(product.getProductId(), product);
+        this.products.add(product);
     }
 
-    public void removeProduct(final String productId) {
-        this.products.remove(productId);
+    public void removeProduct(final Product product) {
+        this.products.remove(product);
     }
 
     public int getTotalPrice() {
         int totalPrice = 0;
-        for (final Product product : this.products.values()) {
+        for (final Product product : this.products) {
             totalPrice += product.getPrice();
         }
 

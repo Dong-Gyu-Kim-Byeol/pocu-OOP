@@ -1,36 +1,36 @@
 package academy.pocu.comp2500.assignment2;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class ProductCanAddApertures extends Product {
     private static final int ADD_PRICE = 5;
 
     private final EOrientation orientation;
-    private final HashMap<String, TextAperture> textApertures;
-    private final HashMap<String, ImageAperture> imageApertures;
+    private final HashSet<TextAperture> textApertures;
+    private final HashSet<ImageAperture> imageApertures;
 
     // public
-    public HashMap<String, TextAperture> getTextApertures() {
+    public HashSet<TextAperture> getTextApertures() {
         return textApertures;
     }
 
     public void addTextAperture(final TextAperture textAperture) {
         if (0 <= textAperture.getX() && textAperture.getX() < super.getWidth()) {
             if (0 <= textAperture.getY() && textAperture.getY() < super.getHeight()) {
-                this.textApertures.put(textAperture.getApertureId(), textAperture);
+                this.textApertures.add(textAperture);
                 this.setAperturesPrice();
             }
         }
     }
 
-    public HashMap<String, ImageAperture> getImageApertures() {
+    public HashSet<ImageAperture> getImageApertures() {
         return imageApertures;
     }
 
     public void addImageAperture(final ImageAperture imageAperture) {
         if (0 <= imageAperture.getX() && imageAperture.getX() < super.getWidth()) {
             if (0 <= imageAperture.getY() && imageAperture.getY() < super.getHeight()) {
-                this.imageApertures.put(imageAperture.getApertureId(), imageAperture);
+                this.imageApertures.add(imageAperture);
                 this.setAperturesPrice();
             }
         }
@@ -40,13 +40,12 @@ public class ProductCanAddApertures extends Product {
         return orientation;
     }
 
-
     // protected
-    protected ProductCanAddApertures(final String productId, final EProductType productType, final EOrientation orientation) {
-        super(productId, productType);
+    protected ProductCanAddApertures(final EProductType productType, final EOrientation orientation) {
+        super(productType);
 
-        this.textApertures = new HashMap<String, TextAperture>();
-        this.imageApertures = new HashMap<String, ImageAperture>();
+        this.textApertures = new HashSet<TextAperture>();
+        this.imageApertures = new HashSet<ImageAperture>();
         this.orientation = orientation;
     }
 

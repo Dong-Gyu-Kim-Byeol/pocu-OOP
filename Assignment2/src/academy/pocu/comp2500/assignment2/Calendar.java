@@ -4,8 +4,8 @@ public class Calendar extends Product {
     private final ECalendarType calendarType;
 
     // public
-    public Calendar(final String productId, final ECalendarType calendarType) {
-        super(productId, calendarType.getProductType());
+    public Calendar(final ECalendarType calendarType) {
+        super(calendarType.getProductType());
 
         final int width;
         final int height;

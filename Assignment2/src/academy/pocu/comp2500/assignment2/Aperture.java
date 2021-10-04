@@ -1,16 +1,11 @@
 package academy.pocu.comp2500.assignment2;
 
 public class Aperture {
-    private final String apertureId;
     private final EApertureSide side;
     private final int x;
     private final int y;
 
     // public
-    public String getApertureId() {
-        return apertureId;
-    }
-
     public EApertureSide getSide() {
         return side;
     }
@@ -24,8 +19,7 @@ public class Aperture {
     }
 
     // protected
-    protected Aperture(final String apertureId, final int x, final int y, final EApertureSide sides) {
-        this.apertureId = apertureId;
+    protected Aperture(final int x, final int y, final EApertureSide sides) {
         this.x = x;
         this.y = y;
         this.side = sides;

@@ -4,8 +4,8 @@ public class Banner extends ProductCanAddApertures {
     private final EBannerType bannerType;
 
     // public
-    public Banner(final String productId, final EBannerType bannerType, final EBannerSize bannerSize, final short r, final short g, final short b, final EOrientation orientation) {
-        super(productId, bannerType.getProductType(), orientation);
+    public Banner(final EBannerType bannerType, final EBannerSize bannerSize, final short r, final short g, final short b, final EOrientation orientation) {
+        super(bannerType.getProductType(), orientation);
 
         final int price;
         switch (bannerType) {

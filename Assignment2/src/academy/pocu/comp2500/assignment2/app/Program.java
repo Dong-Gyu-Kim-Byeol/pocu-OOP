@@ -8,8 +8,6 @@ import academy.pocu.comp2500.assignment2.ShoppingCart;
 import academy.pocu.comp2500.assignment2.Stamp;
 import academy.pocu.comp2500.assignment2.registry.Registry;
 
-import java.util.UUID;
-
 public class Program {
 
     public static void main(String[] args) {
@@ -19,7 +17,7 @@ public class Program {
         registry.validate();
 
         {
-            final Stamp redStamp40x30 = new Stamp(UUID.randomUUID().toString(), EStampSize.MM_40_X_30, EStampColor.RED, "redStamp40x30");
+            final Stamp redStamp40x30 = new Stamp(EStampSize.MM_40_X_30, EStampColor.RED, "redStamp40x30");
 
             final ShoppingCart shoppingCart = new ShoppingCart();
 

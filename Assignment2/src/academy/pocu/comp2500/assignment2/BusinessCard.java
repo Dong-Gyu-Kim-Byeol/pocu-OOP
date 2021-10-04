@@ -5,8 +5,8 @@ public class BusinessCard extends ProductCanAddApertures {
     private final EBusinessCardSides cardSides;
 
     // public
-    public BusinessCard(final String productId, final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final EOrientation orientation, final EBusinessCardSides cardSides) {
-        super(productId, businessCardType.getProductType(), orientation);
+    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final EOrientation orientation, final EBusinessCardSides cardSides) {
+        super(businessCardType.getProductType(), orientation);
 
         final int price;
         switch (businessCardType) {

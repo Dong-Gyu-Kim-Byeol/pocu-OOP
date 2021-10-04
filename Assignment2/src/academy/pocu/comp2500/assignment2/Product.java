@@ -2,7 +2,6 @@ package academy.pocu.comp2500.assignment2;
 
 public class Product {
     private final EProductType productType;
-    private final String productId;
 
     private int width;
     private int height;
@@ -17,10 +16,6 @@ public class Product {
     private EShippingMethod shippingMethod;
 
     // public
-    public String getProductId() {
-        return productId;
-    }
-
     public EProductType getProductType() {
         return productType;
     }
@@ -61,13 +56,12 @@ public class Product {
         return shippingMethod;
     }
 
-    public void setShippingMethod(EShippingMethod shippingMethod) {
+    public void setShippingMethod(final EShippingMethod shippingMethod) {
         this.shippingMethod = shippingMethod;
     }
 
     // protected
-    protected Product(final String productId, final EProductType productType) {
-        this.productId = productId;
+    protected Product(final EProductType productType) {
         this.productType = productType;
         this.shippingMethod = EShippingMethod.SHIP;
     }
