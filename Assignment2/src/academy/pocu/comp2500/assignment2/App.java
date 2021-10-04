@@ -42,8 +42,8 @@ public class App {
         registry.registerTotalPriceGetter("ShoppingCart", "getTotalPrice"); // :장바구니에서 총액을 구해오는 메서드를 등록한다.
 
         // 문구, 사진
-        final String ADD_TEXT = "addText";
-        final String ADD_IMAGE = "addImage";
+        final String ADD_TEXT = "addTextAperture";
+        final String ADD_IMAGE = "addImageAperture";
         registry.registerLandscapeBannerTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :가로 방향 배너에 문구를 추가하는 메서드를 등록한다.
         registry.registerLandscapeBannerImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :가로 방향 배너에 사진을 추가하는 메서드를 등록한다.
 

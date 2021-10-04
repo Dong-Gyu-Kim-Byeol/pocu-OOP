@@ -6,30 +6,32 @@ public class ProductCanAddTextAndImage extends Product {
     private static final int ADD_PRICE = 5;
 
     private final Orientation orientation;
-    private final ArrayList<AddText> texts;
-    private final ArrayList<AddImage> images;
+    private final ArrayList<TextAperture> textApertures;
+    private final ArrayList<ImageAperture> imageApertures;
 
     // public
-    public ArrayList<AddText> getTexts() {
-        return texts;
+    public ArrayList<TextAperture> getTextApertures() {
+        return textApertures;
     }
 
-    public void addText(final AddText text) {
-        if (0 <= text.getPosision().getX() && text.getPosision().getX() <= getSize().getX()) {
-            if (0 <= text.getPosision().getY() && text.getPosision().getY() <= getSize().getY()) {
-                this.texts.add(text);
+    public void addTextAperture(final TextAperture textAperture) {
+        if (0 <= textAperture.getX() && textAperture.getX() < super.getSize().getX()) {
+            if (0 <= textAperture.getY() && textAperture.getY() < super.getSize().getY()) {
+                this.textApertures.add(textAperture);
+                this.setAddPrice();
             }
         }
     }
 
-    public ArrayList<AddImage> getImages() {
-        return images;
+    public ArrayList<ImageAperture> getImageApertures() {
+        return imageApertures;
     }
 
-    public void addImage(final AddImage image) {
-        if (0 <= image.getPosision().getX() && image.getPosision().getX() <= getSize().getX()) {
-            if (0 <= image.getPosision().getY() && image.getPosision().getY() <= getSize().getY()) {
-                this.images.add(image);
+    public void addImageAperture(final ImageAperture imageAperture) {
+        if (0 <= imageAperture.getX() && imageAperture.getX() < super.getSize().getX()) {
+            if (0 <= imageAperture.getY() && imageAperture.getY() < super.getSize().getY()) {
+                this.imageApertures.add(imageAperture);
+                this.setAddPrice();
             }
         }
     }
@@ -43,13 +45,13 @@ public class ProductCanAddTextAndImage extends Product {
     protected ProductCanAddTextAndImage(final EProductType productType, final Orientation orientation) {
         super(productType);
 
-        this.texts = new ArrayList<AddText>();
-        this.images = new ArrayList<AddImage>();
+        this.textApertures = new ArrayList<TextAperture>();
+        this.imageApertures = new ArrayList<ImageAperture>();
         this.orientation = orientation;
     }
 
     // private
     private void setAddPrice() {
-        super.setAddPrice(this.texts.size() * ADD_PRICE + this.images.size() * ADD_PRICE);
+        super.setAddPrice(this.textApertures.size() * ADD_PRICE + this.imageApertures.size() * ADD_PRICE);
     }
 }
