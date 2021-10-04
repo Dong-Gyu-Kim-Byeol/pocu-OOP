@@ -4,31 +4,30 @@ public class ProductCanAddTextAndImage extends Product {
     private static final int ADD_PRICE = 5;
 
     private final Orientation orientation;
-    private AddText text;
-    private AddImage image;
-
+    private AddText textOrNull;
+    private AddImage imageOrNull;
 
     // public
-    public AddText getText() {
-        return text;
+    public AddText getTextOrNull() {
+        return textOrNull;
     }
 
     public void setText(AddText text) {
         if (0 <= text.getPosision().getX() && text.getPosision().getX() <= getSize().getX()) {
             if (0 <= text.getPosision().getY() && text.getPosision().getY() <= getSize().getY()) {
-                this.text = text;
+                this.textOrNull = text;
             }
         }
     }
 
-    public AddImage getImage() {
-        return image;
+    public AddImage getImageOrNull() {
+        return imageOrNull;
     }
 
     public void setImage(AddImage image) {
         if (0 <= image.getPosision().getX() && image.getPosision().getX() <= getSize().getX()) {
             if (0 <= image.getPosision().getY() && image.getPosision().getY() <= getSize().getY()) {
-                this.image = image;
+                this.imageOrNull = image;
             }
         }
     }
@@ -47,6 +46,6 @@ public class ProductCanAddTextAndImage extends Product {
 
     // private
     private void setAddPrice() {
-        super.setAddPrice((this.text != null ? ADD_PRICE : 0) + (this.image != null ? ADD_PRICE : 0));
+        super.setAddPrice((this.textOrNull != null ? ADD_PRICE : 0) + (this.imageOrNull != null ? ADD_PRICE : 0));
     }
 }
