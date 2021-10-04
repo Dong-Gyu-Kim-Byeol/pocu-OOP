@@ -23,7 +23,7 @@ public class Program {
 
             final ShoppingCart shoppingCart = new ShoppingCart();
 
-            shoppingCart.addProduct(redStamp40x30.getProductId(), redStamp40x30);
+            shoppingCart.addProduct(redStamp40x30);
             redStamp40x30.setShippingMethod(EShippingMethod.PICKUP);
             assert redStamp40x30.getShippingMethod() == EShippingMethod.PICKUP;
         }
