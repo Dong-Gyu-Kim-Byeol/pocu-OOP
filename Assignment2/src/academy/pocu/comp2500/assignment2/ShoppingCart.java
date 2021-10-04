@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class ShoppingCart {
     private final HashMap<String, Product> products;
-    private int totalPrice;
 
     // public
     public ShoppingCart() {
@@ -15,29 +14,26 @@ public class ShoppingCart {
         return products;
     }
 
-    public void addProduct(final Product product) {
-        final Product previous = this.products.put(product.getProductId(), product);
-        if (previous != null) {
-            this.totalPrice -= previous.getPrice();
-        }
-        this.totalPrice += product.getPrice();
+    public void addProduct(final String productId, final Product product) {
+        assert (productId.equals(product.getProductId()));
+        final Product previous = this.products.put(productId, product);
     }
 
-    public void removeProduct(final Product product) {
-        final Product previous = this.products.remove(product.getProductId());
-        if (previous != null) {
-            assert (previous.getPrice() == product.getPrice());
-            this.totalPrice -= product.getPrice();
-        }
+    public void removeProduct(final String productId) {
+        final Product previous = this.products.remove(productId);
     }
 
     public int getTotalPrice() {
+        int totalPrice = 0;
+        for (final Product product : this.products.values()) {
+            totalPrice += product.getPrice();
+        }
+
         return totalPrice;
     }
 
     public void clear() {
         this.products.clear();
-        this.totalPrice = 0;
     }
 
 }
