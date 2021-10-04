@@ -7,16 +7,16 @@ public class Stamp extends Product {
     public Stamp(final EStampSize stampSize, final EStampColor stampColor, final String text) {
         super(EProductType.STAMP);
 
-        final int price;
+        final int basePrice;
         switch (stampSize) {
             case MM_40_X_30:
-                price = 2300;
+                basePrice = 2300;
                 break;
             case MM_50_X_20:
-                price = 2300;
+                basePrice = 2300;
                 break;
             case MM_70_X_40:
-                price = 2600;
+                basePrice = 2600;
                 break;
             default:
                 throw new IllegalArgumentException("unknown type");
@@ -26,7 +26,7 @@ public class Stamp extends Product {
         super.setHeight(stampSize.getHeight());
 
         super.setColor(stampColor.getColor());
-        super.setBasePrice(price);
+        super.setBasePrice(basePrice);
 
         this.text = text;
     }

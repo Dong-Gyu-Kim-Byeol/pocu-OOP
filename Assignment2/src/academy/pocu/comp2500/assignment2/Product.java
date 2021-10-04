@@ -25,8 +25,8 @@ public class Product {
         return height;
     }
 
-    public int getColor() {
-        return color;
+    public String getColor() {
+        return Integer.toHexString(color);
     }
 
     public int getPrice() {
