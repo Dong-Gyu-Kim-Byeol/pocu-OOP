@@ -1,7 +1,5 @@
 package academy.pocu.comp2500.assignment2;
 
-import java.util.UUID;
-
 public class Product {
     private final EProductType productType;
     private final String productId;
