@@ -11,6 +11,10 @@ public class ShoppingCart {
         this.products = new HashMap<String, Product>();
     }
 
+    public HashMap<String, Product> getProducts() {
+        return products;
+    }
+
     public void addProduct(final Product product) {
         final Product previous = this.products.put(product.getProductId(), product);
         if (previous != null) {
