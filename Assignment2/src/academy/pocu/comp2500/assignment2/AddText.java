@@ -1,17 +1,17 @@
 package academy.pocu.comp2500.assignment2;
 
 public class AddText {
-    private final Posision posision;
+    private final Position position;
     private final String text;
 
     // public
-    public AddText(final Posision posision, final String text) {
-        this.posision = posision;
+    public AddText(final Position position, final String text) {
+        this.position = position;
         this.text = text;
     }
 
-    public Posision getPosision() {
-        return posision;
+    public Position getPosision() {
+        return position;
     }
 
     public String getText() {

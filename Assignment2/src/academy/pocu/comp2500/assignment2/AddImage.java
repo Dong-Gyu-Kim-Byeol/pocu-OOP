@@ -1,17 +1,17 @@
 package academy.pocu.comp2500.assignment2;
 
 public class AddImage {
-    private final Posision posision;
+    private final Position position;
     private final String imagePath;
 
     // public
-    public AddImage(final Posision posision, final String imagePath) {
-        this.posision = posision;
+    public AddImage(final Position position, final String imagePath) {
+        this.position = position;
         this.imagePath = imagePath;
     }
 
-    public Posision getPosision() {
-        return posision;
+    public Position getPosision() {
+        return position;
     }
 
     public String getImagePath() {
