@@ -42,49 +42,51 @@ public class App {
         registry.registerTotalPriceGetter("ShoppingCart", "getTotalPrice"); // :장바구니에서 총액을 구해오는 메서드를 등록한다.
 
         // 문구, 사진
-        registry.registerLandscapeBannerTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :가로 방향 배너에 문구를 추가하는 메서드를 등록한다.
-        registry.registerLandscapeBannerImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :가로 방향 배너에 사진을 추가하는 메서드를 등록한다.
+        final String ADD_TEXT = "addText";
+        final String ADD_IMAGE = "addImage";
+        registry.registerLandscapeBannerTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :가로 방향 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerLandscapeBannerImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :가로 방향 배너에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerPortraitBannerTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :세로 방향 배너에 문구를 추가하는 메서드를 등록한다.
-        registry.registerPortraitBannerImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :세로 방향 배너에 사진을 추가하는 메서드를 등록한다.
+        registry.registerPortraitBannerTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :세로 방향 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerPortraitBannerImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :세로 방향 배너에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerGlossBannerTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :반사 배너에 문구를 추가하는 메서드를 등록한다.
-        registry.registerGlossBannerImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :반사 배너에 사진을 추가하는 메서드를 등록한다.
+        registry.registerGlossBannerTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :반사 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerGlossBannerImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :반사 배너에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerScrimBannerTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :스크림 배너에 문구를 추가하는 메서드를 등록한다.
-        registry.registerScrimBannerImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :스크림 배너에 사진을 추가하는 메서드를 등록한다.
+        registry.registerScrimBannerTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :스크림 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerScrimBannerImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :스크림 배너에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerMeshBannerTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :메쉬 배너에 문구를 추가하는 메서드를 등록한다.
-        registry.registerMeshBannerImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :메쉬 배너에 사진을 추가하는 메서드를 등록한다.
+        registry.registerMeshBannerTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :메쉬 배너에 문구를 추가하는 메서드를 등록한다.
+        registry.registerMeshBannerImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :메쉬 배너에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerLandscapeBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :가로 방향 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerLandscapeBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :가로 방향 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerLandscapeBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :가로 방향 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerLandscapeBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :가로 방향 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerPortraitBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :세로 방향 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerPortraitBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :세로 방향 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerPortraitBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :세로 방향 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerPortraitBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :세로 방향 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerIvoryBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :아이보리 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerIvoryBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :아이보리 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerIvoryBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :아이보리 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerIvoryBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :아이보리 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerGrayBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :회색 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerGrayBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :회색 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerGrayBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :회색 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerGrayBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :회색 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerWhiteBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :흰색 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerWhiteBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :흰색 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerWhiteBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :흰색 종이에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerWhiteBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :흰색 종이에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerLaidBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :레이드지 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerLaidBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :레이드지 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerLaidBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :레이드지 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerLaidBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :레이드지 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerLinenBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :린넨커버 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerLinenBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :린넨커버 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerLinenBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :린넨커버 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerLinenBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :린넨커버 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerSmoothBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :스노우지 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerSmoothBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :스노우지 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerSmoothBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :스노우지 인쇄용지에 찍는 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerSmoothBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :스노우지 인쇄용지에 찍는 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerSingleSidedBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :단면 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerSingleSidedBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :단면 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerSingleSidedBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :단면 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerSingleSidedBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :단면 명함에 사진을 추가하는 메서드를 등록한다.
 
-        registry.registerDoubleSidedBusinessCardTextApertureAdder("ProductCanAddTextAndImage", "setText"); // :양면 명함에 문구를 추가하는 메서드를 등록한다.
-        registry.registerDoubleSidedBusinessCardImageApertureAdder("ProductCanAddTextAndImage", "setImage"); // :양면 명함에 사진을 추가하는 메서드를 등록한다.
+        registry.registerDoubleSidedBusinessCardTextApertureAdder("ProductCanAddTextAndImage", ADD_TEXT); // :양면 명함에 문구를 추가하는 메서드를 등록한다.
+        registry.registerDoubleSidedBusinessCardImageApertureAdder("ProductCanAddTextAndImage", ADD_IMAGE); // :양면 명함에 사진을 추가하는 메서드를 등록한다.
     }
 }
