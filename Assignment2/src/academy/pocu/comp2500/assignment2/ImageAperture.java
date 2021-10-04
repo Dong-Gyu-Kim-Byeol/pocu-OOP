@@ -3,8 +3,8 @@ package academy.pocu.comp2500.assignment2;
 public class ImageAperture extends Aperture {
     private final String imagePath;
 
-    public ImageAperture(final int x, final int y, final EApertureSide sides, final String imagePath) {
-        super(x, y, sides);
+    public ImageAperture(final EApertureSide sides, final int x, final int y, final String imagePath) {
+        super(sides, x, y);
         this.imagePath = imagePath;
     }
 

@@ -1,23 +1,32 @@
 package academy.pocu.comp2500.assignment2;
 
 public class BusinessCard extends ProductCanAddApertures {
-    private final EBusinessCardSides cardSides;
-
     // public
-    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final EOrientation orientation, final EBusinessCardSides cardSides) {
+    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final EOrientation orientation) {
         super(businessCardType.getProductType(), orientation);
 
-        final int price;
+        final int basePrice;
         switch (businessCardType) {
-            case LINEN:
-                price = cardSides == EBusinessCardSides.DOUBLE_SIZE ? 140 : 110;
+            case LINEN_SINGLE_SIDE:
+                basePrice = 110;
                 break;
-            case LAID:
-                price = cardSides == EBusinessCardSides.DOUBLE_SIZE ? 150 : 120;
+            case LAID_SINGLE_SIDE:
+                basePrice = 120;
                 break;
-            case SMOOTH:
-                price = cardSides == EBusinessCardSides.DOUBLE_SIZE ? 130 : 100;
+            case SMOOTH_SINGLE_SIDE:
+                basePrice = 100;
                 break;
+
+            case LINEN_DOUBLE_SIDE:
+                basePrice = 140;
+                break;
+            case LAID_DOUBLE_SIDE:
+                basePrice = 150;
+                break;
+            case SMOOTH_DOUBLE_SIDE:
+                basePrice = 130;
+                break;
+
             default:
                 throw new IllegalArgumentException("unknown type");
         }
@@ -26,12 +35,6 @@ public class BusinessCard extends ProductCanAddApertures {
         super.setHeight(50);
 
         super.setColor(businessCardColor.getR(), businessCardColor.getG(), businessCardColor.getB());
-        super.setBasePrice(price);
-
-        this.cardSides = cardSides;
-    }
-
-    public EBusinessCardSides getCardSides() {
-        return cardSides;
+        super.setBasePrice(basePrice);
     }
 }

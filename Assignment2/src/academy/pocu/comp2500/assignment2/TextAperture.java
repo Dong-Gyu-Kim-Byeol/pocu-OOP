@@ -3,8 +3,8 @@ package academy.pocu.comp2500.assignment2;
 public class TextAperture extends Aperture {
     private final String text;
 
-    public TextAperture(final int x, final int y, final EApertureSide sides, final String text) {
-        super(x, y, sides);
+    public TextAperture(final EApertureSide sides, final int x, final int y, final String text) {
+        super(sides, x, y);
         this.text = text;
     }
 

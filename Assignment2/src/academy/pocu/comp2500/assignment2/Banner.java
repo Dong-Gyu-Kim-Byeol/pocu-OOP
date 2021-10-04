@@ -5,21 +5,21 @@ public class Banner extends ProductCanAddApertures {
     public Banner(final EBannerType bannerType, final EBannerSize bannerSize, final short r, final short g, final short b, final EOrientation orientation) {
         super(bannerType.getProductType(), orientation);
 
-        final int price;
+        final int basePrice;
         switch (bannerType) {
             case GLOSS: {
                 switch (bannerSize) {
                     case MM_1000_X_500:
-                        price = 5000;
+                        basePrice = 5000;
                         break;
                     case MM_1000_X_1000:
-                        price = 5200;
+                        basePrice = 5200;
                         break;
                     case MM_2000_X_500:
-                        price = 5300;
+                        basePrice = 5300;
                         break;
                     case MM_3000_X_1000:
-                        price = 6000;
+                        basePrice = 6000;
                         break;
                     default:
                         throw new IllegalArgumentException("unknown type");
@@ -31,16 +31,16 @@ public class Banner extends ProductCanAddApertures {
             case MESH: {
                 switch (bannerSize) {
                     case MM_1000_X_500:
-                        price = 5100;
+                        basePrice = 5100;
                         break;
                     case MM_1000_X_1000:
-                        price = 5300;
+                        basePrice = 5300;
                         break;
                     case MM_2000_X_500:
-                        price = 5400;
+                        basePrice = 5400;
                         break;
                     case MM_3000_X_1000:
-                        price = 6100;
+                        basePrice = 6100;
                         break;
                     default:
                         throw new IllegalArgumentException("unknown type");
@@ -55,6 +55,6 @@ public class Banner extends ProductCanAddApertures {
         super.setHeight(bannerSize.getHeight());
 
         super.setColor(r, g, b);
-        super.setBasePrice(price);
+        super.setBasePrice(basePrice);
     }
 }

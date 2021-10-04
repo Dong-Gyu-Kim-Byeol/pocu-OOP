@@ -7,22 +7,22 @@ public class Calendar extends Product {
 
         final int width;
         final int height;
-        final int price;
+        final int basePrice;
         switch (calendarType) {
             case WALL:
                 width = 400;
                 height = 400;
-                price = 1000;
+                basePrice = 1000;
                 break;
             case DESK:
                 width = 200;
                 height = 150;
-                price = 1000;
+                basePrice = 1000;
                 break;
             case MAGNET:
                 width = 100;
                 height = 200;
-                price = 1500;
+                basePrice = 1500;
                 break;
             default:
                 throw new IllegalArgumentException("unknown type");
@@ -32,6 +32,6 @@ public class Calendar extends Product {
         super.setHeight(height);
 
         super.setColor((short) 0xff, (short) 0xff, (short) 0xff);
-        super.setBasePrice(price);
+        super.setBasePrice(basePrice);
     }
 }
