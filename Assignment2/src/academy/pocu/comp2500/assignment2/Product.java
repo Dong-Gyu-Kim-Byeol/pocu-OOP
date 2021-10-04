@@ -6,9 +6,7 @@ public class Product {
     private int width;
     private int height;
 
-    private short red;
-    private short green;
-    private short blue;
+    private int color;
 
     private int basePrice;
     private int aperturesPrice;
@@ -28,16 +26,8 @@ public class Product {
         return height;
     }
 
-    public short getRed() {
-        return red;
-    }
-
-    public short getGreen() {
-        return green;
-    }
-
-    public short getBlue() {
-        return blue;
+    public int getColor() {
+        return color;
     }
 
     public int getPrice() {
@@ -74,34 +64,36 @@ public class Product {
         this.height = height;
     }
 
-    protected void setColor(final short r, final short g, final short b) {
+    protected void setColor(short r, short g, short b) {
         if (r < 0) {
-            this.red = 0;
+            r = 0;
         } else if (r > 0xff) {
-            this.red = 0xff;
+            r = 0xff;
         } else {
-            this.red = r;
+            r = r;
         }
 
         if (g < 0) {
-            this.green = 0;
+            g = 0;
         } else if (g > 0xff) {
-            this.green = 0xff;
+            g = 0xff;
         } else {
-            this.green = g;
+            g = g;
         }
 
         if (b < 0) {
-            this.blue = 0;
+            b = 0;
         } else if (b > 0xff) {
-            this.blue = 0xff;
+            b = 0xff;
         } else {
-            this.blue = b;
+            b = b;
         }
 
-        assert (0 <= r && r <= 0xff);
-        assert (0 <= g && g <= 0xff);
-        assert (0 <= b && b <= 0xff);
+        int color = 0;
+        color |= r << 16;
+        color |= g << 8;
+        color |= b;
+        this.color = color;
     }
 
     protected void setBasePrice(int basePrice) {
