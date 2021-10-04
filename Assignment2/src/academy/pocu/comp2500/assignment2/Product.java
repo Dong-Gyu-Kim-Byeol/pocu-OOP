@@ -31,14 +31,6 @@ public class Product {
     }
 
     public int getPrice() {
-        return price;
-    }
-
-    public int getAperturesPrice() {
-        return aperturesPrice;
-    }
-
-    public int getTotalPrice() {
         return price + aperturesPrice;
     }
 
