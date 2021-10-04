@@ -5,7 +5,10 @@ public class Product {
 
     private int width;
     private int height;
-    private int color;
+
+    private short r;
+    private short g;
+    private short b;
 
     private int basePrice;
     private int aperturesPrice;
@@ -26,7 +29,7 @@ public class Product {
     }
 
     public String getColor() {
-        return Integer.toHexString(color);
+        return String.format("%02X%02X%02X", r, g, b);
     }
 
     public int getPrice() {
@@ -63,14 +66,28 @@ public class Product {
         this.height = height;
     }
 
-    protected void setColor(int color) {
-        if (color < 0) {
-            color = 0;
-        } else if (color > 0xffffff) {
-            color = 0xffffff;
+    protected void setColor(short r, short g, short b) {
+        if (r < 0) {
+            r = 0;
+        } else if (r > 0xff) {
+            r = 0xff;
         }
 
-        this.color = color;
+        if (g < 0) {
+            g = 0;
+        } else if (g > 0xff) {
+            g = 0xff;
+        }
+
+        if (b < 0) {
+            b = 0;
+        } else if (b > 0xff) {
+            b = 0xff;
+        }
+
+        this.r = r;
+        this.g = g;
+        this.b = b;
     }
 
     protected void setBasePrice(final int basePrice) {

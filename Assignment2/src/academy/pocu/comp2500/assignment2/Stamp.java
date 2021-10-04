@@ -25,7 +25,7 @@ public class Stamp extends Product {
         super.setWidth(stampSize.getWidth());
         super.setHeight(stampSize.getHeight());
 
-        super.setColor(stampColor.getColor());
+        super.setColor(stampColor.getR(), stampColor.getG(), stampColor.getB());
         super.setBasePrice(basePrice);
 
         this.text = text;
