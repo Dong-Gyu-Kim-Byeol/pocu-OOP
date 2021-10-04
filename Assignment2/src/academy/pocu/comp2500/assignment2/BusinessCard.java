@@ -56,7 +56,7 @@ public class BusinessCard extends ProductCanAddApertures {
         super.setWidth(90);
         super.setHeight(50);
 
-        super.setColor(businessCardColor.getR(), businessCardColor.getG(), businessCardColor.getB());
+        super.setRgb(businessCardColor.getR(), businessCardColor.getG(), businessCardColor.getB());
         super.setBasePrice(basePrice);
 
         this.businessCardType = businessCardType;
