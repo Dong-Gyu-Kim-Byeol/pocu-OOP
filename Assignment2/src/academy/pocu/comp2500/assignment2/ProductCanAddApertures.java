@@ -15,8 +15,8 @@ public class ProductCanAddApertures extends Product {
     }
 
     public void addTextAperture(final TextAperture textAperture) {
-        if (0 <= textAperture.getX() && textAperture.getX() < super.getSize().getX()) {
-            if (0 <= textAperture.getY() && textAperture.getY() < super.getSize().getY()) {
+        if (0 <= textAperture.getX() && textAperture.getX() < super.getWidth()) {
+            if (0 <= textAperture.getY() && textAperture.getY() < super.getHeight()) {
                 this.textApertures.put(textAperture.getApertureId(), textAperture);
                 this.setAperturesPrice();
             }
@@ -28,8 +28,8 @@ public class ProductCanAddApertures extends Product {
     }
 
     public void addImageAperture(final ImageAperture imageAperture) {
-        if (0 <= imageAperture.getX() && imageAperture.getX() < super.getSize().getX()) {
-            if (0 <= imageAperture.getY() && imageAperture.getY() < super.getSize().getY()) {
+        if (0 <= imageAperture.getX() && imageAperture.getX() < super.getWidth()) {
+            if (0 <= imageAperture.getY() && imageAperture.getY() < super.getHeight()) {
                 this.imageApertures.put(imageAperture.getApertureId(), imageAperture);
                 this.setAperturesPrice();
             }

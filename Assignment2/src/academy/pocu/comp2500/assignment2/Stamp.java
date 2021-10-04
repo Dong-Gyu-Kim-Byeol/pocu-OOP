@@ -21,7 +21,9 @@ public class Stamp extends Product {
                 throw new IllegalArgumentException("unknown type");
         }
 
-        super.setSize(stampSize.getSize());
+        super.setWidth(stampSize.getWidth());
+        super.setHeight(stampSize.getHeight());
+
         super.setColor(stampColor.getColor());
         super.setPrice(price);
 

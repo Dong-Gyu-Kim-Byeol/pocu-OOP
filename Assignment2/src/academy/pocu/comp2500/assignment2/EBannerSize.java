@@ -7,25 +7,47 @@ public enum EBannerSize {
     MM_3000_X_1000;
 
     // public
-    public Size getSize() {
-        final Size size;
+    public int getWidth() {
+        final int width;
         switch (this) {
             case MM_1000_X_500:
-                size = new Size(1000, 500);
+                width = 1000;
                 break;
             case MM_1000_X_1000:
-                size = new Size(1000, 1000);
+                width = 1000;
                 break;
             case MM_2000_X_500:
-                size = new Size(2000, 500);
+                width = 2000;
                 break;
             case MM_3000_X_1000:
-                size = new Size(3000, 1000);
+                width = 3000;
                 break;
             default:
                 throw new IllegalArgumentException("unknown type");
         }
 
-        return size;
+        return width;
+    }
+
+    public int getHeight() {
+        final int height;
+        switch (this) {
+            case MM_1000_X_500:
+                height = 500;
+                break;
+            case MM_1000_X_1000:
+                height = 1000;
+                break;
+            case MM_2000_X_500:
+                height = 500;
+                break;
+            case MM_3000_X_1000:
+                height = 1000;
+                break;
+            default:
+                throw new IllegalArgumentException("unknown type");
+        }
+
+        return height;
     }
 }

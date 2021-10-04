@@ -6,7 +6,8 @@ public class Product {
     private final EProductType productType;
     private final String productId;
 
-    private Size size;
+    private int width;
+    private int height;
     private Color color;
     private int price;
     private int aperturesPrice;
@@ -22,8 +23,12 @@ public class Product {
         return productType;
     }
 
-    public Size getSize() {
-        return size;
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public Color getColor() {
@@ -49,8 +54,12 @@ public class Product {
         this.shippingMethod = EShippingMethod.SHIP;
     }
 
-    protected void setSize(final Size size) {
-        this.size = size;
+    protected void setWidth(int width) {
+        this.width = width;
+    }
+
+    protected void setHeight(int height) {
+        this.height = height;
     }
 
     protected void setColor(final Color color) {

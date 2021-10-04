@@ -53,7 +53,9 @@ public class Banner extends ProductCanAddApertures {
                 throw new IllegalArgumentException("unknown type");
         }
 
-        super.setSize(bannerSize.getSize());
+        super.setWidth(bannerSize.getWidth());
+        super.setHeight(bannerSize.getHeight());
+
         super.setColor(color);
         super.setPrice(price);
 

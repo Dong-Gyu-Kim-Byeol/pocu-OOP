@@ -23,7 +23,9 @@ public class BusinessCard extends ProductCanAddApertures {
                 throw new IllegalArgumentException("unknown type");
         }
 
-        super.setSize(new Size(90, 50));
+        super.setWidth(90);
+        super.setHeight(50);
+
         super.setColor(businessCardColor.getColor());
         super.setPrice(price);
 
