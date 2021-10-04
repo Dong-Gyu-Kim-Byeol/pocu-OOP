@@ -1,30 +1,52 @@
 package academy.pocu.comp2500.assignment2;
 
 public class BusinessCard extends ProductCanAddApertures {
+    private final EBusinessCardType businessCardType;
+    private final EBusinessCardSide sides;
+
     // public
-    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardColor businessCardColor, final EOrientation orientation) {
-        super(businessCardType.getProductType(), orientation);
+    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardSide sides, final EBusinessCardColor businessCardColor, final EOrientation orientation) {
+        super(businessCardType.getProductType(sides), orientation);
 
         final int basePrice;
         switch (businessCardType) {
-            case LINEN_SINGLE_SIDE:
-                basePrice = 110;
-                break;
-            case LAID_SINGLE_SIDE:
-                basePrice = 120;
-                break;
-            case SMOOTH_SINGLE_SIDE:
-                basePrice = 100;
+            case LINEN:
+                switch (sides) {
+                    case SINGLE:
+                        basePrice = 110;
+                        break;
+                    case DOUBLE:
+                        basePrice = 140;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("unknown type");
+                }
                 break;
 
-            case LINEN_DOUBLE_SIDE:
-                basePrice = 140;
+            case LAID:
+                switch (sides) {
+                    case SINGLE:
+                        basePrice = 120;
+                        break;
+                    case DOUBLE:
+                        basePrice = 150;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("unknown type");
+                }
                 break;
-            case LAID_DOUBLE_SIDE:
-                basePrice = 150;
-                break;
-            case SMOOTH_DOUBLE_SIDE:
-                basePrice = 130;
+
+            case SMOOTH:
+                switch (sides) {
+                    case SINGLE:
+                        basePrice = 100;
+                        break;
+                    case DOUBLE:
+                        basePrice = 130;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("unknown type");
+                }
                 break;
 
             default:
@@ -36,5 +58,16 @@ public class BusinessCard extends ProductCanAddApertures {
 
         super.setColor(businessCardColor.getR(), businessCardColor.getG(), businessCardColor.getB());
         super.setBasePrice(basePrice);
+
+        this.businessCardType = businessCardType;
+        this.sides = sides;
+    }
+
+    public EBusinessCardType getBusinessCardType() {
+        return businessCardType;
+    }
+
+    public EBusinessCardSide getSides() {
+        return sides;
     }
 }
