@@ -2,14 +2,16 @@ package academy.pocu.comp2500.lab5;
 
 public class Barbarian {
     private final String name;
+    private final int maxHp;
     private int hp;
     private final int attack;
     private final int defense;
 
     // public
-    public Barbarian(final String name, final int hp, final int attack, final int defense) {
+    public Barbarian(final String name, final int maxHp, final int attack, final int defense) {
         this.name = name;
-        this.hp = hp;
+        this.maxHp = maxHp;
+        this.hp = maxHp;
         this.attack = attack;
         this.defense = defense;
     }
@@ -59,8 +61,13 @@ public class Barbarian {
 
     protected void addHp(final int addHp) {
         this.hp += addHp;
+
         if (this.hp < 0) {
             this.hp = 0;
+        }
+
+        if (this.hp > this.maxHp) {
+            this.hp = this.maxHp;
         }
     }
 
