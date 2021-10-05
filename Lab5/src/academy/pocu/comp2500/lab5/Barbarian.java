@@ -31,7 +31,7 @@ public class Barbarian {
             return;
         }
 
-        int damage = (int) (((double) this.getAttack() - (double) other.getDefense()) / 2.0);
+        int damage = (this.getAttack() - other.getDefense()) / 2;
         if (damage < 1) {
             damage = 1;
         }
@@ -54,7 +54,7 @@ public class Barbarian {
 
     protected void damage(final int damage) {
         assert (damage >= 1);
-        this.addHp(damage);
+        this.addHp(-damage);
     }
 
     protected void addHp(final int addHp) {
