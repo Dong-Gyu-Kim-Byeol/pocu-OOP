@@ -14,10 +14,6 @@ public class Barbarian {
         this.defense = defense;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getHp() {
         return hp;
     }
@@ -36,6 +32,10 @@ public class Barbarian {
     }
 
     // protected
+    protected String getName() {
+        return name;
+    }
+
     protected int getAttack() {
         return attack;
     }

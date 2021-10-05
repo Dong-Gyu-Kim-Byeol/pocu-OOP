@@ -25,6 +25,10 @@ public class Move {
         return this.maxPowerPoint > this.countPowerPoint;
     }
 
+    public int getMaxPowerPoint() {
+        return maxPowerPoint;
+    }
+
     public int getPowerPoint() {
         return this.maxPowerPoint - this.countPowerPoint;
     }
