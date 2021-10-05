@@ -26,9 +26,9 @@ public class Product {
         return height;
     }
 
-    public String getRgbString() {
-        return String.format("0x%02X%02X%02X", rgb[0], rgb[1], rgb[2]);
-    }
+//    public String getRgbString() {
+//        return String.format("0x%02X%02X%02X", rgb[0], rgb[1], rgb[2]);
+//    }
 
     public short[] getRgb() {
         return rgb;
@@ -36,14 +36,6 @@ public class Product {
 
     public int getPrice() {
         return basePrice + aperturesPrice;
-    }
-
-    public int getBasePrice() {
-        return basePrice;
-    }
-
-    public int getAperturesPrice() {
-        return aperturesPrice;
     }
 
     public EShippingMethod getShippingMethod() {
