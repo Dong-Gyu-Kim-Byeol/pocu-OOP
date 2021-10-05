@@ -16,7 +16,7 @@ public class ProductCanAddApertures extends Product {
     }
 
     public void addTextAperture(final TextAperture textAperture) {
-        if (textAperture.getApertureSide() == EApertureSide.BACK && this.canBackSideAperture == false) {
+        if (textAperture.getApertureSide() != EApertureSide.FRONT && this.canBackSideAperture() == false) {
             return;
         }
 
@@ -58,5 +58,9 @@ public class ProductCanAddApertures extends Product {
     // private
     private void setAperturesPrice() {
         super.setAperturesPrice(this.textApertures.size() * ADD_PRICE + this.imageApertures.size() * ADD_PRICE);
+    }
+
+    public boolean canBackSideAperture() {
+        return canBackSideAperture;
     }
 }

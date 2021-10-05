@@ -2,5 +2,6 @@ package academy.pocu.comp2500.assignment2;
 
 public enum EApertureSide {
     FRONT,
-    BACK
+    BACK,
+    FRONT_AND_BACK
 }
