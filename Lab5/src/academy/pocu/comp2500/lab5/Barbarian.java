@@ -31,7 +31,7 @@ public class Barbarian {
             return;
         }
 
-        int damage = (this.getAttack() - other.getDefense()) / 2;
+        int damage = (int) (((double) this.getAttack() - (double) other.getDefense()) / 2.0);
         if (damage < 1) {
             damage = 1;
         }
