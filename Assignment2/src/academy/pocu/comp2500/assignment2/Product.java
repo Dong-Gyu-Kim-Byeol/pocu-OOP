@@ -80,9 +80,9 @@ public class Product {
             b = 0xff;
         }
 
-        this.rgb[0] = r;
-        this.rgb[1] = g;
-        this.rgb[2] = b;
+        this.rgb[ERgbIndex.RED.getIndex()] = r;
+        this.rgb[ERgbIndex.GREEN.getIndex()] = g;
+        this.rgb[ERgbIndex.BLUE.getIndex()] = b;
     }
 
     protected void setBasePrice(final int basePrice) {
