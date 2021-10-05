@@ -23,6 +23,14 @@ public class Barbarian {
     }
 
     public void attack(final Barbarian other) {
+        if (other.getName().equals(this.getName())) {
+            return;
+        }
+
+        if (this.isAlive() == false) {
+            return;
+        }
+
         int damage = (this.getAttack() - other.getDefense()) / 2;
         if (damage < 1) {
             damage = 1;

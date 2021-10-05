@@ -14,6 +14,14 @@ public class Knight extends Gladiator {
     }
 
     public void attackTogether(final Barbarian other) {
+        if (other.getName().equals(this.getName())) {
+            return;
+        }
+
+        if (super.isAlive() == false) {
+            return;
+        }
+
         if (this.petOrNull == null) {
             return;
         }

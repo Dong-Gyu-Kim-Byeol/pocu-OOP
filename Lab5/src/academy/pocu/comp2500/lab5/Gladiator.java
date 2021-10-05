@@ -30,6 +30,14 @@ public class Gladiator extends Barbarian {
     }
 
     public void attack(final String moveName, final Barbarian other) {
+        if (other.getName().equals(this.getName())) {
+            return;
+        }
+
+        if (super.isAlive() == false) {
+            return;
+        }
+
         final Move move = this.moves.get(moveName);
         if (move == null) {
             return;
