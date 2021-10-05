@@ -3,6 +3,7 @@ package academy.pocu.comp2500.lab5;
 import java.util.HashMap;
 
 public class Gladiator extends Barbarian {
+    private static final int MAX_MOVE_COUNT = 4;
     private final HashMap<String, Move> moves;
 
     public Gladiator(final String name, final int hp, final int attack, final int defense) {
@@ -12,12 +13,16 @@ public class Gladiator extends Barbarian {
     }
 
     public boolean addMove(final Move move) {
+        if (this.moves.size() >= MAX_MOVE_COUNT) {
+            return false;
+        }
+
         if (this.moves.containsKey(move.getName())) {
             return false;
-        } else {
-            this.moves.put(move.getName(), move);
-            return true;
         }
+
+        this.moves.put(move.getName(), move);
+        return true;
     }
 
     public boolean removeMove(final String moveName) {
