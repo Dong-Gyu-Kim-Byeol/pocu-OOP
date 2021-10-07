@@ -6,7 +6,7 @@ public enum EBusinessCardType {
     SMOOTH;
 
     // public method
-    public EProductType getProductType(final EBusinessCardSides sides) {
+    public EProductType getProductType() {
         final EProductType productType;
         switch (this) {
             case LINEN:

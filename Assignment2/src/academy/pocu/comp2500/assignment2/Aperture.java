@@ -2,7 +2,7 @@ package academy.pocu.comp2500.assignment2;
 
 public class Aperture {
     private final EApertureType apertureType;
-    private final EApertureSides apertureSides;
+    private final EApertureSide apertureSide;
     private final int x;
     private final int y;
 
@@ -11,8 +11,8 @@ public class Aperture {
         return apertureType;
     }
 
-    public EApertureSides getApertureSides() {
-        return apertureSides;
+    public EApertureSide getApertureSide() {
+        return apertureSide;
     }
 
     public int getX() {
@@ -24,9 +24,9 @@ public class Aperture {
     }
 
     // protected method
-    protected Aperture(final EApertureType apertureType, final EApertureSides sides, final int x, final int y) {
+    protected Aperture(final EApertureType apertureType, final EApertureSide sides, final int x, final int y) {
         this.apertureType = apertureType;
-        this.apertureSides = sides;
+        this.apertureSide = sides;
         this.x = x;
         this.y = y;
     }

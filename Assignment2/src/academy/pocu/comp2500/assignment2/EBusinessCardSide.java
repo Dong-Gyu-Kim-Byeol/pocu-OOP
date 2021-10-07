@@ -1,6 +1,6 @@
 package academy.pocu.comp2500.assignment2;
 
-public enum EBusinessCardSides {
+public enum EBusinessCardSide {
     SINGLE,
     DOUBLE;
 

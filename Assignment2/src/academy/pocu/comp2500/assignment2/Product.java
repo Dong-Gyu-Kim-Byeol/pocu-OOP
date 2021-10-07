@@ -30,6 +30,10 @@ public class Product {
         return basePrice + aperturePrice;
     }
 
+    public int getBasePrice() {
+        return basePrice;
+    }
+
     public EShippingMethod getShippingMethod() {
         return shippingMethod;
     }

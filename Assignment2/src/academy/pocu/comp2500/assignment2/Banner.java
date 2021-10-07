@@ -5,7 +5,7 @@ public class Banner extends ProductCanAddApertures {
 
     // public method
     public Banner(final EBannerType bannerType, final EBannerSize bannerSize, final EOrientation orientation, final Color color) {
-        super(bannerType.getProductType(), false);
+        super(bannerType.getProductType(), orientation, false);
 
         final int basePrice;
         switch (bannerType) {
@@ -56,7 +56,7 @@ public class Banner extends ProductCanAddApertures {
                 throw new IllegalArgumentException("unknown type");
         }
 
-        super.setSize(bannerSize.getSize(orientation));
+        super.setSize(bannerSize.getSize());
         super.setColor(color);
         super.setBasePrice(basePrice);
 
