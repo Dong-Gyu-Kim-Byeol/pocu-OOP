@@ -5,7 +5,7 @@ import java.util.HashSet;
 public class ShoppingCart {
     private final HashSet<Product> products;
 
-    // public
+    // public method
     public ShoppingCart() {
         this.products = new HashSet<Product>();
     }

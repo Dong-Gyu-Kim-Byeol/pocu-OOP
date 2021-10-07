@@ -28,7 +28,7 @@ public class Product {
     // protected
     protected int aperturePrice;
 
-    // public
+    // public method
     public EProductType getProductType() {
         return productType;
     }
@@ -57,7 +57,7 @@ public class Product {
         this.shippingMethod = shippingMethod;
     }
 
-    // protected
+    // protected method
     protected Product(final EProductType productType) {
         this.productType = productType;
         this.shippingMethod = EShippingMethod.SHIP;

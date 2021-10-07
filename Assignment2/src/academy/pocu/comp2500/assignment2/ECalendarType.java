@@ -5,7 +5,7 @@ public enum ECalendarType {
     DESK,
     MAGNET;
 
-    // public
+    // public method
     public EProductType getProductType() {
         final EProductType productType;
         switch (this) {

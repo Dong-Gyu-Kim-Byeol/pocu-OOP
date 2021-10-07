@@ -6,7 +6,7 @@ public enum EBannerSize {
     MM_2000_X_500,
     MM_3000_X_1000;
 
-    // public
+    // public method
     public int getWidth() {
         final int width;
         switch (this) {

@@ -3,7 +3,7 @@ package academy.pocu.comp2500.assignment2;
 public class Stamp extends Product {
     private final String text;
 
-    // public
+    // public method
     public Stamp(final EStampSize stampSize, final EStampColor stampColor, final String text) {
         super(EProductType.STAMP);
 

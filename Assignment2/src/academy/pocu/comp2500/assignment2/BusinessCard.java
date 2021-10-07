@@ -5,10 +5,10 @@ public class BusinessCard extends ProductCanAddApertures {
     private static final int HEIGHT = 50;
 
     private final EBusinessCardType businessCardType;
-    private final EBusinessCardSide sides;
+    private final EBusinessCardSides sides;
 
-    // public
-    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardSide sides, final EBusinessCardColor businessCardColor, final EOrientation orientation) {
+    // public method
+    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardSides sides, final EBusinessCardColor businessCardColor, final EOrientation orientation) {
         super(businessCardType.getProductType(sides), sides.canBackSideAperture(), orientation);
 
         final int basePrice;
@@ -82,7 +82,7 @@ public class BusinessCard extends ProductCanAddApertures {
         return businessCardType;
     }
 
-    public EBusinessCardSide getSides() {
+    public EBusinessCardSides getSides() {
         return sides;
     }
 }

@@ -5,7 +5,7 @@ public enum EStampSize {
     MM_50_X_20,
     MM_70_X_40;
 
-    // public
+    // public method
     public int getWidth() {
         final int width;
         switch (this) {

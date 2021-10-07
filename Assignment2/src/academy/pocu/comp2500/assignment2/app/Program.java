@@ -5,11 +5,11 @@ import academy.pocu.comp2500.assignment2.Banner;
 import academy.pocu.comp2500.assignment2.BusinessCard;
 import academy.pocu.comp2500.assignment2.Calendar;
 import academy.pocu.comp2500.assignment2.Color;
-import academy.pocu.comp2500.assignment2.EApertureSide;
+import academy.pocu.comp2500.assignment2.EApertureSides;
 import academy.pocu.comp2500.assignment2.EBannerSize;
 import academy.pocu.comp2500.assignment2.EBannerType;
 import academy.pocu.comp2500.assignment2.EBusinessCardColor;
-import academy.pocu.comp2500.assignment2.EBusinessCardSide;
+import academy.pocu.comp2500.assignment2.EBusinessCardSides;
 import academy.pocu.comp2500.assignment2.EBusinessCardType;
 import academy.pocu.comp2500.assignment2.ECalendarType;
 import academy.pocu.comp2500.assignment2.EOrientation;
@@ -67,114 +67,113 @@ public class Program {
         {
             Banner bannerGloss1 = new Banner(EBannerType.GLOSS, EBannerSize.MM_1000_X_500, new Color(0x00, 0x80, 0x08), EOrientation.LANDSCAPE);
 
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.FRONT, 0, 0, "imagePath1"));
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.FRONT, 0, 0, "imagePath2"));
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.FRONT, 300, 300, "imagePath3"));
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.FRONT, 2000, 3000, "imagePath4")); // no
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.BACK, 0, 0, "imagePath5")); // no
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.BACK, 0, 0, "imagePath6")); // no
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.BACK, 300, 300, "imagePath7")); // no
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.BACK, 2000, 3000, "imagePath8")); // no
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "imagePath9")); // no
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "imagePath10")); // no
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 300, 300, "imagePath11")); // no
-            bannerGloss1.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 2000, 3000, "imagePath12")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT, 0, 0, "imagePath1"));
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT, 0, 0, "imagePath2"));
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT, 300, 300, "imagePath3"));
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT, 2000, 3000, "imagePath4")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.BACK, 0, 0, "imagePath5")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.BACK, 0, 0, "imagePath6")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.BACK, 300, 300, "imagePath7")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.BACK, 2000, 3000, "imagePath8")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "imagePath9")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "imagePath10")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 300, 300, "imagePath11")); // no
+            bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 2000, 3000, "imagePath12")); // no
 
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT, 0, 0, "text1"));
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT, 0, 0, "text2"));
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT, 300, 300, "text3"));
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT, 2000, 3000, "text4")); // no
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.BACK, 0, 0, "text5")); // no
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.BACK, 0, 0, "text6")); // no
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.BACK, 300, 300, "text7")); // no
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.BACK, 2000, 3000, "text8")); // no
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "text9")); // no
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "text10")); // no
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 300, 300, "text11")); // no
-            bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 2000, 3000, "text12")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.FRONT, 0, 0, "text1"));
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.FRONT, 0, 0, "text2"));
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.FRONT, 300, 300, "text3"));
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.FRONT, 2000, 3000, "text4")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.BACK, 0, 0, "text5")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.BACK, 0, 0, "text6")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.BACK, 300, 300, "text7")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.BACK, 2000, 3000, "text8")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "text9")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "text10")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 300, 300, "text11")); // no
+            bannerGloss1.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 2000, 3000, "text12")); // no
 
             assert bannerGloss1.getPrice() == 5030;
             assert bannerGloss1.getColor().getRed() == 0x00;
             assert bannerGloss1.getColor().getGreen() == 0x80;
             assert bannerGloss1.getColor().getBlue() == 0x08;
-//            assert bannerGloss1.getColor().toString().equals("0x008008");
             assert bannerGloss1.getOrientation() == EOrientation.LANDSCAPE;
         }
 
         {
-            BusinessCard businessCardSingle = new BusinessCard(EBusinessCardType.LINEN, EBusinessCardSide.SINGLE, EBusinessCardColor.GRAY, EOrientation.LANDSCAPE);
+            BusinessCard businessCardSingle = new BusinessCard(EBusinessCardType.LINEN, EBusinessCardSides.SINGLE, EBusinessCardColor.GRAY, EOrientation.LANDSCAPE);
             assert businessCardSingle.getPrice() == 110;
             assert businessCardSingle.getWidth() == 90;
             assert businessCardSingle.getHeight() == 50;
             assert businessCardSingle.getColor().getRed() == 230;
             assert businessCardSingle.getColor().getGreen() == 230;
             assert businessCardSingle.getColor().getBlue() == 230;
-            assert businessCardSingle.getSides() == EBusinessCardSide.SINGLE;
+            assert businessCardSingle.getSides() == EBusinessCardSides.SINGLE;
 
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT, 0, 0, "imagePath1"));
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT, 0, 0, "imagePath2"));
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT, 300, 300, "imagePath3")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT, 2000, 3000, "imagePath4")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.BACK, 0, 0, "imagePath5")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.BACK, 0, 0, "imagePath6")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.BACK, 300, 300, "imagePath7")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.BACK, 2000, 3000, "imagePath8")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "imagePath9")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "imagePath10")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 300, 300, "imagePath11")); // no
-            businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 2000, 3000, "imagePath12")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.FRONT, 0, 0, "imagePath1"));
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.FRONT, 0, 0, "imagePath2"));
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.FRONT, 300, 300, "imagePath3")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.FRONT, 2000, 3000, "imagePath4")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.BACK, 0, 0, "imagePath5")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.BACK, 0, 0, "imagePath6")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.BACK, 300, 300, "imagePath7")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.BACK, 2000, 3000, "imagePath8")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "imagePath9")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "imagePath10")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 300, 300, "imagePath11")); // no
+            businessCardSingle.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 2000, 3000, "imagePath12")); // no
 
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.FRONT, 0, 0, "text1"));
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.FRONT, 0, 0, "text2"));
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.FRONT, 300, 300, "text3")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.FRONT, 2000, 3000, "text4")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.BACK, 0, 0, "text5")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.BACK, 0, 0, "text6")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.BACK, 300, 300, "text7")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.BACK, 2000, 3000, "text8")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "text9")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "text10")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 300, 300, "text11")); // no
-            businessCardSingle.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 2000, 3000, "text12")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.FRONT, 0, 0, "text1"));
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.FRONT, 0, 0, "text2"));
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.FRONT, 300, 300, "text3")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.FRONT, 2000, 3000, "text4")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.BACK, 0, 0, "text5")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.BACK, 0, 0, "text6")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.BACK, 300, 300, "text7")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.BACK, 2000, 3000, "text8")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "text9")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "text10")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 300, 300, "text11")); // no
+            businessCardSingle.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 2000, 3000, "text12")); // no
 
             assert businessCardSingle.getPrice() == 130;
         }
 
         {
-            BusinessCard businessCardDouble = new BusinessCard(EBusinessCardType.LAID, EBusinessCardSide.DOUBLE, EBusinessCardColor.IVORY, EOrientation.PORTRAIT);
+            BusinessCard businessCardDouble = new BusinessCard(EBusinessCardType.LAID, EBusinessCardSides.DOUBLE, EBusinessCardColor.IVORY, EOrientation.PORTRAIT);
             assert businessCardDouble.getPrice() == 150;
             assert businessCardDouble.getWidth() == 50;
             assert businessCardDouble.getHeight() == 90;
             assert businessCardDouble.getColor().getRed() == 255;
             assert businessCardDouble.getColor().getGreen() == 255;
             assert businessCardDouble.getColor().getBlue() == 240;
-            assert businessCardDouble.getSides() == EBusinessCardSide.DOUBLE;
+            assert businessCardDouble.getSides() == EBusinessCardSides.DOUBLE;
 
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT, 0, 0, "imagePath1"));
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT, 0, 0, "imagePath2"));
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT, 300, 300, "imagePath3")); // no
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT, 2000, 3000, "imagePath4")); // no
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.BACK, 0, 0, "imagePath5"));
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.BACK, 0, 0, "imagePath6"));
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.BACK, 300, 300, "imagePath7")); // no
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.BACK, 2000, 3000, "imagePath8")); // no
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "imagePath9"));
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "imagePath10"));
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 300, 300, "imagePath11")); // no
-            businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT_AND_BACK, 2000, 3000, "imagePath12")); // no
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.FRONT, 0, 0, "imagePath1"));
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.FRONT, 0, 0, "imagePath2"));
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.FRONT, 300, 300, "imagePath3")); // no
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.FRONT, 2000, 3000, "imagePath4")); // no
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.BACK, 0, 0, "imagePath5"));
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.BACK, 0, 0, "imagePath6"));
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.BACK, 300, 300, "imagePath7")); // no
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.BACK, 2000, 3000, "imagePath8")); // no
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "imagePath9"));
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "imagePath10"));
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 300, 300, "imagePath11")); // no
+            businessCardDouble.addAperture(new ImageAperture(EApertureSides.FRONT_AND_BACK, 2000, 3000, "imagePath12")); // no
 
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.FRONT, 0, 0, "text1"));
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.FRONT, 0, 0, "text2"));
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.FRONT, 300, 300, "text3")); // no
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.FRONT, 2000, 3000, "text4")); // no
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.BACK, 0, 0, "text5"));
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.BACK, 0, 0, "text6"));
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.BACK, 300, 300, "text7")); // no
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.BACK, 2000, 3000, "text8")); // no
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "text9"));
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 0, 0, "text10"));
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 300, 300, "text11")); // no
-            businessCardDouble.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 2000, 3000, "text12")); // no
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.FRONT, 0, 0, "text1"));
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.FRONT, 0, 0, "text2"));
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.FRONT, 300, 300, "text3")); // no
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.FRONT, 2000, 3000, "text4")); // no
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.BACK, 0, 0, "text5"));
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.BACK, 0, 0, "text6"));
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.BACK, 300, 300, "text7")); // no
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.BACK, 2000, 3000, "text8")); // no
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "text9"));
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 0, 0, "text10"));
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 300, 300, "text11")); // no
+            businessCardDouble.addAperture(new TextAperture(EApertureSides.FRONT_AND_BACK, 2000, 3000, "text12")); // no
 
             assert businessCardDouble.getPrice() == 150 + 12 * 5;
         }

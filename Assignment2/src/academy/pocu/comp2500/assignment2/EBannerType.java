@@ -5,7 +5,7 @@ public enum EBannerType {
     SCRIM,
     MESH;
 
-    // public
+    // public method
     public EProductType getProductType() {
         final EProductType productType;
         switch (this) {

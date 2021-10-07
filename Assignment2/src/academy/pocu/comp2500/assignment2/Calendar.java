@@ -3,7 +3,7 @@ package academy.pocu.comp2500.assignment2;
 public class Calendar extends Product {
     private final ECalendarType calendarType;
 
-    // public
+    // public method
     public Calendar(final ECalendarType calendarType) {
         super(calendarType.getProductType());
 

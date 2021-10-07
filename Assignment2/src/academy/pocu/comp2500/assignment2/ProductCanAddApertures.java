@@ -9,13 +9,13 @@ public class ProductCanAddApertures extends Product {
     private final EOrientation orientation;
     private final HashSet<Aperture> apertures;
 
-    // public
+    // public method
     public HashSet<Aperture> getApertures() {
         return apertures;
     }
 
     public void addAperture(final Aperture aperture) {
-        if (aperture.getApertureSide() != EApertureSide.FRONT && this.canBackSideAperture() == false) {
+        if (aperture.getApertureSides() != EApertureSides.FRONT && this.canBackSideAperture() == false) {
             return;
         }
 
@@ -31,7 +31,7 @@ public class ProductCanAddApertures extends Product {
         return orientation;
     }
 
-    // protected
+    // protected method
     protected ProductCanAddApertures(final EProductType productType, final boolean canBackSideAperture, final EOrientation orientation) {
         super(productType);
 
@@ -40,7 +40,7 @@ public class ProductCanAddApertures extends Product {
         this.orientation = orientation;
     }
 
-    // private
+    // private method
     private void setAperturesPrice() {
         super.aperturePrice = this.apertures.size() * APERTURE_PRICE;
     }
