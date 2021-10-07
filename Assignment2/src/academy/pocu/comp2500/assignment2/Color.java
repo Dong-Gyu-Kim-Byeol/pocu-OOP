@@ -2,6 +2,7 @@ package academy.pocu.comp2500.assignment2;
 
 public class Color {
     public static final Color BLACK = new Color(0, 0, 0);
+    public static final Color WHITE = new Color(0xff, 0xff, 0xff);
 
     private final short r;
     private final short g;
@@ -41,10 +42,5 @@ public class Color {
 
     public short getBlue() {
         return b;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("0x%02X%02X%02X", r, g, b);
     }
 }
