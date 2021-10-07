@@ -41,11 +41,10 @@ public class Program {
         }
 
         {
-            // 빨강 잉크 4 x 3 cm 스탬프 만들기
-            Stamp stamp1 = new Stamp(EStampSize.MM_40_X_30, EStampColor.RED, "text1");
-            assert stamp1.getColor().getRed() == 255;
+            Stamp stamp1 = new Stamp(EStampSize.MM_40_X_30, EStampColor.BLUE, "text1");
+            assert stamp1.getColor().getRed() == 0;
             assert stamp1.getColor().getGreen() == 0;
-            assert stamp1.getColor().getBlue() == 0;
+            assert stamp1.getColor().getBlue() == 0xff;
             assert stamp1.getSize().getWidth() == 40;
             assert stamp1.getSize().getHeight() == 30;
             assert stamp1.getPrice() == 2300;

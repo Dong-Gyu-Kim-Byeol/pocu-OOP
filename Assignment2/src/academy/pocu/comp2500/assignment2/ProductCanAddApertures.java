@@ -10,6 +10,10 @@ public class ProductCanAddApertures extends Product {
     private final HashSet<Aperture> apertures;
 
     // public method
+    public int getAperturePrice() {
+        return super.aperturePrice;
+    }
+
     public HashSet<Aperture> getApertures() {
         return apertures;
     }
