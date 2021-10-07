@@ -10,10 +10,6 @@ public class ProductCanAddApertures extends Product {
     private final HashSet<Aperture> apertures;
 
     // public method
-    public int getAperturePrice() {
-        return super.aperturePrice;
-    }
-
     public HashSet<Aperture> getApertures() {
         return apertures;
     }
@@ -26,7 +22,7 @@ public class ProductCanAddApertures extends Product {
         if (0 <= aperture.getX() && aperture.getX() < super.getSize().getWidth()) {
             if (0 <= aperture.getY() && aperture.getY() < super.getSize().getHeight()) {
                 this.apertures.add(aperture);
-                this.setAperturesPrice();
+                super.setAperturePrice(this.apertures.size() * APERTURE_PRICE);
             }
         }
     }
@@ -44,10 +40,6 @@ public class ProductCanAddApertures extends Product {
     }
 
     // private method
-    private void setAperturesPrice() {
-        super.aperturePrice = this.apertures.size() * APERTURE_PRICE;
-    }
-
     public boolean canBackSideAperture() {
         return canBackSideAperture;
     }
