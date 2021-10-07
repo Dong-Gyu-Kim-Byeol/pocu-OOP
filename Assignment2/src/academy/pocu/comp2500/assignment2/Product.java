@@ -26,15 +26,15 @@ public class Product {
         return height;
     }
 
-    public short getRed() {
+    public int getRed() {
         return rgb[0];
     }
 
-    public short getGreen() {
+    public int getGreen() {
         return rgb[1];
     }
 
-    public short getBlue() {
+    public int getBlue() {
         return rgb[2];
     }
 
