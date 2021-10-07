@@ -4,8 +4,8 @@ public class Banner extends ProductCanAddApertures {
     private final EBannerType bannerType;
 
     // public method
-    public Banner(final EBannerType bannerType, final EBannerSize bannerSize, final Color color, final EOrientation orientation) {
-        super(bannerType.getProductType(), false, orientation);
+    public Banner(final EBannerType bannerType, final EBannerSize bannerSize, final EOrientation orientation, final Color color) {
+        super(bannerType.getProductType(), false);
 
         final int basePrice;
         switch (bannerType) {
@@ -26,8 +26,8 @@ public class Banner extends ProductCanAddApertures {
                     default:
                         throw new IllegalArgumentException("unknown type");
                 }
+                break;
             }
-            break;
 
             case SCRIM:
                 // intentional fallthrough
@@ -49,28 +49,14 @@ public class Banner extends ProductCanAddApertures {
                     default:
                         throw new IllegalArgumentException("unknown type");
                 }
+                break;
             }
-            break;
 
             default:
                 throw new IllegalArgumentException("unknown type");
         }
 
-        assert (bannerSize.getWidth() >= bannerSize.getHeight());
-        switch (orientation) {
-            case LANDSCAPE:
-                super.setWidth(bannerSize.getWidth());
-                super.setHeight(bannerSize.getHeight());
-                break;
-            case PORTRAIT:
-                super.setWidth(bannerSize.getHeight());
-                super.setHeight(bannerSize.getWidth());
-                break;
-            default:
-                throw new IllegalArgumentException("unknown type");
-        }
-
-
+        super.setSize(bannerSize.getSize(orientation));
         super.setColor(color);
         super.setBasePrice(basePrice);
 

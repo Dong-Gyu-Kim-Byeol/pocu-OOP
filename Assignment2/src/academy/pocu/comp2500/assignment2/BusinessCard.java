@@ -1,15 +1,12 @@
 package academy.pocu.comp2500.assignment2;
 
 public class BusinessCard extends ProductCanAddApertures {
-    private static final int WIDTH = 90;
-    private static final int HEIGHT = 50;
-
     private final EBusinessCardType businessCardType;
     private final EBusinessCardSides sides;
 
     // public method
-    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardSides sides, final EBusinessCardColor businessCardColor, final EOrientation orientation) {
-        super(businessCardType.getProductType(sides), sides.canBackSideAperture(), orientation);
+    public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardSides sides, final EOrientation orientation, final EBusinessCardColor businessCardColor) {
+        super(businessCardType.getProductType(sides), sides.canBackSideAperture());
 
         final int basePrice;
         switch (businessCardType) {
@@ -56,21 +53,7 @@ public class BusinessCard extends ProductCanAddApertures {
                 throw new IllegalArgumentException("unknown type");
         }
 
-
-        assert (WIDTH >= HEIGHT);
-        switch (orientation) {
-            case LANDSCAPE:
-                super.setWidth(WIDTH);
-                super.setHeight(HEIGHT);
-                break;
-            case PORTRAIT:
-                super.setWidth(HEIGHT);
-                super.setHeight(WIDTH);
-                break;
-            default:
-                throw new IllegalArgumentException("unknown type");
-        }
-
+        super.setSize(EBusinessCardSize.MM_90_X_50.getSize(orientation));
         super.setColor(businessCardColor.getColor());
         super.setBasePrice(basePrice);
 

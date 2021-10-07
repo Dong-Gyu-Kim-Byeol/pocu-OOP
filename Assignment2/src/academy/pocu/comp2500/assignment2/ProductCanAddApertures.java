@@ -6,7 +6,6 @@ public class ProductCanAddApertures extends Product {
     private static final int APERTURE_PRICE = 5;
 
     private final boolean canBackSideAperture;
-    private final EOrientation orientation;
     private final HashSet<Aperture> apertures;
 
     // public method
@@ -19,25 +18,20 @@ public class ProductCanAddApertures extends Product {
             return;
         }
 
-        if (0 <= aperture.getX() && aperture.getX() < super.getWidth()) {
-            if (0 <= aperture.getY() && aperture.getY() < super.getHeight()) {
+        if (0 <= aperture.getX() && aperture.getX() < super.getSize().getWidth()) {
+            if (0 <= aperture.getY() && aperture.getY() < super.getSize().getHeight()) {
                 this.apertures.add(aperture);
                 this.setAperturesPrice();
             }
         }
     }
 
-    public EOrientation getOrientation() {
-        return orientation;
-    }
-
     // protected method
-    protected ProductCanAddApertures(final EProductType productType, final boolean canBackSideAperture, final EOrientation orientation) {
+    protected ProductCanAddApertures(final EProductType productType, final boolean canBackSideAperture) {
         super(productType);
 
         this.canBackSideAperture = canBackSideAperture;
         this.apertures = new HashSet<Aperture>();
-        this.orientation = orientation;
     }
 
     // private method

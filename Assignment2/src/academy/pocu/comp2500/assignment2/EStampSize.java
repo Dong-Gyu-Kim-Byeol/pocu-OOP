@@ -5,42 +5,27 @@ public enum EStampSize {
     MM_50_X_20,
     MM_70_X_40;
 
+    private static final Size MM_40_X_30_SIZE = new Size(40, 30);
+    private static final Size MM_50_X_20_SIZE = new Size(50, 20);
+    private static final Size MM_70_X_40_SIZE = new Size(70, 40);
+
     // public method
-    public int getWidth() {
-        final int width;
+    public Size getSize() {
+        final Size size;
         switch (this) {
             case MM_40_X_30:
-                width = 40;
+                size = MM_40_X_30_SIZE;
                 break;
             case MM_50_X_20:
-                width = 50;
+                size = MM_50_X_20_SIZE;
                 break;
             case MM_70_X_40:
-                width = 70;
+                size = MM_70_X_40_SIZE;
                 break;
             default:
                 throw new IllegalArgumentException("unknown type");
         }
 
-        return width;
-    }
-
-    public int getHeight() {
-        final int height;
-        switch (this) {
-            case MM_40_X_30:
-                height = 30;
-                break;
-            case MM_50_X_20:
-                height = 20;
-                break;
-            case MM_70_X_40:
-                height = 40;
-                break;
-            default:
-                throw new IllegalArgumentException("unknown type");
-        }
-
-        return height;
+        return size;
     }
 }

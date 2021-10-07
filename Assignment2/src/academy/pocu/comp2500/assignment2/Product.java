@@ -3,23 +3,8 @@ package academy.pocu.comp2500.assignment2;
 public class Product {
     // private
     private final EProductType productType;
-
-    private int width;
-    private int height;
-
+    private Size size;
     private Color color;
-
-    public short getColorRed() {
-        return color.getRed();
-    }
-
-    public short getColorGreen() {
-        return color.getGreen();
-    }
-
-    public short getColorBlue() {
-        return color.getBlue();
-    }
 
     private int basePrice;
 
@@ -33,12 +18,8 @@ public class Product {
         return productType;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    public Size getSize() {
+        return size;
     }
 
     public Color getColor() {
@@ -63,12 +44,8 @@ public class Product {
         this.shippingMethod = EShippingMethod.SHIP;
     }
 
-    protected void setWidth(final int width) {
-        this.width = width;
-    }
-
-    protected void setHeight(final int height) {
-        this.height = height;
+    protected void setSize(final Size size) {
+        this.size = size;
     }
 
     protected void setColor(final Color color) {

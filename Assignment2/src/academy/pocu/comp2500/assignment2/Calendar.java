@@ -7,32 +7,26 @@ public class Calendar extends Product {
     public Calendar(final ECalendarType calendarType) {
         super(calendarType.getProductType());
 
-        final int width;
-        final int height;
+        final Size size;
         final int basePrice;
         switch (calendarType) {
             case WALL:
-                width = 400;
-                height = 400;
+                size = ECalendarSize.MM_400_X_400.getSize();
                 basePrice = 1000;
                 break;
             case DESK:
-                width = 200;
-                height = 150;
+                size = ECalendarSize.MM_200_X_150.getSize();
                 basePrice = 1000;
                 break;
             case MAGNET:
-                width = 100;
-                height = 200;
+                size = ECalendarSize.MM_100_X_200.getSize();
                 basePrice = 1500;
                 break;
             default:
                 throw new IllegalArgumentException("unknown type");
         }
 
-        super.setWidth(width);
-        super.setHeight(height);
-
+        super.setSize(size);
         super.setColor(Color.WHITE);
         super.setBasePrice(basePrice);
 

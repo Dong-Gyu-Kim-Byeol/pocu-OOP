@@ -46,8 +46,8 @@ public class Program {
             assert stamp1.getColor().getRed() == 255;
             assert stamp1.getColor().getGreen() == 0;
             assert stamp1.getColor().getBlue() == 0;
-            assert stamp1.getWidth() == 40;
-            assert stamp1.getHeight() == 30;
+            assert stamp1.getSize().getWidth() == 40;
+            assert stamp1.getSize().getHeight() == 30;
             assert stamp1.getPrice() == 2300;
             assert stamp1.getText().equals("text1");
         }
@@ -57,15 +57,15 @@ public class Program {
             Calendar calendar1 = new Calendar(ECalendarType.WALL);
             assert calendar1.getPrice() == 1000;
             assert calendar1.getCalendarType() == ECalendarType.WALL;
-            assert calendar1.getWidth() == 400;
-            assert calendar1.getHeight() == 400;
+            assert calendar1.getSize().getWidth() == 400;
+            assert calendar1.getSize().getHeight() == 400;
             assert calendar1.getColor().getRed() == 0xff;
             assert calendar1.getColor().getGreen() == 0xff;
             assert calendar1.getColor().getBlue() == 0xff;
         }
 
         {
-            Banner bannerGloss1 = new Banner(EBannerType.GLOSS, EBannerSize.MM_1000_X_500, new Color(0x00, 0x80, 0x08), EOrientation.LANDSCAPE);
+            Banner bannerGloss1 = new Banner(EBannerType.GLOSS, EBannerSize.MM_1000_X_500, EOrientation.LANDSCAPE, new Color(0x00, 0x80, 0x08));
 
             bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT, 0, 0, "imagePath1"));
             bannerGloss1.addAperture(new ImageAperture(EApertureSides.FRONT, 0, 0, "imagePath2"));
@@ -97,14 +97,13 @@ public class Program {
             assert bannerGloss1.getColor().getRed() == 0x00;
             assert bannerGloss1.getColor().getGreen() == 0x80;
             assert bannerGloss1.getColor().getBlue() == 0x08;
-            assert bannerGloss1.getOrientation() == EOrientation.LANDSCAPE;
         }
 
         {
-            BusinessCard businessCardSingle = new BusinessCard(EBusinessCardType.LINEN, EBusinessCardSides.SINGLE, EBusinessCardColor.GRAY, EOrientation.LANDSCAPE);
+            BusinessCard businessCardSingle = new BusinessCard(EBusinessCardType.LINEN, EBusinessCardSides.SINGLE, EOrientation.LANDSCAPE, EBusinessCardColor.GRAY);
             assert businessCardSingle.getPrice() == 110;
-            assert businessCardSingle.getWidth() == 90;
-            assert businessCardSingle.getHeight() == 50;
+            assert businessCardSingle.getSize().getWidth() == 90;
+            assert businessCardSingle.getSize().getHeight() == 50;
             assert businessCardSingle.getColor().getRed() == 230;
             assert businessCardSingle.getColor().getGreen() == 230;
             assert businessCardSingle.getColor().getBlue() == 230;
@@ -140,10 +139,10 @@ public class Program {
         }
 
         {
-            BusinessCard businessCardDouble = new BusinessCard(EBusinessCardType.LAID, EBusinessCardSides.DOUBLE, EBusinessCardColor.IVORY, EOrientation.PORTRAIT);
+            BusinessCard businessCardDouble = new BusinessCard(EBusinessCardType.LAID, EBusinessCardSides.DOUBLE, EOrientation.PORTRAIT, EBusinessCardColor.IVORY);
             assert businessCardDouble.getPrice() == 150;
-            assert businessCardDouble.getWidth() == 50;
-            assert businessCardDouble.getHeight() == 90;
+            assert businessCardDouble.getSize().getWidth() == 50;
+            assert businessCardDouble.getSize().getHeight() == 90;
             assert businessCardDouble.getColor().getRed() == 255;
             assert businessCardDouble.getColor().getGreen() == 255;
             assert businessCardDouble.getColor().getBlue() == 240;
