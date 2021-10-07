@@ -42,7 +42,7 @@ public class ProductCanAddApertures extends Product {
 
     // private
     private void setAperturesPrice() {
-        super.aperturesPrice = this.apertures.size() * APERTURE_PRICE;
+        super.aperturePrice = this.apertures.size() * APERTURE_PRICE;
     }
 
     public boolean canBackSideAperture() {

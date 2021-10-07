@@ -9,12 +9,24 @@ public class Product {
 
     private Color color;
 
+    public short getColorRed() {
+        return color.getRed();
+    }
+
+    public short getColorGreen() {
+        return color.getGreen();
+    }
+
+    public short getColorBlue() {
+        return color.getBlue();
+    }
+
     private int basePrice;
 
     private EShippingMethod shippingMethod;
 
     // protected
-    protected int aperturesPrice;
+    protected int aperturePrice;
 
     // public
     public EProductType getProductType() {
@@ -34,7 +46,7 @@ public class Product {
     }
 
     public int getPrice() {
-        return basePrice + aperturesPrice;
+        return basePrice + aperturePrice;
     }
 
     public EShippingMethod getShippingMethod() {
