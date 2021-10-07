@@ -1,6 +1,7 @@
 package academy.pocu.comp2500.assignment2;
 
 public class Product {
+    // private
     private final EProductType productType;
 
     private int width;
@@ -9,9 +10,11 @@ public class Product {
     private Color color;
 
     private int basePrice;
-    private int aperturesPrice;
 
     private EShippingMethod shippingMethod;
+
+    // protected
+    protected int aperturesPrice;
 
     // public
     public EProductType getProductType() {
@@ -62,9 +65,5 @@ public class Product {
 
     protected void setBasePrice(final int basePrice) {
         this.basePrice = basePrice;
-    }
-
-    protected void setAperturesPrice(final int aperturesPrice) {
-        this.aperturesPrice = aperturesPrice;
     }
 }
