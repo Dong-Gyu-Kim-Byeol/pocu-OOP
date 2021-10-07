@@ -3,39 +3,25 @@ package academy.pocu.comp2500.assignment2;
 import java.util.HashSet;
 
 public class ProductCanAddApertures extends Product {
-    private static final int ADD_PRICE = 5;
+    private static final int APERTURE_PRICE = 5;
 
     private final boolean canBackSideAperture;
     private final EOrientation orientation;
-    private final HashSet<TextAperture> textApertures;
-    private final HashSet<ImageAperture> imageApertures;
+    private final HashSet<Aperture> apertures;
 
     // public
-    public HashSet<TextAperture> getTextApertures() {
-        return textApertures;
+    public HashSet<Aperture> getApertures() {
+        return apertures;
     }
 
-    public void addTextAperture(final TextAperture textAperture) {
-        if (textAperture.getApertureSide() != EApertureSide.FRONT && this.canBackSideAperture() == false) {
+    public void addAperture(final Aperture aperture) {
+        if (aperture.getApertureSide() != EApertureSide.FRONT && this.canBackSideAperture() == false) {
             return;
         }
 
-        if (0 <= textAperture.getX() && textAperture.getX() < super.getWidth()) {
-            if (0 <= textAperture.getY() && textAperture.getY() < super.getHeight()) {
-                this.textApertures.add(textAperture);
-                this.setAperturesPrice();
-            }
-        }
-    }
-
-    public HashSet<ImageAperture> getImageApertures() {
-        return imageApertures;
-    }
-
-    public void addImageAperture(final ImageAperture imageAperture) {
-        if (0 <= imageAperture.getX() && imageAperture.getX() < super.getWidth()) {
-            if (0 <= imageAperture.getY() && imageAperture.getY() < super.getHeight()) {
-                this.imageApertures.add(imageAperture);
+        if (0 <= aperture.getX() && aperture.getX() < super.getWidth()) {
+            if (0 <= aperture.getY() && aperture.getY() < super.getHeight()) {
+                this.apertures.add(aperture);
                 this.setAperturesPrice();
             }
         }
@@ -50,14 +36,13 @@ public class ProductCanAddApertures extends Product {
         super(productType);
 
         this.canBackSideAperture = canBackSideAperture;
-        this.textApertures = new HashSet<TextAperture>();
-        this.imageApertures = new HashSet<ImageAperture>();
+        this.apertures = new HashSet<Aperture>();
         this.orientation = orientation;
     }
 
     // private
     private void setAperturesPrice() {
-        super.setAperturesPrice(this.textApertures.size() * ADD_PRICE + this.imageApertures.size() * ADD_PRICE);
+        super.setAperturesPrice(this.apertures.size() * APERTURE_PRICE);
     }
 
     public boolean canBackSideAperture() {

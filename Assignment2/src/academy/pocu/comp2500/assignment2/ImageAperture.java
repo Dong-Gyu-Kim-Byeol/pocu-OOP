@@ -4,7 +4,7 @@ public class ImageAperture extends Aperture {
     private final String imagePath;
 
     public ImageAperture(final EApertureSide sides, final int x, final int y, final String imagePath) {
-        super(sides, x, y);
+        super(EApertureType.IMAGE, sides, x, y);
         this.imagePath = imagePath;
     }
 

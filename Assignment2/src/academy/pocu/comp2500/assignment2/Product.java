@@ -6,7 +6,7 @@ public class Product {
     private int width;
     private int height;
 
-    private final short[] rgb;
+    private Color color;
 
     private int basePrice;
     private int aperturesPrice;
@@ -26,16 +26,8 @@ public class Product {
         return height;
     }
 
-    public int getRed() {
-        return rgb[0];
-    }
-
-    public int getGreen() {
-        return rgb[1];
-    }
-
-    public int getBlue() {
-        return rgb[2];
+    public Color getColor() {
+        return color;
     }
 
     public int getPrice() {
@@ -53,7 +45,7 @@ public class Product {
     // protected
     protected Product(final EProductType productType) {
         this.productType = productType;
-        this.rgb = new short[3];
+        this.color = Color.BLACK;
         this.shippingMethod = EShippingMethod.SHIP;
     }
 
@@ -65,28 +57,8 @@ public class Product {
         this.height = height;
     }
 
-    protected void setRgb(short r, short g, short b) {
-        if (r < 0) {
-            r = 0;
-        } else if (r > 0xff) {
-            r = 0xff;
-        }
-
-        if (g < 0) {
-            g = 0;
-        } else if (g > 0xff) {
-            g = 0xff;
-        }
-
-        if (b < 0) {
-            b = 0;
-        } else if (b > 0xff) {
-            b = 0xff;
-        }
-
-        this.rgb[0] = r;
-        this.rgb[1] = g;
-        this.rgb[2] = b;
+    protected void setColor(final Color color) {
+        this.color = color;
     }
 
     protected void setBasePrice(final int basePrice) {

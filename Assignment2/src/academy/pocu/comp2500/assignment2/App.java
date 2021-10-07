@@ -43,8 +43,8 @@ public class App {
 
         // 문구, 사진
         final String ADD_CLASS = "ProductCanAddApertures";
-        final String ADD_TEXT = "addTextAperture";
-        final String ADD_IMAGE = "addImageAperture";
+        final String ADD_TEXT = "addAperture";
+        final String ADD_IMAGE = "addAperture";
         registry.registerLandscapeBannerTextApertureAdder(ADD_CLASS, ADD_TEXT); // :가로 방향 배너에 문구를 추가하는 메서드를 등록한다.
         registry.registerLandscapeBannerImageApertureAdder(ADD_CLASS, ADD_IMAGE); // :가로 방향 배너에 사진을 추가하는 메서드를 등록한다.
 

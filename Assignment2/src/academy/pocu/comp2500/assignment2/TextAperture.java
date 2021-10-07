@@ -4,7 +4,7 @@ public class TextAperture extends Aperture {
     private final String text;
 
     public TextAperture(final EApertureSide sides, final int x, final int y, final String text) {
-        super(sides, x, y);
+        super(EApertureType.TEXT, sides, x, y);
         this.text = text;
     }
 
