@@ -31,10 +31,6 @@ public class ProductCanAddApertures extends Product {
         return orientation;
     }
 
-    public static int getAperturePrice() {
-        return APERTURE_PRICE;
-    }
-
     // protected method
     protected ProductCanAddApertures(final EProductType productType, final EOrientation orientation, final boolean canBackSideAperture) {
         super(productType);
