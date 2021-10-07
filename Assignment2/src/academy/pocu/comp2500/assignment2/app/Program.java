@@ -18,7 +18,6 @@ public class Program {
 
         {
             final Stamp redStamp40x30 = new Stamp(EStampSize.MM_40_X_30, EStampColor.RED, "redStamp40x30");
-            final short[] color = redStamp40x30.getRgb();
 
             final ShoppingCart shoppingCart = new ShoppingCart();
 

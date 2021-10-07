@@ -26,12 +26,16 @@ public class Product {
         return height;
     }
 
-//    public String getRgbString() {
-//        return String.format("0x%02X%02X%02X", rgb[0], rgb[1], rgb[2]);
-//    }
+    public short getRed() {
+        return rgb[0];
+    }
 
-    public short[] getRgb() {
-        return rgb;
+    public short getGreen() {
+        return rgb[1];
+    }
+
+    public short getBlue() {
+        return rgb[2];
     }
 
     public int getPrice() {
@@ -80,9 +84,9 @@ public class Product {
             b = 0xff;
         }
 
-        this.rgb[ERgbIndex.RED.getIndex()] = r;
-        this.rgb[ERgbIndex.GREEN.getIndex()] = g;
-        this.rgb[ERgbIndex.BLUE.getIndex()] = b;
+        this.rgb[0] = r;
+        this.rgb[1] = g;
+        this.rgb[2] = b;
     }
 
     protected void setBasePrice(final int basePrice) {
