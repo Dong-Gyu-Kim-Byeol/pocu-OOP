@@ -45,7 +45,6 @@ public class Product {
     // protected
     protected Product(final EProductType productType) {
         this.productType = productType;
-        this.color = Color.BLACK;
         this.shippingMethod = EShippingMethod.SHIP;
     }
 
