@@ -28,6 +28,14 @@ public class Product {
         return getBasePrice() + getAperturePrice();
     }
 
+    public int getBasePrice() {
+        return basePrice;
+    }
+
+    public int getAperturePrice() {
+        return aperturePrice;
+    }
+
     public EShippingMethod getShippingMethod() {
         return shippingMethod;
     }
@@ -42,19 +50,11 @@ public class Product {
         this.shippingMethod = EShippingMethod.SHIP;
     }
 
-    protected int getBasePrice() {
-        return basePrice;
-    }
-
     protected void setBasePrice(final int basePrice) {
         this.basePrice = basePrice;
     }
 
-    protected int getAperturePrice() {
-        return aperturePrice;
-    }
-
-    protected void setAperturePrice(int aperturePrice) {
+    protected void setAperturePrice(final int aperturePrice) {
         this.aperturePrice = aperturePrice;
     }
 
