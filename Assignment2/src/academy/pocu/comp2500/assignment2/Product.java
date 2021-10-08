@@ -6,7 +6,8 @@ public class Product {
     private Size size;
     private Color color;
 
-    private int price;
+    private int basePrice;
+    private int aperturePrice;
 
     private EShippingMethod shippingMethod;
 
@@ -28,7 +29,7 @@ public class Product {
     }
 
     public int getPrice() {
-        return price;
+        return basePrice + aperturePrice;
     }
 
     public EShippingMethod getShippingMethod() {
@@ -45,8 +46,20 @@ public class Product {
         this.shippingMethod = EShippingMethod.SHIP;
     }
 
-    protected void addPrice(final int price) {
-        this.price += price;
+    protected int getBasePrice() {
+        return basePrice;
+    }
+
+    protected void setBasePrice(final int basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    protected int getAperturePrice() {
+        return aperturePrice;
+    }
+
+    protected void setAperturePrice(final int aperturePrice) {
+        this.aperturePrice = aperturePrice;
     }
 
     protected void setSize(final Size size) {
