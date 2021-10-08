@@ -22,7 +22,7 @@ public class ProductCanAddApertures extends Product {
         if (0 <= aperture.getX() && aperture.getX() < super.getSize().getWidth()) {
             if (0 <= aperture.getY() && aperture.getY() < super.getSize().getHeight()) {
                 this.apertures.add(aperture);
-                super.setAperturePrice(this.apertures.size() * APERTURE_PRICE);
+                super.addPrice(APERTURE_PRICE);
             }
         }
     }
