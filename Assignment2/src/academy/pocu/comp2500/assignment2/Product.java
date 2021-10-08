@@ -15,6 +15,10 @@ public class Product {
         return productType;
     }
 
+    public String getName() {
+        return productType.getName();
+    }
+
     public Size getSize() {
         return size;
     }
