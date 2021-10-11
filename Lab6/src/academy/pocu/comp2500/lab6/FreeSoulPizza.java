@@ -1,7 +1,5 @@
 package academy.pocu.comp2500.lab6;
 
-import java.util.ArrayList;
-
 public class FreeSoulPizza extends Pizza {
     protected static final int PRICE = 25;
 
@@ -11,16 +9,5 @@ public class FreeSoulPizza extends Pizza {
 
     public FreeSoulPizza() {
         super(EPizzaType.FREE_SOUL_PIZZA);
-
-        ArrayList<Topping> toppings = new ArrayList<Topping>();
-        super.initToppings(toppings);
-    }
-
-    public boolean addTopping(Topping topping) {
-        return super.add(topping);
-    }
-
-    public boolean removeTopping(final Topping topping) {
-        return super.remove(topping);
     }
 }

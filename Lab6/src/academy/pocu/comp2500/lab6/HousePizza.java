@@ -1,21 +1,14 @@
 package academy.pocu.comp2500.lab6;
 
-import java.util.ArrayList;
-
 public class HousePizza extends Pizza {
     protected static final int PRICE = 20;
 
     protected static final int MAX_MEAT_COUNT = 2;
+    protected static final int MAX_VEGGIE_COUNT = 0;
+    protected static final int MAX_CHEESE_COUNT = 0;
 
     public HousePizza() {
-        super(EPizzaType.HOUSE_PIZZA);
-
-        ArrayList<Topping> toppings = new ArrayList<Topping>();
-        toppings.add(Topping.BLACK_OLIVES);
-        toppings.add(Topping.RED_ONIONS);
-        toppings.add(Topping.GREEN_PEPPERS);
-        toppings.add(Topping.MOZZARELLA_CHEESE);
-        super.initToppings(toppings);
+        super(EPizzaType.HOUSE_PIZZA, Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS, Topping.MOZZARELLA_CHEESE);
     }
 
     public boolean addBacon() {
@@ -23,11 +16,11 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.BACON);
+        return super.addTopping(Topping.BACON);
     }
 
     public boolean removeBacon() {
-        return super.remove(Topping.BACON);
+        return super.removeTopping(Topping.BACON);
     }
 
     public boolean addPeperoni() {
@@ -35,11 +28,11 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.PEPERONI);
+        return super.addTopping(Topping.PEPERONI);
     }
 
     public boolean removePeperoni() {
-        return super.remove(Topping.PEPERONI);
+        return super.removeTopping(Topping.PEPERONI);
     }
 
     public boolean addSausages() {
@@ -47,10 +40,10 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.SAUSAGES);
+        return super.addTopping(Topping.SAUSAGES);
     }
 
     public boolean removeSausages() {
-        return super.remove(Topping.SAUSAGES);
+        return super.removeTopping(Topping.SAUSAGES);
     }
 }

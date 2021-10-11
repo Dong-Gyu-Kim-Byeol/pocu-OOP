@@ -1,22 +1,14 @@
 package academy.pocu.comp2500.lab6;
 
-import java.util.ArrayList;
-
 public class MeatLoverPizza extends Pizza {
     protected static final int PRICE = 21;
 
+    protected static final int MAX_MEAT_COUNT = 0;
     protected static final int MAX_VEGGIE_COUNT = 1;
+    protected static final int MAX_CHEESE_COUNT = 0;
 
     public MeatLoverPizza() {
-        super(EPizzaType.MEAT_LOVER_PIZZA);
-
-        ArrayList<Topping> toppings = new ArrayList<Topping>();
-        toppings.add(Topping.BACON);
-        toppings.add(Topping.CHEDDAR_CHEESE);
-        toppings.add(Topping.SAUSAGES);
-        toppings.add(Topping.HAM);
-        toppings.add(Topping.PEPERONI);
-        super.initToppings(toppings);
+        super(EPizzaType.MEAT_LOVER_PIZZA, Topping.BACON, Topping.CHEDDAR_CHEESE, Topping.SAUSAGES, Topping.HAM, Topping.PEPERONI);
     }
 
     public boolean addBlackOlives() {
@@ -24,11 +16,11 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.BLACK_OLIVES);
+        return super.addTopping(Topping.BLACK_OLIVES);
     }
 
     public boolean removeBlackOlives() {
-        return super.remove(Topping.BLACK_OLIVES);
+        return super.removeTopping(Topping.BLACK_OLIVES);
     }
 
     public boolean addRedOnions() {
@@ -36,11 +28,11 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.RED_ONIONS);
+        return super.addTopping(Topping.RED_ONIONS);
     }
 
     public boolean removeRedOnions() {
-        return super.remove(Topping.RED_ONIONS);
+        return super.removeTopping(Topping.RED_ONIONS);
     }
 
     public boolean addGreenPeppers() {
@@ -48,10 +40,10 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.GREEN_PEPPERS);
+        return super.addTopping(Topping.GREEN_PEPPERS);
     }
 
     public boolean removeGreenPeppers() {
-        return super.remove(Topping.GREEN_PEPPERS);
+        return super.removeTopping(Topping.GREEN_PEPPERS);
     }
 }
