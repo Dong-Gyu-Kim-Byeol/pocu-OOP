@@ -4,10 +4,20 @@ public class DeathByDesserts extends Meal {
     protected static final int PRICE = 20;
 
     public DeathByDesserts() {
-        super(EMealType.DEATH_BY_DESSERTS);
+        super(PRICE);
     }
 
-    public void setDesserts(final Dessert dessert1, final Dessert dessert2, final Dessert dessert3, final Dessert dessert4) {
-        super.setDesserts(dessert1, dessert2, dessert3, dessert4);
+    public boolean isValid() {
+        return super.isValid(0, 0, 4);
+    }
+
+
+    public void setDesserts(Dessert dessert1, Dessert dessert2, Dessert dessert3, Dessert dessert4) {
+        this.desserts.clear();
+
+        this.desserts.add(dessert1);
+        this.desserts.add(dessert2);
+        this.desserts.add(dessert3);
+        this.desserts.add(dessert4);
     }
 }

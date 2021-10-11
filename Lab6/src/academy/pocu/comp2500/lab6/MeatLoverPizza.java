@@ -8,7 +8,11 @@ public class MeatLoverPizza extends Pizza {
     protected static final int MAX_CHEESE_COUNT = 0;
 
     public MeatLoverPizza() {
-        super(EPizzaType.MEAT_LOVER_PIZZA, Topping.BACON, Topping.CHEDDAR_CHEESE, Topping.SAUSAGES, Topping.HAM, Topping.PEPERONI);
+        super(PRICE, Topping.BACON, Topping.CHEDDAR_CHEESE, Topping.SAUSAGES, Topping.HAM, Topping.PEPERONI);
+    }
+
+    public boolean isValid() {
+        return super.isValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addBlackOlives() {

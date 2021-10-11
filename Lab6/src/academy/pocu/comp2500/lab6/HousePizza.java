@@ -8,7 +8,11 @@ public class HousePizza extends Pizza {
     protected static final int MAX_CHEESE_COUNT = 0;
 
     public HousePizza() {
-        super(EPizzaType.HOUSE_PIZZA, Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS, Topping.MOZZARELLA_CHEESE);
+        super(PRICE, Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS, Topping.MOZZARELLA_CHEESE);
+    }
+
+    public boolean isValid() {
+        return super.isValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addBacon() {

@@ -4,14 +4,24 @@ public class NoHeavyMeal extends Meal {
     protected static final int PRICE = 15;
 
     public NoHeavyMeal() {
-        super(EMealType.NO_HEAVY_MEAL);
+        super(PRICE);
     }
 
-    public void setAppetizers(final Appetizer appetizer1, final Appetizer appetizer2) {
-        super.setAppetizers(appetizer1, appetizer2);
+    public boolean isValid() {
+        return super.isValid(2, 0, 1);
     }
 
-    public void setDessert(final Dessert dessert) {
-        super.setDesserts(dessert);
+
+    public void setAppetizers(Appetizer appetizer1, Appetizer appetizer2) {
+        this.appetizers.clear();
+
+        this.appetizers.add(appetizer1);
+        this.appetizers.add(appetizer2);
+    }
+
+    public void setDessert(Dessert dessert) {
+        this.desserts.clear();
+
+        this.desserts.add(dessert);
     }
 }

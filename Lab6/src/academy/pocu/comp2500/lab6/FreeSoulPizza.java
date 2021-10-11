@@ -8,7 +8,11 @@ public class FreeSoulPizza extends Pizza {
     protected static final int MAX_CHEESE_COUNT = 1;
 
     public FreeSoulPizza() {
-        super(EPizzaType.FREE_SOUL_PIZZA);
+        super(PRICE);
+    }
+
+    public boolean isValid() {
+        return super.isValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addTopping(final Topping topping) {
@@ -54,5 +58,4 @@ public class FreeSoulPizza extends Pizza {
 
         return isRemoved;
     }
-
 }

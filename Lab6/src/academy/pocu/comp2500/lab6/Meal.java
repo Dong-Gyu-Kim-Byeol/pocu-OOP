@@ -3,11 +3,9 @@ package academy.pocu.comp2500.lab6;
 import java.util.ArrayList;
 
 public class Meal extends Product {
-    private final EMealType mealType;
-
-    private final ArrayList<Appetizer> appetizers;
-    private final ArrayList<MainCourse> mainCourses;
-    private final ArrayList<Dessert> desserts;
+    protected final ArrayList<Appetizer> appetizers;
+    protected final ArrayList<MainCourse> mainCourses;
+    protected final ArrayList<Dessert> desserts;
 
     // public
     public ArrayList<Appetizer> getAppetizers() {
@@ -22,56 +20,18 @@ public class Meal extends Product {
         return desserts;
     }
 
-    public boolean isValid() {
-        switch (mealType) {
-            case THREE_COURSE_MEAL:
-                return this.appetizers.size() == 1
-                        && this.mainCourses.size() == 1
-                        && this.desserts.size() == 1;
-
-            case NO_HEAVY_MEAL:
-                return this.appetizers.size() == 2
-                        && this.mainCourses.size() == 0
-                        && this.desserts.size() == 1;
-
-            case DEATH_BY_DESSERTS:
-                return this.appetizers.size() == 0
-                        && this.mainCourses.size() == 0
-                        && this.desserts.size() == 4;
-
-            default:
-                throw new IllegalArgumentException("unknown type");
-        }
+    // protected
+    protected boolean isValid(final int maxAppetizerCount, final int maxMainCourseCount, final int maxDessertCount) {
+        return this.appetizers.size() == maxAppetizerCount
+                && this.mainCourses.size() == maxMainCourseCount
+                && this.desserts.size() == maxDessertCount;
     }
 
-    // protected
-    protected Meal(final EMealType mealType) {
-        super(mealType.getProductType());
+    protected Meal(final int price) {
+        super(price);
 
-        this.mealType = mealType;
         this.appetizers = new ArrayList<Appetizer>();
         this.mainCourses = new ArrayList<MainCourse>();
         this.desserts = new ArrayList<Dessert>();
-    }
-
-    protected void setMainCourses(final MainCourse... mainCourses) {
-        this.mainCourses.clear();
-        for (final MainCourse mainCourse : mainCourses) {
-            this.mainCourses.add(mainCourse);
-        }
-    }
-
-    protected void setAppetizers(final Appetizer... appetizers) {
-        this.appetizers.clear();
-        for (final Appetizer appetizer : appetizers) {
-            this.appetizers.add(appetizer);
-        }
-    }
-
-    protected void setDesserts(final Dessert... desserts) {
-        this.desserts.clear();
-        for (final Dessert dessert : desserts) {
-            this.desserts.add(dessert);
-        }
     }
 }

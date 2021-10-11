@@ -4,18 +4,29 @@ public class ThreeCourseMeal extends Meal {
     protected static final int PRICE = 25;
 
     public ThreeCourseMeal() {
-        super(EMealType.THREE_COURSE_MEAL);
+        super(PRICE);
     }
 
-    public void setMainCourse(final MainCourse mainCourse) {
-        super.setMainCourses(mainCourse);
+    public boolean isValid() {
+        return super.isValid(1, 1, 1);
     }
 
-    public void setAppetizer(final Appetizer appetizer) {
-        super.setAppetizers(appetizer);
+
+    public void setMainCourse(MainCourse mainCourse) {
+        this.mainCourses.clear();
+
+        this.mainCourses.add(mainCourse);
     }
 
-    public void setDessert(final Dessert dessert) {
-        super.setDesserts(dessert);
+    public void setAppetizer(Appetizer appetizer) {
+        this.appetizers.clear();
+
+        this.appetizers.add(appetizer);
+    }
+
+    public void setDessert(Dessert dessert) {
+        this.desserts.clear();
+
+        this.desserts.add(dessert);
     }
 }
