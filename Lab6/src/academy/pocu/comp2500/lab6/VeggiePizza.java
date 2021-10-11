@@ -8,9 +8,9 @@ public class VeggiePizza extends Pizza {
     public VeggiePizza() {
         super(EPizzaType.VEGGIE_PIZZA, PRICE);
 
-        this.toppings.add(Topping.BLACK_OLIVES);
-        this.toppings.add(Topping.RED_ONIONS);
-        this.toppings.add(Topping.GREEN_PEPPERS);
+        super.initAdd(Topping.BLACK_OLIVES);
+        super.initAdd(Topping.RED_ONIONS);
+        super.initAdd(Topping.GREEN_PEPPERS);
     }
 
     public boolean addMozzarellaCheese() {
@@ -18,19 +18,11 @@ public class VeggiePizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.MOZZARELLA_CHEESE);
-        ++this.cheeseCount;
-        return true;
+        return super.add(Topping.MOZZARELLA_CHEESE, 0, 0, MAX_CHEESE_COUNT);
     }
 
     public boolean removeMozzarellaCheese() {
-        boolean isRemoved = this.toppings.remove(Topping.MOZZARELLA_CHEESE);
-
-        if (isRemoved) {
-            --this.cheeseCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.MOZZARELLA_CHEESE);
     }
 
     public boolean addCheddarCheese() {
@@ -38,19 +30,11 @@ public class VeggiePizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.CHEDDAR_CHEESE);
-        ++this.cheeseCount;
-        return true;
+        return super.add(Topping.CHEDDAR_CHEESE, 0, 0, MAX_CHEESE_COUNT);
     }
 
     public boolean removeCheddarCheese() {
-        boolean isRemoved = this.toppings.remove(Topping.CHEDDAR_CHEESE);
-
-        if (isRemoved) {
-            --this.cheeseCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.CHEDDAR_CHEESE);
     }
 
     public boolean addFetaCheese() {
@@ -58,18 +42,10 @@ public class VeggiePizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.FETA_CHEESE);
-        ++this.cheeseCount;
-        return true;
+        return super.add(Topping.FETA_CHEESE, 0, 0, MAX_CHEESE_COUNT);
     }
 
     public boolean removeFetaCheese() {
-        boolean isRemoved = this.toppings.remove(Topping.FETA_CHEESE);
-
-        if (isRemoved) {
-            --this.cheeseCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.FETA_CHEESE);
     }
 }

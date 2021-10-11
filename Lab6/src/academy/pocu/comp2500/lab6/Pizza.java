@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Pizza extends Product {
     private final EPizzaType pizzaType;
 
-    protected final ArrayList<Topping> toppings;
+    private final ArrayList<Topping> toppings;
 
-    protected int veggieCount;
-    protected int meatCount;
-    protected int cheeseCount;
+    private int veggieCount;
+    private int meatCount;
+    private int cheeseCount;
 
     public ArrayList<Topping> getToppings() {
         return toppings;
@@ -62,5 +62,53 @@ public class Pizza extends Product {
         return topping == Topping.MOZZARELLA_CHEESE
                 || topping == Topping.CHEDDAR_CHEESE
                 || topping == Topping.FETA_CHEESE;
+    }
+
+    protected void initAdd(final Topping topping) {
+        this.toppings.add(topping);
+    }
+
+    protected boolean add(final Topping topping, final int maxMeatCount, final int maxVeggieCount, final int maxCheeseCount) {
+        if ((isMeat(topping) && this.meatCount >= maxMeatCount)
+                || (isVeggie(topping) && this.veggieCount >= maxVeggieCount)
+                || (isCheese(topping) && this.cheeseCount >= maxCheeseCount)) {
+            return false;
+        }
+
+        this.toppings.add(topping);
+
+        if (isMeat(topping)) {
+            ++this.meatCount;
+        }
+
+        if (isVeggie(topping)) {
+            ++this.veggieCount;
+        }
+
+        if (isCheese(topping)) {
+            ++this.cheeseCount;
+        }
+
+        return true;
+    }
+
+    protected boolean remove(Topping topping) {
+        boolean isRemoved = this.toppings.remove(topping);
+
+        if (isRemoved) {
+            if (isMeat(topping)) {
+                --this.meatCount;
+            }
+
+            if (isVeggie(topping)) {
+                --this.veggieCount;
+            }
+
+            if (isCheese(topping)) {
+                --this.cheeseCount;
+            }
+        }
+
+        return isRemoved;
     }
 }

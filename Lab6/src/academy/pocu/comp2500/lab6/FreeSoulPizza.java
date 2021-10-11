@@ -12,46 +12,10 @@ public class FreeSoulPizza extends Pizza {
     }
 
     public boolean addTopping(Topping topping) {
-        if ((isMeat(topping) && this.meatCount >= MAX_MEAT_COUNT)
-                || (isVeggie(topping) && this.veggieCount >= MAX_VEGGIE_COUNT)
-                || (isCheese(topping) && this.cheeseCount >= MAX_CHEESE_COUNT)) {
-            return false;
-        }
-
-        this.toppings.add(topping);
-
-        if (isMeat(topping)) {
-            ++this.meatCount;
-        }
-
-        if (isVeggie(topping)) {
-            ++this.veggieCount;
-        }
-
-        if (isCheese(topping)) {
-            ++this.cheeseCount;
-        }
-
-        return true;
+        return super.add(topping, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
-    public boolean removeTopping(Topping topping) {
-        boolean isRemoved = this.toppings.remove(topping);
-
-        if (isRemoved) {
-            if (isMeat(topping)) {
-                --this.meatCount;
-            }
-
-            if (isVeggie(topping)) {
-                --this.veggieCount;
-            }
-
-            if (isCheese(topping)) {
-                --this.cheeseCount;
-            }
-        }
-
-        return isRemoved;
+    public boolean removeTopping(final Topping topping) {
+        return super.remove(topping);
     }
 }

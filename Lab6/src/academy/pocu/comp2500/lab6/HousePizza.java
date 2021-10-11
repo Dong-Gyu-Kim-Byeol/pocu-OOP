@@ -8,10 +8,10 @@ public class HousePizza extends Pizza {
     public HousePizza() {
         super(EPizzaType.HOUSE_PIZZA, PRICE);
 
-        this.toppings.add(Topping.BLACK_OLIVES);
-        this.toppings.add(Topping.RED_ONIONS);
-        this.toppings.add(Topping.GREEN_PEPPERS);
-        this.toppings.add(Topping.MOZZARELLA_CHEESE);
+        super.initAdd(Topping.BLACK_OLIVES);
+        super.initAdd(Topping.RED_ONIONS);
+        super.initAdd(Topping.GREEN_PEPPERS);
+        super.initAdd(Topping.MOZZARELLA_CHEESE);
     }
 
     public boolean addBacon() {
@@ -19,19 +19,11 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.BACON);
-        ++this.meatCount;
-        return true;
+        return super.add(Topping.BACON, MAX_MEAT_COUNT, 0, 0);
     }
 
     public boolean removeBacon() {
-        boolean isRemoved = this.toppings.remove(Topping.BACON);
-
-        if (isRemoved) {
-            --this.meatCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.BACON);
     }
 
     public boolean addPeperoni() {
@@ -39,19 +31,11 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.PEPERONI);
-        ++this.meatCount;
-        return true;
+        return super.add(Topping.PEPERONI, MAX_MEAT_COUNT, 0, 0);
     }
 
     public boolean removePeperoni() {
-        boolean isRemoved = this.toppings.remove(Topping.PEPERONI);
-
-        if (isRemoved) {
-            --this.meatCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.PEPERONI);
     }
 
     public boolean addSausages() {
@@ -59,18 +43,10 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.SAUSAGES);
-        ++this.meatCount;
-        return true;
+        return super.add(Topping.SAUSAGES, MAX_MEAT_COUNT, 0, 0);
     }
 
     public boolean removeSausages() {
-        boolean isRemoved = this.toppings.remove(Topping.SAUSAGES);
-
-        if (isRemoved) {
-            --this.meatCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.SAUSAGES);
     }
 }

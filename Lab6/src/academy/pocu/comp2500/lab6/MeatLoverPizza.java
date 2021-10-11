@@ -8,11 +8,11 @@ public class MeatLoverPizza extends Pizza {
     public MeatLoverPizza() {
         super(EPizzaType.MEAT_LOVER_PIZZA, PRICE);
 
-        this.toppings.add(Topping.BACON);
-        this.toppings.add(Topping.PEPERONI);
-        this.toppings.add(Topping.HAM);
-        this.toppings.add(Topping.SAUSAGES);
-        this.toppings.add(Topping.CHEDDAR_CHEESE);
+        super.initAdd(Topping.BACON);
+        super.initAdd(Topping.PEPERONI);
+        super.initAdd(Topping.HAM);
+        super.initAdd(Topping.SAUSAGES);
+        super.initAdd(Topping.CHEDDAR_CHEESE);
     }
 
     public boolean addBlackOlives() {
@@ -20,19 +20,11 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.BLACK_OLIVES);
-        ++this.veggieCount;
-        return true;
+        return super.add(Topping.BLACK_OLIVES, 0, MAX_VEGGIE_COUNT, 0);
     }
 
     public boolean removeBlackOlives() {
-        boolean isRemoved = this.toppings.remove(Topping.BLACK_OLIVES);
-
-        if (isRemoved) {
-            --this.veggieCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.BLACK_OLIVES);
     }
 
     public boolean addRedOnions() {
@@ -40,19 +32,11 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.RED_ONIONS);
-        ++this.veggieCount;
-        return true;
+        return super.add(Topping.RED_ONIONS, 0, MAX_VEGGIE_COUNT, 0);
     }
 
     public boolean removeRedOnions() {
-        boolean isRemoved = this.toppings.remove(Topping.RED_ONIONS);
-
-        if (isRemoved) {
-            --this.veggieCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.RED_ONIONS);
     }
 
     public boolean addGreenPeppers() {
@@ -60,18 +44,10 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        this.toppings.add(Topping.GREEN_PEPPERS);
-        ++this.veggieCount;
-        return true;
+        return super.add(Topping.GREEN_PEPPERS, 0, MAX_VEGGIE_COUNT, 0);
     }
 
     public boolean removeGreenPeppers() {
-        boolean isRemoved = this.toppings.remove(Topping.GREEN_PEPPERS);
-
-        if (isRemoved) {
-            --this.veggieCount;
-        }
-
-        return isRemoved;
+        return super.remove(Topping.GREEN_PEPPERS);
     }
 }
