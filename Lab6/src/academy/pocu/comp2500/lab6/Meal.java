@@ -44,7 +44,7 @@ public class Meal extends Product {
 
     // protected
     protected Meal(final EMealType mealType, final int price) {
-        super(mealType.getProductType(), price);
+        super(price);
 
         this.mealType = mealType;
         this.appetizers = new ArrayList<Appetizer>();

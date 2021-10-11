@@ -2,7 +2,6 @@ package academy.pocu.comp2500.lab6;
 
 public class Product {
     // private
-    private final EProductType productType;
     private final int price;
 
     // public
@@ -10,13 +9,8 @@ public class Product {
         return price;
     }
 
-    public EProductType getProductType() {
-        return productType;
-    }
-
     // protected
-    protected Product(final EProductType productType, final int price) {
-        this.productType = productType;
+    protected Product(final int price) {
         this.price = price;
     }
 }

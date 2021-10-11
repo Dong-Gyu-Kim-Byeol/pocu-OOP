@@ -11,10 +11,6 @@ public class Pizza extends Product {
     protected int meatCount;
     protected int cheeseCount;
 
-    public EPizzaType getPizzaType() {
-        return pizzaType;
-    }
-
     public ArrayList<Topping> getToppings() {
         return toppings;
     }
@@ -42,7 +38,7 @@ public class Pizza extends Product {
 
     // protected
     protected Pizza(final EPizzaType pizzaType, final int price) {
-        super(pizzaType.getProductType(), price);
+        super(price);
 
         this.pizzaType = pizzaType;
         this.toppings = new ArrayList<Topping>();
