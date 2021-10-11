@@ -8,11 +8,6 @@ public class DeathByDesserts extends Meal {
     }
 
     public void setDesserts(final Dessert dessert1, final Dessert dessert2, final Dessert dessert3, final Dessert dessert4) {
-        this.desserts.clear();
-
-        this.desserts.add(dessert1);
-        this.desserts.add(dessert2);
-        this.desserts.add(dessert3);
-        this.desserts.add(dessert4);
+        super.setDessert(dessert1, dessert2, dessert3, dessert4);
     }
 }

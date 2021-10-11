@@ -8,17 +8,14 @@ public class ThreeCourseMeal extends Meal {
     }
 
     public void setMainCourse(final MainCourse mainCourse) {
-        this.mainCourses.clear();
-        this.mainCourses.add(mainCourse);
+        super.setMainCourse(mainCourse);
     }
 
     public void setAppetizer(final Appetizer appetizer) {
-        this.appetizers.clear();
-        this.appetizers.add(appetizer);
+        super.setAppetizer(appetizer);
     }
 
     public void setDessert(final Dessert dessert) {
-        this.desserts.clear();
-        this.desserts.add(dessert);
+        super.setDessert(dessert);
     }
 }

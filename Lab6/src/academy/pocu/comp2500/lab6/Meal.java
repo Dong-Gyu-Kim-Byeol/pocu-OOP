@@ -5,10 +5,9 @@ import java.util.ArrayList;
 public class Meal extends Product {
     private final EMealType mealType;
 
-    // protected
-    protected final ArrayList<Appetizer> appetizers;
-    protected final ArrayList<MainCourse> mainCourses;
-    protected final ArrayList<Dessert> desserts;
+    private final ArrayList<Appetizer> appetizers;
+    private final ArrayList<MainCourse> mainCourses;
+    private final ArrayList<Dessert> desserts;
 
     // public
     public ArrayList<Appetizer> getAppetizers() {
@@ -50,5 +49,26 @@ public class Meal extends Product {
         this.appetizers = new ArrayList<Appetizer>();
         this.mainCourses = new ArrayList<MainCourse>();
         this.desserts = new ArrayList<Dessert>();
+    }
+
+    protected void setMainCourse(final MainCourse... mainCourses) {
+        this.mainCourses.clear();
+        for (final MainCourse mainCourse : mainCourses) {
+            this.mainCourses.add(mainCourse);
+        }
+    }
+
+    protected void setAppetizer(final Appetizer... appetizers) {
+        this.appetizers.clear();
+        for (final Appetizer appetizer : appetizers) {
+            this.appetizers.add(appetizer);
+        }
+    }
+
+    protected void setDessert(final Dessert... desserts) {
+        this.desserts.clear();
+        for (final Dessert dessert : desserts) {
+            this.desserts.add(dessert);
+        }
     }
 }

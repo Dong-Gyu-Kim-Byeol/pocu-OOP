@@ -6,7 +6,6 @@ public class Pizza extends Product {
     private final EPizzaType pizzaType;
 
     private final ArrayList<Topping> toppings;
-
     private int veggieCount;
     private int meatCount;
     private int cheeseCount;
