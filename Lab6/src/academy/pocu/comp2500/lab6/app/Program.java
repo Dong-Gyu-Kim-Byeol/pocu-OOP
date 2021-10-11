@@ -133,7 +133,7 @@ public class Program {
             assert (!freeSoulPizza.isValid());
 
             assert (!freeSoulPizza.addTopping(Topping.GREEN_PEPPERS));
-            assert (!freeSoulPizza.remove(Topping.GREEN_PEPPERS));
+            assert (!freeSoulPizza.removeTopping(Topping.GREEN_PEPPERS));
 
             assert (!freeSoulPizza.isValid());
 

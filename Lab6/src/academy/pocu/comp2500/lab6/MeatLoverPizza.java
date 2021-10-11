@@ -6,13 +6,9 @@ public class MeatLoverPizza extends Pizza {
     protected static final int MAX_VEGGIE_COUNT = 1;
 
     public MeatLoverPizza() {
-        super(EPizzaType.MEAT_LOVER_PIZZA, PRICE);
+        super(EPizzaType.MEAT_LOVER_PIZZA);
 
-        super.initAdd(Topping.BACON);
-        super.initAdd(Topping.PEPERONI);
-        super.initAdd(Topping.HAM);
-        super.initAdd(Topping.SAUSAGES);
-        super.initAdd(Topping.CHEDDAR_CHEESE);
+        super.initTopping(Topping.BACON, Topping.PEPERONI, Topping.HAM, Topping.SAUSAGES, Topping.CHEDDAR_CHEESE);
     }
 
     public boolean addBlackOlives() {

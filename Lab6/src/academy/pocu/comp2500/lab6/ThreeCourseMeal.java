@@ -1,10 +1,10 @@
 package academy.pocu.comp2500.lab6;
 
 public class ThreeCourseMeal extends Meal {
-    private static final int PRICE = 25;
+    protected static final int PRICE = 25;
 
     public ThreeCourseMeal() {
-        super(EMealType.THREE_COURSE_MEAL, PRICE);
+        super(EMealType.THREE_COURSE_MEAL);
     }
 
     public void setMainCourse(final MainCourse mainCourse) {

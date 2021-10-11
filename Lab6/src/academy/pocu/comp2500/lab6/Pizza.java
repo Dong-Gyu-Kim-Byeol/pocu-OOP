@@ -2,7 +2,7 @@ package academy.pocu.comp2500.lab6;
 
 import java.util.ArrayList;
 
-public class Pizza extends Product {
+public class Pizza {
     private final EPizzaType pizzaType;
 
     private final ArrayList<Topping> toppings;
@@ -13,6 +13,26 @@ public class Pizza extends Product {
     public ArrayList<Topping> getToppings() {
         return toppings;
     }
+
+    public int getPrice() {
+        switch (this.pizzaType) {
+            case HOUSE_PIZZA:
+                return HousePizza.PRICE;
+
+            case MEAT_LOVER_PIZZA:
+                return MeatLoverPizza.PRICE;
+
+            case VEGGIE_PIZZA:
+                return VeggiePizza.PRICE;
+
+            case FREE_SOUL_PIZZA:
+                return FreeSoulPizza.PRICE;
+
+            default:
+                throw new IllegalArgumentException("unknown type");
+        }
+    }
+
 
     public boolean isValid() {
         switch (this.pizzaType) {
@@ -36,9 +56,7 @@ public class Pizza extends Product {
     }
 
     // protected
-    protected Pizza(final EPizzaType pizzaType, final int price) {
-        super(price);
-
+    protected Pizza(final EPizzaType pizzaType) {
         this.pizzaType = pizzaType;
         this.toppings = new ArrayList<Topping>();
     }
@@ -63,8 +81,10 @@ public class Pizza extends Product {
                 || topping == Topping.FETA_CHEESE;
     }
 
-    protected void initAdd(final Topping topping) {
-        this.toppings.add(topping);
+    protected void initTopping(final Topping... toppings) {
+        for (final Topping topping : toppings) {
+            this.toppings.add(topping);
+        }
     }
 
     protected boolean add(final Topping topping) {
@@ -124,7 +144,7 @@ public class Pizza extends Product {
         return true;
     }
 
-    public boolean remove(final Topping topping) {
+    protected boolean remove(final Topping topping) {
         boolean isRemoved = this.toppings.remove(topping);
 
         if (isRemoved) {

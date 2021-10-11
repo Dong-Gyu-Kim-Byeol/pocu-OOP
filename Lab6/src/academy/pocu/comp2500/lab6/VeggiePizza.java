@@ -6,11 +6,9 @@ public class VeggiePizza extends Pizza {
     protected static final int MAX_CHEESE_COUNT = 2;
 
     public VeggiePizza() {
-        super(EPizzaType.VEGGIE_PIZZA, PRICE);
+        super(EPizzaType.VEGGIE_PIZZA);
 
-        super.initAdd(Topping.BLACK_OLIVES);
-        super.initAdd(Topping.RED_ONIONS);
-        super.initAdd(Topping.GREEN_PEPPERS);
+        super.initTopping(Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS);
     }
 
     public boolean addMozzarellaCheese() {
