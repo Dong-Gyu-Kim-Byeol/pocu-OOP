@@ -16,11 +16,19 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.addTopping(Topping.BACON);
+        this.toppings.add(Topping.BACON);
+        ++this.meatCount;
+        return true;
     }
 
     public boolean removeBacon() {
-        return super.removeTopping(Topping.BACON);
+        boolean isRemoved = this.toppings.remove(Topping.BACON);
+
+        if (isRemoved) {
+            --this.meatCount;
+        }
+
+        return isRemoved;
     }
 
     public boolean addPeperoni() {
@@ -28,11 +36,19 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.addTopping(Topping.PEPERONI);
+        this.toppings.add(Topping.PEPERONI);
+        ++this.meatCount;
+        return true;
     }
 
     public boolean removePeperoni() {
-        return super.removeTopping(Topping.PEPERONI);
+        boolean isRemoved = this.toppings.remove(Topping.PEPERONI);
+
+        if (isRemoved) {
+            --this.meatCount;
+        }
+
+        return isRemoved;
     }
 
     public boolean addSausages() {
@@ -40,10 +56,18 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.addTopping(Topping.SAUSAGES);
+        this.toppings.add(Topping.SAUSAGES);
+        ++this.meatCount;
+        return true;
     }
 
     public boolean removeSausages() {
-        return super.removeTopping(Topping.SAUSAGES);
+        boolean isRemoved = this.toppings.remove(Topping.SAUSAGES);
+
+        if (isRemoved) {
+            --this.meatCount;
+        }
+
+        return isRemoved;
     }
 }
