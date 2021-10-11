@@ -2,7 +2,7 @@ package academy.pocu.comp2500.lab6;
 
 import java.util.ArrayList;
 
-public class Meal {
+public class Meal extends Product {
     private final EMealType mealType;
 
     private final ArrayList<Appetizer> appetizers;
@@ -10,22 +10,6 @@ public class Meal {
     private final ArrayList<Dessert> desserts;
 
     // public
-    public int getPrice() {
-        switch (mealType) {
-            case THREE_COURSE_MEAL:
-                return ThreeCourseMeal.PRICE;
-
-            case NO_HEAVY_MEAL:
-                return NoHeavyMeal.PRICE;
-
-            case DEATH_BY_DESSERTS:
-                return DeathByDesserts.PRICE;
-
-            default:
-                throw new IllegalArgumentException("unknown type");
-        }
-    }
-
     public ArrayList<Appetizer> getAppetizers() {
         return appetizers;
     }
@@ -59,6 +43,8 @@ public class Meal {
 
     // protected
     protected Meal(final EMealType mealType) {
+        super(mealType.getProductType());
+
         this.mealType = mealType;
         this.appetizers = new ArrayList<Appetizer>();
         this.mainCourses = new ArrayList<MainCourse>();
