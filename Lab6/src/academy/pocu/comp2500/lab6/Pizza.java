@@ -22,8 +22,8 @@ public class Pizza extends Product {
         }
     }
 
-    protected boolean isValid(final int maxMeatCount, final int maxVeggieCount, final int maxCheeseCount) {
-        return this.meatCount == maxMeatCount
+    protected void setIsValid(final int maxMeatCount, final int maxVeggieCount, final int maxCheeseCount) {
+        super.isValid = this.meatCount == maxMeatCount
                 && this.veggieCount == maxVeggieCount
                 && this.cheeseCount == maxCheeseCount;
     }

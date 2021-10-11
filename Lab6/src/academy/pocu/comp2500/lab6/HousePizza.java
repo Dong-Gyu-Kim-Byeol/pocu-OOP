@@ -1,18 +1,14 @@
 package academy.pocu.comp2500.lab6;
 
 public class HousePizza extends Pizza {
-    protected static final int PRICE = 20;
+    private static final int PRICE = 20;
 
-    protected static final int MAX_MEAT_COUNT = 2;
-    protected static final int MAX_VEGGIE_COUNT = 0;
-    protected static final int MAX_CHEESE_COUNT = 0;
+    private static final int MAX_MEAT_COUNT = 2;
+    private static final int MAX_VEGGIE_COUNT = 0;
+    private static final int MAX_CHEESE_COUNT = 0;
 
     public HousePizza() {
         super(PRICE, Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS, Topping.MOZZARELLA_CHEESE);
-    }
-
-    public boolean isValid() {
-        return super.isValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addBacon() {
@@ -22,6 +18,8 @@ public class HousePizza extends Pizza {
 
         this.toppings.add(Topping.BACON);
         ++this.meatCount;
+
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return true;
     }
 
@@ -32,6 +30,7 @@ public class HousePizza extends Pizza {
             --this.meatCount;
         }
 
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return isRemoved;
     }
 
@@ -42,6 +41,8 @@ public class HousePizza extends Pizza {
 
         this.toppings.add(Topping.PEPERONI);
         ++this.meatCount;
+
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return true;
     }
 
@@ -52,6 +53,7 @@ public class HousePizza extends Pizza {
             --this.meatCount;
         }
 
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return isRemoved;
     }
 
@@ -62,6 +64,8 @@ public class HousePizza extends Pizza {
 
         this.toppings.add(Topping.SAUSAGES);
         ++this.meatCount;
+
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return true;
     }
 
@@ -72,6 +76,7 @@ public class HousePizza extends Pizza {
             --this.meatCount;
         }
 
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return isRemoved;
     }
 }

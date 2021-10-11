@@ -21,8 +21,8 @@ public class Meal extends Product {
     }
 
     // protected
-    protected boolean isValid(final int maxAppetizerCount, final int maxMainCourseCount, final int maxDessertCount) {
-        return this.appetizers.size() == maxAppetizerCount
+    protected void setIsValid(final int maxAppetizerCount, final int maxMainCourseCount, final int maxDessertCount) {
+        super.isValid = this.appetizers.size() == maxAppetizerCount
                 && this.mainCourses.size() == maxMainCourseCount
                 && this.desserts.size() == maxDessertCount;
     }

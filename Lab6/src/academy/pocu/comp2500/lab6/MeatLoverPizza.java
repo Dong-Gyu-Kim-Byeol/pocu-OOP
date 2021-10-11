@@ -1,18 +1,14 @@
 package academy.pocu.comp2500.lab6;
 
 public class MeatLoverPizza extends Pizza {
-    protected static final int PRICE = 21;
+    private static final int PRICE = 21;
 
-    protected static final int MAX_MEAT_COUNT = 0;
-    protected static final int MAX_VEGGIE_COUNT = 1;
-    protected static final int MAX_CHEESE_COUNT = 0;
+    private static final int MAX_MEAT_COUNT = 0;
+    private static final int MAX_VEGGIE_COUNT = 1;
+    private static final int MAX_CHEESE_COUNT = 0;
 
     public MeatLoverPizza() {
         super(PRICE, Topping.BACON, Topping.CHEDDAR_CHEESE, Topping.SAUSAGES, Topping.HAM, Topping.PEPERONI);
-    }
-
-    public boolean isValid() {
-        return super.isValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addBlackOlives() {
@@ -22,6 +18,8 @@ public class MeatLoverPizza extends Pizza {
 
         this.toppings.add(Topping.BLACK_OLIVES);
         ++this.veggieCount;
+
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return true;
     }
 
@@ -32,6 +30,7 @@ public class MeatLoverPizza extends Pizza {
             --this.veggieCount;
         }
 
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return isRemoved;
     }
 
@@ -42,6 +41,8 @@ public class MeatLoverPizza extends Pizza {
 
         this.toppings.add(Topping.RED_ONIONS);
         ++this.veggieCount;
+
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return true;
     }
 
@@ -52,6 +53,7 @@ public class MeatLoverPizza extends Pizza {
             --this.veggieCount;
         }
 
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return isRemoved;
     }
 
@@ -62,6 +64,8 @@ public class MeatLoverPizza extends Pizza {
 
         this.toppings.add(Topping.GREEN_PEPPERS);
         ++this.veggieCount;
+
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return true;
     }
 
@@ -72,6 +76,7 @@ public class MeatLoverPizza extends Pizza {
             --this.veggieCount;
         }
 
+        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
         return isRemoved;
     }
 }
