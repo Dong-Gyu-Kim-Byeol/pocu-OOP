@@ -1,21 +1,16 @@
 package academy.pocu.comp2500.lab6;
 
 public class VeggiePizza extends Pizza {
-    private static final int PRICE = 17;
-    private static final int MAX_CHEESE_COUNT = 2;
+    protected static final int PRICE = 17;
 
-    private int cheeseCount;
+    protected static final int MAX_CHEESE_COUNT = 2;
 
     public VeggiePizza() {
-        super(PRICE);
+        super(EPizzaType.VEGGIE_PIZZA, PRICE);
 
         this.toppings.add(Topping.BLACK_OLIVES);
         this.toppings.add(Topping.RED_ONIONS);
         this.toppings.add(Topping.GREEN_PEPPERS);
-    }
-
-    public boolean isValid() {
-        return this.cheeseCount == MAX_CHEESE_COUNT;
     }
 
     public boolean addMozzarellaCheese() {

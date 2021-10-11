@@ -1,23 +1,17 @@
 package academy.pocu.comp2500.lab6;
 
-
 public class HousePizza extends Pizza {
-    private static final int PRICE = 20;
-    private static final int MAX_MEAT_COUNT = 2;
+    protected static final int PRICE = 20;
 
-    private int meatCount;
+    protected static final int MAX_MEAT_COUNT = 2;
 
     public HousePizza() {
-        super(PRICE);
+        super(EPizzaType.HOUSE_PIZZA, PRICE);
 
         this.toppings.add(Topping.BLACK_OLIVES);
         this.toppings.add(Topping.RED_ONIONS);
         this.toppings.add(Topping.GREEN_PEPPERS);
         this.toppings.add(Topping.MOZZARELLA_CHEESE);
-    }
-
-    public boolean isValid() {
-        return this.meatCount == MAX_MEAT_COUNT;
     }
 
     public boolean addBacon() {

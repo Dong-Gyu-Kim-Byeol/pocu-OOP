@@ -4,11 +4,7 @@ public class ThreeCourseMeal extends Meal {
     private static final int PRICE = 25;
 
     public ThreeCourseMeal() {
-        super(PRICE);
-    }
-
-    public boolean isValid() {
-        return this.appetizers.size() == 1 && this.mainCourses.size() == 1 && this.desserts.size() == 1;
+        super(EMealType.THREE_COURSE_MEAL, PRICE);
     }
 
     public void setMainCourse(final MainCourse mainCourse) {

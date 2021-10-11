@@ -4,11 +4,7 @@ public class NoHeavyMeal extends Meal {
     private static final int PRICE = 15;
 
     public NoHeavyMeal() {
-        super(PRICE);
-    }
-
-    public boolean isValid() {
-        return this.appetizers.size() == 2 && this.desserts.size() == 1;
+        super(EMealType.NO_HEAVY_MEAL, PRICE);
     }
 
     public void setAppetizers(final Appetizer appetizer1, final Appetizer appetizer2) {
