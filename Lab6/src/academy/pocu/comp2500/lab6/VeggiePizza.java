@@ -18,7 +18,7 @@ public class VeggiePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.MOZZARELLA_CHEESE, 0, 0, MAX_CHEESE_COUNT);
+        return super.add(Topping.MOZZARELLA_CHEESE);
     }
 
     public boolean removeMozzarellaCheese() {
@@ -30,7 +30,7 @@ public class VeggiePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.CHEDDAR_CHEESE, 0, 0, MAX_CHEESE_COUNT);
+        return super.add(Topping.CHEDDAR_CHEESE);
     }
 
     public boolean removeCheddarCheese() {
@@ -42,7 +42,7 @@ public class VeggiePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.FETA_CHEESE, 0, 0, MAX_CHEESE_COUNT);
+        return super.add(Topping.FETA_CHEESE);
     }
 
     public boolean removeFetaCheese() {

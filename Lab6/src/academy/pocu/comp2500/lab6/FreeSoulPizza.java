@@ -12,10 +12,10 @@ public class FreeSoulPizza extends Pizza {
     }
 
     public boolean addTopping(Topping topping) {
-        return super.add(topping, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
+        return super.add(topping);
     }
 
-    public boolean removeTopping(final Topping topping) {
+    public boolean remove(final Topping topping) {
         return super.remove(topping);
     }
 }

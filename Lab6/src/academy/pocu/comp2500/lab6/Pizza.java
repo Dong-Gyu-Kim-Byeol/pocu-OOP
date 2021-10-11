@@ -67,7 +67,40 @@ public class Pizza extends Product {
         this.toppings.add(topping);
     }
 
-    protected boolean add(final Topping topping, final int maxMeatCount, final int maxVeggieCount, final int maxCheeseCount) {
+    protected boolean add(final Topping topping) {
+        final int maxMeatCount;
+        final int maxVeggieCount;
+        final int maxCheeseCount;
+
+        switch (this.pizzaType) {
+            case HOUSE_PIZZA:
+                maxMeatCount = HousePizza.MAX_MEAT_COUNT;
+                maxVeggieCount = 0;
+                maxCheeseCount = 0;
+                break;
+
+            case MEAT_LOVER_PIZZA:
+                maxMeatCount = 0;
+                maxVeggieCount = MeatLoverPizza.MAX_VEGGIE_COUNT;
+                maxCheeseCount = 0;
+                break;
+
+            case VEGGIE_PIZZA:
+                maxMeatCount = 0;
+                maxVeggieCount = 0;
+                maxCheeseCount = VeggiePizza.MAX_CHEESE_COUNT;
+                break;
+
+            case FREE_SOUL_PIZZA:
+                maxMeatCount = FreeSoulPizza.MAX_MEAT_COUNT;
+                maxVeggieCount = FreeSoulPizza.MAX_VEGGIE_COUNT;
+                maxCheeseCount = FreeSoulPizza.MAX_CHEESE_COUNT;
+                break;
+
+            default:
+                throw new IllegalArgumentException("unknown type");
+        }
+
         if ((isMeat(topping) && this.meatCount >= maxMeatCount)
                 || (isVeggie(topping) && this.veggieCount >= maxVeggieCount)
                 || (isCheese(topping) && this.cheeseCount >= maxCheeseCount)) {
@@ -91,7 +124,7 @@ public class Pizza extends Product {
         return true;
     }
 
-    protected boolean remove(Topping topping) {
+    public boolean remove(final Topping topping) {
         boolean isRemoved = this.toppings.remove(topping);
 
         if (isRemoved) {

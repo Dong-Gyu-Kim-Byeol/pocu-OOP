@@ -20,7 +20,7 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.BLACK_OLIVES, 0, MAX_VEGGIE_COUNT, 0);
+        return super.add(Topping.BLACK_OLIVES);
     }
 
     public boolean removeBlackOlives() {
@@ -32,7 +32,7 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.RED_ONIONS, 0, MAX_VEGGIE_COUNT, 0);
+        return super.add(Topping.RED_ONIONS);
     }
 
     public boolean removeRedOnions() {
@@ -44,7 +44,7 @@ public class MeatLoverPizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.GREEN_PEPPERS, 0, MAX_VEGGIE_COUNT, 0);
+        return super.add(Topping.GREEN_PEPPERS);
     }
 
     public boolean removeGreenPeppers() {

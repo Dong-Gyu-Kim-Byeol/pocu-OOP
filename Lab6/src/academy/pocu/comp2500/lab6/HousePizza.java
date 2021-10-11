@@ -19,7 +19,7 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.BACON, MAX_MEAT_COUNT, 0, 0);
+        return super.add(Topping.BACON);
     }
 
     public boolean removeBacon() {
@@ -31,7 +31,7 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.PEPERONI, MAX_MEAT_COUNT, 0, 0);
+        return super.add(Topping.PEPERONI);
     }
 
     public boolean removePeperoni() {
@@ -43,7 +43,7 @@ public class HousePizza extends Pizza {
             return false;
         }
 
-        return super.add(Topping.SAUSAGES, MAX_MEAT_COUNT, 0, 0);
+        return super.add(Topping.SAUSAGES);
     }
 
     public boolean removeSausages() {
