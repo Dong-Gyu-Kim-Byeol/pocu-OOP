@@ -8,7 +8,7 @@ public class MeatLoverPizza extends Pizza {
     public MeatLoverPizza() {
         super(EPizzaType.MEAT_LOVER_PIZZA);
 
-        super.initTopping(Topping.BACON, Topping.PEPERONI, Topping.HAM, Topping.SAUSAGES, Topping.CHEDDAR_CHEESE);
+        super.initToppings(Topping.BACON, Topping.PEPERONI, Topping.HAM, Topping.SAUSAGES, Topping.CHEDDAR_CHEESE);
     }
 
     public boolean addBlackOlives() {

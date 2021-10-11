@@ -8,7 +8,7 @@ public class VeggiePizza extends Pizza {
     public VeggiePizza() {
         super(EPizzaType.VEGGIE_PIZZA);
 
-        super.initTopping(Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS);
+        super.initToppings(Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS);
     }
 
     public boolean addMozzarellaCheese() {

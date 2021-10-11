@@ -61,7 +61,7 @@ public class Pizza {
         this.toppings = new ArrayList<Topping>();
     }
 
-    protected void initTopping(final Topping... toppings) {
+    protected void initToppings(final Topping... toppings) {
         for (final Topping topping : toppings) {
             this.toppings.add(topping);
         }

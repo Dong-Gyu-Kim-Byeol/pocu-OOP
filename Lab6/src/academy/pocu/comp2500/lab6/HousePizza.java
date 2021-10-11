@@ -8,7 +8,7 @@ public class HousePizza extends Pizza {
     public HousePizza() {
         super(EPizzaType.HOUSE_PIZZA);
 
-        super.initTopping(Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS, Topping.MOZZARELLA_CHEESE);
+        super.initToppings(Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS, Topping.MOZZARELLA_CHEESE);
     }
 
     public boolean addBacon() {
