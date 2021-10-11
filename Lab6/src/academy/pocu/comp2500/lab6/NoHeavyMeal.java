@@ -8,10 +8,10 @@ public class NoHeavyMeal extends Meal {
     }
 
     public void setAppetizers(final Appetizer appetizer1, final Appetizer appetizer2) {
-        super.setAppetizer(appetizer1, appetizer2);
+        super.setAppetizers(appetizer1, appetizer2);
     }
 
     public void setDessert(final Dessert dessert) {
-        super.setDessert(dessert);
+        super.setDesserts(dessert);
     }
 }

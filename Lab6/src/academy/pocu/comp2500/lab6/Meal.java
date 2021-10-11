@@ -65,21 +65,21 @@ public class Meal {
         this.desserts = new ArrayList<Dessert>();
     }
 
-    protected void setMainCourse(final MainCourse... mainCourses) {
+    protected void setMainCourses(final MainCourse... mainCourses) {
         this.mainCourses.clear();
         for (final MainCourse mainCourse : mainCourses) {
             this.mainCourses.add(mainCourse);
         }
     }
 
-    protected void setAppetizer(final Appetizer... appetizers) {
+    protected void setAppetizers(final Appetizer... appetizers) {
         this.appetizers.clear();
         for (final Appetizer appetizer : appetizers) {
             this.appetizers.add(appetizer);
         }
     }
 
-    protected void setDessert(final Dessert... desserts) {
+    protected void setDesserts(final Dessert... desserts) {
         this.desserts.clear();
         for (final Dessert dessert : desserts) {
             this.desserts.add(dessert);

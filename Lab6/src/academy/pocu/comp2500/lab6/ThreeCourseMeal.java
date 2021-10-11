@@ -8,14 +8,14 @@ public class ThreeCourseMeal extends Meal {
     }
 
     public void setMainCourse(final MainCourse mainCourse) {
-        super.setMainCourse(mainCourse);
+        super.setMainCourses(mainCourse);
     }
 
     public void setAppetizer(final Appetizer appetizer) {
-        super.setAppetizer(appetizer);
+        super.setAppetizers(appetizer);
     }
 
     public void setDessert(final Dessert dessert) {
-        super.setDessert(dessert);
+        super.setDesserts(dessert);
     }
 }
