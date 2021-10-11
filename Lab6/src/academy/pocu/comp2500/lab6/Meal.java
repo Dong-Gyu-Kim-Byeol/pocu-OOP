@@ -31,10 +31,13 @@ public class Meal extends Product {
 
             case NO_HEAVY_MEAL:
                 return this.appetizers.size() == 2
+                        && this.mainCourses.size() == 0
                         && this.desserts.size() == 1;
 
             case DEATH_BY_DESSERTS:
-                return this.desserts.size() == 4;
+                return this.appetizers.size() == 0
+                        && this.mainCourses.size() == 0
+                        && this.desserts.size() == 4;
 
             default:
                 throw new IllegalArgumentException("unknown type");

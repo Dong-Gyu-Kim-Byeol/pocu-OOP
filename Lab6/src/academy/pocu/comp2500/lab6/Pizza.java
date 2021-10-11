@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Pizza extends Product {
     private final EPizzaType pizzaType;
 
-    private final ArrayList<Topping> toppings;
+    private ArrayList<Topping> toppings;
     private int veggieCount;
     private int meatCount;
     private int cheeseCount;
@@ -13,7 +13,6 @@ public class Pizza extends Product {
     public ArrayList<Topping> getToppings() {
         return toppings;
     }
-
 
     public boolean isValid() {
         switch (this.pizzaType) {
@@ -41,13 +40,10 @@ public class Pizza extends Product {
         super(pizzaType.getProductType());
 
         this.pizzaType = pizzaType;
-        this.toppings = new ArrayList<Topping>();
     }
 
-    protected void initToppings(final Topping... toppings) {
-        for (final Topping topping : toppings) {
-            this.toppings.add(topping);
-        }
+    protected void initToppings(final ArrayList<Topping> toppings) {
+        this.toppings = toppings;
     }
 
     protected static boolean isMeat(final Topping topping) {

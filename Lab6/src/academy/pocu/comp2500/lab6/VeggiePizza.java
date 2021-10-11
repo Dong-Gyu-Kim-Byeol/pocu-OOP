@@ -1,5 +1,7 @@
 package academy.pocu.comp2500.lab6;
 
+import java.util.ArrayList;
+
 public class VeggiePizza extends Pizza {
     protected static final int PRICE = 17;
 
@@ -8,7 +10,11 @@ public class VeggiePizza extends Pizza {
     public VeggiePizza() {
         super(EPizzaType.VEGGIE_PIZZA);
 
-        super.initToppings(Topping.BLACK_OLIVES, Topping.RED_ONIONS, Topping.GREEN_PEPPERS);
+        ArrayList<Topping> toppings = new ArrayList<Topping>();
+        toppings.add(Topping.BLACK_OLIVES);
+        toppings.add(Topping.RED_ONIONS);
+        toppings.add(Topping.GREEN_PEPPERS);
+        super.initToppings(toppings);
     }
 
     public boolean addMozzarellaCheese() {

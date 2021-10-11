@@ -1,5 +1,7 @@
 package academy.pocu.comp2500.lab6;
 
+import java.util.ArrayList;
+
 public class MeatLoverPizza extends Pizza {
     protected static final int PRICE = 21;
 
@@ -8,7 +10,13 @@ public class MeatLoverPizza extends Pizza {
     public MeatLoverPizza() {
         super(EPizzaType.MEAT_LOVER_PIZZA);
 
-        super.initToppings(Topping.BACON, Topping.PEPERONI, Topping.HAM, Topping.SAUSAGES, Topping.CHEDDAR_CHEESE);
+        ArrayList<Topping> toppings = new ArrayList<Topping>();
+        toppings.add(Topping.BACON);
+        toppings.add(Topping.CHEDDAR_CHEESE);
+        toppings.add(Topping.SAUSAGES);
+        toppings.add(Topping.HAM);
+        toppings.add(Topping.PEPERONI);
+        super.initToppings(toppings);
     }
 
     public boolean addBlackOlives() {
