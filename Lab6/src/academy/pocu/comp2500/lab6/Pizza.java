@@ -61,6 +61,12 @@ public class Pizza {
         this.toppings = new ArrayList<Topping>();
     }
 
+    protected void initTopping(final Topping... toppings) {
+        for (final Topping topping : toppings) {
+            this.toppings.add(topping);
+        }
+    }
+
     protected static boolean isMeat(final Topping topping) {
         return topping == Topping.BACON
                 || topping == Topping.CHICKEN
@@ -79,12 +85,6 @@ public class Pizza {
         return topping == Topping.MOZZARELLA_CHEESE
                 || topping == Topping.CHEDDAR_CHEESE
                 || topping == Topping.FETA_CHEESE;
-    }
-
-    protected void initTopping(final Topping... toppings) {
-        for (final Topping topping : toppings) {
-            this.toppings.add(topping);
-        }
     }
 
     protected boolean add(final Topping topping) {
