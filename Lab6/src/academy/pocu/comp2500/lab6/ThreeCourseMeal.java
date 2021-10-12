@@ -11,24 +11,15 @@ public class ThreeCourseMeal extends Meal {
         super(PRICE);
     }
 
-    public void setMainCourse(final MainCourse mainCourse) {
-        this.mainCourses.clear();
-
-        this.mainCourses.add(mainCourse);
-        super.setIsValid(MAX_APPETIZER_COUNT, MAX_MAIN_COURSE_COUNT, MAX_DESSERT_COUNT);
+    public void setAppetizer(final Appetizer appetizer) {
+        super.setAppetizersAndSetIsValid(MAX_APPETIZER_COUNT, MAX_MAIN_COURSE_COUNT, MAX_DESSERT_COUNT, appetizer);
     }
 
-    public void setAppetizer(final Appetizer appetizer) {
-        this.appetizers.clear();
-
-        this.appetizers.add(appetizer);
-        super.setIsValid(MAX_APPETIZER_COUNT, MAX_MAIN_COURSE_COUNT, MAX_DESSERT_COUNT);
+    public void setMainCourse(final MainCourse mainCourse) {
+        super.setMainCoursesAndSetIsValid(MAX_APPETIZER_COUNT, MAX_MAIN_COURSE_COUNT, MAX_DESSERT_COUNT, mainCourse);
     }
 
     public void setDessert(final Dessert dessert) {
-        this.desserts.clear();
-
-        this.desserts.add(dessert);
-        super.setIsValid(MAX_APPETIZER_COUNT, MAX_MAIN_COURSE_COUNT, MAX_DESSERT_COUNT);
+        super.setDessertsAndSetIsValid(MAX_APPETIZER_COUNT, MAX_MAIN_COURSE_COUNT, MAX_DESSERT_COUNT, dessert);
     }
 }

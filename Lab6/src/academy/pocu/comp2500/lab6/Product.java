@@ -1,10 +1,7 @@
 package academy.pocu.comp2500.lab6;
 
 public class Product {
-    // protected
-    protected boolean isValid;
-
-    // private
+    private boolean isValid;
     private final int price;
 
     // public
@@ -19,5 +16,9 @@ public class Product {
     // protected
     protected Product(final int price) {
         this.price = price;
+    }
+
+    protected void setIsValid(boolean valid) {
+        isValid = valid;
     }
 }

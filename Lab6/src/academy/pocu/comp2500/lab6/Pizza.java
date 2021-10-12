@@ -3,10 +3,10 @@ package academy.pocu.comp2500.lab6;
 import java.util.ArrayList;
 
 public class Pizza extends Product {
-    protected ArrayList<Topping> toppings;
-    protected int veggieCount;
-    protected int meatCount;
-    protected int cheeseCount;
+    private final ArrayList<Topping> toppings;
+    private int veggieCount;
+    private int meatCount;
+    private int cheeseCount;
 
     public ArrayList<Topping> getToppings() {
         return toppings;
@@ -20,12 +20,6 @@ public class Pizza extends Product {
         for (final Topping topping : toppings) {
             this.toppings.add(topping);
         }
-    }
-
-    protected void setIsValid(final int maxMeatCount, final int maxVeggieCount, final int maxCheeseCount) {
-        super.isValid = this.meatCount == maxMeatCount
-                && this.veggieCount == maxVeggieCount
-                && this.cheeseCount == maxCheeseCount;
     }
 
     protected static boolean isMeat(final Topping topping) {
@@ -46,5 +40,58 @@ public class Pizza extends Product {
         return topping == Topping.MOZZARELLA_CHEESE
                 || topping == Topping.CHEDDAR_CHEESE
                 || topping == Topping.FETA_CHEESE;
+    }
+
+    protected boolean addToppingAndSetIsValid(final Topping topping, final int maxMeatCount, final int maxVeggieCount, final int maxCheeseCount) {
+        if ((isMeat(topping) && this.meatCount >= maxMeatCount)
+                || (isVeggie(topping) && this.veggieCount >= maxVeggieCount)
+                || (isCheese(topping) && this.cheeseCount >= maxCheeseCount)) {
+            return false;
+        }
+
+        this.toppings.add(topping);
+
+        if (isMeat(topping)) {
+            ++this.meatCount;
+        }
+
+        if (isVeggie(topping)) {
+            ++this.veggieCount;
+        }
+
+        if (isCheese(topping)) {
+            ++this.cheeseCount;
+        }
+
+        this.setIsValid(maxMeatCount, maxVeggieCount, maxCheeseCount);
+        return true;
+    }
+
+    protected boolean removeToppingAndSetIsValid(final Topping topping, final int maxMeatCount, final int maxVeggieCount, final int maxCheeseCount) {
+        boolean isRemoved = this.toppings.remove(topping);
+
+        if (isRemoved) {
+            if (isMeat(topping)) {
+                --this.meatCount;
+            }
+
+            if (isVeggie(topping)) {
+                --this.veggieCount;
+            }
+
+            if (isCheese(topping)) {
+                --this.cheeseCount;
+            }
+        }
+
+        this.setIsValid(maxMeatCount, maxVeggieCount, maxCheeseCount);
+        return isRemoved;
+    }
+
+    // private
+    private void setIsValid(final int maxMeatCount, final int maxVeggieCount, final int maxCheeseCount) {
+        super.setIsValid(this.meatCount == maxMeatCount
+                && this.veggieCount == maxVeggieCount
+                && this.cheeseCount == maxCheeseCount);
     }
 }

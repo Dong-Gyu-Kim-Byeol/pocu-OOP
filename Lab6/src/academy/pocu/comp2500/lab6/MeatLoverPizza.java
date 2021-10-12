@@ -12,71 +12,26 @@ public class MeatLoverPizza extends Pizza {
     }
 
     public boolean addBlackOlives() {
-        if (isValid()) {
-            return false;
-        }
-
-        this.toppings.add(Topping.BLACK_OLIVES);
-        ++this.veggieCount;
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return true;
+        return super.addToppingAndSetIsValid(Topping.BLACK_OLIVES, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean removeBlackOlives() {
-        boolean isRemoved = this.toppings.remove(Topping.BLACK_OLIVES);
-
-        if (isRemoved) {
-            --this.veggieCount;
-        }
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return isRemoved;
+        return super.removeToppingAndSetIsValid(Topping.BLACK_OLIVES, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addRedOnions() {
-        if (isValid()) {
-            return false;
-        }
-
-        this.toppings.add(Topping.RED_ONIONS);
-        ++this.veggieCount;
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return true;
+        return super.addToppingAndSetIsValid(Topping.RED_ONIONS, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean removeRedOnions() {
-        boolean isRemoved = this.toppings.remove(Topping.RED_ONIONS);
-
-        if (isRemoved) {
-            --this.veggieCount;
-        }
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return isRemoved;
+        return super.removeToppingAndSetIsValid(Topping.RED_ONIONS, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addGreenPeppers() {
-        if (isValid()) {
-            return false;
-        }
-
-        this.toppings.add(Topping.GREEN_PEPPERS);
-        ++this.veggieCount;
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return true;
+        return super.addToppingAndSetIsValid(Topping.GREEN_PEPPERS, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean removeGreenPeppers() {
-        boolean isRemoved = this.toppings.remove(Topping.GREEN_PEPPERS);
-
-        if (isRemoved) {
-            --this.veggieCount;
-        }
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return isRemoved;
+        return super.removeToppingAndSetIsValid(Topping.GREEN_PEPPERS, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 }

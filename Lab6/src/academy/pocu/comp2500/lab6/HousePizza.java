@@ -12,71 +12,26 @@ public class HousePizza extends Pizza {
     }
 
     public boolean addBacon() {
-        if (isValid()) {
-            return false;
-        }
-
-        this.toppings.add(Topping.BACON);
-        ++this.meatCount;
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return true;
+        return super.addToppingAndSetIsValid(Topping.BACON, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean removeBacon() {
-        boolean isRemoved = this.toppings.remove(Topping.BACON);
-
-        if (isRemoved) {
-            --this.meatCount;
-        }
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return isRemoved;
+        return super.removeToppingAndSetIsValid(Topping.BACON, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addPeperoni() {
-        if (isValid()) {
-            return false;
-        }
-
-        this.toppings.add(Topping.PEPERONI);
-        ++this.meatCount;
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return true;
+        return super.addToppingAndSetIsValid(Topping.PEPERONI, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean removePeperoni() {
-        boolean isRemoved = this.toppings.remove(Topping.PEPERONI);
-
-        if (isRemoved) {
-            --this.meatCount;
-        }
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return isRemoved;
+        return super.removeToppingAndSetIsValid(Topping.PEPERONI, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean addSausages() {
-        if (isValid()) {
-            return false;
-        }
-
-        this.toppings.add(Topping.SAUSAGES);
-        ++this.meatCount;
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return true;
+        return super.addToppingAndSetIsValid(Topping.SAUSAGES, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 
     public boolean removeSausages() {
-        boolean isRemoved = this.toppings.remove(Topping.SAUSAGES);
-
-        if (isRemoved) {
-            --this.meatCount;
-        }
-
-        super.setIsValid(MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
-        return isRemoved;
+        return super.removeToppingAndSetIsValid(Topping.SAUSAGES, MAX_MEAT_COUNT, MAX_VEGGIE_COUNT, MAX_CHEESE_COUNT);
     }
 }
