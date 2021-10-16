@@ -28,7 +28,7 @@ public class Calendar extends Product {
         }
 
         super.setSize(size);
-        super.setColor(Color.WHITE);
+        super.setColor(CALENDAR_COLOR);
         super.setBasePrice(basePrice);
 
         this.calendarType = calendarType;
@@ -39,6 +39,6 @@ public class Calendar extends Product {
     }
 
     public Color getCalendarColor() {
-        return CALENDAR_COLOR;
+        return super.getColor();
     }
 }

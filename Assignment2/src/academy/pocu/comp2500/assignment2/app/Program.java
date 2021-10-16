@@ -42,9 +42,9 @@ public class Program {
 
         {
             Stamp stamp1 = new Stamp(EStampSize.MM_40_X_30, EStampColor.BLUE, "text1");
-//            assert stamp1.getColor().getRed() == 0;
-//            assert stamp1.getColor().getGreen() == 0;
-//            assert stamp1.getColor().getBlue() == 0xff;
+            assert stamp1.getColor().getRed() == 0;
+            assert stamp1.getColor().getGreen() == 0;
+            assert stamp1.getColor().getBlue() == 0xff;
             assert stamp1.getSize().getWidth() == 40;
             assert stamp1.getSize().getHeight() == 30;
             assert stamp1.getPrice() == 2300;
@@ -58,9 +58,9 @@ public class Program {
             assert calendar1.getCalendarType() == ECalendarType.WALL;
             assert calendar1.getSize().getWidth() == 400;
             assert calendar1.getSize().getHeight() == 400;
-//            assert calendar1.getColor().getRed() == 0xff;
-//            assert calendar1.getColor().getGreen() == 0xff;
-//            assert calendar1.getColor().getBlue() == 0xff;
+            assert calendar1.getColor().getRed() == 0xff;
+            assert calendar1.getColor().getGreen() == 0xff;
+            assert calendar1.getColor().getBlue() == 0xff;
         }
 
         {
@@ -93,9 +93,9 @@ public class Program {
             bannerGloss1.addAperture(new TextAperture(EApertureSide.FRONT_AND_BACK, 2000, 3000, "text12")); // no
 
             assert bannerGloss1.getPrice() == 5030;
-//            assert bannerGloss1.getColor().getRed() == 0x00;
-//            assert bannerGloss1.getColor().getGreen() == 0x80;
-//            assert bannerGloss1.getColor().getBlue() == 0x08;
+            assert bannerGloss1.getColor().getRed() == 0x00;
+            assert bannerGloss1.getColor().getGreen() == 0x80;
+            assert bannerGloss1.getColor().getBlue() == 0x08;
         }
 
         {
@@ -103,9 +103,9 @@ public class Program {
             assert businessCardSingle.getPrice() == 110;
             assert businessCardSingle.getSize().getWidth() == 90;
             assert businessCardSingle.getSize().getHeight() == 50;
-//            assert businessCardSingle.getColor().getRed() == 230;
-//            assert businessCardSingle.getColor().getGreen() == 230;
-//            assert businessCardSingle.getColor().getBlue() == 230;
+            assert businessCardSingle.getColor().getRed() == 230;
+            assert businessCardSingle.getColor().getGreen() == 230;
+            assert businessCardSingle.getColor().getBlue() == 230;
             assert businessCardSingle.getSides() == EBusinessCardSide.SINGLE;
 
             businessCardSingle.addAperture(new ImageAperture(EApertureSide.FRONT, 0, 0, "imagePath1"));
@@ -142,9 +142,9 @@ public class Program {
             assert businessCardDouble.getPrice() == 150;
             assert businessCardDouble.getSize().getWidth() == 90;
             assert businessCardDouble.getSize().getHeight() == 50;
-//            assert businessCardDouble.getColor().getRed() == 255;
-//            assert businessCardDouble.getColor().getGreen() == 255;
-//            assert businessCardDouble.getColor().getBlue() == 240;
+            assert businessCardDouble.getColor().getRed() == 255;
+            assert businessCardDouble.getColor().getGreen() == 255;
+            assert businessCardDouble.getColor().getBlue() == 240;
             assert businessCardDouble.getSides() == EBusinessCardSide.DOUBLE;
 
             businessCardDouble.addAperture(new ImageAperture(EApertureSide.FRONT, 0, 0, "imagePath1"));

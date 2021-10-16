@@ -4,11 +4,7 @@ public class Product {
     // private
     private final EProductType productType;
     private Size size;
-//    private Color color;
-
-    private int r;
-    private int g;
-    private int b;
+    private Color color;
 
     private int basePrice;
     private int aperturePrice;
@@ -16,18 +12,6 @@ public class Product {
     private EShippingMethod shippingMethod;
 
     // public method
-    public int getR() {
-        return r;
-    }
-
-    public int getG() {
-        return g;
-    }
-
-    public int getB() {
-        return b;
-    }
-
     public EProductType getProductType() {
         return productType;
     }
@@ -40,9 +24,9 @@ public class Product {
         return size;
     }
 
-//    public Color getColor() {
-//        return color;
-//    }
+    public Color getColor() {
+        return color;
+    }
 
     public int getPrice() {
         return basePrice + aperturePrice;
@@ -83,9 +67,6 @@ public class Product {
     }
 
     protected void setColor(final Color color) {
-//        this.color = color;
-        this.r = color.getRed();
-        this.g = color.getGreen();
-        this.b = color.getBlue();
+        this.color = color;
     }
 }
