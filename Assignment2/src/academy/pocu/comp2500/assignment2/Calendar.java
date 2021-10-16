@@ -1,5 +1,7 @@
 package academy.pocu.comp2500.assignment2;
 
+import academy.pocu.comp2500.ECalendarColor;
+
 public class Calendar extends Product {
     private final ECalendarType calendarType;
 
@@ -27,7 +29,7 @@ public class Calendar extends Product {
         }
 
         super.setSize(size);
-        super.setColor(Color.WHITE);
+        super.setColor(ECalendarColor.WHITE.getColor());
         super.setBasePrice(basePrice);
 
         this.calendarType = calendarType;
@@ -37,7 +39,7 @@ public class Calendar extends Product {
         return calendarType;
     }
 
-    public Color getCalendarColor() {
-        return super.getColor();
+    public ECalendarColor getCalendarColor() {
+        return ECalendarColor.WHITE;
     }
 }
