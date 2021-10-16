@@ -1,6 +1,4 @@
-package academy.pocu.comp2500;
-
-import academy.pocu.comp2500.assignment2.Color;
+package academy.pocu.comp2500.assignment2;
 
 public enum ECalendarColor {
     WHITE;
