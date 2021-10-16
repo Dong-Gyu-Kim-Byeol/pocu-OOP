@@ -2,7 +2,6 @@ package academy.pocu.comp2500.assignment2;
 
 public class Calendar extends Product {
     private final ECalendarType calendarType;
-    private static final Color CALENDAR_COLOR = Color.WHITE;
 
     // public method
     public Calendar(final ECalendarType calendarType) {
@@ -28,7 +27,7 @@ public class Calendar extends Product {
         }
 
         super.setSize(size);
-        super.setColor(CALENDAR_COLOR);
+        super.setColor(Color.WHITE);
         super.setBasePrice(basePrice);
 
         this.calendarType = calendarType;
