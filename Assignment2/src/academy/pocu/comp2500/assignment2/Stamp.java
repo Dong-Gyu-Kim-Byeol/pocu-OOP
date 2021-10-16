@@ -2,6 +2,7 @@ package academy.pocu.comp2500.assignment2;
 
 public class Stamp extends Product {
     private final String text;
+    private final EStampColor stampColor;
 
     // public method
     public Stamp(final EStampSize stampSize, final EStampColor stampColor, final String text) {
@@ -27,9 +28,14 @@ public class Stamp extends Product {
         super.setBasePrice(basePrice);
 
         this.text = text;
+        this.stampColor = stampColor;
     }
 
     public String getText() {
         return text;
+    }
+
+    public EStampColor getStampColor() {
+        return stampColor;
     }
 }

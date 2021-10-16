@@ -3,6 +3,7 @@ package academy.pocu.comp2500.assignment2;
 public class BusinessCard extends ProductCanAddApertures {
     private final EBusinessCardType businessCardType;
     private final EBusinessCardSide sides;
+    private final EBusinessCardColor businessCardColor;
 
     // public method
     public BusinessCard(final EBusinessCardType businessCardType, final EBusinessCardSide sides, final EOrientation orientation, final EBusinessCardColor businessCardColor) {
@@ -59,6 +60,7 @@ public class BusinessCard extends ProductCanAddApertures {
 
         this.businessCardType = businessCardType;
         this.sides = sides;
+        this.businessCardColor = businessCardColor;
     }
 
     public EBusinessCardType getBusinessCardType() {
@@ -67,5 +69,9 @@ public class BusinessCard extends ProductCanAddApertures {
 
     public EBusinessCardSide getSides() {
         return sides;
+    }
+
+    public EBusinessCardColor getBusinessCardColor() {
+        return businessCardColor;
     }
 }
