@@ -2,6 +2,7 @@ package academy.pocu.comp2500.assignment2;
 
 public class Calendar extends Product {
     private final ECalendarType calendarType;
+    private static final Color CALENDAR_COLOR = Color.WHITE;
 
     // public method
     public Calendar(final ECalendarType calendarType) {
@@ -35,5 +36,9 @@ public class Calendar extends Product {
 
     public ECalendarType getCalendarType() {
         return calendarType;
+    }
+
+    public Color getCalendarColor() {
+        return CALENDAR_COLOR;
     }
 }
