@@ -4,6 +4,13 @@ public class Color {
     public static final Color BLACK = new Color(0, 0, 0);
     public static final Color WHITE = new Color(0xff, 0xff, 0xff);
 
+    public static final Color RED = new Color(0xff, 0, 0);
+    public static final Color GREEN = new Color(0, 0x80, 0);
+    public static final Color BLUE = new Color(0, 0, 0xff);
+
+    public static final Color GRAY = new Color(0xE6, 0xE6, 0xE6);
+    public static final Color IVORY = new Color(0xff, 0xff, 0xf0);
+
     private final short r;
     private final short g;
     private final short b;
