@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class LinkedHashMap<K, V> {
     private final HashMap<K, LinkedHashNode<K, V>> hashMap;
     private LinkedHashNode<K, V> front;
-    private LinkedHashNode<K, V> near;
+    private LinkedHashNode<K, V> rear;
 
     public LinkedHashMap() {
         hashMap = new HashMap<K, LinkedHashNode<K, V>>();
@@ -24,13 +24,13 @@ public class LinkedHashMap<K, V> {
             this.hashMap.get(key).setData(value);
         } else if (front == null) {
             this.front = new LinkedHashNode<K, V>(key, value);
-            this.near = this.front;
+            this.rear = this.front;
             this.hashMap.put(this.front.getKey(), this.front);
         } else {
-            final LinkedHashNode<K, V> nextNear = new LinkedHashNode<K, V>(key, value, this.near, null);
-            this.near.setNext(nextNear);
-            this.near = nextNear;
-            this.hashMap.put(nextNear.getKey(), nextNear);
+            final LinkedHashNode<K, V> nextRear = new LinkedHashNode<K, V>(key, value, this.rear, null);
+            this.rear.setNext(nextRear);
+            this.rear = nextRear;
+            this.hashMap.put(nextRear.getKey(), nextRear);
         }
     }
 
@@ -52,12 +52,12 @@ public class LinkedHashMap<K, V> {
             now.getNext().setPre(valueNode);
         } else if (front == null) {
             this.front = valueNode;
-            this.near = this.front;
+            this.rear = this.front;
         } else {
-            valueNode.setPre(this.near);
+            valueNode.setPre(this.rear);
 
-            this.near.setNext(valueNode);
-            this.near = valueNode;
+            this.rear.setNext(valueNode);
+            this.rear = valueNode;
         }
 
         this.hashMap.put(key, valueNode);
@@ -69,15 +69,15 @@ public class LinkedHashMap<K, V> {
         }
 
         if (this.hashMap.size() == 1) {
-            assert (this.front == this.near);
+            assert (this.front == this.rear);
             this.front = null;
-            this.near = null;
+            this.rear = null;
         } else if (this.front.getKey().equals(key)) {
             this.front = this.front.getNext();
             this.front.setPre(null);
-        } else if (this.near.getKey().equals(key)) {
-            this.near = this.near.getPre();
-            this.near.setNext(null);
+        } else if (this.rear.getKey().equals(key)) {
+            this.rear = this.rear.getPre();
+            this.rear.setNext(null);
         } else {
             final LinkedHashNode<K, V> removeNode = this.hashMap.get(key);
             final LinkedHashNode<K, V> pre = removeNode.getPre();
@@ -96,16 +96,16 @@ public class LinkedHashMap<K, V> {
         return front.getKey();
     }
 
-    public K getNearKey() {
-        return near.getKey();
+    public K getRearKey() {
+        return rear.getKey();
     }
 
     public LinkedHashNode<K, V> getFront() {
         return front;
     }
 
-    public LinkedHashNode<K, V> getNear() {
-        return near;
+    public LinkedHashNode<K, V> getRear() {
+        return rear;
     }
 
     public int size() {
@@ -115,6 +115,6 @@ public class LinkedHashMap<K, V> {
     public void clear() {
         this.hashMap.clear();
         this.front = null;
-        this.near = null;
+        this.rear = null;
     }
 }
