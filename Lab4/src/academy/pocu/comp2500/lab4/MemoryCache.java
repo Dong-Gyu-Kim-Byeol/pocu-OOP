@@ -79,7 +79,7 @@ public class MemoryCache {
 
     // static private
     private static void updateLruDiskNames(final String diskName) {
-        final HashNode<String, MemoryCache> updateLru = MemoryCache.instances.getNode(diskName);
+        final LinkedHashNode<String, MemoryCache> updateLru = MemoryCache.instances.getNode(diskName);
         assert (updateLru != null);
 
         MemoryCache.instances.remove(diskName);
@@ -104,7 +104,7 @@ public class MemoryCache {
     }
 
     private void updateLruEntries(final String key) {
-        final HashNode<String, String> updateLru = this.lruEntries.getNode(key);
+        final LinkedHashNode<String, String> updateLru = this.lruEntries.getNode(key);
         assert (updateLru != null);
 
         this.lruEntries.remove(key);

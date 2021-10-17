@@ -1,16 +1,16 @@
 package academy.pocu.comp2500.lab4;
 
-public class HashNode<K, V> {
+public class LinkedHashNode<K, V> {
     private final K key;
     private V data;
-    private HashNode<K, V> pre;
-    private HashNode<K, V> next;
+    private LinkedHashNode<K, V> pre;
+    private LinkedHashNode<K, V> next;
 
-    public HashNode(final K key, final V data) {
+    public LinkedHashNode(final K key, final V data) {
         this(key, data, null, null);
     }
 
-    public HashNode(final K key, final V data, final HashNode<K, V> pre, final HashNode<K, V> next) {
+    public LinkedHashNode(final K key, final V data, final LinkedHashNode<K, V> pre, final LinkedHashNode<K, V> next) {
         this.key = key;
         this.data = data;
         this.pre = pre;
@@ -29,19 +29,19 @@ public class HashNode<K, V> {
         this.data = data;
     }
 
-    public HashNode<K, V> getNext() {
+    public LinkedHashNode<K, V> getNext() {
         return next;
     }
 
-    public void setNext(final HashNode<K, V> next) {
+    public void setNext(final LinkedHashNode<K, V> next) {
         this.next = next;
     }
 
-    public HashNode<K, V> getPre() {
+    public LinkedHashNode<K, V> getPre() {
         return pre;
     }
 
-    public void setPre(final HashNode<K, V> pre) {
+    public void setPre(final LinkedHashNode<K, V> pre) {
         this.pre = pre;
     }
 }
