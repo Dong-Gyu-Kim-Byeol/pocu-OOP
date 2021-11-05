@@ -35,6 +35,7 @@ public final class ReadingList {
             sb.append(". ");
             sb.append(book.toString());
             sb.append(System.lineSeparator());
+            ++i;
         }
 
         return sb.toString();

@@ -40,9 +40,9 @@ public final class Book {
 
     public int hashCode() {
         return this.title.hashCode()
-                ^ this.author.hashCode()
-                ^ this.releaseYear
-                ^ this.genre.hashCode();
+                ^ this.author.hashCode() << 1
+                ^ this.releaseYear << 2
+                ^ this.genre.hashCode() << 3;
     }
 
     public boolean equals(final Object other) {

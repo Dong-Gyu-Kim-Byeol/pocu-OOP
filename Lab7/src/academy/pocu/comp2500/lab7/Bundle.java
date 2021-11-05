@@ -20,10 +20,6 @@ public final class Bundle {
     }
 
     public boolean add(final Book book) {
-        if (this.books.size() >= 4) {
-            return false;
-        }
-
         return this.books.add(book);
     }
 

@@ -20,7 +20,7 @@ public final class Bookshelf {
     }
 
     public boolean add(final Book book) {
-        if(this.books.size() >= this.capacity){
+        if (this.books.size() >= this.capacity) {
             return false;
         }
 

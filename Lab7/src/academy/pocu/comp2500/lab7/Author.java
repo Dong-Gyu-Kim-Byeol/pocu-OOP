@@ -49,7 +49,7 @@ public final class Author {
 
     public int hashCode() {
         return this.firstName.hashCode()
-                ^ this.lastName.hashCode();
+                ^ this.lastName.hashCode() << 1;
     }
 
 }
