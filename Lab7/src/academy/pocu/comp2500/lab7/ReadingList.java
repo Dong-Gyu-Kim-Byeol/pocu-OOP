@@ -43,6 +43,7 @@ public final class ReadingList {
 
     public int hashCode() {
         int hash = this.name.hashCode();
+        hash ^= this.books.size();
         for (final Book book : this.books) {
             hash ^= book.hashCode();
         }
