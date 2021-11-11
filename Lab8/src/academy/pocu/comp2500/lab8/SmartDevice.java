@@ -10,16 +10,16 @@ public abstract class SmartDevice {
         this.smartDeviceType = smartDeviceType;
     }
 
-    public ESmartDeviceType getSmartDeviceType() {
+    public void onTick() {
+        this.tick++;
+    }
+
+    public final ESmartDeviceType getSmartDeviceType() {
         return smartDeviceType;
     }
 
     public final boolean isOn() {
         return isOn;
-    }
-
-    public void onTick() {
-        this.tick++;
     }
 
     public final int getTicksSinceLastUpdate() {

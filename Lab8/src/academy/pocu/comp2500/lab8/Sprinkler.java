@@ -13,23 +13,6 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
         this.schedules = new LinkedList<>();
     }
 
-    private boolean isSetUseSchedule(Schedule schedule) {
-        if (schedule.getStartTick() >= tick) {
-            schedule.setUse(true);
-            return true;
-        }
-
-        return false;
-    }
-
-    private boolean isValidSchedule(Schedule schedule) {
-        if (schedule.getStartTick() + schedule.getWorkTickCount() - 1 >= tick) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public void onTick() {
         this.tick++;
 
@@ -100,6 +83,23 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
     public void spray(Planter planter) {
         if (isOn()) {
             planter.addWater(ADD_WATER_LEVEL_PER_TICK);
+        }
+    }
+
+    private boolean isSetUseSchedule(Schedule schedule) {
+        if (schedule.getStartTick() >= tick) {
+            schedule.setUse(true);
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isValidSchedule(Schedule schedule) {
+        if (schedule.getStartTick() + schedule.getWorkTickCount() - 1 >= tick) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
