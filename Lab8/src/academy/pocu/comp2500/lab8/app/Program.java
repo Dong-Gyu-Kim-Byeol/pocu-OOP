@@ -93,6 +93,8 @@ public class Program {
         Test12();
 
         Test13();
+
+        Test14();
     }
 
     public static void Test1() {
@@ -488,6 +490,24 @@ public class Program {
         for (int i = 0; i < expectedIsOn.length; ++i) {
             assert (expectedIsOn[i] == sprinkler.isOn()) : i;
             sprinkler.onTick();
+        }
+    }
+
+    public static void Test14() {
+        Drainer drainer = new Drainer(30);
+
+        Planter planter = new Planter(50);
+        planter.installSmartDevice(drainer);
+
+        int[] expectedWaterAmount = new int[]{50, 41, 32, 23, 21, 19, 17, 15, 13, 11, 9};
+        boolean[] expectedIsOn = new boolean[]{false, true, true, true, false, false, false, false, false, false, false};
+        int[] drainerTickSinceLastUpdate = new int[]{0, 0, 1, 2, 0, 1, 2, 3, 4, 5, 6};
+
+        for (int i = 0; i < expectedWaterAmount.length; ++i) {
+            assert (expectedWaterAmount[i] == planter.getWaterAmount()) : planter.getWaterAmount();
+            assert (expectedIsOn[i] == drainer.isOn());
+            assert (drainerTickSinceLastUpdate[i] == drainer.getTicksSinceLastUpdate()) : i + " :" + drainer.getTicksSinceLastUpdate();
+            planter.tick();
         }
     }
 }

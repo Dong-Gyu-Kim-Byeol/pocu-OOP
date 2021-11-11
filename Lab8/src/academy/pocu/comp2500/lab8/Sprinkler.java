@@ -88,6 +88,7 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
             return true;
         }
 
+        schedule.setUse(false);
         return false;
     }
 
