@@ -31,9 +31,6 @@ public class Planter {
     public void tick() {
         for (final SmartDevice smartDevice : this.smartDevices) {
             smartDevice.onTick();
-        }
-
-        for (final SmartDevice smartDevice : this.smartDevices) {
             switch (smartDevice.getSmartDeviceType()) {
                 case DRAINER:
                     final Drainer drainer = (Drainer) smartDevice;
@@ -47,7 +44,6 @@ public class Planter {
         }
 
         for (final SmartDevice smartDevice : this.smartDevices) {
-
             switch (smartDevice.getSmartDeviceType()) {
                 case DRAINER:
                     break;

@@ -21,7 +21,6 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
                 if (this.isOn != false) {
                     this.ticksSinceLastUpdate = this.tick;
                 }
-
                 this.isOn = false;
                 return;
             }
@@ -41,7 +40,6 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
             if (this.isOn != false) {
                 this.ticksSinceLastUpdate = this.tick;
             }
-
             this.isOn = false;
             return;
         }
@@ -51,14 +49,12 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
                 if (this.isOn != true) {
                     this.ticksSinceLastUpdate = this.tick;
                 }
-
                 this.isOn = true;
                 return;
             } else {
                 if (this.isOn != false) {
                     this.ticksSinceLastUpdate = this.tick;
                 }
-
                 this.isOn = false;
                 return;
             }
@@ -80,7 +76,7 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
         this.schedules.add(schedule);
     }
 
-    public void spray(Planter planter) {
+    public void spray(final Planter planter) {
         if (isOn()) {
             planter.addWater(ADD_WATER_LEVEL_PER_TICK);
         }
