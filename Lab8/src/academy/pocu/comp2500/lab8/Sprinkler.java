@@ -34,6 +34,10 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
             }
 
             if (this.schedules.getFirst().getStartTick() > tick) {
+                if (this.isOn != false) {
+                    this.ticksSinceLastUpdate = this.tick;
+                }
+                this.isOn = false;
                 break;
             }
 
