@@ -1,6 +1,7 @@
 package academy.pocu.comp2500.assignment3;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public final class SimulationManager {
@@ -27,6 +28,7 @@ public final class SimulationManager {
     private final LinkedList<IMovable> movableUnits;
     private final LinkedList<ICollision> collisionUnits;
     private final ArrayList<AttackIntent> attackIntents;
+    private final HashSet<Unit> attackedUnits;
 
     @SuppressWarnings("unchecked")
     private SimulationManager() {
@@ -43,6 +45,7 @@ public final class SimulationManager {
         this.collisionUnits = new LinkedList<>();
 
         this.attackIntents = new ArrayList<>();
+        this.attackedUnits = new HashSet<>();
     }
 
     public LinkedList<Unit>[][] getMap() {
@@ -102,9 +105,11 @@ public final class SimulationManager {
             thinkable.think();
         }
 
+
         for (final IMovable movable : movableUnits) {
             movable.move();
         }
+
 
         for (final ICollision collision : collisionUnits) {
             final int y = collision.getCollisionPosition().y();
@@ -115,16 +120,35 @@ public final class SimulationManager {
             }
         }
 
-        for()
-    }
 
-
-    public static boolean isValidPosition(final LinkedList<Unit>[][] map, final int x, final int y) {
-        if (x < 0 || map[0].length <= x
-                || y < 0 || map.length <= y) {
-            return false;
+        for (int y = 0; y < Y_MAP_SIZE; ++y) {
+            for (int x = 0; x < X_MAP_SIZE; ++x) {
+                for (final Unit unit : this.map[y][x]) {
+                    final AttackIntent attackIntent = unit.attack();
+                    if (attackIntent.isValid(map)) {
+                        attackIntents.add(attackIntent);
+                    }
+                }
+            }
         }
 
-        return true;
+
+        for (final AttackIntent attackIntent : attackIntents) {
+            attackIntent.execute(map, attackedUnits);
+        }
+        attackIntents.clear();
+
+
+        for (final Unit unit : attackedUnits) {
+            if (unit.getHp() <= 0) {
+                map[unit.getPosition().getY()][unit.getPosition().getX()].remove(unit);
+                --unitCount;
+            }
+        }
+        attackedUnits.clear();
+    }
+
+    public static boolean isValidPosition(final LinkedList<Unit>[][] map, final int x, final int y) {
+        return 0 <= x && x < map[0].length && 0 <= y && y < map.length;
     }
 }

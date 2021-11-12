@@ -2,7 +2,7 @@ package academy.pocu.comp2500.assignment3;
 
 import java.util.LinkedList;
 
-public class Tank extends Unit implements IMovable, IThinkable {
+public final class Tank extends Unit implements IMovable, IThinkable {
     // 전차에는 두 가지 모드(mode)가 있습니다.
     //
     // 전차(tank) 모드 (기본 모드): 전차 모드인 경우, 이동할 수 있으나 공격할 수는 없습니다.
@@ -41,12 +41,140 @@ public class Tank extends Unit implements IMovable, IThinkable {
 
     private ETankMode tankMode;
     private boolean isMoveRight;
+    private ImmutableIntVector2D targetOrNull;
+
 
     public Tank(final IntVector2D position) {
         super(UNIT_TYPE, HP, position);
         this.tankMode = ETankMode.TANK;
         this.isMoveRight = true;
     }
+
+    public EAction think() {
+        // attack
+        targetOrNull = searchMinHpAttackTargetOrNull();
+        if (targetOrNull != null) {
+            if (isCanAttackMode()) {
+                setAction(EAction.ATTACK);
+                return EAction.ATTACK;
+            } else {
+                changeMode();
+                setAction(EAction.DO_NOTHING);
+                return EAction.DO_NOTHING;
+            }
+        }
+
+        // vision
+        if (isExistVisionTarget()) {
+            if (isCanAttackMode() == false) {
+                changeMode();
+            }
+
+            setAction(EAction.DO_NOTHING);
+            return EAction.DO_NOTHING;
+        }
+
+        if (isCanMoveMode()) {
+            setAction(EAction.MOVE);
+            return EAction.MOVE;
+        } else {
+            changeMode();
+            setAction(EAction.DO_NOTHING);
+            return EAction.DO_NOTHING;
+        }
+    }
+
+    @Override
+    public void move() {
+        // 전차가 시야 안에서 적을 찾지 못하면 다음의 이동 규칙을 따릅니다. (역시 우선순위 순)
+        //
+        // 1 월드의 동쪽(오른쪽) 끝까지 이동
+        // 2 월드의 서쪽(왼쪽) 끝까지 이동
+        // 3 시야 안에서 적을 발견할 때까지 1 - 2를 반복
+
+        if (getAction() != EAction.MOVE) {
+            return;
+        }
+
+        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final int x;
+        final int y = getPosition().getY();
+
+        if (isMoveRight) {
+            x = getPosition().getX() + 1;
+
+            if (SimulationManager.isValidPosition(map, x, y) == false) {
+                isMoveRight = false;
+                getPosition().setX(getPosition().getX() - 1);
+                return;
+            }
+
+            getPosition().setX(x);
+            return;
+        } else {
+            assert (isMoveRight == false);
+
+            x = getPosition().getX() - 1;
+
+            if (SimulationManager.isValidPosition(map, x, y) == false) {
+                isMoveRight = true;
+                getPosition().setX(getPosition().getX() + 1);
+                return;
+            }
+
+            getPosition().setX(x);
+            return;
+        }
+    }
+
+    // 시그내처 불변
+    public AttackIntent attack() {
+        // 1 현재 공성 모드가 아닌 경우 공성 모드로 변경
+        // 2 가장 약한 유닛이 있는 타일을 공격
+        // 3 북쪽에 유닛이 있다면 그 타일을 공격. 그렇지 않을 경우 시계 방향으로 검색하다가 찾은 유닛의 타일을 공격
+        // 전차가 시야 안에서 적을 찾으면 공성 모드로 변환하여 공격할 준비를 합니다.
+
+        if (getAction() != EAction.ATTACK) {
+            return new AttackIntent(this, ImmutableIntVector2D.MINUS_ONE);
+        }
+
+        assert (targetOrNull != null);
+
+        return new AttackIntent(this, targetOrNull);
+    }
+
+    // 시그내처 불변
+    public void onAttacked(int damage) {
+        if (tankMode == ETankMode.SIEGE) {
+            damage *= 2;
+        }
+
+        subHp(damage);
+    }
+
+    // 시그내처 불변
+    public void onSpawn() {
+        SimulationManager.getInstance().registerThinkable(this);
+        SimulationManager.getInstance().registerMovable(this);
+    }
+
+    // 시그내처 불변
+    public char getSymbol() {
+        return SYMBOL;
+    }
+
+    public int getAttackPoint() {
+        return ATTACK_POINT;
+    }
+
+    public int getAttackAreaOfEffect() {
+        return ATTACK_AREA_OF_EFFECT;
+    }
+
+    public EUnitType[] getCanAttackUnitTypes() {
+        return CAN_ATTACK_UNIT_TYPES;
+    }
+
 
     private boolean isCanAttackMode() {
         return tankMode == ETankMode.SIEGE;
@@ -60,8 +188,7 @@ public class Tank extends Unit implements IMovable, IThinkable {
         tankMode = tankMode == ETankMode.TANK ? ETankMode.SIEGE : ETankMode.TANK;
     }
 
-
-    private Unit searchMinHpAttackTargetOrNull(final boolean isNeedOnlyExist) {
+    private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
         final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
@@ -86,17 +213,13 @@ public class Tank extends Unit implements IMovable, IThinkable {
                     if (unit.getUnitType() == unitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
-
-                            if (isNeedOnlyExist) {
-                                return minHp;
-                            }
                         }
                     }
                 }
             }
         }
 
-        return minHp;
+        return new ImmutableIntVector2D(minHp.getPosition());
     }
 
     private boolean isExistVisionTarget() {
@@ -134,128 +257,5 @@ public class Tank extends Unit implements IMovable, IThinkable {
         }
 
         return false;
-    }
-
-    public EAction think() {
-        assert (getAction() == EAction.DO_NOTHING);
-
-        // attack
-        if (searchMinHpAttackTargetOrNull(true) != null) {
-            if (isCanAttackMode()) {
-                setAction(EAction.ATTACK);
-                return EAction.ATTACK;
-            } else {
-                changeMode();
-                setAction(EAction.DO_NOTHING);
-                return EAction.DO_NOTHING;
-            }
-        }
-
-        // vision
-        if (isExistVisionTarget()) {
-            if (isCanAttackMode() == false) {
-                changeMode();
-            }
-
-            setAction(EAction.DO_NOTHING);
-            return EAction.DO_NOTHING;
-        }
-
-        if (isCanMoveMode()) {
-            setAction(EAction.MOVE);
-            return EAction.MOVE;
-        } else {
-            changeMode();
-            setAction(EAction.DO_NOTHING);
-            return EAction.DO_NOTHING;
-        }
-    }
-
-    // 시그내처 불변
-    public AttackIntent attack() {
-        // 1 현재 공성 모드가 아닌 경우 공성 모드로 변경
-        // 2 가장 약한 유닛이 있는 타일을 공격
-        // 3 북쪽에 유닛이 있다면 그 타일을 공격. 그렇지 않을 경우 시계 방향으로 검색하다가 찾은 유닛의 타일을 공격
-        // 전차가 시야 안에서 적을 찾으면 공성 모드로 변환하여 공격할 준비를 합니다.
-
-        assert (getAction() == EAction.ATTACK);
-
-        final Unit minHp = searchMinHpAttackTargetOrNull(false);
-
-        assert (minHp != null);
-        return new AttackIntent(this, new ImmutableIntVector2D(minHp.getPosition().getX(), minHp.getPosition().getY()));
-    }
-
-    @Override
-    public void move() {
-        // 전차가 시야 안에서 적을 찾지 못하면 다음의 이동 규칙을 따릅니다. (역시 우선순위 순)
-        //
-        // 1 월드의 동쪽(오른쪽) 끝까지 이동
-        // 2 월드의 서쪽(왼쪽) 끝까지 이동
-        // 3 시야 안에서 적을 발견할 때까지 1 - 2를 반복
-
-        assert (getAction() == EAction.MOVE);
-
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
-        final int x;
-        final int y = getPosition().getY();
-
-        if (isMoveRight) {
-            x = getPosition().getX() + 1;
-
-            if (SimulationManager.isValidPosition(map, x, y) == false) {
-                isMoveRight = false;
-                getPosition().setX(getPosition().getX() - 1);
-                return;
-            }
-
-            getPosition().setX(x);
-            return;
-        } else {
-            assert (isMoveRight == false);
-
-            x = getPosition().getX() - 1;
-
-            if (SimulationManager.isValidPosition(map, x, y) == false) {
-                isMoveRight = true;
-                getPosition().setX(getPosition().getX() + 1);
-                return;
-            }
-
-            getPosition().setX(x);
-            return;
-        }
-    }
-
-    // 시그내처 불변
-    public void onAttacked(int damage) {
-        if (tankMode == ETankMode.SIEGE) {
-            damage *= 2;
-        }
-
-        subHp(damage);
-    }
-
-    // 시그내처 불변
-    public void onSpawn() {
-        SimulationManager.getInstance().registerThinkable(this);
-        SimulationManager.getInstance().registerMovable(this);
-    }
-
-    // 시그내처 불변
-    public char getSymbol() {
-        return SYMBOL;
-    }
-
-    public int getAttackPoint() {
-        return ATTACK_POINT;
-    }
-
-    public int getAttackAreaOfEffect() {
-        return ATTACK_AREA_OF_EFFECT;
-    }
-
-    public EUnitType[] getCanAttackUnitTypes() {
-        return CAN_ATTACK_UNIT_TYPES;
     }
 }

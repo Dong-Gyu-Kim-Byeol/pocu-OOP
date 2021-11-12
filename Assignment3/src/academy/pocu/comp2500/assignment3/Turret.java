@@ -27,7 +27,72 @@ public class Turret extends Unit implements IThinkable {
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.AIR};
 
-    private Unit searchMinHpAttackTargetOrNull(final boolean isNeedOnlyExist) {
+
+    private ImmutableIntVector2D targetOrNull;
+
+
+    public Turret(final IntVector2D position) {
+        super(UNIT_TYPE, HP, position);
+    }
+
+
+    @Override
+    public EAction think() {
+        targetOrNull = searchMinHpAttackTargetOrNull();
+        if (targetOrNull != null) {
+            setAction(EAction.ATTACK);
+            return EAction.ATTACK;
+        }
+
+        setAction(EAction.DO_NOTHING);
+        return EAction.DO_NOTHING;
+    }
+
+    // 시그내처 불변
+    public AttackIntent attack() {
+        // 1 가장 약한 유닛이 있는 타일을 공격
+        // 2 자신의 위치에 유닛이 있다면 그 타일을 공격.
+        //   그렇지 않을 경우 북쪽(위쪽)에 유닛이 있다면 그 타일을 공격.
+        //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
+
+        if (getAction() != EAction.ATTACK) {
+            return new AttackIntent(this, ImmutableIntVector2D.MINUS_ONE);
+        }
+
+        assert (targetOrNull != null);
+
+        return new AttackIntent(this, targetOrNull);
+    }
+
+    // 시그내처 불변
+    public void onAttacked(int damage) {
+        subHp(damage);
+    }
+
+    // 시그내처 불변
+    public void onSpawn() {
+        SimulationManager.getInstance().registerThinkable(this);
+    }
+
+    // 시그내처 불변
+    public char getSymbol() {
+        return SYMBOL;
+    }
+
+    public int getAttackPoint() {
+        return ATTACK_POINT;
+    }
+
+    public int getAttackAreaOfEffect() {
+        return ATTACK_AREA_OF_EFFECT;
+    }
+
+    public EUnitType[] getCanAttackUnitTypes() {
+        return CAN_ATTACK_UNIT_TYPES;
+    }
+
+
+    private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
         final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
@@ -52,78 +117,12 @@ public class Turret extends Unit implements IThinkable {
                     if (unit.getUnitType() == unitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
-
-                            if (isNeedOnlyExist) {
-                                return minHp;
-                            }
                         }
                     }
                 }
             }
         }
 
-        return minHp;
-    }
-
-    @Override
-    public EAction think() {
-        assert (getAction() == EAction.DO_NOTHING);
-
-        if (searchMinHpAttackTargetOrNull(true) != null) {
-            setAction(EAction.ATTACK);
-            return EAction.ATTACK;
-        }
-
-        setAction(EAction.DO_NOTHING);
-        return EAction.DO_NOTHING;
-    }
-
-    // 시그내처 불변
-    public AttackIntent attack() {
-        // 1 가장 약한 유닛이 있는 타일을 공격
-        // 2 자신의 위치에 유닛이 있다면 그 타일을 공격.
-        //   그렇지 않을 경우 북쪽(위쪽)에 유닛이 있다면 그 타일을 공격.
-        //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
-
-        assert (getAction() == EAction.ATTACK);
-
-        final Unit minHp = searchMinHpAttackTargetOrNull(false);
-
-        assert (minHp != null);
-
-        return new AttackIntent(this, new ImmutableIntVector2D(minHp.getPosition().getX(), minHp.getPosition().getY()));
-    }
-
-
-    // 시그내처 불변
-    public void onAttacked(int damage) {
-        subHp(damage);
-    }
-
-    // 시그내처 불변
-    public void onSpawn() {
-        SimulationManager.getInstance().registerThinkable(this);
-    }
-
-    // 시그내처 불변
-    public char getSymbol() {
-        return SYMBOL;
-    }
-
-    public Turret(final IntVector2D position) {
-        super(UNIT_TYPE, HP, position);
-    }
-
-
-    public int getAttackPoint() {
-        return ATTACK_POINT;
-    }
-
-    public int getAttackAreaOfEffect() {
-        return ATTACK_AREA_OF_EFFECT;
-    }
-
-    public EUnitType[] getCanAttackUnitTypes() {
-        return CAN_ATTACK_UNIT_TYPES;
+        return new ImmutableIntVector2D(minHp.getPosition());
     }
 }

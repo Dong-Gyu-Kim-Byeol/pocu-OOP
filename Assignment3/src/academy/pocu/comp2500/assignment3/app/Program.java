@@ -53,7 +53,7 @@ public class Program {
                 clearConsole();
                 visualizer.visualize(i, simulationManager.getUnits());
                 simulationManager.update();
-                continueOnEnter();
+//                continueOnEnter();
             }
         }
     }

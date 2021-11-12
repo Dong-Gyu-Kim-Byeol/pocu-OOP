@@ -2,7 +2,7 @@ package academy.pocu.comp2500.assignment3;
 
 import java.util.LinkedList;
 
-public class Wraith extends Unit implements IMovable, IThinkable {
+public final class Wraith extends Unit implements IMovable, IThinkable {
     // 망령은 공격을 받으면 즉시 가동되는 특수 방어막을 가지고 있습니다.
     // 한 번 가동된 방어막은 현재 프레임이 끝날 때까지 지속되어 망령은 피해를 입지 않습니다.
     // 다음 프레임부터는 공격을 받으면 피해를 입습니다.
@@ -24,7 +24,148 @@ public class Wraith extends Unit implements IMovable, IThinkable {
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.AIR, EUnitType.GROUND};
 
 
-    private Unit searchMinHpAttackTargetOrNull(final boolean isNeedOnlyExist) {
+    private boolean isHasShield;
+    private boolean isUseShield;
+    private final ImmutableIntVector2D startPosition;
+    private ImmutableIntVector2D targetOrNull;
+
+
+    public Wraith(final IntVector2D position) {
+        super(UNIT_TYPE, HP, position);
+
+        this.isHasShield = true;
+        this.startPosition = new ImmutableIntVector2D(position.getX(), position.getY());
+    }
+
+
+    public EAction think() {
+        if (isUseShield) {
+            isHasShield = false;
+        }
+
+        // attack
+        targetOrNull = searchMinHpAttackTargetOrNull();
+        if (targetOrNull != null) {
+            setAction(EAction.ATTACK);
+            return EAction.ATTACK;
+        }
+
+        // vision
+        targetOrNull = searchNinDistanceVisionTargetOrNull();
+        if (targetOrNull != null) {
+            setAction(EAction.MOVE);
+            return EAction.MOVE;
+        }
+
+        if (getPosition().getX() == startPosition.x() && getPosition().getY() == startPosition.y()) {
+            setAction(EAction.DO_NOTHING);
+            return EAction.DO_NOTHING;
+        }
+
+        setAction(EAction.MOVE);
+        return EAction.MOVE;
+    }
+
+    @Override
+    public void move() {
+        // 1 공중 유닛들을 따라갈 후보로 선택. 선택할 공중 유닛이 없다면 지상 유닛들을 선택
+        // 2 가장 가까이 있는 유닛 쪽으로 이동
+        // 3 가장 약한 유닛 쪽으로 이동
+        // 4 북쪽에 있는 유닛 쪽으로 이동. 북쪽에 유닛이 없다면 시계 방향으로 검색하다 찾은 유닛 쪽으로 이동
+        // 이동할 때는 언제나 y축을 따라 이동하는 게 우선입니다.
+        //
+        // 망령이 시야 안에서 적을 찾지 못한 경우, 자기의 처음 위치 쪽으로 이동해야 합니다. 이때 역시 y축을 따라 먼저 이동합니다.
+
+        if (getAction() != EAction.MOVE) {
+            return;
+        }
+
+        if (targetOrNull == null) {
+            if (getPosition().getY() != startPosition.y()) {
+                if (getPosition().getY() < startPosition.y()) {
+                    getPosition().setY(getPosition().getY() + 1);
+                } else {
+                    getPosition().setY(getPosition().getY() - 1);
+                }
+            } else {
+                if (getPosition().getX() < startPosition.x()) {
+                    getPosition().setX(getPosition().getX() + 1);
+                } else {
+                    getPosition().setX(getPosition().getX() - 1);
+                }
+            }
+
+            return;
+        }
+
+
+        if (getPosition().getY() != targetOrNull.y()) {
+            if (getPosition().getY() < targetOrNull.y()) {
+                getPosition().setY(getPosition().getY() + 1);
+            } else {
+                getPosition().setY(getPosition().getY() - 1);
+            }
+        } else {
+            if (getPosition().getX() < targetOrNull.x()) {
+                getPosition().setX(getPosition().getX() + 1);
+            } else {
+                getPosition().setX(getPosition().getX() - 1);
+            }
+        }
+    }
+
+    // 시그내처 불변
+    public AttackIntent attack() {
+        // 1 공중 유닛들을 공격할 후보로 선택. 선택할 공중 유닛이 없다면 지상 유닛들을 선택
+        // 2 가장 약한 유닛이 있는 타일을 공격
+        // 3 자신의 위치에 유닛이 있다면 그 타일을 공격.
+        //   그렇지 않을 경우 북쪽(위쪽)에 유닛이 있다면 그 타일을 공격.
+        //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
+
+        if (getAction() != EAction.ATTACK) {
+            return new AttackIntent(this, ImmutableIntVector2D.MINUS_ONE);
+        }
+
+        assert (targetOrNull != null);
+
+        return new AttackIntent(this, targetOrNull);
+    }
+
+    // 시그내처 불변
+    public void onAttacked(int damage) {
+        if (isHasShield) {
+            isUseShield = true;
+            return;
+        }
+
+        subHp(damage);
+    }
+
+    // 시그내처 불변
+    public void onSpawn() {
+        SimulationManager.getInstance().registerThinkable(this);
+        SimulationManager.getInstance().registerMovable(this);
+    }
+
+    // 시그내처 불변
+    public char getSymbol() {
+        return SYMBOL;
+    }
+
+    public int getAttackPoint() {
+        return ATTACK_POINT;
+    }
+
+    public int getAttackAreaOfEffect() {
+        return ATTACK_AREA_OF_EFFECT;
+    }
+
+    public EUnitType[] getCanAttackUnitTypes() {
+        return CAN_ATTACK_UNIT_TYPES;
+    }
+
+
+    private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
         final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
@@ -49,25 +190,20 @@ public class Wraith extends Unit implements IMovable, IThinkable {
                     if (unit.getUnitType() == unitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
-
-                            if (isNeedOnlyExist) {
-                                return minHp;
-                            }
                         }
                     }
                 }
             }
 
             if (minHp != null) {
-                assert (minHp.getUnitType() == EUnitType.AIR);
-                return minHp;
+                return new ImmutableIntVector2D(minHp.getPosition());
             }
         }
 
-        return minHp;
+        return new ImmutableIntVector2D(minHp.getPosition());
     }
 
-    private Unit searchNinDistanceVisionTargetOrNull(final boolean isNeedOnlyExist) {
+    private ImmutableIntVector2D searchNinDistanceVisionTargetOrNull() {
         final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
         Unit minDistanceUnit = null;
         final int minDistance = Integer.MAX_VALUE;
@@ -98,11 +234,9 @@ public class Wraith extends Unit implements IMovable, IThinkable {
                                 + Math.abs(unit.getPosition().getY() - getPosition().getY());
 
                         if (unit.getUnitType() == unitType) {
-                            if (minDistanceUnit == null || minDistance > distance) {
-                                minDistanceUnit = unit;
-
-                                if (isNeedOnlyExist) {
-                                    return minDistanceUnit;
+                            if (minDistanceUnit == null || minDistance > +distance) {
+                                if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
+                                    minDistanceUnit = unit;
                                 }
                             }
                         }
@@ -111,150 +245,10 @@ public class Wraith extends Unit implements IMovable, IThinkable {
             }
 
             if (minDistanceUnit != null) {
-                assert (minDistanceUnit.getUnitType() == EUnitType.AIR);
-                return minDistanceUnit;
+                return new ImmutableIntVector2D(minDistanceUnit.getPosition());
             }
         }
 
-        return minDistanceUnit;
-    }
-
-    public EAction think() {
-        assert (getAction() == EAction.DO_NOTHING);
-
-        if (isUseShield) {
-            isHasShield = false;
-        }
-
-        // attack
-        if (searchMinHpAttackTargetOrNull(true) != null) {
-            setAction(EAction.ATTACK);
-            return EAction.ATTACK;
-        }
-
-        // vision
-        if (searchNinDistanceVisionTargetOrNull(true) != null) {
-            setAction(EAction.MOVE);
-            return EAction.MOVE;
-        }
-
-        if (getPosition().getX() == startPosition.x() && getPosition().getY() == startPosition.y()) {
-            setAction(EAction.DO_NOTHING);
-            return EAction.DO_NOTHING;
-        }
-
-        setAction(EAction.MOVE);
-        return EAction.MOVE;
-    }
-
-    // 시그내처 불변
-    public AttackIntent attack() {
-        // 1 공중 유닛들을 공격할 후보로 선택. 선택할 공중 유닛이 없다면 지상 유닛들을 선택
-        // 2 가장 약한 유닛이 있는 타일을 공격
-        // 3 자신의 위치에 유닛이 있다면 그 타일을 공격.
-        //   그렇지 않을 경우 북쪽(위쪽)에 유닛이 있다면 그 타일을 공격.
-        //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
-
-        assert (getAction() == EAction.ATTACK);
-
-        final Unit minHp = searchMinHpAttackTargetOrNull(false);
-
-        assert (minHp != null);
-
-        return new AttackIntent(this, new ImmutableIntVector2D(minHp.getPosition().getX(), minHp.getPosition().getY()));
-    }
-
-    @Override
-    public void move() {
-        // 1 공중 유닛들을 따라갈 후보로 선택. 선택할 공중 유닛이 없다면 지상 유닛들을 선택
-        // 2 가장 가까이 있는 유닛 쪽으로 이동
-        // 3 가장 약한 유닛 쪽으로 이동
-        // 4 북쪽에 있는 유닛 쪽으로 이동. 북쪽에 유닛이 없다면 시계 방향으로 검색하다 찾은 유닛 쪽으로 이동
-        // 이동할 때는 언제나 y축을 따라 이동하는 게 우선입니다.
-        //
-        // 망령이 시야 안에서 적을 찾지 못한 경우, 자기의 처음 위치 쪽으로 이동해야 합니다. 이때 역시 y축을 따라 먼저 이동합니다.
-
-        assert (getAction() == EAction.MOVE);
-
-        final Unit minDistanceOrNull = searchNinDistanceVisionTargetOrNull(false);
-
-        if (minDistanceOrNull == null) {
-            if (getPosition().getY() != startPosition.y()) {
-                if (getPosition().getY() < startPosition.y()) {
-                    getPosition().setY(getPosition().getY() + 1);
-                } else {
-                    getPosition().setY(getPosition().getY() - 1);
-                }
-            } else {
-                if (getPosition().getX() < startPosition.x()) {
-                    getPosition().setX(getPosition().getX() + 1);
-                } else {
-                    getPosition().setX(getPosition().getX() - 1);
-                }
-            }
-
-            return;
-        }
-
-
-        if (getPosition().getY() != minDistanceOrNull.getPosition().getY()) {
-            if (getPosition().getY() < minDistanceOrNull.getPosition().getY()) {
-                getPosition().setY(getPosition().getY() + 1);
-            } else {
-                getPosition().setY(getPosition().getY() - 1);
-            }
-        } else {
-            if (getPosition().getX() < minDistanceOrNull.getPosition().getX()) {
-                getPosition().setX(getPosition().getX() + 1);
-            } else {
-                getPosition().setX(getPosition().getX() - 1);
-            }
-        }
-    }
-
-    // 시그내처 불변
-    public void onAttacked(int damage) {
-        if (isHasShield) {
-            isUseShield = true;
-            return;
-        }
-
-        subHp(damage);
-    }
-
-    // 시그내처 불변
-    public void onSpawn() {
-        SimulationManager.getInstance().registerThinkable(this);
-        SimulationManager.getInstance().registerMovable(this);
-    }
-
-    // 시그내처 불변
-    public char getSymbol() {
-        return SYMBOL;
-    }
-
-
-    private boolean isHasShield;
-    private boolean isUseShield;
-    private final ImmutableIntVector2D startPosition;
-
-    public Wraith(final IntVector2D position) {
-        super(UNIT_TYPE, HP, position);
-
-        this.isHasShield = true;
-        this.startPosition = new ImmutableIntVector2D(position.getX(), position.getY());
-    }
-
-
-    public int getAttackPoint() {
-        return ATTACK_POINT;
-    }
-
-    public int getAttackAreaOfEffect() {
-        return ATTACK_AREA_OF_EFFECT;
-    }
-
-    public EUnitType[] getCanAttackUnitTypes() {
-        return CAN_ATTACK_UNIT_TYPES;
+        return new ImmutableIntVector2D(minDistanceUnit.getPosition());
     }
 }

@@ -1,6 +1,6 @@
 package academy.pocu.comp2500.assignment3;
 
-public class IntVector2D {
+public final class IntVector2D {
     private int x;
     private int y;
 

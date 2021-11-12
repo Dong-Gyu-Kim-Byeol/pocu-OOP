@@ -1,8 +1,6 @@
 package academy.pocu.comp2500.assignment3;
 
-import java.util.ArrayList;
-
-public class Destroyer extends Unit implements IThinkable {
+public final class Destroyer extends Unit implements IThinkable {
     public static final char SYMBOL = 'D';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
     private static final int VISION = Math.max(SimulationManager.X_MAP_SIZE, SimulationManager.Y_MAP_SIZE);
@@ -15,6 +13,12 @@ public class Destroyer extends Unit implements IThinkable {
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR, EUnitType.MINE};
 
+
+    public Destroyer(final IntVector2D position) {
+        super(UNIT_TYPE, HP, position);
+    }
+
+
     @Override
     public EAction think() {
         setAction(EAction.ATTACK);
@@ -26,7 +30,9 @@ public class Destroyer extends Unit implements IThinkable {
         // 이 유닛은 알려진 것이 별로 없습니다. 이 유닛을 개발한 군사 과학자에 따르면 이 유닛은 망령을 제외한 모든 유닛을 한 프레임 만에 모두 파괴할 수 있다고 합니다.
         // (망령을 죽이지 못하는 이유는 방어막 때문)
 
-        assert (getAction() == EAction.ATTACK);
+        if (getAction() != EAction.ATTACK) {
+            return new AttackIntent(this, ImmutableIntVector2D.MINUS_ONE);
+        }
 
         return new AttackIntent(this, new ImmutableIntVector2D(getPosition().getX(), getPosition().getY()));
     }
@@ -47,12 +53,6 @@ public class Destroyer extends Unit implements IThinkable {
         return SYMBOL;
     }
 
-
-    public Destroyer(final IntVector2D position) {
-        super(UNIT_TYPE, HP, position);
-    }
-
-
     public int getAttackPoint() {
         return ATTACK_POINT;
     }
@@ -64,6 +64,7 @@ public class Destroyer extends Unit implements IThinkable {
     public EUnitType[] getCanAttackUnitTypes() {
         return CAN_ATTACK_UNIT_TYPES;
     }
+
 
     private static int calculateAttackPoint() {
         final double distance = VISION;
@@ -80,5 +81,4 @@ public class Destroyer extends Unit implements IThinkable {
 
         return (int) ap;
     }
-
 }

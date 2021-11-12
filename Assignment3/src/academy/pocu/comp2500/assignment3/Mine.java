@@ -13,8 +13,27 @@ public class Mine extends Unit implements ICollision, IThinkable {
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {};
 
-    protected boolean isCanStepOnAttack() {
-        return this.minStepOn <= 0;
+
+    private int minStepOn;
+    private final ImmutableIntVector2D immutablePosition;
+
+
+    public Mine(final IntVector2D position, final int minStepOn) {
+        super(UNIT_TYPE, HP, position);
+
+        this.minStepOn = minStepOn;
+        this.immutablePosition = new ImmutableIntVector2D(getPosition().getX(), getPosition().getY());
+    }
+
+    @Override
+    public EAction think() {
+        if (isCanStepOnAttack()) {
+            setAction(EAction.ATTACK);
+            return EAction.ATTACK;
+        }
+
+        setAction(EAction.DO_NOTHING);
+        return EAction.DO_NOTHING;
     }
 
     @Override
@@ -30,20 +49,7 @@ public class Mine extends Unit implements ICollision, IThinkable {
         deceaseMinStepOn();
     }
 
-    @Override
-    public EAction think() {
-        assert (getAction() == EAction.DO_NOTHING);
-
-        if (isCanStepOnAttack()) {
-            setAction(EAction.ATTACK);
-            return EAction.ATTACK;
-        }
-
-        setAction(EAction.DO_NOTHING);
-        return EAction.DO_NOTHING;
-    }
-
-    public ImmutableIntVector2D getCollisionPosition() {
+    public final ImmutableIntVector2D getCollisionPosition() {
         return immutablePosition;
     }
 
@@ -54,7 +60,10 @@ public class Mine extends Unit implements ICollision, IThinkable {
         // 이 횟수는 지뢰마다 다르게 지정할 수 있습니다.
         // 터진 지뢰는 파괴됩니다.
 
-        assert (getAction() == EAction.ATTACK);
+        if (getAction() != EAction.ATTACK) {
+            return new AttackIntent(this, ImmutableIntVector2D.MINUS_ONE);
+        }
+
         assert (this.minStepOn <= 0);
 
         subHp(HP);
@@ -78,24 +87,6 @@ public class Mine extends Unit implements ICollision, IThinkable {
         return SYMBOL;
     }
 
-    private int minStepOn;
-    private final ImmutableIntVector2D immutablePosition;
-
-    public Mine(final IntVector2D position, final int minStepOn) {
-        super(UNIT_TYPE, HP, position);
-
-        this.minStepOn = minStepOn;
-        this.immutablePosition = new ImmutableIntVector2D(getPosition().getX(), getPosition().getY());
-    }
-
-    protected final int getMinStepOn() {
-        return minStepOn;
-    }
-
-    protected final void deceaseMinStepOn() {
-        --minStepOn;
-    }
-
     public int getAttackPoint() {
         return ATTACK_POINT;
     }
@@ -106,5 +97,18 @@ public class Mine extends Unit implements ICollision, IThinkable {
 
     public EUnitType[] getCanAttackUnitTypes() {
         return CAN_ATTACK_UNIT_TYPES;
+    }
+
+
+    protected final boolean isCanStepOnAttack() {
+        return this.minStepOn <= 0;
+    }
+
+    protected final int getMinStepOn() {
+        return minStepOn;
+    }
+
+    protected final void deceaseMinStepOn() {
+        --minStepOn;
     }
 }
