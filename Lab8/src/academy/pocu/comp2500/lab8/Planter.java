@@ -58,19 +58,6 @@ public class Planter {
             }
         }
 
-//        for (final SmartDevice smartDevice : this.smartDevices) {
-//            switch (smartDevice.getSmartDeviceType()) {
-//                case DRAINER:
-//                    final Drainer drainer = (Drainer) smartDevice;
-//                    drainer.drain(this);
-//                    break;
-//                case SPRINKLER:
-//                    break;
-//                default:
-//                    throw new IllegalArgumentException("unknown type");
-//            }
-//        }
-
         addWater(EAT_WATER_LEVEL_PER_TICK);
     }
 }
