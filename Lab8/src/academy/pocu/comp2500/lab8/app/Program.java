@@ -54,22 +54,22 @@ public class Program {
                     23, 24, 25, 26, 0, 1, 2, 3, 4, 5,
                     6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
-//            for (int i = 0; i < expectedWaterAmount.length; ++i) {
-//                final int planterE = planter.getWaterAmount();
-//                final int planterExpectedWaterAmount = expectedWaterAmount[i];
-//
-//                final int sprinklerU = sprinkler.getTicksSinceLastUpdate();
-//                final int sprinklerGetTicksSinceLastUpdate = sprinklerTicksSinceLastUpdate[i];
-//
-//                final int drainerU = drainer.getTicksSinceLastUpdate();
-//                final int drainerGetTicksSinceLastUpdate = drainerTicksSinceLastUpdate[i];
-//
-//                assert (expectedWaterAmount[i] == planter.getWaterAmount());
-//                assert (sprinklerTicksSinceLastUpdate[i] == sprinkler.getTicksSinceLastUpdate()) : i;
-//                assert (drainerTicksSinceLastUpdate[i] == drainer.getTicksSinceLastUpdate()) : i;
-//
-//                planter.tick();
-//            }
+            for (int i = 0; i < expectedWaterAmount.length; ++i) {
+                final int planterE = planter.getWaterAmount();
+                final int planterExpectedWaterAmount = expectedWaterAmount[i];
+
+                final int sprinklerU = sprinkler.getTicksSinceLastUpdate();
+                final int sprinklerGetTicksSinceLastUpdate = sprinklerTicksSinceLastUpdate[i];
+
+                final int drainerU = drainer.getTicksSinceLastUpdate();
+                final int drainerGetTicksSinceLastUpdate = drainerTicksSinceLastUpdate[i];
+
+                assert (expectedWaterAmount[i] == planter.getWaterAmount());
+                assert (sprinklerTicksSinceLastUpdate[i] == sprinkler.getTicksSinceLastUpdate()) : i;
+                assert (drainerTicksSinceLastUpdate[i] == drainer.getTicksSinceLastUpdate()) : i;
+
+                planter.tick();
+            }
         }
     }
 

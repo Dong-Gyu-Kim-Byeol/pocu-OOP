@@ -22,6 +22,8 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
                     this.ticksSinceLastUpdate = this.tick;
                 }
                 this.isOn = false;
+
+                nowSchedule = null;
                 return;
             }
 
@@ -29,6 +31,10 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
             if (isValidSchedule(this.schedules.getFirst()) == false) {
                 schedules.poll();
                 continue;
+            }
+
+            if (this.schedules.getFirst().getStartTick() > tick) {
+                break;
             }
 
             isSetUseSchedule(schedules.getFirst());
@@ -83,6 +89,8 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
     }
 
     private boolean isSetUseSchedule(Schedule schedule) {
+        assert (schedule.getStartTick() <= tick);
+
         if (schedule.getStartTick() >= tick) {
             schedule.setUse(true);
             return true;
