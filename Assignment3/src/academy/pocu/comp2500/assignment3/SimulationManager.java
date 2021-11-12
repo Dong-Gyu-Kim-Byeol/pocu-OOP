@@ -3,8 +3,12 @@ package academy.pocu.comp2500.assignment3;
 import java.util.ArrayList;
 
 public final class SimulationManager {
+    // 월드는 16 x 8 크기의 2D 그리드(grid)입니다.
+    // 원점은 (0,0)이며 +x는 오른쪽, +y는 아래쪽입니다. 또한 북쪽은 -y, 동쪽은 +x 입니다
+
     private static SimulationManager instance;
 
+    // 시그내처 불변
     public static SimulationManager getInstance() {
         if (instance == null) {
             instance = new SimulationManager();
@@ -21,10 +25,12 @@ public final class SimulationManager {
         this.units = new ArrayList<>();
     }
 
+    // 시그내처 불변
     public ArrayList<Unit> getUnits() {
         return units;
     }
 
+    // 시그내처 불변
     public void spawn(final Unit unit) {
         if (unit.getHp() == 0) {
             return;
@@ -38,18 +44,22 @@ public final class SimulationManager {
         this.units.add(unit);
     }
 
-    public void registerThinkable(Unit thinkable) {
+    // 시그내처 ?
+    public void registerThinkable(IThinkable thinkable) {
 
     }
 
-    public void registerMovable(Unit movable) {
+    // 시그내처 ?
+    public void registerMovable(IMovable movable) {
 
     }
 
-    public void registerCollisionEventListener(Unit listener) {
+    // 시그내처 ?
+    public void registerCollisionEventListener(Mine listener) {
 
     }
 
+    // 시그내처 불변
     public void update() {
 //      1  각 유닛들이 이번 프레임에서 할 행동(선택지: 공격, 이동, 아무것도 안 함)을 결정
 //      2  움직일 수 있는 각 유닛에게 이동할 기회를 줌
