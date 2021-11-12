@@ -41,6 +41,10 @@ public class Marine extends Unit implements IMovable, IThinkable {
             }
 
             for (final Unit unit : map[y][x]) {
+                if (unit == this) {
+                    continue;
+                }
+
                 for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
                     if (unit.getUnitType() == unitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
@@ -73,6 +77,10 @@ public class Marine extends Unit implements IMovable, IThinkable {
                 }
 
                 for (final Unit unit : map[y][x]) {
+                    if (unit == this) {
+                        continue;
+                    }
+
                     for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
                         if (unit.getUnitType() == unitType) {
                             if (minHp == null || minHp.getHp() > unit.getHp()) {

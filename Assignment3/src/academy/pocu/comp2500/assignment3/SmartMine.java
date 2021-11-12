@@ -31,6 +31,10 @@ public final class SmartMine extends Mine {
                 }
 
                 for (final Unit unit : map[y][x]) {
+                    if (unit == this) {
+                        continue;
+                    }
+
                     for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
                         if (unit.getUnitType() == unitType) {
                             ++unitCount;

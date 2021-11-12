@@ -42,6 +42,10 @@ public class Wraith extends Unit implements IMovable, IThinkable {
                 }
 
                 for (final Unit unit : map[y][x]) {
+                    if (unit == this) {
+                        continue;
+                    }
+
                     if (unit.getUnitType() == unitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
@@ -80,6 +84,10 @@ public class Wraith extends Unit implements IMovable, IThinkable {
                     }
 
                     for (final Unit unit : map[y][x]) {
+                        if (unit == this) {
+                            continue;
+                        }
+
                         final int distance = Math.abs(unit.getPosition().getX() - getPosition().getX())
                                 + Math.abs(unit.getPosition().getY() - getPosition().getY());
 
