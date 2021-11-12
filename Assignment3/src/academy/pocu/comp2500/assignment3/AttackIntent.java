@@ -1,16 +1,15 @@
 package academy.pocu.comp2500.assignment3;
 
+import java.util.LinkedList;
+
 // 공격 의도
 public class AttackIntent {
     private final Unit attackUnit;
-    private final IntVector2D attackedPosition;
-    private final int damage;
+    private final ImmutableIntVector2D attackPosition;
 
-
-    public AttackIntent(final Unit attackUnit, final IntVector2D attackedPosition, final int damage) {
+    public AttackIntent(final Unit attackUnit, final ImmutableIntVector2D attackPosition) {
         this.attackUnit = attackUnit;
-        this.attackedPosition = attackedPosition;
-        this.damage = damage;
+        this.attackPosition = attackPosition;
     }
 
     public Unit getAttackUnit() {
@@ -28,11 +27,49 @@ public class AttackIntent {
     //        3 2 2 2 2 2 3
     //        3 3 3 3 3 3 3
     // 계산 중에는 double 형을 사용하고 최종 계산 뒤에는 소수점 이하는 버리세요.
-    public int getDamage() {
-        return damage;
+    public int getAttackPoint(final ImmutableIntVector2D attackedPosition) {
+        if (isAttacked(attackedPosition) == false) {
+            assert (false);
+            return 0;
+        }
+
+        final double distance = Math.max(Math.abs(attackPosition.x() - attackedPosition.x()), Math.abs(attackPosition.y() - attackedPosition.y()));
+        final double aoe = attackUnit.getAttackAreaOfEffect();
+        final double ap = attackUnit.getAttackPoint();
+
+        assert (distance <= aoe);
+
+        return (int) (ap * (1.0 - distance / (aoe + 1.0)));
     }
 
-    public IntVector2D getAttackedPosition() {
-        return attackedPosition;
+    public boolean isAttacked(final ImmutableIntVector2D attackedPosition) {
+        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final int aoe = attackUnit.getAttackAreaOfEffect();
+
+        for (int y = attackPosition.y() - aoe; y <= attackPosition.y() + aoe; ++y) {
+            for (int x = attackPosition.x() - aoe; x <= attackPosition.x() + aoe; ++x) {
+                if (!SimulationManager.isValidPosition(map, x, y)) {
+                    continue;
+                }
+
+                if (map[y][x].size() == 0) {
+                    continue;
+                }
+
+                for (final Unit unit : map[y][x]) {
+                    for (final EUnitType unitType : attackUnit.getCanAttackUnitTypes()) {
+                        if (unit.getUnitType() == unitType) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public ImmutableIntVector2D getAttackPosition() {
+        return attackPosition;
     }
 }

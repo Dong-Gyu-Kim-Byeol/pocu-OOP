@@ -1,7 +1,7 @@
 package academy.pocu.comp2500.assignment3;
 
 public class Destroyer extends Unit{
-        private static final char SYMBOL = 'D';
+    public static final char SYMBOL = 'D';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
     private static final int HP = 1000;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR, EUnitType.MINE};
@@ -11,11 +11,6 @@ public class Destroyer extends Unit{
     public AttackIntent attack() {
         // 이 유닛은 알려진 것이 별로 없습니다. 이 유닛을 개발한 군사 과학자에 따르면 이 유닛은 망령을 제외한 모든 유닛을 한 프레임 만에 모두 파괴할 수 있다고 합니다.
         // (망령을 죽이지 못하는 이유는 방어막 때문)
-
-    }
-
-    @Override
-    public void move() {
 
     }
 
@@ -37,5 +32,18 @@ public class Destroyer extends Unit{
 
     public Destroyer(final IntVector2D position) {
 
+    }
+
+
+    public int getAttackPoint() {
+        return ATTACK_POINT;
+    }
+
+    public int getAttackAreaOfEffect() {
+        return ATTACK_AREA_OF_EFFECT;
+    }
+
+    public EUnitType[] getCanAttackUnitTypes() {
+        return CAN_ATTACK_UNIT_TYPES;
     }
 }
