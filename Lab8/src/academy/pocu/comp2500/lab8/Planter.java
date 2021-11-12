@@ -2,7 +2,7 @@ package academy.pocu.comp2500.lab8;
 
 import java.util.LinkedList;
 
-public class Planter {
+public final class Planter {
     private static final int EAT_WATER_LEVEL_PER_TICK = -2;
 
     private int waterAmount;
@@ -31,6 +31,7 @@ public class Planter {
     public void tick() {
         for (final SmartDevice smartDevice : this.smartDevices) {
             smartDevice.onTick();
+
             switch (smartDevice.getSmartDeviceType()) {
                 case DRAINER:
                     final Drainer drainer = (Drainer) smartDevice;

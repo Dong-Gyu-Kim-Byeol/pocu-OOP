@@ -1,6 +1,6 @@
 package academy.pocu.comp2500.lab8;
 
-public class Schedule {
+public final class Schedule {
     private final int startTick;
     private final int workTickCount;
     private boolean isUse;
@@ -13,7 +13,7 @@ public class Schedule {
         this.workTickCount = workTickCount;
     }
 
-    public void setUse(boolean isUse) {
+    public void setIsUse(boolean isUse) {
         this.isUse = isUse;
     }
 

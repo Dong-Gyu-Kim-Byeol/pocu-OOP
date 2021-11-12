@@ -10,14 +10,6 @@ public final class Drainer extends SmartDevice implements IWaterDetectable, IDra
         this.maxWaterSize = maxWaterSize;
     }
 
-    public void drain(Planter planter) {
-        if (isOn()) {
-//            if (planter.getWaterAmount() >= maxWaterSize) {
-                planter.addWater(DRAIN_WATER_LEVEL_PER_TICK);
-//            }
-        }
-    }
-
     public void detect(final int waterLevel) {
         if (waterLevel >= this.maxWaterSize) {
             if (this.isOn != true) {
@@ -29,6 +21,12 @@ public final class Drainer extends SmartDevice implements IWaterDetectable, IDra
                 this.ticksSinceLastUpdate = this.tick;
             }
             this.isOn = false;
+        }
+    }
+
+    public void drain(Planter planter) {
+        if (isOn()) {
+            planter.addWater(DRAIN_WATER_LEVEL_PER_TICK);
         }
     }
 }
