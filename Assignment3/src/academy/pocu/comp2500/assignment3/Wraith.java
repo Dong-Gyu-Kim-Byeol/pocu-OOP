@@ -72,9 +72,15 @@ public class Wraith extends Unit implements IMovable, IThinkable {
         Unit minDistanceUnit = null;
         final int minDistance = Integer.MAX_VALUE;
 
+        final int minY = getPosition().getY() - VISION;
+        final int minX = getPosition().getX() - VISION;
+
+        final int maxY = getPosition().getY() + VISION;
+        final int maxX = getPosition().getX() + VISION;
+
         for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
-            for (int y = getPosition().getY() - VISION; y <= getPosition().getY() + VISION; ++y) {
-                for (int x = getPosition().getX() - VISION; x <= getPosition().getX() + VISION; ++x) {
+            for (int y = minY; y <= maxY; ++y) {
+                for (int x = minX; x <= maxX; ++x) {
                     if (!SimulationManager.isValidPosition(map, x, y)) {
                         continue;
                     }
@@ -114,24 +120,30 @@ public class Wraith extends Unit implements IMovable, IThinkable {
     }
 
     public EAction think() {
+        assert (getAction() == EAction.DO_NOTHING);
+
         if (isUseShield) {
             isHasShield = false;
         }
 
         // attack
         if (searchMinHpAttackTargetOrNull(true) != null) {
+            setAction(EAction.ATTACK);
             return EAction.ATTACK;
         }
 
         // vision
         if (searchNinDistanceVisionTargetOrNull(true) != null) {
+            setAction(EAction.MOVE);
             return EAction.MOVE;
         }
 
         if (getPosition().getX() == startPosition.x() && getPosition().getY() == startPosition.y()) {
+            setAction(EAction.DO_NOTHING);
             return EAction.DO_NOTHING;
         }
 
+        setAction(EAction.MOVE);
         return EAction.MOVE;
     }
 
@@ -142,6 +154,8 @@ public class Wraith extends Unit implements IMovable, IThinkable {
         // 3 자신의 위치에 유닛이 있다면 그 타일을 공격.
         //   그렇지 않을 경우 북쪽(위쪽)에 유닛이 있다면 그 타일을 공격.
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
+
+        assert (getAction() == EAction.ATTACK);
 
         final Unit minHp = searchMinHpAttackTargetOrNull(false);
 
@@ -159,6 +173,8 @@ public class Wraith extends Unit implements IMovable, IThinkable {
         // 이동할 때는 언제나 y축을 따라 이동하는 게 우선입니다.
         //
         // 망령이 시야 안에서 적을 찾지 못한 경우, 자기의 처음 위치 쪽으로 이동해야 합니다. 이때 역시 y축을 따라 먼저 이동합니다.
+
+        assert (getAction() == EAction.MOVE);
 
         final Unit minDistanceOrNull = searchNinDistanceVisionTargetOrNull(false);
 

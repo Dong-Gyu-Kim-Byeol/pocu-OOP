@@ -9,14 +9,17 @@ public abstract class Unit {
     // 이동 가능한 유닛은 공격 구역에 있는 적을 발견하지 못한 경우에만 이동할 수 있습니다.
     // 유닛은 자기 자신에게 피해를 입힐 수 없습니다.
 
+
     private final EUnitType unitType;
     private final IntVector2D position;
     private int hp;
+    private EAction action;
 
     protected Unit(final EUnitType unitType, final int hp, final IntVector2D startPosition) {
         this.unitType = unitType;
         this.hp = hp;
         this.position = startPosition;
+        this.action = EAction.DO_NOTHING;
     }
 
     public EUnitType getUnitType() {
@@ -31,6 +34,14 @@ public abstract class Unit {
     // 시그내처 불변
     public final int getHp() {
         return hp;
+    }
+
+    protected EAction getAction() {
+        return action;
+    }
+
+    protected void setAction(EAction action) {
+        this.action = action;
     }
 
     // 시그내처 불변

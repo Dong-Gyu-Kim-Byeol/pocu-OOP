@@ -103,8 +103,14 @@ public class Tank extends Unit implements IMovable, IThinkable {
         final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
-        for (int y = getPosition().getY() - VISION; y <= getPosition().getY() + VISION; ++y) {
-            for (int x = getPosition().getX() - VISION; x <= getPosition().getX() + VISION; ++x) {
+        final int minY = getPosition().getY() - VISION;
+        final int minX = getPosition().getX() - VISION;
+
+        final int maxY = getPosition().getY() + VISION;
+        final int maxX = getPosition().getX() + VISION;
+
+        for (int y = minY; y <= maxY; ++y) {
+            for (int x = minX; x <= maxX; ++x) {
                 if (!SimulationManager.isValidPosition(map, x, y)) {
                     continue;
                 }
@@ -131,12 +137,16 @@ public class Tank extends Unit implements IMovable, IThinkable {
     }
 
     public EAction think() {
+        assert (getAction() == EAction.DO_NOTHING);
+
         // attack
         if (searchMinHpAttackTargetOrNull(true) != null) {
             if (isCanAttackMode()) {
+                setAction(EAction.ATTACK);
                 return EAction.ATTACK;
             } else {
                 changeMode();
+                setAction(EAction.DO_NOTHING);
                 return EAction.DO_NOTHING;
             }
         }
@@ -147,13 +157,16 @@ public class Tank extends Unit implements IMovable, IThinkable {
                 changeMode();
             }
 
+            setAction(EAction.DO_NOTHING);
             return EAction.DO_NOTHING;
         }
 
         if (isCanMoveMode()) {
+            setAction(EAction.MOVE);
             return EAction.MOVE;
         } else {
             changeMode();
+            setAction(EAction.DO_NOTHING);
             return EAction.DO_NOTHING;
         }
     }
@@ -165,10 +178,11 @@ public class Tank extends Unit implements IMovable, IThinkable {
         // 3 북쪽에 유닛이 있다면 그 타일을 공격. 그렇지 않을 경우 시계 방향으로 검색하다가 찾은 유닛의 타일을 공격
         // 전차가 시야 안에서 적을 찾으면 공성 모드로 변환하여 공격할 준비를 합니다.
 
+        assert (getAction() == EAction.ATTACK);
+
         final Unit minHp = searchMinHpAttackTargetOrNull(false);
 
         assert (minHp != null);
-
         return new AttackIntent(this, new ImmutableIntVector2D(minHp.getPosition().getX(), minHp.getPosition().getY()));
     }
 
@@ -179,6 +193,8 @@ public class Tank extends Unit implements IMovable, IThinkable {
         // 1 월드의 동쪽(오른쪽) 끝까지 이동
         // 2 월드의 서쪽(왼쪽) 끝까지 이동
         // 3 시야 안에서 적을 발견할 때까지 1 - 2를 반복
+
+        assert (getAction() == EAction.MOVE);
 
         final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
         final int x;

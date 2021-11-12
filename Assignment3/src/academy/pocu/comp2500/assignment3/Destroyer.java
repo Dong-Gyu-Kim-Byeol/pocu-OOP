@@ -1,5 +1,7 @@
 package academy.pocu.comp2500.assignment3;
 
+import java.util.ArrayList;
+
 public class Destroyer extends Unit implements IThinkable {
     public static final char SYMBOL = 'D';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
@@ -15,6 +17,7 @@ public class Destroyer extends Unit implements IThinkable {
 
     @Override
     public EAction think() {
+        setAction(EAction.ATTACK);
         return EAction.ATTACK;
     }
 
@@ -22,6 +25,8 @@ public class Destroyer extends Unit implements IThinkable {
     public AttackIntent attack() {
         // 이 유닛은 알려진 것이 별로 없습니다. 이 유닛을 개발한 군사 과학자에 따르면 이 유닛은 망령을 제외한 모든 유닛을 한 프레임 만에 모두 파괴할 수 있다고 합니다.
         // (망령을 죽이지 못하는 이유는 방어막 때문)
+
+        assert (getAction() == EAction.ATTACK);
 
         return new AttackIntent(this, new ImmutableIntVector2D(getPosition().getX(), getPosition().getY()));
     }
@@ -71,7 +76,7 @@ public class Destroyer extends Unit implements IThinkable {
 
         assert (ap > 0);
         assert (ap >= damage);
-        assert (ap >= AttackIntent.calculateDamage(new Destroyer(new IntVector2D(0, 0)), new ImmutableIntVector2D(0, 0), new ImmutableIntVector2D(VISION, VISION)));
+        assert (ap >= AttackIntent.calculateDamage(new Destroyer(new IntVector2D(0, 0)), new ImmutableIntVector2D(0, 0), VISION, VISION));
 
         return (int) ap;
     }

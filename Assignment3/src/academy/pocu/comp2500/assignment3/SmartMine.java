@@ -20,8 +20,14 @@ public final class SmartMine extends Mine {
 
         int unitCount = 0;
 
-        for (int y = getPosition().getY() - VISION; y <= getPosition().getY() + VISION; ++y) {
-            for (int x = getPosition().getX() - VISION; x <= getPosition().getX() + VISION; ++x) {
+        final int minY = getPosition().getY() - VISION;
+        final int minX = getPosition().getX() - VISION;
+
+        final int maxY = getPosition().getY() + VISION;
+        final int maxX = getPosition().getX() + VISION;
+
+        for (int y = minY; y <= maxY; ++y) {
+            for (int x = minX; x <= maxX; ++x) {
                 if (!SimulationManager.isValidPosition(map, x, y)) {
                     continue;
                 }
@@ -57,14 +63,19 @@ public final class SmartMine extends Mine {
         // 초특급 울트라 레이더 기술 덕분에 스마트 지뢰는 시야 안에 있는 모든 지상 유닛을 감지할 수 있습니다.
         // 하지만 공중 유닛과 볼 수 없는 유닛은 감지할 수 없답니다.
 
+        assert (getAction() == EAction.DO_NOTHING);
+
         if (isCanStepOnAttack()) {
+            setAction(EAction.ATTACK);
             return EAction.ATTACK;
         }
 
         if (isCanDetectAttack()) {
+            setAction(EAction.ATTACK);
             return EAction.ATTACK;
         }
 
+        setAction(EAction.DO_NOTHING);
         return EAction.DO_NOTHING;
     }
 

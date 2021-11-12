@@ -18,7 +18,11 @@ public class Mine extends Unit implements ICollision, IThinkable {
     }
 
     @Override
-    public final void collision(final Unit unit) {
+    public final void checkCollision(final Unit unit) {
+        if (unit == this) {
+            return;
+        }
+
         if (unit.getUnitType() != EUnitType.GROUND) {
             return;
         }
@@ -28,11 +32,19 @@ public class Mine extends Unit implements ICollision, IThinkable {
 
     @Override
     public EAction think() {
+        assert (getAction() == EAction.DO_NOTHING);
+
         if (isCanStepOnAttack()) {
+            setAction(EAction.ATTACK);
             return EAction.ATTACK;
         }
 
+        setAction(EAction.DO_NOTHING);
         return EAction.DO_NOTHING;
+    }
+
+    public ImmutableIntVector2D getCollisionPosition() {
+        return immutablePosition;
     }
 
     // 시그내처 불변
@@ -42,6 +54,7 @@ public class Mine extends Unit implements ICollision, IThinkable {
         // 이 횟수는 지뢰마다 다르게 지정할 수 있습니다.
         // 터진 지뢰는 파괴됩니다.
 
+        assert (getAction() == EAction.ATTACK);
         assert (this.minStepOn <= 0);
 
         subHp(HP);
@@ -66,11 +79,13 @@ public class Mine extends Unit implements ICollision, IThinkable {
     }
 
     private int minStepOn;
+    private final ImmutableIntVector2D immutablePosition;
 
     public Mine(final IntVector2D position, final int minStepOn) {
         super(UNIT_TYPE, HP, position);
 
         this.minStepOn = minStepOn;
+        this.immutablePosition = new ImmutableIntVector2D(getPosition().getX(), getPosition().getY());
     }
 
     protected final int getMinStepOn() {

@@ -21,10 +21,12 @@ public final class SimulationManager {
     }
 
     private final LinkedList<Unit>[][] map;
+    private int unitCount;
 
     private final LinkedList<IThinkable> thinkableUnits;
     private final LinkedList<IMovable> movableUnits;
     private final LinkedList<ICollision> collisionUnits;
+    private final ArrayList<AttackIntent> attackIntents;
 
     @SuppressWarnings("unchecked")
     private SimulationManager() {
@@ -39,6 +41,8 @@ public final class SimulationManager {
         this.thinkableUnits = new LinkedList<>();
         this.movableUnits = new LinkedList<>();
         this.collisionUnits = new LinkedList<>();
+
+        this.attackIntents = new ArrayList<>();
     }
 
     public LinkedList<Unit>[][] getMap() {
@@ -47,14 +51,7 @@ public final class SimulationManager {
 
     // 시그내처 불변
     public ArrayList<Unit> getUnits() {
-        int size = 0;
-        for (int y = 0; y < Y_MAP_SIZE; ++y) {
-            for (int x = 0; x < X_MAP_SIZE; ++x) {
-                size += this.map[y][x].size();
-            }
-        }
-
-        ArrayList<Unit> out = new ArrayList<>(size);
+        ArrayList<Unit> out = new ArrayList<>(unitCount);
 
         for (int y = 0; y < Y_MAP_SIZE; ++y) {
             for (int x = 0; x < X_MAP_SIZE; ++x) {
@@ -64,12 +61,16 @@ public final class SimulationManager {
             }
         }
 
+        assert (out.size() == unitCount);
+
         return out;
     }
 
     // 시그내처 불변
     public void spawn(final Unit unit) {
         unit.onSpawn();
+
+        ++this.unitCount;
         this.map[unit.getPosition().getY()][unit.getPosition().getX()].add(unit);
     }
 
@@ -96,6 +97,25 @@ public final class SimulationManager {
 //      4  각 유닛에게 공격할 기회를 줌
 //      5  피해를 입어야 하는 각 유닛에게 피해를 입힘
 //      6  죽은 유닛들을 모두 게임에서 제거함
+
+        for (final IThinkable thinkable : thinkableUnits) {
+            thinkable.think();
+        }
+
+        for (final IMovable movable : movableUnits) {
+            movable.move();
+        }
+
+        for (final ICollision collision : collisionUnits) {
+            final int y = collision.getCollisionPosition().y();
+            final int x = collision.getCollisionPosition().x();
+
+            for (final Unit unit : map[y][x]) {
+                collision.checkCollision(unit);
+            }
+        }
+
+        for()
     }
 
 

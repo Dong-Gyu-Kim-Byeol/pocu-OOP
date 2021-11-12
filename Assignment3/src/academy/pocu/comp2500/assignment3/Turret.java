@@ -67,10 +67,14 @@ public class Turret extends Unit implements IThinkable {
 
     @Override
     public EAction think() {
+        assert (getAction() == EAction.DO_NOTHING);
+
         if (searchMinHpAttackTargetOrNull(true) != null) {
+            setAction(EAction.ATTACK);
             return EAction.ATTACK;
         }
 
+        setAction(EAction.DO_NOTHING);
         return EAction.DO_NOTHING;
     }
 
@@ -80,6 +84,8 @@ public class Turret extends Unit implements IThinkable {
         // 2 자신의 위치에 유닛이 있다면 그 타일을 공격.
         //   그렇지 않을 경우 북쪽(위쪽)에 유닛이 있다면 그 타일을 공격.
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
+
+        assert (getAction() == EAction.ATTACK);
 
         final Unit minHp = searchMinHpAttackTargetOrNull(false);
 

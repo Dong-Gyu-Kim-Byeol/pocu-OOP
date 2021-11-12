@@ -66,8 +66,14 @@ public class Marine extends Unit implements IMovable, IThinkable {
         final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
-        for (int y = getPosition().getY() - VISION; y <= getPosition().getY() + VISION; ++y) {
-            for (int x = getPosition().getX() - VISION; x <= getPosition().getX() + VISION; ++x) {
+        final int minY = getPosition().getY() - VISION;
+        final int minX = getPosition().getX() - VISION;
+
+        final int maxY = getPosition().getY() + VISION;
+        final int maxX = getPosition().getX() + VISION;
+
+        for (int y = minY; y <= maxY; ++y) {
+            for (int x = minX; x <= maxX; ++x) {
                 if (!SimulationManager.isValidPosition(map, x, y)) {
                     continue;
                 }
@@ -100,16 +106,21 @@ public class Marine extends Unit implements IMovable, IThinkable {
     }
 
     public EAction think() {
+        assert (getAction() == EAction.DO_NOTHING);
+
         // attack
         if (searchMinHpAttackTargetOrNull(true) != null) {
+            setAction(EAction.ATTACK);
             return EAction.ATTACK;
         }
 
         // vision
         if (searchMinHpVisionTargetOrNull(true) != null) {
+            setAction(EAction.MOVE);
             return EAction.MOVE;
         }
 
+        setAction(EAction.DO_NOTHING);
         return EAction.DO_NOTHING;
     }
 
@@ -118,6 +129,8 @@ public class Marine extends Unit implements IMovable, IThinkable {
         // 1 가장 약한 유닛(HP가 가장 낮은 유닛)이 있는 타일을 공격
         // 2 자신의 위치에 유닛이 있다면 그 타일을 공격. 그렇지 않을 경우 북쪽(위쪽)에 유닛이 있다면 그 타일을 공격.
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
+
+        assert (getAction() == EAction.ATTACK);
 
         final Unit minHp = searchMinHpAttackTargetOrNull(false);
 
@@ -134,6 +147,8 @@ public class Marine extends Unit implements IMovable, IThinkable {
         // 이동할 때는 언제나 y축을 따라 다 이동한 뒤 x축을 따라 이동합니다.
         //
         // 해병이 시야 안에서 적을 찾지 못한 경우, 현재 타일에서 움직이지 않습니다.
+
+        assert (getAction() == EAction.MOVE);
 
         final Unit minHp = searchMinHpVisionTargetOrNull(false);
 
@@ -152,6 +167,7 @@ public class Marine extends Unit implements IMovable, IThinkable {
                 getPosition().setX(getPosition().getX() - 1);
             }
         }
+
     }
 
     // 시그내처 불변
