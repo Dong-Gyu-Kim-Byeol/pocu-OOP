@@ -76,7 +76,7 @@ public class Program {
             units.add(new Mine(new IntVector2D(7, 0), 1)); // E
             units.add(new Tank(new IntVector2D(13, 7))); // F
 
-//            units.add(new Destroyer(new IntVector2D(1, 7)));
+            units.add(new Destroyer(new IntVector2D(1, 7)));
 
             for (Unit unit : units) {
                 simulationManager.spawn(unit);

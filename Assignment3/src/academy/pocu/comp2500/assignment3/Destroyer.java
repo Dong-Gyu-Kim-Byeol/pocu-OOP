@@ -4,7 +4,7 @@ public final class Destroyer extends Unit {
     public static final char SYMBOL = 'D';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
     private static final int VISION = Math.max(SimulationManager.X_MAP_SIZE, SimulationManager.Y_MAP_SIZE);
-    private static final int ATTACK_AREA_OF_EFFECT = VISION * 2;
+    private static final int ATTACK_AREA_OF_EFFECT = VISION;
     private static final int WANT_DAMAGE = 1000;
     private static final int ATTACK_POINT = calculateAttackPoint();
     private static final int HP = 1000;

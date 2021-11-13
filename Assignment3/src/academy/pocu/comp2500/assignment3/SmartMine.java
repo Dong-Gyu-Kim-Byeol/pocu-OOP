@@ -21,6 +21,7 @@ public final class SmartMine extends Mine implements IThinkable {
     public void think() {
         if (isCanDetectAttack()) {
             setAction(EAction.ATTACK);
+            return;
         }
 
         setAction(EAction.DO_NOTHING);
@@ -42,10 +43,8 @@ public final class SmartMine extends Mine implements IThinkable {
         }
 
         if (getAction() == EAction.ATTACK) {
-            if (isCanDetectAttack()) {
-                setHpZero();
-                return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
-            }
+            setHpZero();
+            return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
         }
 
         return new AttackIntent(this, true, ImmutableIntVector2D.MINUS_ONE);
@@ -116,6 +115,7 @@ public final class SmartMine extends Mine implements IThinkable {
                     for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
                         if (unit.getUnitType() == canVisionUnitType) {
                             ++unitCount;
+                            continue;
                         }
                     }
                 }
