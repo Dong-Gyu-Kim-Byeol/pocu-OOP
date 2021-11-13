@@ -30,7 +30,7 @@ class MapParser {
         for (String line : grid) {
             for (int i = 2; i < line.length(); i++) {
                 if (Character.isAlphabetic(line.charAt(i)) || Character.isDigit(line.charAt(i))) {
-                    positions.add(String.format("%c: [%d,%d]", line.charAt(i), i - 2, grid.indexOf(line)));
+                    positions.add(String.format("%c:    %d,%d      ", line.charAt(i), i - 2, grid.indexOf(line)));
                 }
             }
         }

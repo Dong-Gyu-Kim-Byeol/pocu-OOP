@@ -20,7 +20,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
             new ImmutableIntVector2D(-1, 0), // left
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.AIR, EUnitType.GROUND};
-    private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseBoxOffsetStartingAt12oClock(VISION);
+    private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseManhattanDistanceOrderOffsetStartingAt12oClock(VISION);
 
 
     private boolean isHasShield;
