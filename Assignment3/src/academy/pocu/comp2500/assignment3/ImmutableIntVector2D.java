@@ -2,6 +2,7 @@ package academy.pocu.comp2500.assignment3;
 
 public final class ImmutableIntVector2D {
     public static final ImmutableIntVector2D MINUS_ONE = new ImmutableIntVector2D(-1, -1);
+    public static final ImmutableIntVector2D ZERO = new ImmutableIntVector2D(0, 0);
 
     private final int x;
     private final int y;

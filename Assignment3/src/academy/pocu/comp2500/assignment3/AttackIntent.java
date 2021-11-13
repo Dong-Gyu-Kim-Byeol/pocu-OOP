@@ -1,6 +1,5 @@
 package academy.pocu.comp2500.assignment3;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -14,8 +13,10 @@ public final class AttackIntent {
         this.attackCenterPosition = attackPosition;
     }
 
-    public void execute(final LinkedList<Unit>[][] map, final HashSet<Unit> outAttackedUnits) {
-        if (!isValid(map)) {
+    public void execute(final HashSet<Unit> outAttackedUnits) {
+        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+
+        if (!isValid()) {
             return;
         }
 
@@ -27,7 +28,7 @@ public final class AttackIntent {
 
         for (int y = minY; y <= maxY; ++y) {
             for (int x = minX; x <= maxX; ++x) {
-                if (!SimulationManager.isValidPosition(map, x, y)) {
+                if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                     continue;
                 }
 
@@ -51,8 +52,8 @@ public final class AttackIntent {
         }
     }
 
-    public boolean isValid(final LinkedList<Unit>[][] map) {
-        return SimulationManager.isValidPosition(map, attackCenterPosition.x(), attackCenterPosition.y());
+    public boolean isValid() {
+        return SimulationManager.getInstance().isValidPosition(attackCenterPosition.x(), attackCenterPosition.y());
     }
 
     // 피해치(x, y) = (공격 지점에서의 피해치) * (1 - 공격 지점으로부터의 거리 / (공격의 AoE 값 + 1))

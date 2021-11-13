@@ -34,11 +34,11 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         super(UNIT_TYPE, HP, position);
 
         this.isHasShield = true;
-        this.startPosition = new ImmutableIntVector2D(position.getX(), position.getY());
+        this.startPosition = new ImmutableIntVector2D(position);
     }
 
 
-    public EAction think() {
+    public void think() {
         if (isUseShield) {
             isHasShield = false;
         }
@@ -47,23 +47,23 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         targetOrNull = searchMinHpAttackTargetOrNull();
         if (targetOrNull != null) {
             setAction(EAction.ATTACK);
-            return EAction.ATTACK;
+            return;
         }
 
         // vision
         targetOrNull = searchNinDistanceVisionTargetOrNull();
         if (targetOrNull != null) {
             setAction(EAction.MOVE);
-            return EAction.MOVE;
+            return;
         }
 
         if (getPosition().getX() == startPosition.x() && getPosition().getY() == startPosition.y()) {
             setAction(EAction.DO_NOTHING);
-            return EAction.DO_NOTHING;
+            return;
         }
 
         setAction(EAction.MOVE);
-        return EAction.MOVE;
+        return;
     }
 
     @Override
@@ -80,6 +80,9 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
             return;
         }
 
+        final int preX = getPosition().getX();
+        final int preY = getPosition().getY();
+
         if (targetOrNull == null) {
             if (getPosition().getY() != startPosition.y()) {
                 if (getPosition().getY() < startPosition.y()) {
@@ -95,6 +98,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                 }
             }
 
+            SimulationManager.getInstance().replacePosition(this, preX, preY);
             return;
         }
 
@@ -112,6 +116,9 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                 getPosition().setX(getPosition().getX() - 1);
             }
         }
+
+        SimulationManager.getInstance().replacePosition(this, preX, preY);
+        return;
     }
 
     // 시그내처 불변
@@ -174,7 +181,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                 final int x = getPosition().getX() + offset.x();
                 final int y = getPosition().getY() + offset.y();
 
-                if (!SimulationManager.isValidPosition(map, x, y)) {
+                if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                     continue;
                 }
 
@@ -200,6 +207,10 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
             }
         }
 
+        if (minHp == null) {
+            return null;
+        }
+
         return new ImmutableIntVector2D(minHp.getPosition());
     }
 
@@ -217,7 +228,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
             for (int y = minY; y <= maxY; ++y) {
                 for (int x = minX; x <= maxX; ++x) {
-                    if (!SimulationManager.isValidPosition(map, x, y)) {
+                    if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                         continue;
                     }
 
@@ -234,7 +245,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                                 + Math.abs(unit.getPosition().getY() - getPosition().getY());
 
                         if (unit.getUnitType() == unitType) {
-                            if (minDistanceUnit == null || minDistance > +distance) {
+                            if (minDistanceUnit == null || minDistance > distance) {
                                 if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
                                     minDistanceUnit = unit;
                                 }
@@ -247,6 +258,10 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
             if (minDistanceUnit != null) {
                 return new ImmutableIntVector2D(minDistanceUnit.getPosition());
             }
+        }
+
+        if (minDistanceUnit == null) {
+            return null;
         }
 
         return new ImmutableIntVector2D(minDistanceUnit.getPosition());

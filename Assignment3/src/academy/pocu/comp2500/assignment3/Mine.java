@@ -3,15 +3,10 @@ package academy.pocu.comp2500.assignment3;
 public class Mine extends Unit implements ICollision, IThinkable {
     public static final char SYMBOL = 'N';
     private static final EUnitType UNIT_TYPE = EUnitType.MINE;
-    private static final int VISION = 0;
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 10;
     private static final int HP = 1;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
-    private static final ImmutableIntVector2D[] CAN_ATTACK_AREA_OFFSET = {
-            new ImmutableIntVector2D(0, 0)
-    };
-    private static final EUnitType[] CAN_VISION_UNIT_TYPES = {};
 
 
     private int minStepOn;
@@ -22,18 +17,18 @@ public class Mine extends Unit implements ICollision, IThinkable {
         super(UNIT_TYPE, HP, position);
 
         this.minStepOn = minStepOn;
-        this.immutablePosition = new ImmutableIntVector2D(getPosition().getX(), getPosition().getY());
+        this.immutablePosition = new ImmutableIntVector2D(getPosition());
     }
 
     @Override
-    public EAction think() {
+    public void think() {
         if (isCanStepOnAttack()) {
             setAction(EAction.ATTACK);
-            return EAction.ATTACK;
+            return;
         }
 
         setAction(EAction.DO_NOTHING);
-        return EAction.DO_NOTHING;
+        return;
     }
 
     @Override
@@ -68,7 +63,7 @@ public class Mine extends Unit implements ICollision, IThinkable {
 
         subHp(HP);
 
-        return new AttackIntent(this, new ImmutableIntVector2D(getPosition().getX(), getPosition().getY()));
+        return new AttackIntent(this, new ImmutableIntVector2D(getPosition()));
     }
 
     // 시그내처 불변
@@ -102,10 +97,6 @@ public class Mine extends Unit implements ICollision, IThinkable {
 
     protected final boolean isCanStepOnAttack() {
         return this.minStepOn <= 0;
-    }
-
-    protected final int getMinStepOn() {
-        return minStepOn;
     }
 
     protected final void deceaseMinStepOn() {

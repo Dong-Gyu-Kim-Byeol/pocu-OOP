@@ -4,15 +4,10 @@ import java.util.LinkedList;
 
 public final class SmartMine extends Mine {
     public static final char SYMBOL = 'A';
-    private static final EUnitType UNIT_TYPE = EUnitType.MINE;
     private static final int VISION = 1;
     private static final int ATTACK_AREA_OF_EFFECT = 1;
     private static final int ATTACK_POINT = 15;
-    private static final int HP = 1;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
-    private static final ImmutableIntVector2D[] CAN_ATTACK_AREA_OFFSET = {
-            new ImmutableIntVector2D(0, 0)
-    };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
 
 
@@ -25,7 +20,7 @@ public final class SmartMine extends Mine {
     }
 
 
-    public EAction think() {
+    public void think() {
         // 스마트 지뢰는 지뢰의 상위 호환 버전입니다.
         // 스마트 지뢰는 지뢰와 동일하게 작동하는 것 외에도 초특급 울트라 레이더를 탑재한 덕분에 근처에 있는 유닛들을 감지하는 능력을 갖추고 있습니다.
         // 만약 시야 안에서 몇 명 이상의 적 유닛이 감지되면, 스마트 지뢰가 폭발합니다.
@@ -36,16 +31,16 @@ public final class SmartMine extends Mine {
 
         if (isCanStepOnAttack()) {
             setAction(EAction.ATTACK);
-            return EAction.ATTACK;
+            return;
         }
 
         if (isCanDetectAttack()) {
             setAction(EAction.ATTACK);
-            return EAction.ATTACK;
+            return;
         }
 
         setAction(EAction.DO_NOTHING);
-        return EAction.DO_NOTHING;
+        return;
     }
 
     // 시그내처 불변
@@ -79,7 +74,7 @@ public final class SmartMine extends Mine {
 
         for (int y = minY; y <= maxY; ++y) {
             for (int x = minX; x <= maxX; ++x) {
-                if (!SimulationManager.isValidPosition(map, x, y)) {
+                if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                     continue;
                 }
 

@@ -48,13 +48,18 @@ public class Program {
                 simulationManager.spawn(unit);
             }
 
+            int frame = 10;
             SimulationVisualizer visualizer = new SimulationVisualizer(units);
-            for (int i = 0; i < 10; ++i) {
+            for (int i = 0; i < frame; ++i) {
                 clearConsole();
                 visualizer.visualize(i, simulationManager.getUnits());
                 simulationManager.update();
 //                continueOnEnter();
             }
+
+            clearConsole();
+            visualizer.visualize(frame + 1, simulationManager.getUnits());
+            simulationManager.update();
         }
     }
 

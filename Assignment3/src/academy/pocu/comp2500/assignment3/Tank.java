@@ -50,18 +50,18 @@ public final class Tank extends Unit implements IMovable, IThinkable {
         this.isMoveRight = true;
     }
 
-    public EAction think() {
+    public void think() {
         // attack
         targetOrNull = searchMinHpAttackTargetOrNull();
         if (targetOrNull != null) {
             if (isCanAttackMode()) {
                 setAction(EAction.ATTACK);
-                return EAction.ATTACK;
-            } else {
-                changeMode();
-                setAction(EAction.DO_NOTHING);
-                return EAction.DO_NOTHING;
+                return;
             }
+
+            changeMode();
+            setAction(EAction.DO_NOTHING);
+            return;
         }
 
         // vision
@@ -71,17 +71,17 @@ public final class Tank extends Unit implements IMovable, IThinkable {
             }
 
             setAction(EAction.DO_NOTHING);
-            return EAction.DO_NOTHING;
+            return;
         }
 
         if (isCanMoveMode()) {
             setAction(EAction.MOVE);
-            return EAction.MOVE;
-        } else {
-            changeMode();
-            setAction(EAction.DO_NOTHING);
-            return EAction.DO_NOTHING;
+            return;
         }
+
+        changeMode();
+        setAction(EAction.DO_NOTHING);
+        return;
     }
 
     @Override
@@ -96,33 +96,41 @@ public final class Tank extends Unit implements IMovable, IThinkable {
             return;
         }
 
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
-        final int x;
-        final int y = getPosition().getY();
+        final int preX = getPosition().getX();
+        final int preY = getPosition().getY();
 
         if (isMoveRight) {
-            x = getPosition().getX() + 1;
+            final int postX = preX + 1;
 
-            if (SimulationManager.isValidPosition(map, x, y) == false) {
+            if (SimulationManager.getInstance().isValidPosition(postX, preY) == false) {
                 isMoveRight = false;
-                getPosition().setX(getPosition().getX() - 1);
+                getPosition().setX(preX - 1);
+
+                SimulationManager.getInstance().replacePosition(this, preX, preY);
                 return;
             }
 
-            getPosition().setX(x);
+            getPosition().setX(postX);
+
+            SimulationManager.getInstance().replacePosition(this, preX, preY);
             return;
-        } else {
-            assert (isMoveRight == false);
+        }
 
-            x = getPosition().getX() - 1;
+        assert (isMoveRight == false);
+        {
+            final int postX = preX - 1;
 
-            if (SimulationManager.isValidPosition(map, x, y) == false) {
+            if (SimulationManager.getInstance().isValidPosition(postX, preY) == false) {
                 isMoveRight = true;
-                getPosition().setX(getPosition().getX() + 1);
+                getPosition().setX(preX + 1);
+
+                SimulationManager.getInstance().replacePosition(this, preX, preY);
                 return;
             }
 
-            getPosition().setX(x);
+            getPosition().setX(postX);
+
+            SimulationManager.getInstance().replacePosition(this, preX, preY);
             return;
         }
     }
@@ -196,7 +204,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
             final int x = getPosition().getX() + offset.x();
             final int y = getPosition().getY() + offset.y();
 
-            if (!SimulationManager.isValidPosition(map, x, y)) {
+            if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                 continue;
             }
 
@@ -219,12 +227,15 @@ public final class Tank extends Unit implements IMovable, IThinkable {
             }
         }
 
+        if (minHp == null) {
+            return null;
+        }
+
         return new ImmutableIntVector2D(minHp.getPosition());
     }
 
     private boolean isExistVisionTarget() {
         final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
-        Unit minHp = null;
 
         final int minY = getPosition().getY() - VISION;
         final int minX = getPosition().getX() - VISION;
@@ -234,7 +245,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
 
         for (int y = minY; y <= maxY; ++y) {
             for (int x = minX; x <= maxX; ++x) {
-                if (!SimulationManager.isValidPosition(map, x, y)) {
+                if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                     continue;
                 }
 

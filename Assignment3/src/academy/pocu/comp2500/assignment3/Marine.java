@@ -28,23 +28,23 @@ public final class Marine extends Unit implements IMovable, IThinkable {
     }
 
 
-    public EAction think() {
+    public void think() {
         // attack
         targetOrNull = searchMinHpAttackTargetOrNull();
         if (targetOrNull != null) {
             setAction(EAction.ATTACK);
-            return EAction.ATTACK;
+            return;
         }
 
         // vision
         targetOrNull = searchMinHpVisionTargetOrNull();
         if (targetOrNull != null) {
             setAction(EAction.MOVE);
-            return EAction.MOVE;
+            return;
         }
 
         setAction(EAction.DO_NOTHING);
-        return EAction.DO_NOTHING;
+        return;
     }
 
     @Override
@@ -62,20 +62,25 @@ public final class Marine extends Unit implements IMovable, IThinkable {
 
         assert (targetOrNull != null);
 
-        if (getPosition().getY() != targetOrNull.y()) {
-            if (getPosition().getY() < targetOrNull.y()) {
-                getPosition().setY(getPosition().getY() + 1);
+        final int preX = getPosition().getX();
+        final int preY = getPosition().getY();
+
+        if (preY != targetOrNull.y()) {
+            if (preY < targetOrNull.y()) {
+                getPosition().setY(preY + 1);
             } else {
-                getPosition().setY(getPosition().getY() - 1);
+                getPosition().setY(preY - 1);
             }
         } else {
-            if (getPosition().getX() < targetOrNull.x()) {
-                getPosition().setX(getPosition().getX() + 1);
+            if (preX < targetOrNull.x()) {
+                getPosition().setX(preX + 1);
             } else {
-                getPosition().setX(getPosition().getX() - 1);
+                getPosition().setX(preX - 1);
             }
         }
 
+        SimulationManager.getInstance().replacePosition(this, preX, preY);
+        return;
     }
 
     // 시그내처 불변
@@ -130,7 +135,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
             final int x = getPosition().getX() + offset.x();
             final int y = getPosition().getY() + offset.y();
 
-            if (!SimulationManager.isValidPosition(map, x, y)) {
+            if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                 continue;
             }
 
@@ -153,6 +158,10 @@ public final class Marine extends Unit implements IMovable, IThinkable {
             }
         }
 
+        if (minHp == null) {
+            return null;
+        }
+
         return new ImmutableIntVector2D(minHp.getPosition());
     }
 
@@ -168,7 +177,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
 
         for (int y = minY; y <= maxY; ++y) {
             for (int x = minX; x <= maxX; ++x) {
-                if (!SimulationManager.isValidPosition(map, x, y)) {
+                if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                     continue;
                 }
 
@@ -190,6 +199,10 @@ public final class Marine extends Unit implements IMovable, IThinkable {
                     }
                 }
             }
+        }
+
+        if (minHp == null) {
+            return null;
         }
 
         return new ImmutableIntVector2D(minHp.getPosition());

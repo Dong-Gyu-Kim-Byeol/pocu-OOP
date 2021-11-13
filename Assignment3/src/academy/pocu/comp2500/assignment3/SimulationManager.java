@@ -77,6 +77,15 @@ public final class SimulationManager {
         this.map[unit.getPosition().getY()][unit.getPosition().getX()].add(unit);
     }
 
+    public boolean isValidPosition(final int x, final int y) {
+        return 0 <= x && x < map[0].length && 0 <= y && y < map.length;
+    }
+
+    public void replacePosition(final Unit unit, final int preX, final int preY) {
+        map[preY][preX].remove(unit);
+        map[unit.getPosition().getY()][unit.getPosition().getX()].add(unit);
+    }
+
     // 시그내처 ?
     public void registerThinkable(final IThinkable thinkable) {
         this.thinkableUnits.add(thinkable);
@@ -94,23 +103,17 @@ public final class SimulationManager {
 
     // 시그내처 불변
     public void update() {
-//      1  각 유닛들이 이번 프레임에서 할 행동(선택지: 공격, 이동, 아무것도 안 함)을 결정
-//      2  움직일 수 있는 각 유닛에게 이동할 기회를 줌
-//      3  이동 후 충돌 처리
-//      4  각 유닛에게 공격할 기회를 줌
-//      5  피해를 입어야 하는 각 유닛에게 피해를 입힘
-//      6  죽은 유닛들을 모두 게임에서 제거함
-
+        // 1  각 유닛들이 이번 프레임에서 할 행동(선택지: 공격, 이동, 아무것도 안 함)을 결정
         for (final IThinkable thinkable : thinkableUnits) {
             thinkable.think();
         }
 
-
+        // 2  움직일 수 있는 각 유닛에게 이동할 기회를 줌
         for (final IMovable movable : movableUnits) {
             movable.move();
         }
 
-
+        // 3  이동 후 충돌 처리
         for (final ICollision collision : collisionUnits) {
             final int y = collision.getCollisionPosition().y();
             final int x = collision.getCollisionPosition().x();
@@ -120,25 +123,25 @@ public final class SimulationManager {
             }
         }
 
-
+        // 4  각 유닛에게 공격할 기회를 줌
         for (int y = 0; y < Y_MAP_SIZE; ++y) {
             for (int x = 0; x < X_MAP_SIZE; ++x) {
                 for (final Unit unit : this.map[y][x]) {
                     final AttackIntent attackIntent = unit.attack();
-                    if (attackIntent.isValid(map)) {
+                    if (attackIntent.isValid()) {
                         attackIntents.add(attackIntent);
                     }
                 }
             }
         }
 
-
+        // 5  피해를 입어야 하는 각 유닛에게 피해를 입힘
         for (final AttackIntent attackIntent : attackIntents) {
-            attackIntent.execute(map, attackedUnits);
+            attackIntent.execute(attackedUnits);
         }
         attackIntents.clear();
 
-
+        // 6  죽은 유닛들을 모두 게임에서 제거함
         for (final Unit unit : attackedUnits) {
             if (unit.getHp() <= 0) {
                 map[unit.getPosition().getY()][unit.getPosition().getX()].remove(unit);
@@ -146,9 +149,5 @@ public final class SimulationManager {
             }
         }
         attackedUnits.clear();
-    }
-
-    public static boolean isValidPosition(final LinkedList<Unit>[][] map, final int x, final int y) {
-        return 0 <= x && x < map[0].length && 0 <= y && y < map.length;
     }
 }

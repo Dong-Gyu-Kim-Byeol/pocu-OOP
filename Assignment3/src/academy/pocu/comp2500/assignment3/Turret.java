@@ -5,7 +5,6 @@ import java.util.LinkedList;
 public class Turret extends Unit implements IThinkable {
     public static final char SYMBOL = 'U';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
-    private static final int VISION = 2;
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 7;
     private static final int HP = 99;
@@ -37,15 +36,15 @@ public class Turret extends Unit implements IThinkable {
 
 
     @Override
-    public EAction think() {
+    public void think() {
         targetOrNull = searchMinHpAttackTargetOrNull();
         if (targetOrNull != null) {
             setAction(EAction.ATTACK);
-            return EAction.ATTACK;
+            return;
         }
 
         setAction(EAction.DO_NOTHING);
-        return EAction.DO_NOTHING;
+        return;
     }
 
     // 시그내처 불변
@@ -100,7 +99,7 @@ public class Turret extends Unit implements IThinkable {
             final int x = getPosition().getX() + offset.x();
             final int y = getPosition().getY() + offset.y();
 
-            if (!SimulationManager.isValidPosition(map, x, y)) {
+            if (!SimulationManager.getInstance().isValidPosition(x, y)) {
                 continue;
             }
 
@@ -121,6 +120,10 @@ public class Turret extends Unit implements IThinkable {
                     }
                 }
             }
+        }
+
+        if (minHp == null) {
+            return null;
         }
 
         return new ImmutableIntVector2D(minHp.getPosition());
