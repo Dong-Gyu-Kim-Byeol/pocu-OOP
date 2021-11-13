@@ -1,7 +1,6 @@
 package academy.pocu.comp2500.assignment3;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 
 // 공격 의도
 public final class AttackIntent {
@@ -43,10 +42,11 @@ public final class AttackIntent {
                         continue;
                     }
 
-                    for (final EUnitType unitType : attackUnit.getCanAttackUnitTypes()) {
-                        if (unit.getUnitType() == unitType) {
+                    for (final EUnitType canAttackUnitType : attackUnit.getCanAttackUnitTypes()) {
+                        if (unit.getUnitType() == canAttackUnitType) {
                             unit.onAttacked(calculateDamage(attackUnit, attackCenterPosition, x, y));
                             outAttackedUnits.add(unit);
+                            break;
                         }
                     }
                 }

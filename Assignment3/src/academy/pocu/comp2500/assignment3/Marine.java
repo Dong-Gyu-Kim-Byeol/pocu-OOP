@@ -164,6 +164,8 @@ public final class Marine extends Unit implements IMovable, IThinkable {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
                         }
+
+                        break;
                     }
                 }
             }
@@ -216,6 +218,8 @@ public final class Marine extends Unit implements IMovable, IThinkable {
                                 minDistance = distance;
                             }
                         }
+
+                        break;
                     }
                 }
             }

@@ -234,6 +234,8 @@ public final class Tank extends Unit implements IMovable, IThinkable {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
                         }
+
+                        break;
                     }
                 }
             }

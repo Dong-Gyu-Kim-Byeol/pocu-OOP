@@ -127,6 +127,8 @@ public final class Turret extends Unit implements IThinkable {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
                         }
+
+                        break;
                     }
                 }
             }

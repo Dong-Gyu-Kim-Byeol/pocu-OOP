@@ -115,7 +115,7 @@ public final class SmartMine extends Mine implements IThinkable {
                     for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
                         if (unit.getUnitType() == canVisionUnitType) {
                             ++unitCount;
-                            continue;
+                            break;
                         }
                     }
                 }
