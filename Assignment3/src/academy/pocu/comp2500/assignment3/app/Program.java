@@ -84,6 +84,10 @@ public class Program {
 //                continueOnEnter();
             }
         }
+
+        {
+            MapParser.parser();
+        }
     }
 
     public static void continueOnEnter() {
