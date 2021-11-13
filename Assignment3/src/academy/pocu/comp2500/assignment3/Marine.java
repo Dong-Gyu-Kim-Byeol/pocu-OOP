@@ -180,7 +180,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
 
         Unit minDistanceUnit = null;
-        final int minDistance = Integer.MAX_VALUE;
+        int minDistance = Integer.MAX_VALUE;
 
         for (final ImmutableIntVector2D offset : CAN_VISION_AREA_OFFSET) {
             final int x = getPosition().getX() + offset.x();
@@ -204,11 +204,16 @@ public final class Marine extends Unit implements IMovable, IThinkable {
 
                 for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
                     if (unit.getUnitType() == canVisionUnitType) {
-                        if (minDistanceUnit == null || minDistance >= distance) {
+                        if (minDistanceUnit == null || minDistance > distance) {
                             minDistanceUnit = unit;
+                            minDistance = distance;
+                        }
 
-                            if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
+                        if (minDistance == distance) {
+                            assert (minDistanceUnit != null);
+                            if (minDistanceUnit.getHp() > unit.getHp()) {
                                 minDistanceUnit = unit;
+                                minDistance = distance;
                             }
                         }
                     }

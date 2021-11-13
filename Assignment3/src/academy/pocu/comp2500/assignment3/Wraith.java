@@ -229,13 +229,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
 
         Unit minDistanceUnit = null;
-        final int minDistance = Integer.MAX_VALUE;
-
-        final int minY = getPosition().getY() - VISION;
-        final int minX = getPosition().getX() - VISION;
-
-        final int maxY = getPosition().getY() + VISION;
-        final int maxX = getPosition().getX() + VISION;
+        int minDistance = Integer.MAX_VALUE;
 
         for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
             for (final ImmutableIntVector2D offset : CAN_VISION_AREA_OFFSET) {
@@ -258,9 +252,16 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                             + Math.abs(unit.getPosition().getY() - getPosition().getY());
 
                     if (unit.getUnitType() == canVisionUnitType) {
-                        if (minDistanceUnit == null || minDistance >= distance) {
-                            if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
+                        if (minDistanceUnit == null || minDistance > distance) {
+                            minDistanceUnit = unit;
+                            minDistance = distance;
+                        }
+
+                        if (minDistance == distance) {
+                            assert (minDistanceUnit != null);
+                            if (minDistanceUnit.getHp() > unit.getHp()) {
                                 minDistanceUnit = unit;
+                                minDistance = distance;
                             }
                         }
                     }

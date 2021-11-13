@@ -111,7 +111,7 @@ public abstract class Unit {
         ArrayList<ImmutableIntVector2D> arrayList = new ArrayList<>();
 
         // If zero is not inserted, the center is empty.
-        arrayList.add(ImmutableIntVector2D.ZERO);
+        // arrayList.add(ImmutableIntVector2D.ZERO);
 
         {
             assert (maxDistanceFromCenter > 0);
