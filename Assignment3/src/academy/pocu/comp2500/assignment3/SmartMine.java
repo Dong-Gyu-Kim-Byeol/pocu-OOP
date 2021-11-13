@@ -68,6 +68,18 @@ public final class SmartMine extends Mine implements IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
+    public boolean isIThinkable() {
+        return true;
+    }
+
+    public boolean isIMovable() {
+        return false;
+    }
+
+    public boolean isICollision() {
+        return true;
+    }
+
 
     private boolean isCanDetectAttack() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
