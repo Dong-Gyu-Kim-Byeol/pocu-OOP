@@ -63,7 +63,7 @@ public class Mine extends Unit implements ICollision {
     }
 
     // 시그내처 불변
-    public final void onSpawn() {
+    public void onSpawn() {
         SimulationManager.getInstance().registerCollisionEventListener(this);
     }
 

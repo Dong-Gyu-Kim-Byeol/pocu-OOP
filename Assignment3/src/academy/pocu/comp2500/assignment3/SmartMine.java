@@ -52,6 +52,12 @@ public final class SmartMine extends Mine implements IThinkable {
     }
 
     // 시그내처 불변
+    public void onSpawn() {
+        SimulationManager.getInstance().registerThinkable(this);
+        SimulationManager.getInstance().registerCollisionEventListener(this);
+    }
+
+    // 시그내처 불변
     public char getSymbol() {
         return SYMBOL;
     }
