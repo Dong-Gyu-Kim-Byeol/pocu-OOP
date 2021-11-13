@@ -83,7 +83,7 @@ public abstract class Unit {
     public abstract boolean isICollision();
 
 
-    public static ImmutableIntVector2D[] createClockwiseOffsetStartingAt12oClock(final int maxDistanceFromCenter) {
+    protected static ImmutableIntVector2D[] createClockwiseOffsetStartingAt12oClock(final int maxDistanceFromCenter) {
 
         //   시야: 1   ( == vision)
         //   o o o
