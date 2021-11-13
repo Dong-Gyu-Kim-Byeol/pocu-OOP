@@ -21,15 +21,17 @@ public class Mine extends Unit implements ICollision {
 
     @Override
     public final void checkCollision(final Unit unit) {
-        if (unit == this) {
-            return;
+        switch (unit.getUnitType()) {
+            case GROUND:
+                deceaseMinStepOn();
+                break;
+            case MINE:
+                // intentional fallthrough
+            case AIR:
+                break;
+            default:
+                throw new IllegalArgumentException("unknown type");
         }
-
-        if (unit.getUnitType() != EUnitType.GROUND) {
-            return;
-        }
-
-        deceaseMinStepOn();
     }
 
     public final ImmutableIntVector2D getCollisionPosition() {

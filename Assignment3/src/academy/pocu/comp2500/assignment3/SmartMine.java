@@ -6,7 +6,7 @@ public final class SmartMine extends Mine {
     private static final int ATTACK_AREA_OF_EFFECT = 1;
     private static final int ATTACK_POINT = 15;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
-    private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
+    private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND};
 
 
     private final int minDetectEnemy;
