@@ -1,6 +1,6 @@
 package academy.pocu.comp2500.assignment3;
 
-public final class SmartMine extends Mine {
+public final class SmartMine extends Mine implements IThinkable {
     public static final char SYMBOL = 'A';
     private static final int VISION = 1;
     private static final int ATTACK_AREA_OF_EFFECT = 1;
@@ -15,6 +15,15 @@ public final class SmartMine extends Mine {
     public SmartMine(final IntVector2D position, final int minStepOn, final int minDetectEnemy) {
         super(position, minStepOn);
         this.minDetectEnemy = minDetectEnemy;
+    }
+
+    @Override
+    public void think() {
+        if (isCanDetectAttack()) {
+            setAction(EAction.ATTACK);
+        }
+
+        setAction(EAction.DO_NOTHING);
     }
 
     // 시그내처 불변
@@ -32,9 +41,11 @@ public final class SmartMine extends Mine {
             return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
         }
 
-        if (isCanDetectAttack()) {
-            setHpZero();
-            return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
+        if (getAction() == EAction.ATTACK) {
+            if (isCanDetectAttack()) {
+                setHpZero();
+                return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
+            }
         }
 
         return new AttackIntent(this, true, ImmutableIntVector2D.MINUS_ONE);

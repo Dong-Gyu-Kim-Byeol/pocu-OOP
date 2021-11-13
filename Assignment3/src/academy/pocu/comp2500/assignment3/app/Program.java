@@ -56,35 +56,35 @@ public class Program {
 
             ArrayList<Unit> units = new ArrayList<>();
 
-            units.add(new Marine(new IntVector2D(12, 6))); // 0
-            units.add(new Turret(new IntVector2D(7, 4))); // 1
-            units.add(new SmartMine(new IntVector2D(2, 5), 2, 2)); // 2
-            units.add(new Mine(new IntVector2D(7, 3), 2)); // 3
+            units.add(new Mine(new IntVector2D(14, 4), 1)); // 0
+            units.add(new Marine(new IntVector2D(9, 7))); // 1
+            units.add(new SmartMine(new IntVector2D(5, 2), 4, 2)); // 2
+            units.add(new Marine(new IntVector2D(1, 5))); // 3
 
-            units.add(new Mine(new IntVector2D(7, 7), 4)); // 4
-            units.add(new Turret(new IntVector2D(1, 6))); // 5
-            units.add(new Mine(new IntVector2D(11, 0), 4)); // 6
-            units.add(new SmartMine(new IntVector2D(3, 0), 2, 1)); // 7
+            units.add(new SmartMine(new IntVector2D(9, 3), 1, 1)); // 4
+            units.add(new SmartMine(new IntVector2D(11, 6), 3, 1)); // 5
+            units.add(new Turret(new IntVector2D(7, 7))); // 6
+            units.add(new SmartMine(new IntVector2D(12, 0), 3, 3)); // 7
 
-            units.add(new Turret(new IntVector2D(10, 0))); // 8
-            units.add(new Turret(new IntVector2D(13, 3))); // 9
-            units.add(new Turret(new IntVector2D(14, 2))); // A
-            units.add(new Tank(new IntVector2D(14, 6))); // B
+            units.add(new Wraith(new IntVector2D(12, 6))); // 8
+            units.add(new SmartMine(new IntVector2D(13, 6), 1, 3)); // 9
+            units.add(new Wraith(new IntVector2D(5, 7))); // A
+            units.add(new Turret(new IntVector2D(11, 3))); // B
 
-            units.add(new SmartMine(new IntVector2D(10, 0), 1, 3)); // C
-            units.add(new Marine(new IntVector2D(12, 6))); // D
-            units.add(new Wraith(new IntVector2D(8, 7))); // E
-//            units.add(new Wraith(new IntVector2D(15, 7))); // F
+            units.add(new SmartMine(new IntVector2D(0, 3), 2, 1)); // C
+            units.add(new Turret(new IntVector2D(9, 4))); // D
+            units.add(new Mine(new IntVector2D(7, 0), 1)); // E
+            units.add(new Tank(new IntVector2D(13, 7))); // F
 
-            units.add(new Destroyer(new IntVector2D(1, 7)));
+//            units.add(new Destroyer(new IntVector2D(1, 7)));
 
             for (Unit unit : units) {
                 simulationManager.spawn(unit);
             }
 
-            int frame = 3;
+            int frame = 6;
             SimulationVisualizer visualizer = new SimulationVisualizer(units);
-            for (int i = 0; i < frame; ++i) {
+            for (int i = 0; i <= frame; ++i) {
                 clearConsole();
                 visualizer.visualize(i, simulationManager.getUnits());
                 simulationManager.update();

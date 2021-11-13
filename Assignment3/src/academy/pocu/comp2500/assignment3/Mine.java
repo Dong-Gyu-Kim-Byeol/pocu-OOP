@@ -21,12 +21,16 @@ public class Mine extends Unit implements ICollision {
 
     @Override
     public final void checkCollision(final Unit unit) {
+        if (unit == this) {
+            return;
+        }
+
         switch (unit.getUnitType()) {
             case GROUND:
+                // intentional fallthrough
+            case MINE:
                 deceaseMinStepOn();
                 break;
-            case MINE:
-                // intentional fallthrough
             case AIR:
                 break;
             default:
