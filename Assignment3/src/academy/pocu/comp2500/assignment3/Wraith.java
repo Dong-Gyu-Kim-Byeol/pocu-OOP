@@ -20,6 +20,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
             new ImmutableIntVector2D(-1, 0), // left
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.AIR, EUnitType.GROUND};
+    private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseOffsetStartingAt12oClock(VISION);
 
 
     private boolean isHasShield;
@@ -182,12 +183,11 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     }
 
 
-
     private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
-        for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
+        for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
             for (final ImmutableIntVector2D offset : CAN_ATTACK_AREA_OFFSET) {
                 final int x = getPosition().getX() + offset.x();
                 final int y = getPosition().getY() + offset.y();
@@ -205,7 +205,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                         continue;
                     }
 
-                    if (unit.getUnitType() == unitType) {
+                    if (unit.getUnitType() == canVisionUnitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
                         }
@@ -227,6 +227,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
 
     private ImmutableIntVector2D searchMinDistanceVisionTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
+
         Unit minDistanceUnit = null;
         final int minDistance = Integer.MAX_VALUE;
 
@@ -236,30 +237,30 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         final int maxY = getPosition().getY() + VISION;
         final int maxX = getPosition().getX() + VISION;
 
-        for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
-            for (int y = minY; y <= maxY; ++y) {
-                for (int x = minX; x <= maxX; ++x) {
-                    if (!SimulationManager.getInstance().isValidPosition(x, y)) {
+        for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
+            for (final ImmutableIntVector2D offset : CAN_VISION_AREA_OFFSET) {
+                final int x = getPosition().getX() + offset.x();
+                final int y = getPosition().getY() + offset.y();
+                if (!SimulationManager.getInstance().isValidPosition(x, y)) {
+                    continue;
+                }
+
+                if (map.getHashSet(y, x).size() == 0) {
+                    continue;
+                }
+
+                for (final Unit unit : map.getHashSet(y, x)) {
+                    if (unit == this) {
                         continue;
                     }
 
-                    if (map.getHashSet(y, x).size() == 0) {
-                        continue;
-                    }
+                    final int distance = Math.abs(unit.getPosition().getX() - getPosition().getX())
+                            + Math.abs(unit.getPosition().getY() - getPosition().getY());
 
-                    for (final Unit unit : map.getHashSet(y, x)) {
-                        if (unit == this) {
-                            continue;
-                        }
-
-                        final int distance = Math.abs(unit.getPosition().getX() - getPosition().getX())
-                                + Math.abs(unit.getPosition().getY() - getPosition().getY());
-
-                        if (unit.getUnitType() == unitType) {
-                            if (minDistanceUnit == null || minDistance > distance) {
-                                if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
-                                    minDistanceUnit = unit;
-                                }
+                    if (unit.getUnitType() == canVisionUnitType) {
+                        if (minDistanceUnit == null || minDistance > distance) {
+                            if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
+                                minDistanceUnit = unit;
                             }
                         }
                     }

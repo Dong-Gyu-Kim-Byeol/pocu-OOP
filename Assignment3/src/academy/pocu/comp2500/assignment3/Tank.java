@@ -196,7 +196,6 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     }
 
 
-
     private boolean isCanAttackMode() {
         return tankMode == ETankMode.SIEGE;
     }
@@ -230,8 +229,8 @@ public final class Tank extends Unit implements IMovable, IThinkable {
                     continue;
                 }
 
-                for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
-                    if (unit.getUnitType() == unitType) {
+                for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
+                    if (unit.getUnitType() == canVisionUnitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
                         }
@@ -271,8 +270,8 @@ public final class Tank extends Unit implements IMovable, IThinkable {
                         continue;
                     }
 
-                    for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
-                        if (unit.getUnitType() == unitType) {
+                    for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
+                        if (unit.getUnitType() == canVisionUnitType) {
                             return true;
                         }
                     }

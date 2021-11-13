@@ -84,8 +84,8 @@ public final class SmartMine extends Mine {
                         continue;
                     }
 
-                    for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
-                        if (unit.getUnitType() == unitType) {
+                    for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
+                        if (unit.getUnitType() == canVisionUnitType) {
                             ++unitCount;
                         }
                     }

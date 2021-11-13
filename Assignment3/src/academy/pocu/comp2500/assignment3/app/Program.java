@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class Program {
 
     public static void main(String[] args) {
+
+        ImmutableIntVector2D[] a = Unit.createClockwiseOffsetStartingAt12oClock(2);
+
+
         {
             Registry registry = new Registry();
             App app = new App(registry);

@@ -1,5 +1,7 @@
 package academy.pocu.comp2500.assignment3;
 
+import java.util.ArrayList;
+
 public final class Marine extends Unit implements IMovable, IThinkable {
     public static final char SYMBOL = 'M';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
@@ -16,6 +18,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
             new ImmutableIntVector2D(-1, 0), // left
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR};
+    private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseOffsetStartingAt12oClock(VISION);
 
 
     private ImmutableIntVector2D targetOrNull;
@@ -158,8 +161,8 @@ public final class Marine extends Unit implements IMovable, IThinkable {
                     continue;
                 }
 
-                for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
-                    if (unit.getUnitType() == unitType) {
+                for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
+                    if (unit.getUnitType() == canVisionUnitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
                         }
@@ -177,44 +180,41 @@ public final class Marine extends Unit implements IMovable, IThinkable {
 
     private ImmutableIntVector2D searchMinDistanceVisionTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
+
         Unit minDistanceUnit = null;
         final int minDistance = Integer.MAX_VALUE;
 
-        final int minY = getPosition().getY() - VISION;
-        final int minX = getPosition().getX() - VISION;
+        for (final ImmutableIntVector2D offset : CAN_VISION_AREA_OFFSET) {
+            final int x = getPosition().getX() + offset.x();
+            final int y = getPosition().getY() + offset.y();
 
-        final int maxY = getPosition().getY() + VISION;
-        final int maxX = getPosition().getX() + VISION;
+            if (!SimulationManager.getInstance().isValidPosition(x, y)) {
+                continue;
+            }
 
-        for (int y = minY; y <= maxY; ++y) {
-            for (int x = minX; x <= maxX; ++x) {
-                if (!SimulationManager.getInstance().isValidPosition(x, y)) {
+            if (map.getHashSet(y, x).size() == 0) {
+                continue;
+            }
+
+            for (final Unit unit : map.getHashSet(y, x)) {
+                if (unit == this) {
                     continue;
                 }
 
-                if (map.getHashSet(y, x).size() == 0) {
-                    continue;
-                }
+                final int distance = Math.abs(unit.getPosition().getX() - getPosition().getX())
+                        + Math.abs(unit.getPosition().getY() - getPosition().getY());
 
-                for (final Unit unit : map.getHashSet(y, x)) {
-                    if (unit == this) {
-                        continue;
-                    }
-
-                    final int distance = Math.abs(unit.getPosition().getX() - getPosition().getX())
-                            + Math.abs(unit.getPosition().getY() - getPosition().getY());
-
-                    for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
-                        if (unit.getUnitType() == unitType) {
-                            if (minDistanceUnit == null || minDistance > distance) {
-                                if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
-                                    minDistanceUnit = unit;
-                                }
+                for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
+                    if (unit.getUnitType() == canVisionUnitType) {
+                        if (minDistanceUnit == null || minDistance > distance) {
+                            if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
+                                minDistanceUnit = unit;
                             }
                         }
                     }
                 }
             }
+
         }
 
         if (minDistanceUnit == null) {

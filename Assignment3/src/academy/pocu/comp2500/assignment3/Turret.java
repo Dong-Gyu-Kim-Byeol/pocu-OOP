@@ -122,8 +122,8 @@ public final class Turret extends Unit implements IThinkable {
                     continue;
                 }
 
-                for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
-                    if (unit.getUnitType() == unitType) {
+                for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
+                    if (unit.getUnitType() == canVisionUnitType) {
                         if (minHp == null || minHp.getHp() > unit.getHp()) {
                             minHp = unit;
                         }
