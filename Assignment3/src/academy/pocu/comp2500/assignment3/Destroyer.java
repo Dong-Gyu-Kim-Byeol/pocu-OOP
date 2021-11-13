@@ -76,6 +76,6 @@ public final class Destroyer extends Unit {
         assert (ap >= damage);
         assert (ap >= AttackIntent.calculateDamage(new Destroyer(new IntVector2D(0, 0)), ImmutableIntVector2D.ZERO, VISION, VISION));
 
-        return (int) ap;
+        return (int) ap * 5;
     }
 }
