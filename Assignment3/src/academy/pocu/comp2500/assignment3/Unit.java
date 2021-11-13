@@ -83,7 +83,7 @@ public abstract class Unit {
     public abstract boolean isICollision();
 
 
-    protected static ImmutableIntVector2D[] createClockwiseOffsetStartingAt12oClock(final int maxDistanceFromCenter) {
+    protected static ImmutableIntVector2D[] createClockwiseBoxOffsetStartingAt12oClock(final int maxDistanceFromCenter) {
 
         //   시야: 1   ( == vision)
         //   o o o
@@ -109,7 +109,10 @@ public abstract class Unit {
         // Create a clockwise offset starting at 12 o'clock
 
         ArrayList<ImmutableIntVector2D> arrayList = new ArrayList<>();
+
+        // If zero is not inserted, the center is empty.
         arrayList.add(ImmutableIntVector2D.ZERO);
+
         {
             assert (maxDistanceFromCenter > 0);
 

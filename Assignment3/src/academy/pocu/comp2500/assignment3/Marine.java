@@ -1,7 +1,5 @@
 package academy.pocu.comp2500.assignment3;
 
-import java.util.ArrayList;
-
 public final class Marine extends Unit implements IMovable, IThinkable {
     public static final char SYMBOL = 'M';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
@@ -18,7 +16,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
             new ImmutableIntVector2D(-1, 0), // left
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR};
-    private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseOffsetStartingAt12oClock(VISION);
+    private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseBoxOffsetStartingAt12oClock(VISION);
 
 
     private ImmutableIntVector2D targetOrNull;
@@ -206,7 +204,9 @@ public final class Marine extends Unit implements IMovable, IThinkable {
 
                 for (final EUnitType canVisionUnitType : CAN_VISION_UNIT_TYPES) {
                     if (unit.getUnitType() == canVisionUnitType) {
-                        if (minDistanceUnit == null || minDistance > distance) {
+                        if (minDistanceUnit == null || minDistance >= distance) {
+                            minDistanceUnit = unit;
+
                             if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
                                 minDistanceUnit = unit;
                             }

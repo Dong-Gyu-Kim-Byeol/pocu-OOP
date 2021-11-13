@@ -20,7 +20,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
             new ImmutableIntVector2D(-1, 0), // left
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.AIR, EUnitType.GROUND};
-    private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseOffsetStartingAt12oClock(VISION);
+    private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseBoxOffsetStartingAt12oClock(VISION);
 
 
     private boolean isHasShield;
@@ -258,7 +258,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                             + Math.abs(unit.getPosition().getY() - getPosition().getY());
 
                     if (unit.getUnitType() == canVisionUnitType) {
-                        if (minDistanceUnit == null || minDistance > distance) {
+                        if (minDistanceUnit == null || minDistance >= distance) {
                             if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
                                 minDistanceUnit = unit;
                             }
