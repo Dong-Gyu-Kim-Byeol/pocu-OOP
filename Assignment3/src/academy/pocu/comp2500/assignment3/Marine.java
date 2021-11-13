@@ -139,7 +139,6 @@ public final class Marine extends Unit implements IMovable, IThinkable {
     }
 
 
-
     private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
@@ -180,7 +179,8 @@ public final class Marine extends Unit implements IMovable, IThinkable {
 
     private ImmutableIntVector2D searchMinHpVisionTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
-        Unit minHp = null;
+        Unit minDistanceUnit = null;
+        final int minDistance = Integer.MAX_VALUE;
 
         final int minY = getPosition().getY() - VISION;
         final int minX = getPosition().getX() - VISION;
@@ -203,10 +203,15 @@ public final class Marine extends Unit implements IMovable, IThinkable {
                         continue;
                     }
 
+                    final int distance = Math.abs(unit.getPosition().getX() - getPosition().getX())
+                            + Math.abs(unit.getPosition().getY() - getPosition().getY());
+
                     for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
                         if (unit.getUnitType() == unitType) {
-                            if (minHp == null || minHp.getHp() > unit.getHp()) {
-                                minHp = unit;
+                            if (minDistanceUnit == null || minDistance > distance) {
+                                if (minDistanceUnit == null || minDistanceUnit.getHp() > unit.getHp()) {
+                                    minDistanceUnit = unit;
+                                }
                             }
                         }
                     }
@@ -214,10 +219,10 @@ public final class Marine extends Unit implements IMovable, IThinkable {
             }
         }
 
-        if (minHp == null) {
+        if (minDistanceUnit == null) {
             return null;
         }
 
-        return new ImmutableIntVector2D(minHp.getPosition());
+        return new ImmutableIntVector2D(minDistanceUnit.getPosition());
     }
 }
