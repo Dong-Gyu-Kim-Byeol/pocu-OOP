@@ -24,9 +24,10 @@ public final class SimulationManager {
     private final LinkedList<Unit>[][] map;
     private int unitCount;
 
-    private final LinkedList<IThinkable> thinkableUnits;
-    private final LinkedList<IMovable> movableUnits;
-    private final LinkedList<ICollision> collisionUnits;
+    private final HashSet<IThinkable> thinkableUnits;
+    private final HashSet<IMovable> movableUnits;
+    private final HashSet<ICollision> collisionUnits;
+
     private final ArrayList<AttackIntent> attackIntents;
     private final HashSet<Unit> attackedUnits;
 
@@ -40,13 +41,31 @@ public final class SimulationManager {
             }
         }
 
-        this.thinkableUnits = new LinkedList<>();
-        this.movableUnits = new LinkedList<>();
-        this.collisionUnits = new LinkedList<>();
+        this.thinkableUnits = new HashSet<>();
+        this.movableUnits = new HashSet<>();
+        this.collisionUnits = new HashSet<>();
 
         this.attackIntents = new ArrayList<>();
         this.attackedUnits = new HashSet<>();
     }
+
+    public void clear() {
+        for (int y = 0; y < Y_MAP_SIZE; ++y) {
+            for (int x = 0; x < X_MAP_SIZE; ++x) {
+                this.map[y][x].clear();
+            }
+        }
+
+        unitCount = 0;
+
+        this.thinkableUnits.clear();
+        this.movableUnits.clear();
+        this.collisionUnits.clear();
+
+        this.attackIntents.clear();
+        this.attackedUnits.clear();
+    }
+
 
     public LinkedList<Unit>[][] getMap() {
         return map;
@@ -145,6 +164,9 @@ public final class SimulationManager {
         for (final Unit unit : attackedUnits) {
             if (unit.getHp() <= 0) {
                 map[unit.getPosition().getY()][unit.getPosition().getX()].remove(unit);
+                thinkableUnits.remove(unit);
+                movableUnits.remove(unit);
+                collisionUnits.remove(unit);
                 --unitCount;
             }
         }
