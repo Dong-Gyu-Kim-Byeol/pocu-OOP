@@ -82,7 +82,7 @@ public class Program {
                 simulationManager.spawn(unit);
             }
 
-            int frame = 3;
+            int frame = 2;
             SimulationVisualizer visualizer = new SimulationVisualizer(units);
             for (int i = 0; i <= frame; ++i) {
                 clearConsole();

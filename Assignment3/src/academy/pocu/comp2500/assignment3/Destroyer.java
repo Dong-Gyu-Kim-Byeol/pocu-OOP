@@ -2,7 +2,7 @@ package academy.pocu.comp2500.assignment3;
 
 public final class Destroyer extends Unit {
     public static final char SYMBOL = 'D';
-    private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
+    private static final EUnitType UNIT_TYPE = EUnitType.AIR;
     private static final int VISION = Math.max(SimulationManager.X_MAP_SIZE, SimulationManager.Y_MAP_SIZE);
     private static final int ATTACK_AREA_OF_EFFECT = VISION;
     private static final int WANT_DAMAGE = 1000;
