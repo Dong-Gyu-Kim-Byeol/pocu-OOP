@@ -143,12 +143,12 @@ public final class Tank extends Unit implements IMovable, IThinkable {
         // 전차가 시야 안에서 적을 찾으면 공성 모드로 변환하여 공격할 준비를 합니다.
 
         if (getAction() != EAction.ATTACK) {
-            return new AttackIntent(this, ImmutableIntVector2D.MINUS_ONE);
+            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
         }
 
         assert (targetOrNull != null);
 
-        return new AttackIntent(this, targetOrNull);
+        return new AttackIntent(this, false, targetOrNull);
     }
 
     // 시그내처 불변

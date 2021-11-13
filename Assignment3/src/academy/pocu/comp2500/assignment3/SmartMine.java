@@ -29,15 +29,15 @@ public final class SmartMine extends Mine {
 
         if (isCanStepOnAttack()) {
             setHpZero();
-            return new AttackIntent(this, new ImmutableIntVector2D(getPosition()));
+            return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
         }
 
         if (isCanDetectAttack()) {
             setHpZero();
-            return new AttackIntent(this, new ImmutableIntVector2D(getPosition()));
+            return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
         }
 
-        return new AttackIntent(this, ImmutableIntVector2D.MINUS_ONE);
+        return new AttackIntent(this, true, ImmutableIntVector2D.MINUS_ONE);
     }
 
     // 시그내처 불변
