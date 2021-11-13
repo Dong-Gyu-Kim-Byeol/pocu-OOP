@@ -109,6 +109,7 @@ public abstract class Unit {
         // Create a clockwise offset starting at 12 o'clock
 
         ArrayList<ImmutableIntVector2D> arrayList = new ArrayList<>();
+        arrayList.add(ImmutableIntVector2D.ZERO);
         {
             assert (maxDistanceFromCenter > 0);
 
