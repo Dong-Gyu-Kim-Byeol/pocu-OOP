@@ -2,7 +2,6 @@ package academy.pocu.comp2500.assignment3;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 public final class SimulationManager {
     // 월드는 16 x 8 크기의 2D 그리드(grid)입니다.
@@ -21,7 +20,7 @@ public final class SimulationManager {
         return instance;
     }
 
-    private final LinkedList<Unit>[][] map;
+    private final Map2DCanSamePosition<Unit> map;
     private int unitCount;
 
     private final HashSet<IThinkable> thinkableUnits;
@@ -33,13 +32,7 @@ public final class SimulationManager {
 
     @SuppressWarnings("unchecked")
     private SimulationManager() {
-        this.map = new LinkedList[Y_MAP_SIZE][X_MAP_SIZE];
-
-        for (int y = 0; y < Y_MAP_SIZE; ++y) {
-            for (int x = 0; x < X_MAP_SIZE; ++x) {
-                this.map[y][x] = new LinkedList<>();
-            }
-        }
+        this.map = new Map2DCanSamePosition<Unit>(Y_MAP_SIZE, X_MAP_SIZE);
 
         this.thinkableUnits = new HashSet<>();
         this.movableUnits = new HashSet<>();
@@ -50,11 +43,7 @@ public final class SimulationManager {
     }
 
     public void clear() {
-        for (int y = 0; y < Y_MAP_SIZE; ++y) {
-            for (int x = 0; x < X_MAP_SIZE; ++x) {
-                this.map[y][x].clear();
-            }
-        }
+        this.map.clear();
 
         unitCount = 0;
 
@@ -67,7 +56,7 @@ public final class SimulationManager {
     }
 
 
-    public LinkedList<Unit>[][] getMap() {
+    public Map2DCanSamePosition<Unit> getMap() {
         return map;
     }
 
@@ -77,7 +66,7 @@ public final class SimulationManager {
 
         for (int y = 0; y < Y_MAP_SIZE; ++y) {
             for (int x = 0; x < X_MAP_SIZE; ++x) {
-                for (final Unit unit : this.map[y][x]) {
+                for (final Unit unit : this.map.getHashSet(y, x)) {
                     out.add(unit);
                 }
             }
@@ -93,16 +82,15 @@ public final class SimulationManager {
         unit.onSpawn();
 
         ++this.unitCount;
-        this.map[unit.getPosition().getY()][unit.getPosition().getX()].add(unit);
+        this.map.add(unit, unit.getPosition().getY(), unit.getPosition().getX());
     }
 
     public boolean isValidPosition(final int x, final int y) {
-        return 0 <= x && x < map[0].length && 0 <= y && y < map.length;
+        return 0 <= x && x < map.xSize() && 0 <= y && y < map.ySize();
     }
 
     public void replacePosition(final Unit unit, final int preX, final int preY) {
-        map[preY][preX].remove(unit);
-        map[unit.getPosition().getY()][unit.getPosition().getX()].add(unit);
+        map.replace(unit, preY, preX, unit.getPosition().getY(), unit.getPosition().getX());
     }
 
     // 시그내처 ?
@@ -137,7 +125,7 @@ public final class SimulationManager {
             final int y = collision.getCollisionPosition().y();
             final int x = collision.getCollisionPosition().x();
 
-            for (final Unit unit : map[y][x]) {
+            for (final Unit unit : map.getHashSet(y, x)) {
                 collision.checkCollision(unit);
             }
         }
@@ -145,7 +133,7 @@ public final class SimulationManager {
         // 4  각 유닛에게 공격할 기회를 줌
         for (int y = 0; y < Y_MAP_SIZE; ++y) {
             for (int x = 0; x < X_MAP_SIZE; ++x) {
-                for (final Unit unit : this.map[y][x]) {
+                for (final Unit unit : map.getHashSet(y, x)) {
                     final AttackIntent attackIntent = unit.attack();
                     if (attackIntent.isValid()) {
                         attackIntents.add(attackIntent);
@@ -163,10 +151,18 @@ public final class SimulationManager {
         // 6  죽은 유닛들을 모두 게임에서 제거함
         for (final Unit unit : attackedUnits) {
             if (unit.getHp() <= 0) {
-                map[unit.getPosition().getY()][unit.getPosition().getX()].remove(unit);
-                thinkableUnits.remove(unit);
-                movableUnits.remove(unit);
-                collisionUnits.remove(unit);
+                map.remove(unit, unit.getPosition().getY(), unit.getPosition().getX());
+
+                if (unit.isIThinkable()) {
+                    thinkableUnits.remove((IThinkable) unit);
+                }
+                if (unit.isIMovable()) {
+                    movableUnits.remove((IMovable) unit);
+                }
+                if (unit.isICollision()) {
+                    collisionUnits.remove((ICollision) unit);
+                }
+
                 --unitCount;
             }
         }

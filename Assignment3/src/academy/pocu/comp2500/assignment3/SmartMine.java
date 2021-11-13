@@ -62,7 +62,7 @@ public final class SmartMine extends Mine {
 
 
     private boolean isCanDetectAttack() {
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
 
         int unitCount = 0;
 
@@ -78,11 +78,11 @@ public final class SmartMine extends Mine {
                     continue;
                 }
 
-                if (map[y][x].size() == 0) {
+                if (map.getHashSet(y, x).size() == 0) {
                     continue;
                 }
 
-                for (final Unit unit : map[y][x]) {
+                for (final Unit unit : map.getHashSet(y, x)) {
                     if (unit == this) {
                         continue;
                     }

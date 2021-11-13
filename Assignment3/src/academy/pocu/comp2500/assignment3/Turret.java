@@ -1,8 +1,6 @@
 package academy.pocu.comp2500.assignment3;
 
-import java.util.LinkedList;
-
-public class Turret extends Unit implements IThinkable {
+public final class Turret extends Unit implements IThinkable {
     public static final char SYMBOL = 'U';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
     private static final int ATTACK_AREA_OF_EFFECT = 0;
@@ -90,9 +88,21 @@ public class Turret extends Unit implements IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
+    public boolean isIThinkable() {
+        return true;
+    }
+
+    public boolean isIMovable() {
+        return false;
+    }
+
+    public boolean isICollision() {
+        return false;
+    }
+
 
     private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
         for (final ImmutableIntVector2D offset : CAN_ATTACK_AREA_OFFSET) {
@@ -103,11 +113,11 @@ public class Turret extends Unit implements IThinkable {
                 continue;
             }
 
-            if (map[y][x].size() == 0) {
+            if (map.getHashSet(y, x).size() == 0) {
                 continue;
             }
 
-            for (final Unit unit : map[y][x]) {
+            for (final Unit unit : map.getHashSet(y, x)) {
                 if (unit == this) {
                     continue;
                 }

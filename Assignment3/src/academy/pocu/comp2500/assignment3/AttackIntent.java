@@ -14,7 +14,7 @@ public final class AttackIntent {
     }
 
     public void execute(final HashSet<Unit> outAttackedUnits) {
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
 
         if (!isValid()) {
             return;
@@ -32,11 +32,11 @@ public final class AttackIntent {
                     continue;
                 }
 
-                if (map[y][x].size() == 0) {
+                if (map.getHashSet(y, x).size() == 0) {
                     continue;
                 }
 
-                for (final Unit unit : map[y][x]) {
+                for (final Unit unit : map.getHashSet(y, x)) {
                     if (unit == attackUnit) {
                         continue;
                     }

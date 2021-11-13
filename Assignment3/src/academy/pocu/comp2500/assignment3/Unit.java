@@ -12,7 +12,6 @@ public abstract class Unit {
     private int hp;
     private EAction action;
 
-
     protected Unit(final EUnitType unitType, final int hp, final IntVector2D startPosition) {
         this.unitType = unitType;
         this.hp = hp;
@@ -70,4 +69,10 @@ public abstract class Unit {
     public abstract int getAttackAreaOfEffect();
 
     public abstract EUnitType[] getCanAttackUnitTypes();
+
+    public abstract boolean isIThinkable();
+
+    public abstract boolean isIMovable();
+
+    public abstract boolean isICollision();
 }

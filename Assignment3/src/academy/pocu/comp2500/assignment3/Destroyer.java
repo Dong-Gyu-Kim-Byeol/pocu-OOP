@@ -50,6 +50,18 @@ public final class Destroyer extends Unit {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
+    public boolean isIThinkable() {
+        return false;
+    }
+
+    public boolean isIMovable() {
+        return false;
+    }
+
+    public boolean isICollision() {
+        return false;
+    }
+
 
     private static int calculateAttackPoint() {
         final double distance = VISION;

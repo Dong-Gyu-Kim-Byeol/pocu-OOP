@@ -171,9 +171,22 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
+    public boolean isIThinkable() {
+        return true;
+    }
+
+    public boolean isIMovable() {
+        return true;
+    }
+
+    public boolean isICollision() {
+        return false;
+    }
+
+
 
     private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
         for (final EUnitType unitType : CAN_VISION_UNIT_TYPES) {
@@ -185,11 +198,11 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                     continue;
                 }
 
-                if (map[y][x].size() == 0) {
+                if (map.getHashSet(y, x).size() == 0) {
                     continue;
                 }
 
-                for (final Unit unit : map[y][x]) {
+                for (final Unit unit : map.getHashSet(y, x)) {
                     if (unit == this) {
                         continue;
                     }
@@ -215,7 +228,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     }
 
     private ImmutableIntVector2D searchNinDistanceVisionTargetOrNull() {
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
         Unit minDistanceUnit = null;
         final int minDistance = Integer.MAX_VALUE;
 
@@ -232,11 +245,11 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
                         continue;
                     }
 
-                    if (map[y][x].size() == 0) {
+                    if (map.getHashSet(y, x).size() == 0) {
                         continue;
                     }
 
-                    for (final Unit unit : map[y][x]) {
+                    for (final Unit unit : map.getHashSet(y, x)) {
                         if (unit == this) {
                             continue;
                         }

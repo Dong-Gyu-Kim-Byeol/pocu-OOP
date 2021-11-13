@@ -183,6 +183,19 @@ public final class Tank extends Unit implements IMovable, IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
+    public boolean isIThinkable() {
+        return true;
+    }
+
+    public boolean isIMovable() {
+        return true;
+    }
+
+    public boolean isICollision() {
+        return false;
+    }
+
+
 
     private boolean isCanAttackMode() {
         return tankMode == ETankMode.SIEGE;
@@ -197,7 +210,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     }
 
     private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
         Unit minHp = null;
 
         for (final ImmutableIntVector2D offset : CAN_ATTACK_AREA_OFFSET) {
@@ -208,11 +221,11 @@ public final class Tank extends Unit implements IMovable, IThinkable {
                 continue;
             }
 
-            if (map[y][x].size() == 0) {
+            if (map.getHashSet(y, x).size() == 0) {
                 continue;
             }
 
-            for (final Unit unit : map[y][x]) {
+            for (final Unit unit : map.getHashSet(y, x)) {
                 if (unit == this) {
                     continue;
                 }
@@ -235,7 +248,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     }
 
     private boolean isExistVisionTarget() {
-        final LinkedList<Unit>[][] map = SimulationManager.getInstance().getMap();
+        final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
 
         final int minY = getPosition().getY() - VISION;
         final int minX = getPosition().getX() - VISION;
@@ -249,11 +262,11 @@ public final class Tank extends Unit implements IMovable, IThinkable {
                     continue;
                 }
 
-                if (map[y][x].size() == 0) {
+                if (map.getHashSet(y, x).size() == 0) {
                     continue;
                 }
 
-                for (final Unit unit : map[y][x]) {
+                for (final Unit unit : map.getHashSet(y, x)) {
                     if (unit == this) {
                         continue;
                     }

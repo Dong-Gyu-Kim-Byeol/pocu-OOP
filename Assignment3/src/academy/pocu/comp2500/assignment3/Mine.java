@@ -94,6 +94,19 @@ public class Mine extends Unit implements ICollision, IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
+    public boolean isIThinkable() {
+        return true;
+    }
+
+    public boolean isIMovable() {
+        return false;
+    }
+
+    public boolean isICollision() {
+        return true;
+    }
+
+
 
     protected final boolean isCanStepOnAttack() {
         return this.minStepOn <= 0;
