@@ -43,6 +43,10 @@ public abstract class Unit {
         }
     }
 
+    protected final void setHpZero() {
+        this.hp = 0;
+    }
+
     protected EAction getAction() {
         return action;
     }

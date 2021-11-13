@@ -6,10 +6,12 @@ import java.util.LinkedList;
 // 공격 의도
 public final class AttackIntent {
     private final Unit attackUnit;
+    private final boolean isCanSelfAttack;
     private final ImmutableIntVector2D attackCenterPosition;
 
-    public AttackIntent(final Unit attackUnit, final ImmutableIntVector2D attackPosition) {
+    public AttackIntent(final Unit attackUnit, final boolean isCanSelfAttack, final ImmutableIntVector2D attackPosition) {
         this.attackUnit = attackUnit;
+        this.isCanSelfAttack = isCanSelfAttack;
         this.attackCenterPosition = attackPosition;
     }
 
@@ -37,7 +39,7 @@ public final class AttackIntent {
                 }
 
                 for (final Unit unit : map.getHashSet(y, x)) {
-                    if (unit == attackUnit) {
+                    if (unit == attackUnit && isCanSelfAttack == false) {
                         continue;
                     }
 

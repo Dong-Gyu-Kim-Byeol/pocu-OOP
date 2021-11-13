@@ -1,7 +1,5 @@
 package academy.pocu.comp2500.assignment3;
 
-import java.util.LinkedList;
-
 public final class SmartMine extends Mine {
     public static final char SYMBOL = 'A';
     private static final int VISION = 1;
@@ -19,8 +17,8 @@ public final class SmartMine extends Mine {
         this.minDetectEnemy = minDetectEnemy;
     }
 
-
-    public void think() {
+    // 시그내처 불변
+    public final AttackIntent attack() {
         // 스마트 지뢰는 지뢰의 상위 호환 버전입니다.
         // 스마트 지뢰는 지뢰와 동일하게 작동하는 것 외에도 초특급 울트라 레이더를 탑재한 덕분에 근처에 있는 유닛들을 감지하는 능력을 갖추고 있습니다.
         // 만약 시야 안에서 몇 명 이상의 적 유닛이 감지되면, 스마트 지뢰가 폭발합니다.
@@ -30,17 +28,16 @@ public final class SmartMine extends Mine {
         // 하지만 공중 유닛과 볼 수 없는 유닛은 감지할 수 없답니다.
 
         if (isCanStepOnAttack()) {
-            setAction(EAction.ATTACK);
-            return;
+            setHpZero();
+            return new AttackIntent(this, new ImmutableIntVector2D(getPosition()));
         }
 
         if (isCanDetectAttack()) {
-            setAction(EAction.ATTACK);
-            return;
+            setHpZero();
+            return new AttackIntent(this, new ImmutableIntVector2D(getPosition()));
         }
 
-        setAction(EAction.DO_NOTHING);
-        return;
+        return new AttackIntent(this, ImmutableIntVector2D.MINUS_ONE);
     }
 
     // 시그내처 불변
