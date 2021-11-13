@@ -1,7 +1,5 @@
 package academy.pocu.comp2500.assignment3;
 
-import java.util.LinkedList;
-
 public final class Wraith extends Unit implements IMovable, IThinkable {
     // 망령은 공격을 받으면 즉시 가동되는 특수 방어막을 가지고 있습니다.
     // 한 번 가동된 방어막은 현재 프레임이 끝날 때까지 지속되어 망령은 피해를 입지 않습니다.
@@ -51,7 +49,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         }
 
         // vision
-        targetOrNull = searchNinDistanceVisionTargetOrNull();
+        targetOrNull = searchMinDistanceVisionTargetOrNull();
         if (targetOrNull != null) {
             setAction(EAction.MOVE);
             return;
@@ -227,7 +225,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         return new ImmutableIntVector2D(minHp.getPosition());
     }
 
-    private ImmutableIntVector2D searchNinDistanceVisionTargetOrNull() {
+    private ImmutableIntVector2D searchMinDistanceVisionTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
         Unit minDistanceUnit = null;
         final int minDistance = Integer.MAX_VALUE;

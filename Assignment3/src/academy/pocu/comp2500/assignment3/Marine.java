@@ -1,7 +1,5 @@
 package academy.pocu.comp2500.assignment3;
 
-import java.util.LinkedList;
-
 public final class Marine extends Unit implements IMovable, IThinkable {
     public static final char SYMBOL = 'M';
     private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
@@ -37,7 +35,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
         }
 
         // vision
-        targetOrNull = searchMinHpVisionTargetOrNull();
+        targetOrNull = searchMinDistanceVisionTargetOrNull();
         if (targetOrNull != null) {
             setAction(EAction.MOVE);
             return;
@@ -177,7 +175,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
         return new ImmutableIntVector2D(minHp.getPosition());
     }
 
-    private ImmutableIntVector2D searchMinHpVisionTargetOrNull() {
+    private ImmutableIntVector2D searchMinDistanceVisionTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();
         Unit minDistanceUnit = null;
         final int minDistance = Integer.MAX_VALUE;
