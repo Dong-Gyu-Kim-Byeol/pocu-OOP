@@ -4,6 +4,8 @@ public final class Marine extends Unit implements IMovable, IThinkable {
     public static final char SYMBOL = 'M';
     public static final EUnitType UNIT_TYPE = EUnitType.GROUND;
 
+    // ---
+
     private static final int VISION = 2;
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 6;
@@ -19,14 +21,29 @@ public final class Marine extends Unit implements IMovable, IThinkable {
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR};
     private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseManhattanDistanceOrderOffsetStartingAt12oClock(VISION);
 
+    // ---
 
     private ImmutableIntVector2D targetOrNull;
 
+    // ---
 
     public Marine(final IntVector2D position) {
         super(HP, position);
     }
 
+    // ---
+
+    @Override
+    public final boolean isIThinkable() {
+        return true;
+    }
+
+    @Override
+    public final boolean isIMovable() {
+        return true;
+    }
+
+    // ---
 
     @Override
     public void think() {
@@ -139,16 +156,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    @Override
-    public final boolean isIThinkable() {
-        return true;
-    }
-
-    @Override
-    public final boolean isIMovable() {
-        return true;
-    }
-
+    // ---
 
     private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();

@@ -4,6 +4,8 @@ public final class Turret extends Unit implements IThinkable {
     public static final char SYMBOL = 'U';
     public static final EUnitType UNIT_TYPE = EUnitType.GROUND;
 
+    // ---
+
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 7;
     private static final int HP = 99;
@@ -25,14 +27,24 @@ public final class Turret extends Unit implements IThinkable {
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.AIR};
 
+    // ---
 
     private ImmutableIntVector2D targetOrNull;
 
+    // ---
 
     public Turret(final IntVector2D position) {
         super(HP, position);
     }
 
+    // ---
+
+    @Override
+    public final boolean isIThinkable() {
+        return true;
+    }
+
+    // ---
 
     @Override
     public void think() {
@@ -101,11 +113,7 @@ public final class Turret extends Unit implements IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    @Override
-    public final boolean isIThinkable() {
-        return true;
-    }
-
+    // ---
 
     private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();

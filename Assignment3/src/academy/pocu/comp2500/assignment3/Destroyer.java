@@ -4,17 +4,21 @@ public final class Destroyer extends Unit {
     public static final char SYMBOL = 'D';
     public static final EUnitType UNIT_TYPE = EUnitType.AIR;
 
-    private static final int VISION = Math.max(SimulationManager.X_MAP_SIZE, SimulationManager.Y_MAP_SIZE);
+    // ---
+
+    private static final int VISION = Math.max(SimulationManager.getInstance().getMap().xSize(), SimulationManager.getInstance().getMap().ySize());
     private static final int ATTACK_AREA_OF_EFFECT = VISION;
     private static final int ATTACK_POINT = 1000 * VISION;
     private static final int HP = 1000;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR, EUnitType.MINE};
 
+    // ---
 
     public Destroyer(final IntVector2D position) {
         super(HP, position);
     }
 
+    // ---
 
     // 시그내처 불변
     @Override

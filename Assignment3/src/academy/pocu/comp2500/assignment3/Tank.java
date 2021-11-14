@@ -12,6 +12,8 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     public static final char SYMBOL = 'T';
     public static final EUnitType UNIT_TYPE = EUnitType.GROUND;
 
+    // ---
+
     private static final int VISION = 3;
     private static final int ATTACK_AREA_OF_EFFECT = 1;
     private static final int ATTACK_POINT = 8;
@@ -37,17 +39,33 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     };
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND};
 
+    // ---
 
     private ETankMode tankMode;
     private boolean isMoveRight;
     private ImmutableIntVector2D targetOrNull;
 
+    // ---
 
     public Tank(final IntVector2D position) {
         super(HP, position);
         this.tankMode = ETankMode.TANK;
         this.isMoveRight = true;
     }
+
+    // ---
+
+    @Override
+    public final boolean isIThinkable() {
+        return true;
+    }
+
+    @Override
+    public final boolean isIMovable() {
+        return true;
+    }
+
+    // ---
 
     @Override
     public void think() {
@@ -195,16 +213,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    @Override
-    public final boolean isIThinkable() {
-        return true;
-    }
-
-    @Override
-    public final boolean isIMovable() {
-        return true;
-    }
-
+    // ---
 
     private boolean isCanAttackMode() {
         return tankMode == ETankMode.SIEGE;

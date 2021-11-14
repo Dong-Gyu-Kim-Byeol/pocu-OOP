@@ -6,19 +6,15 @@ import java.util.HashSet;
 public final class SimulationManager {
     // 월드는 16 x 8 크기의 2D 그리드(grid)입니다.
     // 원점은 (0,0)이며 +x는 오른쪽, +y는 아래쪽입니다. 또한 북쪽은 -y, 동쪽은 +x 입니다
-    public static final int X_MAP_SIZE = 16;
-    public static final int Y_MAP_SIZE = 8;
 
     private static SimulationManager instance;
 
-    // 시그내처 불변
-    public static SimulationManager getInstance() {
-        if (instance == null) {
-            instance = new SimulationManager();
-        }
+    // ---
 
-        return instance;
-    }
+    private static final int X_MAP_SIZE = 16;
+    private static final int Y_MAP_SIZE = 8;
+
+    // ---
 
     private final Map2DCanSamePosition<Unit> map;
 
@@ -29,7 +25,8 @@ public final class SimulationManager {
     private final ArrayList<AttackIntent> attackIntents;
     private final HashSet<Unit> attackedUnits;
 
-    @SuppressWarnings("unchecked")
+    // ---
+
     private SimulationManager() {
         this.map = new Map2DCanSamePosition<Unit>(Y_MAP_SIZE, X_MAP_SIZE);
 
@@ -41,6 +38,19 @@ public final class SimulationManager {
         this.attackedUnits = new HashSet<>();
     }
 
+    // ---
+
+    // 시그내처 불변
+    public static SimulationManager getInstance() {
+        if (instance == null) {
+            instance = new SimulationManager();
+        }
+
+        return instance;
+    }
+
+    // ---
+
     public void clear() {
         this.map.clear();
 
@@ -51,7 +61,6 @@ public final class SimulationManager {
         this.attackIntents.clear();
         this.attackedUnits.clear();
     }
-
 
     public Map2DCanSamePosition<Unit> getMap() {
         return map;

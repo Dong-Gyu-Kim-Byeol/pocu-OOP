@@ -4,14 +4,19 @@ public class Mine extends Unit implements ICollision {
     public static final char SYMBOL = 'N';
     public static final EUnitType UNIT_TYPE = EUnitType.MINE;
 
+    // ---
+
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 10;
     private static final int HP = 1;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
 
+    // ---
 
     private int minStepOn;
     private final ImmutableIntVector2D immutablePosition;
+
+    // ---
 
     public Mine(final IntVector2D position, final int minStepOn) {
         super(HP, position);
@@ -19,6 +24,8 @@ public class Mine extends Unit implements ICollision {
         this.minStepOn = minStepOn;
         this.immutablePosition = new ImmutableIntVector2D(getPosition());
     }
+
+    // ---
 
     @Override
     public final void onCollision(final Unit unit) {
@@ -47,6 +54,24 @@ public class Mine extends Unit implements ICollision {
         return immutablePosition;
     }
 
+    @Override
+    public final boolean isICollision() {
+        return true;
+    }
+
+    // 시그내처 불변
+    @Override
+    public final void onAttacked(int damage) {
+        subHp(damage);
+    }
+
+    @Override
+    public final EUnitType getUnitType() {
+        return UNIT_TYPE;
+    }
+
+    // ---
+
     // 시그내처 불변
     @Override
     public AttackIntent attack() {
@@ -65,19 +90,8 @@ public class Mine extends Unit implements ICollision {
 
     // 시그내처 불변
     @Override
-    public final void onAttacked(int damage) {
-        subHp(damage);
-    }
-
-    // 시그내처 불변
-    @Override
     public void onSpawn() {
         SimulationManager.getInstance().registerCollisionEventListener(this);
-    }
-
-    @Override
-    public final EUnitType getUnitType() {
-        return UNIT_TYPE;
     }
 
     // 시그내처 불변
@@ -101,11 +115,7 @@ public class Mine extends Unit implements ICollision {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    @Override
-    public final boolean isICollision() {
-        return true;
-    }
-
+    // ---
 
     private boolean isCanStepOnAttack() {
         return this.minStepOn <= 0;

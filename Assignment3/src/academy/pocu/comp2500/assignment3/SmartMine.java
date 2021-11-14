@@ -3,20 +3,33 @@ package academy.pocu.comp2500.assignment3;
 public final class SmartMine extends Mine implements IThinkable {
     public static final char SYMBOL = 'A';
 
+    // ---
+
     private static final int VISION = 1;
     private static final int ATTACK_AREA_OF_EFFECT = 1;
     private static final int ATTACK_POINT = 15;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND};
 
+    // ---
 
     private final int minDetectEnemy;
 
+    // ---
 
     public SmartMine(final IntVector2D position, final int minStepOn, final int minDetectEnemy) {
         super(position, minStepOn);
         this.minDetectEnemy = minDetectEnemy;
     }
+
+    // ---
+
+    @Override
+    public final boolean isIThinkable() {
+        return true;
+    }
+
+    // ---
 
     @Override
     public void think() {
@@ -80,11 +93,7 @@ public final class SmartMine extends Mine implements IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    @Override
-    public final boolean isIThinkable() {
-        return true;
-    }
-
+    // ---
 
     private boolean isCanDetectAttack() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();

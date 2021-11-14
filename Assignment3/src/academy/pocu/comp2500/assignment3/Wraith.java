@@ -8,6 +8,8 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     public static final char SYMBOL = 'W';
     public static final EUnitType UNIT_TYPE = EUnitType.AIR;
 
+    // ---
+
     private static final int VISION = 4;
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 6;
@@ -23,12 +25,14 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.AIR, EUnitType.GROUND};
     private static final ImmutableIntVector2D[] CAN_VISION_AREA_OFFSET = createClockwiseManhattanDistanceOrderOffsetStartingAt12oClock(VISION);
 
+    // ---
 
     private boolean isHasShield;
     private boolean isUseShield;
     private final ImmutableIntVector2D startPosition;
     private ImmutableIntVector2D targetOrNull;
 
+    // ---
 
     public Wraith(final IntVector2D position) {
         super(HP, position);
@@ -37,6 +41,19 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         this.startPosition = new ImmutableIntVector2D(position);
     }
 
+    // ---
+
+    @Override
+    public final boolean isIThinkable() {
+        return true;
+    }
+
+    @Override
+    public final boolean isIMovable() {
+        return true;
+    }
+
+    // ---
 
     @Override
     public void think() {
@@ -184,16 +201,8 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    @Override
-    public final boolean isIThinkable() {
-        return true;
-    }
 
-    @Override
-    public final boolean isIMovable() {
-        return true;
-    }
-
+    // ---
 
     private ImmutableIntVector2D searchMinHpAttackTargetOrNull() {
         final Map2DCanSamePosition<Unit> map = SimulationManager.getInstance().getMap();

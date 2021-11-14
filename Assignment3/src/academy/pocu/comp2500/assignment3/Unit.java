@@ -9,16 +9,22 @@ public abstract class Unit {
     // 이동 가능한 유닛은 공격 구역에 있는 적을 발견하지 못한 경우에만 이동할 수 있습니다.
     // 유닛은 자기 자신에게 피해를 입힐 수 없습니다.
 
+    // ---
+
     private final IntVector2D position;
     private int hp;
     private EAction action;
 
+    // ---
+
     protected Unit(final int hp, final IntVector2D startPosition) {
-        this.hp = hp;
         this.position = startPosition;
+
+        this.hp = hp;
         this.action = EAction.DO_NOTHING;
     }
 
+    // ---
 
     // 시그내처 불변
     public final IntVector2D getPosition() {
@@ -30,50 +36,7 @@ public abstract class Unit {
         return hp;
     }
 
-    protected final void subHp(final int damage) {
-        assert (damage >= 0);
-
-        this.hp -= damage;
-        if (this.hp < 0) {
-            this.hp = 0;
-        }
-    }
-
-    protected final void setHpZero() {
-        this.hp = 0;
-    }
-
-    protected final EAction getAction() {
-        return action;
-    }
-
-    protected final void setAction(EAction action) {
-        this.action = action;
-    }
-
-
-    // 시그내처 불변
-    public abstract AttackIntent attack();
-
-    // 시그내처 불변
-    public void onAttacked(final int damage) {
-        subHp(damage);
-    }
-
-    // 시그내처 불변
-    public void onSpawn() {
-    }
-
-    // 시그내처 불변
-    public abstract EUnitType getUnitType();
-
-    public abstract char getSymbol();
-
-    public abstract int getAttackPoint();
-
-    public abstract int getAttackAreaOfEffect();
-
-    public abstract EUnitType[] getCanAttackUnitTypes();
+    // ---
 
     public boolean isIThinkable() {
         return false;
@@ -86,6 +49,33 @@ public abstract class Unit {
     public boolean isICollision() {
         return false;
     }
+
+    // 시그내처 불변
+    public void onAttacked(final int damage) {
+        subHp(damage);
+    }
+
+    // 시그내처 불변
+    public void onSpawn() {
+    }
+
+    // ---
+
+    // 시그내처 불변
+    public abstract AttackIntent attack();
+
+    // 시그내처 불변
+    public abstract EUnitType getUnitType();
+
+    public abstract char getSymbol();
+
+    public abstract int getAttackPoint();
+
+    public abstract int getAttackAreaOfEffect();
+
+    public abstract EUnitType[] getCanAttackUnitTypes();
+
+    // ---
 
     protected static ImmutableIntVector2D[] createClockwiseManhattanDistanceOrderOffsetStartingAt12oClock(final int vision) {
 
@@ -124,9 +114,6 @@ public abstract class Unit {
                 // -x : left, +x : right
                 // Add corner points clockwise starting at 12 o'clock
                 // 12시 방향을 시작으로 시계방향으로 모서리 점 추가
-
-                final int maxX = vision;
-
 
                 // 1 / 4
                 for (int y = -distanceFromCenter; y < 0; ++y) {
@@ -175,5 +162,28 @@ public abstract class Unit {
         }
 
         return arrayList.toArray(new ImmutableIntVector2D[0]);
+    }
+
+    // ---
+
+    protected final void subHp(final int damage) {
+        assert (damage >= 0);
+
+        this.hp -= damage;
+        if (this.hp < 0) {
+            this.hp = 0;
+        }
+    }
+
+    protected final void setHpZero() {
+        this.hp = 0;
+    }
+
+    protected final EAction getAction() {
+        return action;
+    }
+
+    protected final void setAction(EAction action) {
+        this.action = action;
     }
 }
