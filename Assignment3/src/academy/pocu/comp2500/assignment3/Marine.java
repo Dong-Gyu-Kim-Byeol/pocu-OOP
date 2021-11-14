@@ -10,7 +10,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 6;
     private static final int HP = 35;
-    private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR, EUnitType.MINE};
+    private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR, EUnitType.INVISIBLE};
     private static final ImmutableIntVector2D[] CAN_ATTACK_AREA_OFFSET = {
             new ImmutableIntVector2D(0, 0),
             new ImmutableIntVector2D(0, -1), // up

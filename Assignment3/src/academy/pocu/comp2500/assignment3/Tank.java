@@ -18,7 +18,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     private static final int ATTACK_AREA_OF_EFFECT = 1;
     private static final int ATTACK_POINT = 8;
     private static final int HP = 85;
-    private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
+    private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.INVISIBLE};
     private static final ImmutableIntVector2D[] CAN_ATTACK_AREA_OFFSET = {
             new ImmutableIntVector2D(0, -2), // up
             new ImmutableIntVector2D(1, -2),

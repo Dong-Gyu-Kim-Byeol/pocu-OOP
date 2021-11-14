@@ -10,7 +10,7 @@ public final class Destroyer extends Unit {
     private static final int ATTACK_AREA_OF_EFFECT = VISION;
     private static final int ATTACK_POINT = 1000 * VISION;
     private static final int HP = 1000;
-    private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR, EUnitType.MINE};
+    private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR, EUnitType.INVISIBLE};
 
     // ---
 

@@ -2,14 +2,14 @@ package academy.pocu.comp2500.assignment3;
 
 public class Mine extends Unit implements ICollision {
     public static final char SYMBOL = 'N';
-    public static final EUnitType UNIT_TYPE = EUnitType.MINE;
+    public static final EUnitType UNIT_TYPE = EUnitType.INVISIBLE;
 
     // ---
 
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 10;
     private static final int HP = 1;
-    private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.MINE};
+    private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.INVISIBLE};
 
     // ---
 
@@ -39,7 +39,7 @@ public class Mine extends Unit implements ICollision {
         switch (unit.getUnitType()) {
             case GROUND:
                 // intentional fallthrough
-            case MINE:
+            case INVISIBLE:
                 deceaseMinStepOn();
                 break;
             case AIR:
