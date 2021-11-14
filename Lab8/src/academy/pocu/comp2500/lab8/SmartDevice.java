@@ -1,22 +1,16 @@
 package academy.pocu.comp2500.lab8;
 
 public abstract class SmartDevice {
-    protected final ESmartDeviceType smartDeviceType;
-    protected int tick;
-    protected int ticksSinceLastUpdate;
-    protected boolean isOn;
+    private int tick;
+    private int ticksSinceLastUpdate;
+    private boolean isOn;
 
-    protected SmartDevice(final ESmartDeviceType smartDeviceType) {
-        this.smartDeviceType = smartDeviceType;
+    // ---
+
+    protected SmartDevice() {
     }
 
-    public void onTick() {
-        this.tick++;
-    }
-
-    public final ESmartDeviceType getSmartDeviceType() {
-        return smartDeviceType;
-    }
+    // ---
 
     public final boolean isOn() {
         return isOn;
@@ -24,5 +18,29 @@ public abstract class SmartDevice {
 
     public final int getTicksSinceLastUpdate() {
         return this.tick - this.ticksSinceLastUpdate;
+    }
+
+    // ---
+
+    public void onTick() {
+        this.tick++;
+    }
+
+    // ---
+
+    public abstract ESmartDeviceType getSmartDeviceType();
+
+    // ---
+
+    protected final int getTick() {
+        return tick;
+    }
+
+    protected final void setIsOn(final boolean on) {
+        if (this.isOn() != on) {
+            this.ticksSinceLastUpdate = this.tick;
+        }
+
+        this.isOn = on;
     }
 }

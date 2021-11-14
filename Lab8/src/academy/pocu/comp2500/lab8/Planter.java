@@ -5,28 +5,36 @@ import java.util.LinkedList;
 public final class Planter {
     private static final int EAT_WATER_LEVEL_PER_TICK = -2;
 
+    // ---
+
     private int waterAmount;
     private final LinkedList<SmartDevice> smartDevices;
+
+    // ---
 
     public Planter(final int waterAmount) {
         this.waterAmount = waterAmount;
         this.smartDevices = new LinkedList<>();
     }
 
-    public int getWaterAmount() {
+    // ---
+
+    public final int getWaterAmount() {
         return waterAmount;
     }
 
-    public void addWater(final int waterLevel) {
+    public final void addWater(final int waterLevel) {
         this.waterAmount += waterLevel;
         if (this.waterAmount < 0) {
             this.waterAmount = 0;
         }
     }
 
-    public void installSmartDevice(final SmartDevice smartDevice) {
+    public final void installSmartDevice(final SmartDevice smartDevice) {
         this.smartDevices.add(smartDevice);
     }
+
+    // ---
 
     public void tick() {
         for (final SmartDevice smartDevice : this.smartDevices) {

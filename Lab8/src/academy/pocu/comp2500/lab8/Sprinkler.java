@@ -3,25 +3,34 @@ package academy.pocu.comp2500.lab8;
 import java.util.LinkedList;
 
 public final class Sprinkler extends SmartDevice implements ISprayable {
+    private static final ESmartDeviceType SMART_DEVICE_TYPE = ESmartDeviceType.SPRINKLER;
     private static final int ADD_WATER_LEVEL_PER_TICK = 15;
+
+    // ---
 
     private final LinkedList<Schedule> schedules;
     private Schedule nowScheduleOrNull;
 
+    // ---
+
     public Sprinkler() {
-        super(ESmartDeviceType.SPRINKLER);
         this.schedules = new LinkedList<>();
     }
 
+    // ---
+
+    @Override
+    public ESmartDeviceType getSmartDeviceType() {
+        return SMART_DEVICE_TYPE;
+    }
+
+    @Override
     public void onTick() {
-        this.tick++;
+        super.onTick();
 
         while (this.schedules.size() != 0 && (nowScheduleOrNull == null || isValidSchedule(nowScheduleOrNull) == false)) {
-            if (nowScheduleOrNull != null && nowScheduleOrNull.getStartTick() + nowScheduleOrNull.getWorkTickCount() == tick) {
-                if (this.isOn != false) {
-                    this.ticksSinceLastUpdate = this.tick;
-                }
-                this.isOn = false;
+            if (nowScheduleOrNull != null && nowScheduleOrNull.getStartTick() + nowScheduleOrNull.getWorkTickCount() == getTick()) {
+                this.setIsOn(false);
 
                 nowScheduleOrNull = null;
                 return;
@@ -33,11 +42,8 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
                 continue;
             }
 
-            if (this.schedules.getFirst().getStartTick() > tick) {
-                if (this.isOn != false) {
-                    this.ticksSinceLastUpdate = this.tick;
-                }
-                this.isOn = false;
+            if (this.schedules.getFirst().getStartTick() > getTick()) {
+                this.setIsOn(false);
                 break;
             }
 
@@ -47,34 +53,22 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
         }
 
         if (nowScheduleOrNull == null) {
-            if (this.isOn != false) {
-                this.ticksSinceLastUpdate = this.tick;
-            }
-            this.isOn = false;
+            this.setIsOn(false);
             return;
         }
 
         if (isValidSchedule(nowScheduleOrNull)) {
-            if (nowScheduleOrNull.isUse(tick)) {
-                if (this.isOn != true) {
-                    this.ticksSinceLastUpdate = this.tick;
-                }
-                this.isOn = true;
+            if (nowScheduleOrNull.isCanUse(getTick())) {
+                this.setIsOn(true);
                 return;
             } else {
-                if (this.isOn != false) {
-                    this.ticksSinceLastUpdate = this.tick;
-                }
-                this.isOn = false;
+                this.setIsOn(false);
                 return;
             }
         }
 
         {
-            if (this.isOn != false) {
-                this.ticksSinceLastUpdate = this.tick;
-            }
-            this.isOn = false;
+            this.setIsOn(false);
             return;
         }
     }
@@ -93,10 +87,12 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
         }
     }
 
-    private void setIsUseInSchedule(final Schedule schedule) {
-        assert (schedule.getStartTick() <= tick);
+    // ---
 
-        if (schedule.getStartTick() >= tick) {
+    private void setIsUseInSchedule(final Schedule schedule) {
+        assert (schedule.getStartTick() <= getTick()); // prevent wrong calls
+
+        if (schedule.getStartTick() >= getTick()) {
             schedule.setIsUse(true);
             return;
         }
@@ -105,6 +101,6 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
     }
 
     private boolean isValidSchedule(final Schedule schedule) {
-        return schedule.getStartTick() + schedule.getWorkTickCount() - 1 >= tick;
+        return schedule.getStartTick() + schedule.getWorkTickCount() - 1 >= getTick();
     }
 }

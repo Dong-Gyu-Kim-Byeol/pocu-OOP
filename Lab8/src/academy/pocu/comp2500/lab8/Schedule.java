@@ -17,8 +17,8 @@ public final class Schedule {
         this.isUse = isUse;
     }
 
-    public boolean isUse(final int tick) {
-        return isUse && tick >= startTick;
+    public boolean isCanUse(final int nowTick) {
+        return isUse && nowTick >= startTick;
     }
 
     public int getStartTick() {
