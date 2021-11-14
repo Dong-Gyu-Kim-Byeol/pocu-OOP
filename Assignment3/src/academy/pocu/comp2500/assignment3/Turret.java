@@ -60,7 +60,7 @@ public final class Turret extends Unit implements IThinkable {
 
     // 시그내처 불변
     @Override
-    public AttackIntent attackOrNull() {
+    public AttackIntent attack() {
         // 1 가장 약한 유닛이 있는 타일을 공격
         // 2 자신의 위치에 유닛이 있다면 그 타일을 공격.
         //   그렇지 않을 경우 북쪽(위쪽)에 유닛이 있다면 그 타일을 공격.

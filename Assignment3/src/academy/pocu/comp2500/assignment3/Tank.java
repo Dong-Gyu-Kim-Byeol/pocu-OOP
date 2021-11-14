@@ -155,7 +155,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
 
     // 시그내처 불변
     @Override
-    public AttackIntent attackOrNull() {
+    public AttackIntent attack() {
         // 1 현재 공성 모드가 아닌 경우 공성 모드로 변경
         // 2 가장 약한 유닛이 있는 타일을 공격
         // 3 북쪽에 유닛이 있다면 그 타일을 공격. 그렇지 않을 경우 시계 방향으로 검색하다가 찾은 유닛의 타일을 공격
