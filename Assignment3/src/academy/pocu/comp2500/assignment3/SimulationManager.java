@@ -21,7 +21,6 @@ public final class SimulationManager {
     }
 
     private final Map2DCanSamePosition<Unit> map;
-    private int unitCount;
 
     private final HashSet<IThinkable> thinkableUnits;
     private final HashSet<IMovable> movableUnits;
@@ -45,8 +44,6 @@ public final class SimulationManager {
     public void clear() {
         this.map.clear();
 
-        unitCount = 0;
-
         this.thinkableUnits.clear();
         this.movableUnits.clear();
         this.collisionUnits.clear();
@@ -62,7 +59,7 @@ public final class SimulationManager {
 
     // 시그내처 불변
     public ArrayList<Unit> getUnits() {
-        ArrayList<Unit> out = new ArrayList<>(unitCount);
+        ArrayList<Unit> out = new ArrayList<>(map.elementsCount());
 
         for (int y = 0; y < Y_MAP_SIZE; ++y) {
             for (int x = 0; x < X_MAP_SIZE; ++x) {
@@ -72,7 +69,7 @@ public final class SimulationManager {
             }
         }
 
-        assert (out.size() == unitCount);
+        assert (out.size() == map.elementsCount());
 
         return out;
     }
@@ -80,8 +77,6 @@ public final class SimulationManager {
     // 시그내처 불변
     public void spawn(final Unit unit) {
         unit.onSpawn();
-
-        ++this.unitCount;
         this.map.add(unit, unit.getPosition().getY(), unit.getPosition().getX());
     }
 
@@ -126,7 +121,7 @@ public final class SimulationManager {
             final int x = collision.getCollisionPosition().x();
 
             for (final Unit unit : map.getHashSet(y, x)) {
-                collision.checkCollision(unit);
+                collision.onCollision(unit);
             }
         }
 
@@ -134,9 +129,9 @@ public final class SimulationManager {
         for (int y = 0; y < Y_MAP_SIZE; ++y) {
             for (int x = 0; x < X_MAP_SIZE; ++x) {
                 for (final Unit unit : map.getHashSet(y, x)) {
-                    final AttackIntent attackIntent = unit.attack();
-                    if (attackIntent.isValid()) {
-                        attackIntents.add(attackIntent);
+                    final AttackIntent attackIntentOrNull = unit.attack();
+                    if (attackIntentOrNull != null) {
+                        attackIntents.add(attackIntentOrNull);
                     }
                 }
             }
@@ -162,8 +157,6 @@ public final class SimulationManager {
                 if (unit.isICollision()) {
                     collisionUnits.remove((ICollision) unit);
                 }
-
-                --unitCount;
             }
         }
         attackedUnits.clear();

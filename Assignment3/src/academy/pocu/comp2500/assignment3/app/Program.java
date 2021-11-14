@@ -71,18 +71,18 @@ public class Program {
             units.add(new Wraith(new IntVector2D(5, 7))); // A
             units.add(new Turret(new IntVector2D(11, 3))); // B
 
-//            units.add(new SmartMine(new IntVector2D(0, 3), 2, 1)); // C
+            units.add(new SmartMine(new IntVector2D(0, 3), 2, 1)); // C
             units.add(new Turret(new IntVector2D(9, 4))); // D
             units.add(new Mine(new IntVector2D(7, 0), 1)); // E
             units.add(new Tank(new IntVector2D(13, 7))); // F
 
-            units.add(new Destroyer(new IntVector2D(1, 7)));
+//            units.add(new Destroyer(new IntVector2D(1, 7)));
 
             for (Unit unit : units) {
                 simulationManager.spawn(unit);
             }
 
-            int frame = 2;
+            int frame = 13;
             SimulationVisualizer visualizer = new SimulationVisualizer(units);
             for (int i = 0; i <= frame; ++i) {
                 clearConsole();

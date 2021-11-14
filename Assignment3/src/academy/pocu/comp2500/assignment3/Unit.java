@@ -9,22 +9,16 @@ public abstract class Unit {
     // 이동 가능한 유닛은 공격 구역에 있는 적을 발견하지 못한 경우에만 이동할 수 있습니다.
     // 유닛은 자기 자신에게 피해를 입힐 수 없습니다.
 
-    private final EUnitType unitType;
     private final IntVector2D position;
     private int hp;
     private EAction action;
 
-    protected Unit(final EUnitType unitType, final int hp, final IntVector2D startPosition) {
-        this.unitType = unitType;
+    protected Unit(final int hp, final IntVector2D startPosition) {
         this.hp = hp;
         this.position = startPosition;
         this.action = EAction.DO_NOTHING;
     }
 
-
-    public EUnitType getUnitType() {
-        return unitType;
-    }
 
     // 시그내처 불변
     public final IntVector2D getPosition() {
@@ -49,11 +43,11 @@ public abstract class Unit {
         this.hp = 0;
     }
 
-    protected EAction getAction() {
+    protected final EAction getAction() {
         return action;
     }
 
-    protected void setAction(EAction action) {
+    protected final void setAction(EAction action) {
         this.action = action;
     }
 
@@ -62,12 +56,17 @@ public abstract class Unit {
     public abstract AttackIntent attack();
 
     // 시그내처 불변
-    public abstract void onAttacked(final int damage);
+    public void onAttacked(final int damage) {
+        subHp(damage);
+    }
 
     // 시그내처 불변
-    public abstract void onSpawn();
+    public void onSpawn() {
+    }
 
     // 시그내처 불변
+    public abstract EUnitType getUnitType();
+
     public abstract char getSymbol();
 
     public abstract int getAttackPoint();
@@ -76,13 +75,19 @@ public abstract class Unit {
 
     public abstract EUnitType[] getCanAttackUnitTypes();
 
-    public abstract boolean isIThinkable();
+    public boolean isIThinkable() {
+        return false;
+    }
 
-    public abstract boolean isIMovable();
+    public boolean isIMovable() {
+        return false;
+    }
 
-    public abstract boolean isICollision();
+    public boolean isICollision() {
+        return false;
+    }
 
-    protected static ImmutableIntVector2D[] createClockwiseManhattanDistanceOrderOffsetStartingAt12oClock(final int maxDistanceFromCenter) {
+    protected static ImmutableIntVector2D[] createClockwiseManhattanDistanceOrderOffsetStartingAt12oClock(final int vision) {
 
         //   시야: 1   ( == vision)
         //   o o o
@@ -110,24 +115,24 @@ public abstract class Unit {
         ArrayList<ImmutableIntVector2D> arrayList = new ArrayList<>();
 
         {
-            assert (maxDistanceFromCenter > 0);
+            assert (vision > 0);
 
             // vision == distance from center
-            for (int distanceFromCenter = 1; distanceFromCenter <= maxDistanceFromCenter * 2; ++distanceFromCenter) {
+            for (int distanceFromCenter = 1; distanceFromCenter <= vision * 2; ++distanceFromCenter) {
 
                 // -y : up, +y : down
                 // -x : left, +x : right
                 // Add corner points clockwise starting at 12 o'clock
                 // 12시 방향을 시작으로 시계방향으로 모서리 점 추가
 
-                final int maxX = maxDistanceFromCenter;
+                final int maxX = vision;
 
 
                 // 1 / 4
                 for (int y = -distanceFromCenter; y < 0; ++y) {
                     final ImmutableIntVector2D pos = new ImmutableIntVector2D(distanceFromCenter + y, y);
 
-                    if (-maxDistanceFromCenter > pos.x() || pos.x() > maxDistanceFromCenter || -maxDistanceFromCenter > pos.y() || pos.y() > maxDistanceFromCenter) {
+                    if (-vision > pos.x() || pos.x() > vision || -vision > pos.y() || pos.y() > vision) {
                         continue;
                     }
 
@@ -138,7 +143,7 @@ public abstract class Unit {
                 for (int y = 0; y < distanceFromCenter; ++y) {
                     final ImmutableIntVector2D pos = new ImmutableIntVector2D(distanceFromCenter - y, y);
 
-                    if (-maxDistanceFromCenter > pos.x() || pos.x() > maxDistanceFromCenter || -maxDistanceFromCenter > pos.y() || pos.y() > maxDistanceFromCenter) {
+                    if (-vision > pos.x() || pos.x() > vision || -vision > pos.y() || pos.y() > vision) {
                         continue;
                     }
 
@@ -149,7 +154,7 @@ public abstract class Unit {
                 for (int y = distanceFromCenter; 0 < y; --y) {
                     final ImmutableIntVector2D pos = new ImmutableIntVector2D(-distanceFromCenter + y, y);
 
-                    if (-maxDistanceFromCenter > pos.x() || pos.x() > maxDistanceFromCenter || -maxDistanceFromCenter > pos.y() || pos.y() > maxDistanceFromCenter) {
+                    if (-vision > pos.x() || pos.x() > vision || -vision > pos.y() || pos.y() > vision) {
                         continue;
                     }
 
@@ -160,7 +165,7 @@ public abstract class Unit {
                 for (int y = 0; -distanceFromCenter < y; --y) {
                     final ImmutableIntVector2D pos = new ImmutableIntVector2D(-distanceFromCenter - y, y);
 
-                    if (-maxDistanceFromCenter > pos.x() || pos.x() > maxDistanceFromCenter || -maxDistanceFromCenter > pos.y() || pos.y() > maxDistanceFromCenter) {
+                    if (-vision > pos.x() || pos.x() > vision || -vision > pos.y() || pos.y() > vision) {
                         continue;
                     }
 

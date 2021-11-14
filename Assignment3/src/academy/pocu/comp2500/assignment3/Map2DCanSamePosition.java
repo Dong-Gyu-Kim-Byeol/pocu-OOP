@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 public final class Map2DCanSamePosition<T> {
     private final ArrayList<ArrayList<HashSet<T>>> map;
+    private int unitCount;
 
     public Map2DCanSamePosition(final int ySize, final int xSize) {
         map = new ArrayList<ArrayList<HashSet<T>>>(ySize);
@@ -26,6 +27,10 @@ public final class Map2DCanSamePosition<T> {
         }
     }
 
+    public int elementsCount() {
+        return unitCount;
+    }
+
     public int ySize() {
         return map.size();
     }
@@ -40,10 +45,12 @@ public final class Map2DCanSamePosition<T> {
 
     public void add(final T data, final int y, final int x) {
         map.get(y).get(x).add(data);
+        ++unitCount;
     }
 
     public void remove(final T data, final int y, final int x) {
         map.get(y).get(x).remove(data);
+        --unitCount;
     }
 
     public void replace(final T data, final int preY, final int preX, final int postY, final int postX) {

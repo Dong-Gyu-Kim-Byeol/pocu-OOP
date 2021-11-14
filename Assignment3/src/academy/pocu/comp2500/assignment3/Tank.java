@@ -1,7 +1,5 @@
 package academy.pocu.comp2500.assignment3;
 
-import java.util.LinkedList;
-
 public final class Tank extends Unit implements IMovable, IThinkable {
     // 전차에는 두 가지 모드(mode)가 있습니다.
     //
@@ -12,7 +10,8 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     // 공성 모드인 전차는 탱크 모드일 때보다 2배의 피해를 받습니다.
 
     public static final char SYMBOL = 'T';
-    private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
+    public static final EUnitType UNIT_TYPE = EUnitType.GROUND;
+
     private static final int VISION = 3;
     private static final int ATTACK_AREA_OF_EFFECT = 1;
     private static final int ATTACK_POINT = 8;
@@ -45,11 +44,12 @@ public final class Tank extends Unit implements IMovable, IThinkable {
 
 
     public Tank(final IntVector2D position) {
-        super(UNIT_TYPE, HP, position);
+        super(HP, position);
         this.tankMode = ETankMode.TANK;
         this.isMoveRight = true;
     }
 
+    @Override
     public void think() {
         // attack
         targetOrNull = searchMinHpAttackTargetOrNull();
@@ -136,6 +136,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     }
 
     // 시그내처 불변
+    @Override
     public AttackIntent attack() {
         // 1 현재 공성 모드가 아닌 경우 공성 모드로 변경
         // 2 가장 약한 유닛이 있는 타일을 공격
@@ -143,7 +144,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
         // 전차가 시야 안에서 적을 찾으면 공성 모드로 변환하여 공격할 준비를 합니다.
 
         if (getAction() != EAction.ATTACK) {
-            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
+            return null;
         }
 
         assert (targetOrNull != null);
@@ -152,6 +153,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     }
 
     // 시그내처 불변
+    @Override
     public void onAttacked(int damage) {
         if (tankMode == ETankMode.SIEGE) {
             damage *= 2;
@@ -161,38 +163,46 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     }
 
     // 시그내처 불변
+    @Override
     public void onSpawn() {
         SimulationManager.getInstance().registerThinkable(this);
         SimulationManager.getInstance().registerMovable(this);
     }
 
+    @Override
+    public EUnitType getUnitType() {
+        return UNIT_TYPE;
+    }
+
     // 시그내처 불변
+    @Override
     public char getSymbol() {
         return SYMBOL;
     }
 
+    @Override
     public int getAttackPoint() {
         return ATTACK_POINT;
     }
 
+    @Override
     public int getAttackAreaOfEffect() {
         return ATTACK_AREA_OF_EFFECT;
     }
 
+    @Override
     public EUnitType[] getCanAttackUnitTypes() {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    public boolean isIThinkable() {
+    @Override
+    public final boolean isIThinkable() {
         return true;
     }
 
-    public boolean isIMovable() {
+    @Override
+    public final boolean isIMovable() {
         return true;
-    }
-
-    public boolean isICollision() {
-        return false;
     }
 
 

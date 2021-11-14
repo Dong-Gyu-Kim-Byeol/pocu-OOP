@@ -2,7 +2,8 @@ package academy.pocu.comp2500.assignment3;
 
 public final class Turret extends Unit implements IThinkable {
     public static final char SYMBOL = 'U';
-    private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
+    public static final EUnitType UNIT_TYPE = EUnitType.GROUND;
+
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 7;
     private static final int HP = 99;
@@ -29,7 +30,7 @@ public final class Turret extends Unit implements IThinkable {
 
 
     public Turret(final IntVector2D position) {
-        super(UNIT_TYPE, HP, position);
+        super(HP, position);
     }
 
 
@@ -46,6 +47,7 @@ public final class Turret extends Unit implements IThinkable {
     }
 
     // 시그내처 불변
+    @Override
     public AttackIntent attack() {
         // 1 가장 약한 유닛이 있는 타일을 공격
         // 2 자신의 위치에 유닛이 있다면 그 타일을 공격.
@@ -53,7 +55,7 @@ public final class Turret extends Unit implements IThinkable {
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
 
         if (getAction() != EAction.ATTACK) {
-            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
+            return null;
         }
 
         assert (targetOrNull != null);
@@ -62,42 +64,46 @@ public final class Turret extends Unit implements IThinkable {
     }
 
     // 시그내처 불변
+    @Override
     public void onAttacked(int damage) {
         subHp(damage);
     }
 
     // 시그내처 불변
+    @Override
     public void onSpawn() {
         SimulationManager.getInstance().registerThinkable(this);
     }
 
+    @Override
+    public EUnitType getUnitType() {
+        return UNIT_TYPE;
+    }
+
     // 시그내처 불변
+    @Override
     public char getSymbol() {
         return SYMBOL;
     }
 
+    @Override
     public int getAttackPoint() {
         return ATTACK_POINT;
     }
 
+    @Override
     public int getAttackAreaOfEffect() {
         return ATTACK_AREA_OF_EFFECT;
     }
 
+    @Override
     public EUnitType[] getCanAttackUnitTypes() {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    public boolean isIThinkable() {
+    @Override
+    public final boolean isIThinkable() {
         return true;
-    }
-
-    public boolean isIMovable() {
-        return false;
-    }
-
-    public boolean isICollision() {
-        return false;
     }
 
 

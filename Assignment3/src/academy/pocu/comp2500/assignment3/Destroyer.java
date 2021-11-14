@@ -2,20 +2,22 @@ package academy.pocu.comp2500.assignment3;
 
 public final class Destroyer extends Unit {
     public static final char SYMBOL = 'D';
-    private static final EUnitType UNIT_TYPE = EUnitType.AIR;
+    public static final EUnitType UNIT_TYPE = EUnitType.AIR;
+
     private static final int VISION = Math.max(SimulationManager.X_MAP_SIZE, SimulationManager.Y_MAP_SIZE);
     private static final int ATTACK_AREA_OF_EFFECT = VISION;
-    private static final int WANT_DAMAGE = 1000;
-    private static final int ATTACK_POINT = 1000 * (VISION + 1);
+    private static final int ATTACK_POINT = 1000 * VISION;
     private static final int HP = 1000;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.AIR, EUnitType.MINE};
 
 
     public Destroyer(final IntVector2D position) {
-        super(UNIT_TYPE, HP, position);
+        super(HP, position);
     }
 
+
     // 시그내처 불변
+    @Override
     public AttackIntent attack() {
         // 이 유닛은 알려진 것이 별로 없습니다. 이 유닛을 개발한 군사 과학자에 따르면 이 유닛은 망령을 제외한 모든 유닛을 한 프레임 만에 모두 파괴할 수 있다고 합니다.
         // (망령을 죽이지 못하는 이유는 방어막 때문)
@@ -24,58 +26,35 @@ public final class Destroyer extends Unit {
     }
 
     // 시그내처 불변
+    @Override
     public void onAttacked(int damage) {
         // 파괴자는 공격자의 공격력과는 상관없이 1의 피해만 받습니다.
         subHp(1);
     }
 
-    // 시그내처 불변
-    public void onSpawn() {
+    @Override
+    public EUnitType getUnitType() {
+        return UNIT_TYPE;
     }
 
     // 시그내처 불변
+    @Override
     public char getSymbol() {
         return SYMBOL;
     }
 
+    @Override
     public int getAttackPoint() {
         return ATTACK_POINT;
     }
 
+    @Override
     public int getAttackAreaOfEffect() {
         return ATTACK_AREA_OF_EFFECT;
     }
 
+    @Override
     public EUnitType[] getCanAttackUnitTypes() {
         return CAN_ATTACK_UNIT_TYPES;
-    }
-
-    public boolean isIThinkable() {
-        return false;
-    }
-
-    public boolean isIMovable() {
-        return false;
-    }
-
-    public boolean isICollision() {
-        return false;
-    }
-
-
-    private static int calculateAttackPoint() {
-        final double distance = VISION;
-        final double aoe = ATTACK_AREA_OF_EFFECT;
-        final double damage = WANT_DAMAGE;
-
-        assert (distance <= aoe);
-
-        final double ap = damage / (1.0 - distance / (aoe + 1.0));
-
-        assert (ap > 0);
-        assert (ap >= damage);
-        assert (ap >= AttackIntent.calculateDamage(new Destroyer(new IntVector2D(0, 0)), ImmutableIntVector2D.ZERO, VISION, VISION));
-
-        return (int) ap * 5;
     }
 }

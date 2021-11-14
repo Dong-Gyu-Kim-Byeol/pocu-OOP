@@ -6,7 +6,8 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     // 다음 프레임부터는 공격을 받으면 피해를 입습니다.
 
     public static final char SYMBOL = 'W';
-    private static final EUnitType UNIT_TYPE = EUnitType.AIR;
+    public static final EUnitType UNIT_TYPE = EUnitType.AIR;
+
     private static final int VISION = 4;
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 6;
@@ -30,13 +31,14 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
 
 
     public Wraith(final IntVector2D position) {
-        super(UNIT_TYPE, HP, position);
+        super(HP, position);
 
         this.isHasShield = true;
         this.startPosition = new ImmutableIntVector2D(position);
     }
 
 
+    @Override
     public void think() {
         if (isUseShield) {
             isHasShield = false;
@@ -121,6 +123,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     }
 
     // 시그내처 불변
+    @Override
     public AttackIntent attack() {
         // 1 공중 유닛들을 공격할 후보로 선택. 선택할 공중 유닛이 없다면 지상 유닛들을 선택
         // 2 가장 약한 유닛이 있는 타일을 공격
@@ -129,7 +132,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
 
         if (getAction() != EAction.ATTACK) {
-            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
+            return null;
         }
 
         assert (targetOrNull != null);
@@ -138,6 +141,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     }
 
     // 시그내처 불변
+    @Override
     public void onAttacked(int damage) {
         if (isHasShield) {
             isUseShield = true;
@@ -148,38 +152,46 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     }
 
     // 시그내처 불변
+    @Override
     public void onSpawn() {
         SimulationManager.getInstance().registerThinkable(this);
         SimulationManager.getInstance().registerMovable(this);
     }
 
+    @Override
+    public EUnitType getUnitType() {
+        return UNIT_TYPE;
+    }
+
     // 시그내처 불변
+    @Override
     public char getSymbol() {
         return SYMBOL;
     }
 
+    @Override
     public int getAttackPoint() {
         return ATTACK_POINT;
     }
 
+    @Override
     public int getAttackAreaOfEffect() {
         return ATTACK_AREA_OF_EFFECT;
     }
 
+    @Override
     public EUnitType[] getCanAttackUnitTypes() {
         return CAN_ATTACK_UNIT_TYPES;
     }
 
-    public boolean isIThinkable() {
+    @Override
+    public final boolean isIThinkable() {
         return true;
     }
 
-    public boolean isIMovable() {
+    @Override
+    public final boolean isIMovable() {
         return true;
-    }
-
-    public boolean isICollision() {
-        return false;
     }
 
 
