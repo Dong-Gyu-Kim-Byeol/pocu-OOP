@@ -109,7 +109,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
 
         if (getAction() != EAction.ATTACK) {
-            return null;
+            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
         }
 
         assert (targetOrNull != null);

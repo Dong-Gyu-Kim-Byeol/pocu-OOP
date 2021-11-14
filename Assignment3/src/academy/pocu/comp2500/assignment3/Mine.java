@@ -85,7 +85,7 @@ public class Mine extends Unit implements ICollision {
             return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
         }
 
-        return null;
+        return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
     }
 
     // 시그내처 불변

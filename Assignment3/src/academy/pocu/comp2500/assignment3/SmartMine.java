@@ -52,13 +52,13 @@ public final class SmartMine extends Mine implements IThinkable {
         // 초특급 울트라 레이더 기술 덕분에 스마트 지뢰는 시야 안에 있는 모든 지상 유닛을 감지할 수 있습니다.
         // 하지만 공중 유닛과 볼 수 없는 유닛은 감지할 수 없답니다.
 
-        final AttackIntent attackIntentOrNull = super.attack();
-        if (attackIntentOrNull != null) {
-            return attackIntentOrNull;
+        final AttackIntent superAttackIntent = super.attack();
+        if (superAttackIntent.isValid()) {
+            return superAttackIntent;
         }
 
         if (getAction() != EAction.ATTACK) {
-            return null;
+            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
         }
 
         setHpZero();
