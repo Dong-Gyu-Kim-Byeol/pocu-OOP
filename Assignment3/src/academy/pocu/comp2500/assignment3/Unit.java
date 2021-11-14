@@ -62,7 +62,7 @@ public abstract class Unit {
     // ---
 
     // 시그내처 불변
-    public abstract AttackIntent attack();
+    public abstract AttackIntent attackOrNull();
 
     // 시그내처 불변
     public abstract EUnitType getUnitType();

@@ -138,7 +138,7 @@ public final class SimulationManager {
         for (int y = 0; y < Y_MAP_SIZE; ++y) {
             for (int x = 0; x < X_MAP_SIZE; ++x) {
                 for (final Unit unit : map.getHashSet(y, x)) {
-                    final AttackIntent attackIntentOrNull = unit.attack();
+                    final AttackIntent attackIntentOrNull = unit.attackOrNull();
                     if (attackIntentOrNull != null) {
                         attackIntents.add(attackIntentOrNull);
                     }

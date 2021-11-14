@@ -141,7 +141,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
 
     // 시그내처 불변
     @Override
-    public AttackIntent attack() {
+    public AttackIntent attackOrNull() {
         // 1 공중 유닛들을 공격할 후보로 선택. 선택할 공중 유닛이 없다면 지상 유닛들을 선택
         // 2 가장 약한 유닛이 있는 타일을 공격
         // 3 자신의 위치에 유닛이 있다면 그 타일을 공격.
