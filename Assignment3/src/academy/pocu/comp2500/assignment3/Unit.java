@@ -76,11 +76,7 @@ public abstract class Unit {
     // ---
 
     // 시그내처 불변
-    public void onAttacked(final int damage) {
-        subHp(damage);
-    }
-
-    // ---
+    public abstract void onAttacked(final int damage);
 
     // 시그내처 불변
     public abstract void onSpawn();

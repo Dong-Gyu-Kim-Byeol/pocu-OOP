@@ -71,6 +71,12 @@ public class Mine extends Unit implements ICollision {
         return immutablePosition;
     }
 
+    // 시그내처 불변
+    @Override
+    public final void onAttacked(int damage) {
+        subHp(damage);
+    }
+
     // ---
 
     // 시그내처 불변

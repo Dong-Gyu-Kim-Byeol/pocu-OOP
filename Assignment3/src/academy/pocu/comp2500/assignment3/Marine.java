@@ -108,6 +108,12 @@ public final class Marine extends Unit implements IMovable, IThinkable {
 
     // 시그내처 불변
     @Override
+    public void onAttacked(int damage) {
+        subHp(damage);
+    }
+
+    // 시그내처 불변
+    @Override
     public void onSpawn() {
         SimulationManager.getInstance().registerThinkable(this);
         SimulationManager.getInstance().registerMovable(this);
