@@ -8,6 +8,7 @@ public final class SmartMine extends Mine implements IThinkable {
     private static final int VISION = 1;
     private static final int ATTACK_AREA_OF_EFFECT = 1;
     private static final int ATTACK_POINT = 15;
+    private static final int HP = 1;
     private static final EUnitType[] CAN_ATTACK_UNIT_TYPES = {EUnitType.GROUND, EUnitType.INVISIBLE};
     private static final EUnitType[] CAN_VISION_UNIT_TYPES = {EUnitType.GROUND};
 
@@ -18,15 +19,10 @@ public final class SmartMine extends Mine implements IThinkable {
     // ---
 
     public SmartMine(final IntVector2D position, final int minStepOn, final int minDetectEnemy) {
-        super(position, minStepOn);
+        super(SYMBOL, UNIT_TYPE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES,
+                HP, position, minStepOn);
+
         this.minDetectEnemy = minDetectEnemy;
-    }
-
-    // ---
-
-    @Override
-    public final boolean isIThinkable() {
-        return true;
     }
 
     // ---
@@ -61,7 +57,6 @@ public final class SmartMine extends Mine implements IThinkable {
             return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
         }
 
-        setHpZero();
         return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
     }
 
@@ -72,25 +67,10 @@ public final class SmartMine extends Mine implements IThinkable {
         SimulationManager.getInstance().registerThinkable(this);
     }
 
-    // 시그내처 불변
     @Override
-    public char getSymbol() {
-        return SYMBOL;
-    }
-
-    @Override
-    public int getAttackPoint() {
-        return ATTACK_POINT;
-    }
-
-    @Override
-    public int getAttackAreaOfEffect() {
-        return ATTACK_AREA_OF_EFFECT;
-    }
-
-    @Override
-    public EUnitType[] getCanAttackUnitTypes() {
-        return CAN_ATTACK_UNIT_TYPES;
+    public void onDestroy() {
+        super.onDestroy();
+        SimulationManager.getInstance().unregisterThinkable(this);
     }
 
     // ---

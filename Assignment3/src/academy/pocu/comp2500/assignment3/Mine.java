@@ -19,7 +19,24 @@ public class Mine extends Unit implements ICollision {
     // ---
 
     public Mine(final IntVector2D position, final int minStepOn) {
-        super(HP, position);
+        super(SYMBOL, UNIT_TYPE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES,
+                HP, position);
+
+        this.minStepOn = minStepOn;
+        this.immutablePosition = new ImmutableIntVector2D(getPosition());
+    }
+
+    protected Mine(final char symbol,
+                   final EUnitType unitType,
+                   final int attackPoint,
+                   final int attackAreaOfEffect,
+                   final EUnitType[] canAttackUnitTypes,
+
+                   final int hp,
+                   final IntVector2D position,
+                   final int minStepOn) {
+        super(symbol, unitType, attackPoint, attackAreaOfEffect, canAttackUnitTypes,
+                hp, position);
 
         this.minStepOn = minStepOn;
         this.immutablePosition = new ImmutableIntVector2D(getPosition());
@@ -54,20 +71,10 @@ public class Mine extends Unit implements ICollision {
         return immutablePosition;
     }
 
-    @Override
-    public final boolean isICollision() {
-        return true;
-    }
-
     // 시그내처 불변
     @Override
     public final void onAttacked(int damage) {
         subHp(damage);
-    }
-
-    @Override
-    public final EUnitType getUnitType() {
-        return UNIT_TYPE;
     }
 
     // ---
@@ -81,7 +88,6 @@ public class Mine extends Unit implements ICollision {
         // 터진 지뢰는 파괴됩니다.
 
         if (isCanStepOnAttack()) {
-            setHpZero();
             return new AttackIntent(this, true, new ImmutableIntVector2D(getPosition()));
         }
 
@@ -94,25 +100,9 @@ public class Mine extends Unit implements ICollision {
         SimulationManager.getInstance().registerCollisionEventListener(this);
     }
 
-    // 시그내처 불변
     @Override
-    public char getSymbol() {
-        return SYMBOL;
-    }
-
-    @Override
-    public int getAttackPoint() {
-        return ATTACK_POINT;
-    }
-
-    @Override
-    public int getAttackAreaOfEffect() {
-        return ATTACK_AREA_OF_EFFECT;
-    }
-
-    @Override
-    public EUnitType[] getCanAttackUnitTypes() {
-        return CAN_ATTACK_UNIT_TYPES;
+    public void onDestroy() {
+        SimulationManager.getInstance().unregisterCollisionEventListener(this);
     }
 
     // ---

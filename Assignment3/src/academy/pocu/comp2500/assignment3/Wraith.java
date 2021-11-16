@@ -35,22 +35,11 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     // ---
 
     public Wraith(final IntVector2D position) {
-        super(HP, position);
+        super(SYMBOL, UNIT_TYPE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES,
+                HP, position);
 
         this.isHasShield = true;
         this.startPosition = new ImmutableIntVector2D(position);
-    }
-
-    // ---
-
-    @Override
-    public final boolean isIThinkable() {
-        return true;
-    }
-
-    @Override
-    public final boolean isIMovable() {
-        return true;
     }
 
     // ---
@@ -176,31 +165,10 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     }
 
     @Override
-    public EUnitType getUnitType() {
-        return UNIT_TYPE;
+    public void onDestroy() {
+        SimulationManager.getInstance().unregisterThinkable(this);
+        SimulationManager.getInstance().unregisterMovable(this);
     }
-
-    // 시그내처 불변
-    @Override
-    public char getSymbol() {
-        return SYMBOL;
-    }
-
-    @Override
-    public int getAttackPoint() {
-        return ATTACK_POINT;
-    }
-
-    @Override
-    public int getAttackAreaOfEffect() {
-        return ATTACK_AREA_OF_EFFECT;
-    }
-
-    @Override
-    public EUnitType[] getCanAttackUnitTypes() {
-        return CAN_ATTACK_UNIT_TYPES;
-    }
-
 
     // ---
 

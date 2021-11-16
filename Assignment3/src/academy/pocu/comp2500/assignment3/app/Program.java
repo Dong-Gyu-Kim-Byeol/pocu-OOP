@@ -105,7 +105,7 @@ public class Program {
                 simulationManager.spawn(unit);
             }
 
-            int frame = 13;
+            int frame = 5;
             SimulationVisualizer visualizer = new SimulationVisualizer(units);
             for (int i = 0; i <= frame; ++i) {
                 clearConsole();

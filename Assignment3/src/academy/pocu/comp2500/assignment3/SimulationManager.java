@@ -102,14 +102,26 @@ public final class SimulationManager {
         this.thinkableUnits.add(thinkable);
     }
 
+    public void unregisterThinkable(final IThinkable thinkable) {
+        this.thinkableUnits.remove(thinkable);
+    }
+
     // 시그내처 ?
     public void registerMovable(final IMovable movable) {
         this.movableUnits.add(movable);
     }
 
+    public void unregisterMovable(final IMovable movable) {
+        this.movableUnits.remove(movable);
+    }
+
     // 시그내처 ?
     public void registerCollisionEventListener(final ICollision listener) {
         this.collisionUnits.add(listener);
+    }
+
+    public void unregisterCollisionEventListener(final ICollision listener) {
+        this.collisionUnits.remove(listener);
     }
 
     // 시그내처 불변
@@ -156,16 +168,7 @@ public final class SimulationManager {
         for (final Unit unit : attackedUnits) {
             if (unit.getHp() <= 0) {
                 map.remove(unit, unit.getPosition().getY(), unit.getPosition().getX());
-
-                if (unit.isIThinkable()) {
-                    thinkableUnits.remove((IThinkable) unit);
-                }
-                if (unit.isIMovable()) {
-                    movableUnits.remove((IMovable) unit);
-                }
-                if (unit.isICollision()) {
-                    collisionUnits.remove((ICollision) unit);
-                }
+                unit.onDestroy();
             }
         }
         attackedUnits.clear();

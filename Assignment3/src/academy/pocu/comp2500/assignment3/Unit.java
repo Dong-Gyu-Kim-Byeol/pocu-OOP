@@ -9,7 +9,11 @@ public abstract class Unit {
     // 이동 가능한 유닛은 공격 구역에 있는 적을 발견하지 못한 경우에만 이동할 수 있습니다.
     // 유닛은 자기 자신에게 피해를 입힐 수 없습니다.
 
-    // ---
+    private final char symbol;
+    private final EUnitType unitType;
+    private final int attackAreaOfEffect;
+    private final int attackPoint;
+    private final EUnitType[] canAttackUnitTypes;
 
     private final IntVector2D position;
     private int hp;
@@ -17,9 +21,21 @@ public abstract class Unit {
 
     // ---
 
-    protected Unit(final int hp, final IntVector2D startPosition) {
-        this.position = startPosition;
+    protected Unit(final char symbol,
+                   final EUnitType unitType,
+                   final int attackPoint,
+                   final int attackAreaOfEffect,
+                   final EUnitType[] canAttackUnitTypes,
 
+                   final int hp,
+                   final IntVector2D position) {
+        this.symbol = symbol;
+        this.unitType = unitType;
+        this.attackPoint = attackPoint;
+        this.attackAreaOfEffect = attackAreaOfEffect;
+        this.canAttackUnitTypes = canAttackUnitTypes;
+
+        this.position = position;
         this.hp = hp;
         this.action = EAction.DO_NOTHING;
     }
@@ -36,44 +52,43 @@ public abstract class Unit {
         return hp;
     }
 
+    public final EUnitType getUnitType() {
+        return unitType;
+    }
+
+    // 시그내처 불변
+    public final char getSymbol() {
+        return symbol;
+    }
+
+    public final int getAttackPoint() {
+        return attackPoint;
+    }
+
+    public final int getAttackAreaOfEffect() {
+        return attackAreaOfEffect;
+    }
+
+    public final EUnitType[] getCanAttackUnitTypes() {
+        return canAttackUnitTypes;
+    }
+
     // ---
-
-    public boolean isIThinkable() {
-        return false;
-    }
-
-    public boolean isIMovable() {
-        return false;
-    }
-
-    public boolean isICollision() {
-        return false;
-    }
 
     // 시그내처 불변
     public void onAttacked(final int damage) {
         subHp(damage);
     }
 
-    // 시그내처 불변
-    public void onSpawn() {
-    }
-
     // ---
 
     // 시그내처 불변
-    public abstract AttackIntent attack();
+    public abstract void onSpawn();
+
+    public abstract void onDestroy();
 
     // 시그내처 불변
-    public abstract EUnitType getUnitType();
-
-    public abstract char getSymbol();
-
-    public abstract int getAttackPoint();
-
-    public abstract int getAttackAreaOfEffect();
-
-    public abstract EUnitType[] getCanAttackUnitTypes();
+    public abstract AttackIntent attack();
 
     // ---
 
@@ -173,10 +188,6 @@ public abstract class Unit {
         if (this.hp < 0) {
             this.hp = 0;
         }
-    }
-
-    protected final void setHpZero() {
-        this.hp = 0;
     }
 
     protected final EAction getAction() {

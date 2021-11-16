@@ -34,14 +34,8 @@ public final class Turret extends Unit implements IThinkable {
     // ---
 
     public Turret(final IntVector2D position) {
-        super(HP, position);
-    }
-
-    // ---
-
-    @Override
-    public final boolean isIThinkable() {
-        return true;
+        super(SYMBOL, UNIT_TYPE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES,
+                HP, position);
     }
 
     // ---
@@ -88,29 +82,8 @@ public final class Turret extends Unit implements IThinkable {
     }
 
     @Override
-    public EUnitType getUnitType() {
-        return UNIT_TYPE;
-    }
-
-    // 시그내처 불변
-    @Override
-    public char getSymbol() {
-        return SYMBOL;
-    }
-
-    @Override
-    public int getAttackPoint() {
-        return ATTACK_POINT;
-    }
-
-    @Override
-    public int getAttackAreaOfEffect() {
-        return ATTACK_AREA_OF_EFFECT;
-    }
-
-    @Override
-    public EUnitType[] getCanAttackUnitTypes() {
-        return CAN_ATTACK_UNIT_TYPES;
+    public void onDestroy() {
+        SimulationManager.getInstance().unregisterThinkable(this);
     }
 
     // ---
