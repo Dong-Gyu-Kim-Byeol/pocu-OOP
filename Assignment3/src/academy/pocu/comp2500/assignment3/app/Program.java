@@ -78,6 +78,27 @@ public class Program {
             units.add(new Mine(new IntVector2D(7, 0), 1)); // E
             units.add(new Tank(new IntVector2D(13, 7))); // F
 
+            // K00_SimulationTest0
+            //올바른 결과:
+            //Frame: 5
+            //
+            //0(N)01 1(M)35 2(A)01 3(M)35
+            //4(A)XX 5(A)01 6(U)51 7(A)01
+            //8(W)80 9(A)01 A(W)59 B(U)99
+            //C(A)01 D(U)92 E(N)01 F(T)85
+            //
+            //
+            //  0123456789ABCDEF
+            // +----------------+
+            //0|       E    7   |
+            //1|                |
+            //2|     2          |
+            //3|C          B    |
+            //4|         D    0 |
+            //5| 3              |
+            //6|           5 9  |
+            //7|      A61   F 8 |
+            // +----------------+
 
 
             for (Unit unit : units) {
