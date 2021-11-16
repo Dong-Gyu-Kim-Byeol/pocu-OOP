@@ -11,15 +11,11 @@ public final class Drainer extends SmartDevice implements IWaterDetectable, IDra
     // ---
 
     public Drainer(final int maxWaterSize) {
+        super(SMART_DEVICE_TYPE);
         this.maxWaterSize = maxWaterSize;
     }
 
     // ---
-
-    @Override
-    public ESmartDeviceType getSmartDeviceType() {
-        return SMART_DEVICE_TYPE;
-    }
 
     @Override
     public void detect(final int waterLevel) {

@@ -14,15 +14,11 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
     // ---
 
     public Sprinkler() {
+        super(SMART_DEVICE_TYPE);
         this.schedules = new LinkedList<>();
     }
 
     // ---
-
-    @Override
-    public ESmartDeviceType getSmartDeviceType() {
-        return SMART_DEVICE_TYPE;
-    }
 
     @Override
     public void onTick() {
