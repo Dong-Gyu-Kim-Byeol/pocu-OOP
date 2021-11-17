@@ -19,6 +19,7 @@ public final class BuyOneGetOneFree implements IPricingModel {
 
     // ---
 
+    @Override
     public final int getTotalPrice(final ArrayList<Book> books) {
         int sum = 0;
 
