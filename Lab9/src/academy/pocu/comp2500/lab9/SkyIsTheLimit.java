@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public final class SkyIsTheLimit implements IPricingModel {
     private static final double DISCOUNTED_PRICE = 0.5;
-    private static final double DISCOUNT_MAX_COUNT = 2;
+    private static final int DISCOUNT_MAX_COUNT = 2;
     private static final int START_DISCOUNTING_COUNT = 5;
 
     // ---
@@ -34,7 +34,8 @@ public final class SkyIsTheLimit implements IPricingModel {
 
         Sort.radixSort(books, Book::getPrice);
 
-        for (int i = books.size() - 1; i > books.size() - 1 - DISCOUNT_MAX_COUNT; --i) {
+        final int lastIndex = books.size() - DISCOUNT_MAX_COUNT;
+        for (int i = books.size() - 1; i >= lastIndex; --i) {
             sum -= (double) (books.get(i).getPrice()) * (1.0 - DISCOUNTED_PRICE);
         }
 

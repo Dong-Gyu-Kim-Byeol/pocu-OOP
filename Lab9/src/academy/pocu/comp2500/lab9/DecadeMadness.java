@@ -48,6 +48,7 @@ public final class DecadeMadness implements IPricingModel {
         }
 
 
+        // clear
         for (final LinkedList<Book> bookLinkedList : this.generations.values()) {
             bookLinkedList.clear();
         }

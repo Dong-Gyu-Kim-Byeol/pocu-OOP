@@ -37,9 +37,11 @@ public final class BuyOneGetOneFree implements IPricingModel {
         }
 
 
+        // clear
         for (final UUID sku : this.isSkuFrees.keySet()) {
             isSkuFrees.put(sku, false);
         }
+
 
         return sum;
     }
