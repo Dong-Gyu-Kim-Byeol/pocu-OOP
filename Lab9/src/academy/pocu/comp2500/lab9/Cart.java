@@ -1,7 +1,6 @@
 package academy.pocu.comp2500.lab9;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public final class Cart {
     private final ArrayList<Book> books;
@@ -26,19 +25,13 @@ public final class Cart {
         return this.books.size();
     }
 
-    public final void addBooks(final UUID[] skus, final String[] titles, final int[] prices, final int[] publishedYears) {
-        if (skus.length != titles.length || skus.length != prices.length || skus.length != publishedYears.length) {
-            return;
-        }
-
-        for (int i = 0; i < skus.length; ++i) {
-            Book book = new Book(skus[i], titles[i], prices[i], publishedYears[i]);
+    public final void addBooks(final Book[] books) {
+        for (final Book book : books) {
             this.books.add(book);
         }
     }
 
-    public final void addBook(final UUID sku, final String title, final int price, final int publishedYear) {
-        Book book = new Book(sku, title, price, publishedYear);
+    public final void addBook(final Book book) {
         this.books.add(book);
     }
 
@@ -52,13 +45,7 @@ public final class Cart {
         return true;
     }
 
-    public final int getTotalPrice() {
-        int sum = 0;
-
-        for (Book book : this.books) {
-            sum += book.getPrice();
-        }
-
-        return sum;
+    public final int getTotalPrice(final IPricingModel pricingModel) {
+        return pricingModel.getTotalPrice(this.books);
     }
 }
