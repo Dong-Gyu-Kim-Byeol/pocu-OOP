@@ -24,7 +24,7 @@ public final class SkyIsTheLimit implements IPricingModel {
     @Override
     public final int getTotalPrice(ArrayList<Book> books) {
         double sum = this.simplePricing.getTotalPrice(books);
-        if (sum < startDiscountPrice) {
+        if (sum < this.startDiscountPrice) {
             return (int) sum;
         }
 
