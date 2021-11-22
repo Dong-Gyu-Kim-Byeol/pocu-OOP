@@ -11,9 +11,6 @@ public abstract class Unit {
 
     private final char symbol;
     private final EUnitType unitType;
-    private final int attackAreaOfEffect;
-    private final int attackPoint;
-    private final EUnitType[] canAttackUnitTypes;
 
     private final IntVector2D position;
     private int hp;
@@ -23,17 +20,11 @@ public abstract class Unit {
 
     protected Unit(final char symbol,
                    final EUnitType unitType,
-                   final int attackPoint,
-                   final int attackAreaOfEffect,
-                   final EUnitType[] canAttackUnitTypes,
 
                    final int hp,
                    final IntVector2D position) {
         this.symbol = symbol;
         this.unitType = unitType;
-        this.attackPoint = attackPoint;
-        this.attackAreaOfEffect = attackAreaOfEffect;
-        this.canAttackUnitTypes = canAttackUnitTypes;
 
         this.position = position;
         this.hp = hp;
@@ -59,18 +50,6 @@ public abstract class Unit {
     // 시그내처 불변
     public final char getSymbol() {
         return symbol;
-    }
-
-    public final int getAttackPoint() {
-        return attackPoint;
-    }
-
-    public final int getAttackAreaOfEffect() {
-        return attackAreaOfEffect;
-    }
-
-    public final EUnitType[] getCanAttackUnitTypes() {
-        return canAttackUnitTypes;
     }
 
     // ---

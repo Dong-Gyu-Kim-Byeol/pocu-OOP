@@ -7,12 +7,12 @@ public final class SimulationManager {
     // 월드는 16 x 8 크기의 2D 그리드(grid)입니다.
     // 원점은 (0,0)이며 +x는 오른쪽, +y는 아래쪽입니다. 또한 북쪽은 -y, 동쪽은 +x 입니다
 
-    private static SimulationManager instance;
+    private static final int X_MAP_SIZE = 16;
+    private static final int Y_MAP_SIZE = 8;
 
     // ---
 
-    private static final int X_MAP_SIZE = 16;
-    private static final int Y_MAP_SIZE = 8;
+    private static SimulationManager instance;
 
     // ---
 

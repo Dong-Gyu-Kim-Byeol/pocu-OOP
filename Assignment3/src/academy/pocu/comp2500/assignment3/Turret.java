@@ -1,10 +1,8 @@
 package academy.pocu.comp2500.assignment3;
 
 public final class Turret extends Unit implements IThinkable {
-    public static final char SYMBOL = 'U';
-    public static final EUnitType UNIT_TYPE = EUnitType.GROUND;
-
-    // ---
+    private static final char SYMBOL = 'U';
+    private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
 
     private static final int ATTACK_AREA_OF_EFFECT = 0;
     private static final int ATTACK_POINT = 7;
@@ -34,8 +32,7 @@ public final class Turret extends Unit implements IThinkable {
     // ---
 
     public Turret(final IntVector2D position) {
-        super(SYMBOL, UNIT_TYPE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES,
-                HP, position);
+        super(SYMBOL, UNIT_TYPE, HP, position);
     }
 
     // ---
@@ -61,12 +58,12 @@ public final class Turret extends Unit implements IThinkable {
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
 
         if (getAction() != EAction.ATTACK) {
-            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
+            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES);
         }
 
         assert (targetOrNull != null);
 
-        return new AttackIntent(this, false, targetOrNull);
+        return new AttackIntent(this, false, targetOrNull, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES);
     }
 
     // 시그내처 불변

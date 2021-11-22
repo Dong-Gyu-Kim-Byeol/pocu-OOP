@@ -9,10 +9,8 @@ public final class Tank extends Unit implements IMovable, IThinkable {
 
     // 공성 모드인 전차는 탱크 모드일 때보다 2배의 피해를 받습니다.
 
-    public static final char SYMBOL = 'T';
-    public static final EUnitType UNIT_TYPE = EUnitType.GROUND;
-
-    // ---
+    private static final char SYMBOL = 'T';
+    private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
 
     private static final int VISION = 3;
     private static final int ATTACK_AREA_OF_EFFECT = 1;
@@ -48,8 +46,7 @@ public final class Tank extends Unit implements IMovable, IThinkable {
     // ---
 
     public Tank(final IntVector2D position) {
-        super(SYMBOL, UNIT_TYPE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES,
-                HP, position);
+        super(SYMBOL, UNIT_TYPE, HP, position);
 
         this.tankMode = ETankMode.TANK;
         this.isMoveRight = true;
@@ -152,12 +149,12 @@ public final class Tank extends Unit implements IMovable, IThinkable {
         // 전차가 시야 안에서 적을 찾으면 공성 모드로 변환하여 공격할 준비를 합니다.
 
         if (getAction() != EAction.ATTACK) {
-            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
+            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES);
         }
 
         assert (targetOrNull != null);
 
-        return new AttackIntent(this, false, targetOrNull);
+        return new AttackIntent(this, false, targetOrNull, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES);
     }
 
     // 시그내처 불변

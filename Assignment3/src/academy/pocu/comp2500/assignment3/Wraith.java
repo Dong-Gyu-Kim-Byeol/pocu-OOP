@@ -5,10 +5,8 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     // 한 번 가동된 방어막은 현재 프레임이 끝날 때까지 지속되어 망령은 피해를 입지 않습니다.
     // 다음 프레임부터는 공격을 받으면 피해를 입습니다.
 
-    public static final char SYMBOL = 'W';
-    public static final EUnitType UNIT_TYPE = EUnitType.AIR;
-
-    // ---
+    private static final char SYMBOL = 'W';
+    private static final EUnitType UNIT_TYPE = EUnitType.AIR;
 
     private static final int VISION = 4;
     private static final int ATTACK_AREA_OF_EFFECT = 0;
@@ -35,8 +33,7 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
     // ---
 
     public Wraith(final IntVector2D position) {
-        super(SYMBOL, UNIT_TYPE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES,
-                HP, position);
+        super(SYMBOL, UNIT_TYPE, HP, position);
 
         this.isHasShield = true;
         this.startPosition = new ImmutableIntVector2D(position);
@@ -138,12 +135,12 @@ public final class Wraith extends Unit implements IMovable, IThinkable {
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
 
         if (getAction() != EAction.ATTACK) {
-            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
+            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES);
         }
 
         assert (targetOrNull != null);
 
-        return new AttackIntent(this, false, targetOrNull);
+        return new AttackIntent(this, false, targetOrNull, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES);
     }
 
     // 시그내처 불변

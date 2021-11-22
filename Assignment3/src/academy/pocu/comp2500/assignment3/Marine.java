@@ -1,10 +1,8 @@
 package academy.pocu.comp2500.assignment3;
 
 public final class Marine extends Unit implements IMovable, IThinkable {
-    public static final char SYMBOL = 'M';
-    public static final EUnitType UNIT_TYPE = EUnitType.GROUND;
-
-    // ---
+    private static final char SYMBOL = 'M';
+    private static final EUnitType UNIT_TYPE = EUnitType.GROUND;
 
     private static final int VISION = 2;
     private static final int ATTACK_AREA_OF_EFFECT = 0;
@@ -28,8 +26,7 @@ public final class Marine extends Unit implements IMovable, IThinkable {
     // ---
 
     public Marine(final IntVector2D position) {
-        super(SYMBOL, UNIT_TYPE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES,
-                HP, position);
+        super(SYMBOL, UNIT_TYPE, HP, position);
     }
 
     // ---
@@ -98,12 +95,12 @@ public final class Marine extends Unit implements IMovable, IThinkable {
         //   그렇지 않을 경우 시계 방향으로 검색하다 찾은 유닛의 타일을 공격
 
         if (getAction() != EAction.ATTACK) {
-            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE);
+            return new AttackIntent(this, false, ImmutableIntVector2D.MINUS_ONE, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES);
         }
 
         assert (targetOrNull != null);
 
-        return new AttackIntent(this, false, targetOrNull);
+        return new AttackIntent(this, false, targetOrNull, ATTACK_POINT, ATTACK_AREA_OF_EFFECT, CAN_ATTACK_UNIT_TYPES);
     }
 
     // 시그내처 불변
