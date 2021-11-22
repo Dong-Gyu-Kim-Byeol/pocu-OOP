@@ -11,17 +11,23 @@ public final class Drainer extends SmartDevice implements IWaterDetectable, IDra
     // ---
 
     public Drainer(final int maxWaterSize) {
-        super(SMART_DEVICE_TYPE);
         this.maxWaterSize = maxWaterSize;
     }
 
     // ---
 
     @Override
+    public void onInstall(final Planter planter) {
+        planter.registerIWaterDetectable(this);
+        planter.registerIDrainable(this);
+    }
+
+    @Override
     public void detect(final int waterLevel) {
         this.setIsOn(waterLevel >= this.maxWaterSize);
     }
 
+    @Override
     public void drain(Planter planter) {
         if (isOn()) {
             planter.addWater(DRAIN_WATER_LEVEL_PER_TICK);

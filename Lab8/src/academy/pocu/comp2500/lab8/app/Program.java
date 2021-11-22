@@ -9,6 +9,22 @@ public class Program {
 
     public static void test0() {
         {
+            Drainer drainer1 = new Drainer(7);
+            Drainer drainer2 = new Drainer(7);
+
+            Planter planter = new Planter(12);
+            planter.installSmartDevice(drainer1);
+            planter.installSmartDevice(drainer2);
+
+            int[] expectedWaterAmount = new int[]{12, 0};
+
+            for (int i = 0; i < expectedWaterAmount.length; ++i) {
+                assert (planter.getWaterAmount() == expectedWaterAmount[i]) : i;
+                planter.tick();
+            }
+        }
+
+        {
             Sprinkler sprinkler = new Sprinkler();
 
             sprinkler.addSchedule(new Schedule(0, 4));

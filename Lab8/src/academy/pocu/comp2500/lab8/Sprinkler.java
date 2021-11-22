@@ -14,11 +14,15 @@ public final class Sprinkler extends SmartDevice implements ISprayable {
     // ---
 
     public Sprinkler() {
-        super(SMART_DEVICE_TYPE);
         this.schedules = new LinkedList<>();
     }
 
     // ---
+
+    @Override
+    public void onInstall(final Planter planter) {
+        planter.registerISprayable(this);
+    }
 
     @Override
     public void onTick() {
