@@ -36,7 +36,8 @@ public final class CacheMiddleware implements IRequestHandler {
 
 
         final ResultBase resultBase = requestHandler.handle(request);
-        if (resultBase.getCode() == ResultCode.OK) {
+        final ResultValidator validator = new ResultValidator(resultBase);
+        if (validator.isValid(ResultCode.OK)) {
             this.cachedExpiryCounts.put(request, this.startExpiryCount);
         }
 
