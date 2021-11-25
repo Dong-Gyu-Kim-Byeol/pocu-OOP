@@ -13,15 +13,15 @@ public final class Movie {
         this.playTime = playTime;
     }
 
-    public String getTitle() {
+    public final String getTitle() {
         return this.title;
     }
 
-    public int getPlayTime() {
+    public final int getPlayTime() {
         return this.playTime;
     }
 
-    public Rating getRating() {
+    public final Rating getRating() {
         return this.rating;
     }
 }

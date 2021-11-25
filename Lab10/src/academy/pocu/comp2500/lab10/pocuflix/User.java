@@ -9,16 +9,16 @@ public final class User {
         this.password = password;
     }
 
-    public String getUsername() {
+    public final String getUsername() {
         return this.username;
     }
 
-    public String getPassword() {
+    public final String getPassword() {
         return this.password;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public final boolean equals(Object obj) {
         if (obj == this) {
             return true;
         }
@@ -34,7 +34,7 @@ public final class User {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return this.username.hashCode() ^ (this.password.hashCode() << 16);
     }
 }

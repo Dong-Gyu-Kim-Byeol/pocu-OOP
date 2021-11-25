@@ -9,7 +9,7 @@ public final class OkResult extends ResultBase {
         this.movie = movie;
     }
 
-    public Movie getMovie() {
+    public final Movie getMovie() {
         return this.movie;
     }
 }
