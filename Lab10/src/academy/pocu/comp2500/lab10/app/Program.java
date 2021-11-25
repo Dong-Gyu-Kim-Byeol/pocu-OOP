@@ -25,6 +25,15 @@ import java.util.concurrent.TimeUnit;
 public class Program {
 
     public static void main(String[] args) {
+        {
+            ResultBase result = new UnauthorizedResult();
+
+            ResultValidator validator = new ResultValidator(result);
+
+            assert (validator.isValid(ResultCode.UNAUTHORIZED)); // true
+            assert (!validator.isValid(ResultCode.OK)); // false
+        }
+
         MovieStore store = new MovieStore();
 
         store.add(new Movie("Harry Potter", Rating.PG13, 180));
