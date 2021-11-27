@@ -51,6 +51,6 @@ public final class Request {
     @Override
     public int hashCode() {
         return this.movieTitle.hashCode()
-                & this.user.hashCode() << 2;
+                ^ this.user.hashCode() << 4;
     }
 }
