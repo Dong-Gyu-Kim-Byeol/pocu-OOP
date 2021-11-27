@@ -34,7 +34,7 @@ public final class CacheMiddleware implements IRequestHandler {
             }
         }
 
-        final ResultBase resultBase = requestHandler.handle(request);
+        final ResultBase resultBase = this.requestHandler.handle(request);
         final ResultValidator validator = new ResultValidator(resultBase);
         if (validator.isValid(ResultCode.OK)) {
             this.cacheUsedCounts.put(request, 0);
