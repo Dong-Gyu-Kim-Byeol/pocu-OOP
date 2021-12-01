@@ -15,8 +15,7 @@ public final class App {
     private static final String APP_EXIT_TEXT = "exit";
 
     private static final String WAREHOUSE_START_TEXT = "WAREHOUSE: Choose your warehouse!";
-    private static final String[] WAREHOUSE_TYPE_TEXTS = {"APPLE", "MICROSOFT", "SAMSUNG"};
-    private static final WarehouseType[] WAREHOUSE_TYPES = {WarehouseType.APPLE, WarehouseType.MICROSOFT, WarehouseType.SAMSUNG};
+    private static final WarehouseType[] WAREHOUSE_TYPES = WarehouseType.values();
 
     private static final String BALANCE_TEXT = "BALANCE: ";
 
@@ -34,15 +33,13 @@ public final class App {
         Warehouse warehouse;
         final SafeWallet wallet;
         while (true) {
-//            out.printf("%s%s", WAREHOUSE_START_TEXT, System.lineSeparator());
-//            for (int i = 0; i < WAREHOUSE_TYPE_TEXTS.length; ++i) {
-////                out.println(String.format("%d. %s", i + 1, WAREHOUSE_TYPE_TEXTS[i]));
-//                out.printf("%d. %s%s", i + 1, WAREHOUSE_TYPE_TEXTS[i], System.lineSeparator());
-//            }
-            out.println("WAREHOUSE: Choose your warehouse!");
-            out.println("1. APPLE");
-            out.println("2. MICROSOFT");
-            out.println("3. SAMSUNG");
+            out.printf("%s%s", WAREHOUSE_START_TEXT, System.lineSeparator());
+            for (int i = 0; i < WAREHOUSE_TYPES.length; ++i) {
+//                out.println(String.format("%d. %s", i + 1, WAREHOUSE_TYPE_TEXTS[i]));
+                out.printf("%d. %s%s", i + 1, WAREHOUSE_TYPES[i].toString(), System.lineSeparator());
+            }
+
+            out.println();
 
             int chooseWarehouseNum;
             try {
@@ -56,7 +53,7 @@ public final class App {
                 continue;
             }
 
-            if (1 <= chooseWarehouseNum && chooseWarehouseNum <= WAREHOUSE_TYPE_TEXTS.length) {
+            if (1 <= chooseWarehouseNum && chooseWarehouseNum <= WAREHOUSE_TYPES.length) {
                 warehouse = new Warehouse(WAREHOUSE_TYPES[chooseWarehouseNum - 1]);
                 break;
             }
