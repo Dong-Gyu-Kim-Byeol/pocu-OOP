@@ -97,7 +97,7 @@ public final class App {
                 try {
                     wallet.withdraw(product.getPrice());
                 } catch (UnderflowException e) {
-                    continue;
+                    return;
                 }
 
                 try {
