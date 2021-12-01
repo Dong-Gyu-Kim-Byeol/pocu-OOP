@@ -94,6 +94,10 @@ public final class App {
             if (1 <= chooseProductNum && chooseProductNum <= products.size()) {
                 final Product product = products.get(chooseProductNum - 1);
 
+                if (wallet.getAmount() < product.getPrice()) {
+                    continue;
+                }
+
                 wallet.withdraw(product.getPrice());
 
                 try {
