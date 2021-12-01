@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 public class Program {
 
     public static void main(String[] args) {
-        App app = new App();
+        App app = new App(new User());
 
         app.run(new BufferedReader(new InputStreamReader(System.in)), System.out, System.err);
     }

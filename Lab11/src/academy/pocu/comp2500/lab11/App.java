@@ -23,15 +23,18 @@ public final class App {
 
     // ---
 
-    public App() {
+    private final User user;
+
+    // ---
+
+    public App(final User user) {
+        this.user = user;
     }
 
     // ---
 
     public final void run(final BufferedReader in, final PrintStream out, final PrintStream err) {
-        final User user = new User();
-
-        final Warehouse warehouse;
+        Warehouse warehouse;
         final SafeWallet wallet;
         while (true) {
             out.println(WAREHOUSE_START_TEXT);
@@ -39,7 +42,7 @@ public final class App {
                 out.printf("%d. %s%s", i + 1, WAREHOUSE_TYPE_TEXTS[i], System.lineSeparator());
             }
 
-            int chooseWarehouseNum = -1;
+            int chooseWarehouseNum;
             try {
                 final String read = in.readLine();
                 if (read.equals(APP_EXIT_TEXT)) {
@@ -52,17 +55,17 @@ public final class App {
             }
 
             if (1 <= chooseWarehouseNum && chooseWarehouseNum <= WAREHOUSE_TYPE_TEXTS.length) {
-                // get wallet
-                try {
-                    wallet = new SafeWallet(user);
-                } catch (IllegalAccessException e) {
-                    err.println("AUTH_ERROR");
-                    return;
-                }
-
                 warehouse = new Warehouse(WAREHOUSE_TYPES[chooseWarehouseNum - 1]);
                 break;
             }
+        }
+
+        // get wallet
+        try {
+            wallet = new SafeWallet(this.user);
+        } catch (IllegalAccessException e) {
+            err.println("AUTH_ERROR");
+            return;
         }
 
         // Choose the product
@@ -77,7 +80,7 @@ public final class App {
                 out.printf("%d. %-20s%5d%s", i + 1, products.get(i).getName(), products.get(i).getPrice(), System.lineSeparator());
             }
 
-            int chooseProductNum = -1;
+            int chooseProductNum;
             try {
                 final String read = in.readLine();
                 if (read.equals(APP_EXIT_TEXT)) {
