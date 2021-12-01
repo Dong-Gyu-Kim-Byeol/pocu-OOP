@@ -94,11 +94,11 @@ public final class App {
             if (1 <= chooseProductNum && chooseProductNum <= products.size()) {
                 final Product product = products.get(chooseProductNum - 1);
 
-                if (wallet.getAmount() < product.getPrice()) {
+                try {
+                    wallet.withdraw(product.getPrice());
+                } catch (UnderflowException e) {
                     continue;
                 }
-
-                wallet.withdraw(product.getPrice());
 
                 try {
                     warehouse.removeProduct(product.getId());
