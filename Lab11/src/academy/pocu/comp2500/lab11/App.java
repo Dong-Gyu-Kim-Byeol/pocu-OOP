@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public final class App {
     private static final String APP_EXIT_TEXT = "exit";
 
-    private static final String WAREHOUSE_START_TEXT = "WAREHOUSE: Choose";
+    private static final String WAREHOUSE_START_TEXT = "WAREHOUSE: Choose your warehouse!";
     private static final String[] WAREHOUSE_TYPE_TEXTS = {"APPLE", "MICROSOFT", "SAMSUNG"};
     private static final WarehouseType[] WAREHOUSE_TYPES = {WarehouseType.APPLE, WarehouseType.MICROSOFT, WarehouseType.SAMSUNG};
 
