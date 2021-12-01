@@ -23,17 +23,13 @@ public final class App {
 
     // ---
 
-    private final User user;
-
-    // ---
-
-    public App(final User user) {
-        this.user = user;
+    public App() {
     }
 
     // ---
 
     public final void run(final BufferedReader in, final PrintStream out, final PrintStream err) {
+        final User user = new User();
         Warehouse warehouse;
         final SafeWallet wallet;
         while (true) {
@@ -62,7 +58,7 @@ public final class App {
 
         // get wallet
         try {
-            wallet = new SafeWallet(this.user);
+            wallet = new SafeWallet(user);
         } catch (IllegalAccessException e) {
             err.println("AUTH_ERROR");
             return;
