@@ -8,12 +8,13 @@ import academy.pocu.comp2500.lab11.pocu.WarehouseType;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public final class App {
     private static final String APP_EXIT_TEXT = "exit";
 
-    private static final String WAREHOUSE_START_TEXT = "WAREHOUSE: Choose your warehouse!";
+    private static final String WAREHOUSE_START_TEXT = "WAREHOUSE: Choose";
     private static final String[] WAREHOUSE_TYPE_TEXTS = {"APPLE", "MICROSOFT", "SAMSUNG"};
     private static final WarehouseType[] WAREHOUSE_TYPES = {WarehouseType.APPLE, WarehouseType.MICROSOFT, WarehouseType.SAMSUNG};
 
@@ -33,7 +34,7 @@ public final class App {
         Warehouse warehouse;
         final SafeWallet wallet;
         while (true) {
-            out.println(WAREHOUSE_START_TEXT);
+            out.printf("%s%s", WAREHOUSE_START_TEXT, System.lineSeparator());
             for (int i = 0; i < WAREHOUSE_TYPE_TEXTS.length; ++i) {
 //                out.println(String.format("%d. %s", i + 1, WAREHOUSE_TYPE_TEXTS[i]));
                 out.printf("%d. %s%s", i + 1, WAREHOUSE_TYPE_TEXTS[i], System.lineSeparator());
