@@ -14,6 +14,7 @@ public final class App {
     private static final String APP_EXIT_TEXT = "exit";
 
     private static final String WAREHOUSE_START_TEXT = "WAREHOUSE: Choose your warehouse!";
+    private static final String[] WAREHOUSE_TYPE_TEXTS = {"APPLE", "MICROSOFT", "SAMSUNG"};
     private static final WarehouseType[] WAREHOUSE_TYPES = {WarehouseType.APPLE, WarehouseType.MICROSOFT, WarehouseType.SAMSUNG};
 
     private static final String BALANCE_TEXT = "BALANCE: ";
@@ -28,22 +29,14 @@ public final class App {
     // ---
 
     public final void run(final BufferedReader in, final PrintStream out, final PrintStream err) {
-        final StringBuilder sb = new StringBuilder(1000);
         final User user = new User();
         Warehouse warehouse;
         final SafeWallet wallet;
         while (true) {
-            sb.setLength(0);
-            sb.append(WAREHOUSE_START_TEXT);
-            sb.append(System.lineSeparator());
-            for (int i = 0; i < WAREHOUSE_TYPES.length; ++i) {
-                sb.append(i + 1);
-                sb.append(". ");
-                sb.append(WAREHOUSE_TYPES[i].toString());
-                sb.append(System.lineSeparator());
+            out.println(WAREHOUSE_START_TEXT);
+            for (int i = 0; i < WAREHOUSE_TYPE_TEXTS.length; ++i) {
+                out.println(String.format("%d. %s", i + 1, WAREHOUSE_TYPE_TEXTS[i]));
             }
-            out.print(sb.toString());
-
 
             int chooseWarehouseNum;
             try {
@@ -57,7 +50,7 @@ public final class App {
                 continue;
             }
 
-            if (1 <= chooseWarehouseNum && chooseWarehouseNum <= WAREHOUSE_TYPES.length) {
+            if (1 <= chooseWarehouseNum && chooseWarehouseNum <= WAREHOUSE_TYPE_TEXTS.length) {
                 warehouse = new Warehouse(WAREHOUSE_TYPES[chooseWarehouseNum - 1]);
                 break;
             }
