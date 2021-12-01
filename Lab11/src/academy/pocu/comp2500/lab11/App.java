@@ -93,17 +93,14 @@ public final class App {
 
             if (1 <= chooseProductNum && chooseProductNum <= products.size()) {
                 final Product product = products.get(chooseProductNum - 1);
-                if (product.getPrice() > wallet.getAmount()) {
-                    throw new OverflowException("price > amount");
-                }
+
+                wallet.withdraw(product.getPrice());
 
                 try {
                     warehouse.removeProduct(product.getId());
                 } catch (ProductNotFoundException e) {
-                    continue;
+                    wallet.deposit(product.getPrice());
                 }
-
-                wallet.withdraw(product.getPrice());
             }
         }
     }
