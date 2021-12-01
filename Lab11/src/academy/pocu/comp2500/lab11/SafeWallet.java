@@ -17,12 +17,4 @@ public final class SafeWallet extends Wallet {
 
         return super.deposit(amount);
     }
-
-    public final boolean withdraw(final int amount) {
-        if (this.getAmount() < amount) {
-            throw new UnderflowException("withdraw(final int amount): this.getAmount() < amount");
-        }
-
-        return super.withdraw(amount);
-    }
 }

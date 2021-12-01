@@ -94,10 +94,8 @@ public final class App {
             if (1 <= chooseProductNum && chooseProductNum <= products.size()) {
                 final Product product = products.get(chooseProductNum - 1);
 
-                try {
-                    wallet.withdraw(product.getPrice());
-                } catch (UnderflowException e) {
-                    return;
+                if (!wallet.withdraw(product.getPrice())) {
+                    continue;
                 }
 
                 try {
