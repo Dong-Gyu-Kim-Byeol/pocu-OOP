@@ -35,7 +35,7 @@ public final class App {
         while (true) {
             out.println(WAREHOUSE_START_TEXT);
             for (int i = 0; i < WAREHOUSE_TYPE_TEXTS.length; ++i) {
-                out.printf("%d. %s%s", i + 1, WAREHOUSE_TYPE_TEXTS[i], System.lineSeparator());
+                out.println(String.format("%d. %s", i + 1, WAREHOUSE_TYPE_TEXTS[i]));
             }
 
             int chooseWarehouseNum;
@@ -67,13 +67,13 @@ public final class App {
         // Choose the product
         while (true) {
             // print BALANCE
-            out.printf("%s%d%s", BALANCE_TEXT, wallet.getAmount(), System.lineSeparator());
+            out.println(String.format("%s%d", BALANCE_TEXT, wallet.getAmount()));
 
             // print product
             out.println(PRODUCT_LIST_START_TEXT);
             final ArrayList<Product> products = warehouse.getProducts();
             for (int i = 0; i < products.size(); ++i) {
-                out.printf("%d. %-20s%5d%s", i + 1, products.get(i).getName(), products.get(i).getPrice(), System.lineSeparator());
+                out.println(String.format("%d. %-20s%5d", i + 1, products.get(i).getName(), products.get(i).getPrice()));
             }
 
             int chooseProductNum;
