@@ -49,7 +49,7 @@ public class Wallet {
     }
 
     private static int retrieveAmountMock() {
-        return 100;
+        return 10;
     }
 
     private static HashSet<Department> retrieveDepartmentsMock() {
