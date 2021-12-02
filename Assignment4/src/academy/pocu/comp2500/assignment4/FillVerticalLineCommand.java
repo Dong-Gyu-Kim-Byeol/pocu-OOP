@@ -19,6 +19,10 @@ public class FillVerticalLineCommand extends CommandBase {
 
     @Override
     protected final boolean doOperation(final Canvas canvas) {
+        if (this.x < 0 || canvas.getWidth() <= this.x) {
+            return false;
+        }
+
         if (this.backup == null) {
             this.backup = new char[canvas.getHeight()];
             for (int y = 0; y < canvas.getHeight(); ++y) {

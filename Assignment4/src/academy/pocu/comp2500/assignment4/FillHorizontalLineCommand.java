@@ -19,6 +19,10 @@ public class FillHorizontalLineCommand extends CommandBase {
 
     @Override
     protected final boolean doOperation(final Canvas canvas) {
+        if (this.y < 0 || canvas.getWidth() <= this.y) {
+            return false;
+        }
+
         if (this.backup == null) {
             this.backup = new char[canvas.getWidth()];
             for (int x = 0; x < canvas.getWidth(); ++x) {
