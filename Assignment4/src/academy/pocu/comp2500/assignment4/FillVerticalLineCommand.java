@@ -18,7 +18,7 @@ public class FillVerticalLineCommand extends CommandBase {
     // ---
 
     @Override
-    protected final void doOperation(final Canvas canvas) {
+    protected final boolean doOperation(final Canvas canvas) {
         if (this.backup == null) {
             this.backup = new char[canvas.getHeight()];
             for (int y = 0; y < canvas.getHeight(); ++y) {
@@ -30,6 +30,7 @@ public class FillVerticalLineCommand extends CommandBase {
             assert (this.backup[y] == canvas.getPixel(this.x, y));
         }
         canvas.fillVerticalLine(this.x, this.character);
+        return true;
     }
 
     @Override

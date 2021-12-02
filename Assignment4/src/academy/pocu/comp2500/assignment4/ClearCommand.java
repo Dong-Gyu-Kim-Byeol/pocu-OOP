@@ -12,7 +12,7 @@ public final class ClearCommand extends CommandBase {
     // ---
 
     @Override
-    protected final void doOperation(final Canvas canvas) {
+    protected final boolean doOperation(final Canvas canvas) {
         if (backup == null) {
             this.backup = new char[canvas.getHeight()][canvas.getWidth()];
 
@@ -30,6 +30,7 @@ public final class ClearCommand extends CommandBase {
         }
 
         canvas.clear();
+        return true;
     }
 
     @Override

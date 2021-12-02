@@ -16,9 +16,8 @@ public abstract class CommandBase implements ICommand {
         }
 
         this.canvas = canvas;
-        doOperation(this.canvas);
-        canUndo = true;
-        return true;
+        canUndo = doOperation(this.canvas);;
+        return canUndo;
     }
 
     @Override
@@ -45,15 +44,14 @@ public abstract class CommandBase implements ICommand {
         if (canUndo) {
             return false;
         }
-
-        doOperation(this.canvas);
-        canUndo = true;
-        return true;
+;
+        canUndo = doOperation(this.canvas);
+        return canUndo;
     }
 
     // ---
 
-    protected abstract void doOperation(final Canvas canvas);
+    protected abstract boolean doOperation(final Canvas canvas);
 
     protected abstract void undoOperation(final Canvas canvas);
 

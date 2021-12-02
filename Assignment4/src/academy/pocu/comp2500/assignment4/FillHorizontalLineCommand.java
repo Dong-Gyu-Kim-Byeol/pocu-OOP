@@ -18,7 +18,7 @@ public class FillHorizontalLineCommand extends CommandBase {
     // ---
 
     @Override
-    protected final void doOperation(final Canvas canvas) {
+    protected final boolean doOperation(final Canvas canvas) {
         if (this.backup == null) {
             this.backup = new char[canvas.getWidth()];
             for (int x = 0; x < canvas.getWidth(); ++x) {
@@ -30,6 +30,7 @@ public class FillHorizontalLineCommand extends CommandBase {
             assert (this.backup[x] == canvas.getPixel(x, this.y));
         }
         canvas.fillHorizontalLine(this.y, this.character);
+        return true;
     }
 
     @Override

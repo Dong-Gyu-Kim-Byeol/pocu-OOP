@@ -16,10 +16,13 @@ public final class CommandHistoryManager {
     // ---
 
     public final boolean execute(final ICommand command) {
-        this.canUndoCommands.addLast(command);
-        this.canRedoCommands.clear();
+        if (command.execute(this.canvas)) {
+            this.canUndoCommands.addLast(command);
+            this.canRedoCommands.clear();
+            return true;
+        }
 
-        return command.execute(this.canvas);
+        return false;
     }
 
     public final boolean canUndo() {

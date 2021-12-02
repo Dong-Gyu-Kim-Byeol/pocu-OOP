@@ -21,13 +21,14 @@ public final class DrawPixelCommand extends CommandBase {
     // ---
 
     @Override
-    protected final void doOperation(final Canvas canvas) {
+    protected final boolean doOperation(final Canvas canvas) {
         if (this.backup == 0) {
             this.backup = canvas.getPixel(this.x, this.y);
         }
 
         assert (this.backup == canvas.getPixel(this.x, this.y));
         canvas.drawPixel(this.x, this.y, this.character);
+        return true;
     }
 
     @Override
