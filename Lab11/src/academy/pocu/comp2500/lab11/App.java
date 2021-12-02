@@ -8,11 +8,11 @@ import academy.pocu.comp2500.lab11.pocu.WarehouseType;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public final class App {
     private static final String APP_EXIT_TEXT = "exit";
+    private static final String AUTH_ERROR_TEXT = "AUTH_ERROR";
 
     private static final String WAREHOUSE_START_TEXT = "WAREHOUSE: Choose your warehouse!";
     private static final WarehouseType[] WAREHOUSE_TYPES = WarehouseType.values();
@@ -35,7 +35,6 @@ public final class App {
         while (true) {
             out.printf("%s%s", WAREHOUSE_START_TEXT, System.lineSeparator());
             for (int i = 0; i < WAREHOUSE_TYPES.length; ++i) {
-//                out.println(String.format("%d. %s", i + 1, WAREHOUSE_TYPE_TEXTS[i]));
                 out.printf("%d. %s%s", i + 1, WAREHOUSE_TYPES[i].toString(), System.lineSeparator());
             }
 
@@ -63,7 +62,7 @@ public final class App {
         try {
             wallet = new SafeWallet(user);
         } catch (IllegalAccessException e) {
-            err.println("AUTH_ERROR");
+            err.println(AUTH_ERROR_TEXT);
             return;
         }
 
@@ -91,6 +90,7 @@ public final class App {
                 continue;
             }
 
+            // buy
             if (1 <= chooseProductNum && chooseProductNum <= products.size()) {
                 final Product product = products.get(chooseProductNum - 1);
 
