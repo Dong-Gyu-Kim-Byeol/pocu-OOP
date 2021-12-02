@@ -35,12 +35,14 @@ public final class CommandHistoryManager {
         }
 
         final ICommand command = this.canUndoCommands.getLast();
-        this.canUndoCommands.removeLast();
 
-        final boolean out = command.undo();
-        this.canRedoCommands.addFirst(command);
+        if (command.undo()) {
+            this.canRedoCommands.addFirst(command);
+            this.canUndoCommands.removeLast();
+            return true;
+        }
 
-        return out;
+        return false;
     }
 
     public final boolean canRedo() {
@@ -53,12 +55,15 @@ public final class CommandHistoryManager {
         }
 
         final ICommand command = this.canRedoCommands.getFirst();
-        this.canRedoCommands.removeFirst();
 
-        final boolean out = command.redo();
-        this.canUndoCommands.addLast(command);
 
-        return out;
+        if (command.redo()) {
+            this.canUndoCommands.addLast(command);
+            this.canRedoCommands.removeFirst();
+            return true;
+        }
+
+        return false;
     }
 
 }

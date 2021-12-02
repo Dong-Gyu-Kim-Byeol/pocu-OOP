@@ -1,8 +1,9 @@
 package academy.pocu.comp2500.assignment4;
 
 public abstract class CommandBase implements ICommand {
-    private boolean canUndo;
+    private boolean canUndoTry;
     private Canvas canvas;
+    private char[][] lastWorkedBackup;
 
     protected CommandBase() {
     }
@@ -16,8 +17,12 @@ public abstract class CommandBase implements ICommand {
         }
 
         this.canvas = canvas;
-        canUndo = doOperation(this.canvas);;
-        return canUndo;
+        this.lastWorkedBackup = new char[canvas.getHeight()][canvas.getWidth()];
+
+        canUndoTry = doOperation(this.canvas);
+
+        setLastWorkedBackup();
+        return canUndoTry;
     }
 
     @Override
@@ -26,13 +31,19 @@ public abstract class CommandBase implements ICommand {
             return false;
         }
 
-        if (!canUndo) {
+        if (!canUndoTry) {
             return false;
         }
 
-        undoOperation(this.canvas);
-        canUndo = false;
-        return true;
+        if (checkCanUpdate()) {
+            undoOperation(this.canvas);
+            canUndoTry = false;
+
+            setLastWorkedBackup();
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -41,12 +52,18 @@ public abstract class CommandBase implements ICommand {
             return false;
         }
 
-        if (canUndo) {
+        if (canUndoTry) {
             return false;
         }
-;
-        canUndo = doOperation(this.canvas);
-        return canUndo;
+
+        if (checkCanUpdate()) {
+            canUndoTry = doOperation(this.canvas);
+
+            setLastWorkedBackup();
+            return canUndoTry;
+        }
+
+        return false;
     }
 
     // ---
@@ -54,5 +71,27 @@ public abstract class CommandBase implements ICommand {
     protected abstract boolean doOperation(final Canvas canvas);
 
     protected abstract void undoOperation(final Canvas canvas);
+
+    // ---
+
+    private boolean checkCanUpdate() {
+        for (int y = 0; y < canvas.getHeight(); ++y) {
+            for (int x = 0; x < canvas.getWidth(); ++x) {
+                if (this.lastWorkedBackup[y][x] != canvas.getPixel(x, y)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private void setLastWorkedBackup() {
+        for (int y = 0; y < canvas.getHeight(); ++y) {
+            for (int x = 0; x < canvas.getWidth(); ++x) {
+                this.lastWorkedBackup[y][x] = canvas.getPixel(x, y);
+            }
+        }
+    }
 
 }

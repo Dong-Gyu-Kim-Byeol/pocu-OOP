@@ -90,6 +90,57 @@ public class Program {
             System.out.print(analyzer.getDrawing());
             System.out.println(analyzer.getPixelHistory(0, 1)); // 오류 생기는 부분 직접 입력
         }
+
+        {
+            // 2021년 1월 학기 BasicUndoOrder, BasicRedoOrder 테스트 ================= 시작
+            Canvas canvas = new Canvas(20, 10);
+            CommandHistoryManager chm = new CommandHistoryManager(canvas);
+            ArrayList<ICommand> commandList = new ArrayList<>();
+            commandList.add(new DrawPixelCommand(1, 2, '3'));
+            commandList.add(new DecreasePixelCommand(1, 2));
+            commandList.add(new IncreasePixelCommand(1, 2));
+            commandList.add(new FillHorizontalLineCommand(3, 'h'));
+            commandList.add(new FillVerticalLineCommand(3, 'h'));
+            commandList.add(new ToUpperCommand(3, 2));
+            commandList.add(new ToLowerCommand(3, 2));
+            commandList.add(new ClearCommand());
+            for (ICommand command : commandList) {
+                assert (chm.execute(command) == true);
+                assert (chm.undo() == true);
+                assert (chm.redo() == true);
+                canvas.drawPixel(9, 9, '5');
+                assert (chm.undo() == false);
+                canvas.drawPixel(9, 9, ' ');
+                assert (chm.undo() == true);
+                canvas.drawPixel(9, 9, '5');
+                assert (chm.redo() == false);
+                canvas.drawPixel(9, 9, ' ');
+                assert (chm.redo() == true);
+            }
+            // 2021년 1월 학기 BasicUndoOrder, BasicRedoOrder 테스트 ================= 끝
+        }
+
+        {
+            // BasicUndoOrder, BasicRedoOrder 테스트 케이스 추가 by 카이지
+
+            Canvas canvas = new Canvas(20, 10);
+            CommandHistoryManager chm = new CommandHistoryManager(canvas);
+            DrawPixelCommand c1 = new DrawPixelCommand(1, 2, '1');
+            DrawPixelCommand c2 = new DrawPixelCommand(3, 5, '2');
+
+            assert (chm.execute(c1) == true);
+            assert (chm.execute(c2) == true);
+
+            assert (chm.undo() == true);
+            assert (chm.redo() == true);
+
+            assert (chm.undo() == true);
+
+            canvas.drawPixel(1, 2, '5');
+
+            assert (chm.undo() == false);
+//            assert (chm.redo() == true); ??
+        }
     }
 
 
