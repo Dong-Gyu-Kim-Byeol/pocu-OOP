@@ -1,5 +1,6 @@
 package academy.pocu.comp2500.assignment4.app;
 
+import academy.pocu.comp2500.assignment4.App;
 import academy.pocu.comp2500.assignment4.Canvas;
 import academy.pocu.comp2500.assignment4.ClearCommand;
 import academy.pocu.comp2500.assignment4.CommandHistoryManager;
@@ -12,12 +13,19 @@ import academy.pocu.comp2500.assignment4.IncreasePixelCommand;
 import academy.pocu.comp2500.assignment4.OverdrawAnalyzer;
 import academy.pocu.comp2500.assignment4.ToLowerCommand;
 import academy.pocu.comp2500.assignment4.ToUpperCommand;
+import academy.pocu.comp2500.assignment4.registry.Registry;
 
 import java.util.ArrayList;
 
 public class Program {
 
     public static void main(String[] args) {
+        {
+            Registry registry = new Registry();
+            App app = new App(registry);
+            registry.validate();
+        }
+
         {
             Canvas canvas = new Canvas(10, 10);
 
