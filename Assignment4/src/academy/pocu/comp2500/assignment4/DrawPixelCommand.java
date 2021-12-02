@@ -3,6 +3,7 @@ package academy.pocu.comp2500.assignment4;
 
 public final class DrawPixelCommand extends CommandBase {
     private char backup;
+    private char lastWorkedBackup;
 
     private final char character;
     private final int x;
@@ -41,5 +42,19 @@ public final class DrawPixelCommand extends CommandBase {
     @Override
     protected final void undoOperation(final Canvas canvas) {
         canvas.drawPixel(this.x, this.y, this.backup);
+    }
+
+    @Override
+    protected final boolean checkCanUpdate(final Canvas canvas) {
+        if (this.backup == 0) {
+            return false;
+        }
+
+        return this.lastWorkedBackup == canvas.getPixel(this.x, this.y);
+    }
+
+    @Override
+    protected final void setLastWorkedBackup(final Canvas canvas) {
+        this.lastWorkedBackup = canvas.getPixel(this.x, this.y);
     }
 }
