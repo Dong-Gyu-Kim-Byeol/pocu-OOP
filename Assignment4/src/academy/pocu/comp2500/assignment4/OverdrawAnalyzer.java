@@ -27,8 +27,10 @@ public final class OverdrawAnalyzer extends Canvas {
             return;
         }
 
-        final LinkedList<Character> history = getPixelHistory(x, y);
-        history.addLast(character);
+        if (this.historyArray != null) {
+            final LinkedList<Character> history = getPixelHistory(x, y);
+            history.addLast(character);
+        }
 
         super.drawPixel(x, y, character);
     }

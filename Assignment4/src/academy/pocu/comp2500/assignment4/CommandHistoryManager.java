@@ -4,13 +4,11 @@ import java.util.LinkedList;
 
 public final class CommandHistoryManager {
     private final Canvas canvas;
-    private final LinkedList<ICommand> commands;
     private final LinkedList<ICommand> canUndoCommands;
     private final LinkedList<ICommand> canRedoCommands;
 
     public CommandHistoryManager(final Canvas canvas) {
         this.canvas = canvas;
-        this.commands = new LinkedList<>();
         this.canUndoCommands = new LinkedList<>();
         this.canRedoCommands = new LinkedList<>();
     }
