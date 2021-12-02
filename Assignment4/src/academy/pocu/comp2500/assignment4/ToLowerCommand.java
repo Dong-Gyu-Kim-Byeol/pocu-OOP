@@ -19,10 +19,10 @@ public class ToLowerCommand extends CommandBase {
 
     @Override
     protected final boolean doOperation(final Canvas canvas) {
-        if (xIsValid(this.x)) {
+        if (!xIsValid(this.x)) {
             return false;
         }
-        if (yIsValid(this.y)) {
+        if (!yIsValid(this.y)) {
             return false;
         }
 

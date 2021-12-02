@@ -19,7 +19,7 @@ public class FillHorizontalLineCommand extends CommandBase {
 
     @Override
     protected final boolean doOperation(final Canvas canvas) {
-        if (yIsValid(this.y)) {
+        if (!yIsValid(this.y)) {
             return false;
         }
 
