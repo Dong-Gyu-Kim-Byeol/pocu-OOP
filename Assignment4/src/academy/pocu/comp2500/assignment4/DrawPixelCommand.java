@@ -25,7 +25,7 @@ public final class DrawPixelCommand extends CommandBase {
         if (this.x < 0 || canvas.getWidth() <= this.x) {
             return false;
         }
-        if (this.y < 0 || canvas.getWidth() <= this.y) {
+        if (this.y < 0 || canvas.getHeight() <= this.y) {
             return false;
         }
 

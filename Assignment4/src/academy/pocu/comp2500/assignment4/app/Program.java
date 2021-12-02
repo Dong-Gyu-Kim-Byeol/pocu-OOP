@@ -39,7 +39,7 @@ public class Program {
         // 추가 테스트 1
         {
             OverdrawAnalyzer analyzer = new OverdrawAnalyzer(6, 6);
-            CommandHistoryManager manager = new CommandHistoryManager((Canvas) analyzer);
+            CommandHistoryManager manager = new CommandHistoryManager(analyzer);
 
             ArrayList<ICommand> commands = new ArrayList<>();
             commands.add(new ClearCommand());
@@ -105,17 +105,17 @@ public class Program {
             commandList.add(new ToLowerCommand(3, 2));
             commandList.add(new ClearCommand());
             for (ICommand command : commandList) {
-                assert (chm.execute(command) == true);
-                assert (chm.undo() == true);
-                assert (chm.redo() == true);
+                assert (chm.execute(command));
+                assert (chm.undo());
+                assert (chm.redo());
                 canvas.drawPixel(9, 9, '5');
-                assert (chm.undo() == false);
+                assert (!chm.undo());
                 canvas.drawPixel(9, 9, ' ');
-                assert (chm.undo() == true);
+                assert (chm.undo());
                 canvas.drawPixel(9, 9, '5');
-                assert (chm.redo() == false);
+                assert (!chm.redo());
                 canvas.drawPixel(9, 9, ' ');
-                assert (chm.redo() == true);
+                assert (chm.redo());
             }
             // 2021년 1월 학기 BasicUndoOrder, BasicRedoOrder 테스트 ================= 끝
         }
@@ -128,18 +128,84 @@ public class Program {
             DrawPixelCommand c1 = new DrawPixelCommand(1, 2, '1');
             DrawPixelCommand c2 = new DrawPixelCommand(3, 5, '2');
 
-            assert (chm.execute(c1) == true);
-            assert (chm.execute(c2) == true);
+            assert (chm.execute(c1));
+            assert (chm.execute(c2));
 
-            assert (chm.undo() == true);
-            assert (chm.redo() == true);
+            assert (chm.undo());
+            assert (chm.redo());
 
-            assert (chm.undo() == true);
+            assert (chm.undo());
 
             canvas.drawPixel(1, 2, '5');
 
-            assert (chm.undo() == false);
+            assert (!chm.undo());
 //            assert (chm.redo() == true); ??
+        }
+
+        {
+            // 올바른 결과:
+            // +-------------------------+
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |LLLLLLLLLLLLLLLLnLzLLLLLL|
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |                n z      |
+            // |5555555555555555555555555|
+            // |                n z      |
+            // |                n z      |
+            // +-------------------------+
+            //
+            // 1. drawPixel(12, 20, r)
+            // 2. clear()
+            // 3. redo
+            // 4. fillHorizontalLine(8, L)
+            // 5. redo
+            // 6. fillVerticalLine(18, z)
+            // 7. fillVerticalLine(16, n)
+            // 8. fillHorizontalLine(27, 5)
+
+            Canvas canvas = new Canvas(25, 30);
+            CommandHistoryManager chm = new CommandHistoryManager(canvas);
+
+            System.out.println(canvas.getDrawing());
+            chm.execute(new DrawPixelCommand(12, 20, 'r'));
+            System.out.println(canvas.getDrawing());
+            chm.execute(new ClearCommand());
+            System.out.println(canvas.getDrawing());
+            chm.redo();
+            System.out.println(canvas.getDrawing());
+            chm.execute(new FillHorizontalLineCommand(8, 'L'));
+            System.out.println(canvas.getDrawing());
+            chm.redo();
+            System.out.println(canvas.getDrawing());
+            chm.execute(new FillVerticalLineCommand(18, 'z'));
+            System.out.println(canvas.getDrawing());
+            chm.execute(new FillVerticalLineCommand(16, 'n'));
+            System.out.println(canvas.getDrawing());
+            chm.execute(new FillHorizontalLineCommand(27, '5'));
+            System.out.println(canvas.getDrawing());
         }
     }
 
