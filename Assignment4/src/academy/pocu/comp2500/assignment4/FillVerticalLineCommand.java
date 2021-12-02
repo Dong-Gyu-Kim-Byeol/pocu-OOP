@@ -19,7 +19,7 @@ public class FillVerticalLineCommand extends CommandBase {
 
     @Override
     protected final boolean doOperation(final Canvas canvas) {
-        if (this.x < 0 || canvas.getWidth() <= this.x) {
+        if (xIsValid(this.x)) {
             return false;
         }
 

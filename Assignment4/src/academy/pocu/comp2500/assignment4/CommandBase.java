@@ -119,6 +119,16 @@ public abstract class CommandBase implements ICommand {
 
     // ---
 
+    protected final boolean xIsValid(final int x) {
+        return 0 <= x && x < canvas.getWidth();
+    }
+
+    protected final boolean yIsValid(final int y) {
+        return 0 <= y && y < canvas.getHeight();
+    }
+
+    // ---
+
     protected abstract boolean doOperation(final Canvas canvas);
 
     protected abstract void undoOperation(final Canvas canvas);
