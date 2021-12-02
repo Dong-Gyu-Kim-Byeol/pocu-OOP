@@ -46,10 +46,10 @@ package academy.pocu.comp2500.assignment4;
 // 이렇듯 '유효한 연산을 책임지는 주체가 누구인가?'
 // (예: 히스토리 매니저 vs 각 커맨드 vs 이걸 사용하는 프로그래머)라는 주제는 언제나 정답이 없고 여러 가지 측면을 고려한 뒤, 팀 내 합의를 통해 진행하는 게 옳습니다.
 
-
 public abstract class CommandBase implements ICommand {
     private boolean canUndoTry;
     private Canvas canvas;
+    private char[][] lastWorkedBackup;
 
     protected CommandBase() {
     }
@@ -66,7 +66,8 @@ public abstract class CommandBase implements ICommand {
         canUndoTry = doOperation(this.canvas);
 
         if (canUndoTry) {
-            setLastWorkedBackup(this.canvas);
+            this.lastWorkedBackup = new char[canvas.getHeight()][canvas.getWidth()];
+            setLastWorkedBackup();
         }
 
         return canUndoTry;
@@ -82,11 +83,11 @@ public abstract class CommandBase implements ICommand {
             return false;
         }
 
-        if (checkCanUpdate(this.canvas)) {
+        if (checkCanUpdate()) {
             undoOperation(this.canvas);
             canUndoTry = false;
 
-            setLastWorkedBackup(this.canvas);
+            setLastWorkedBackup();
             return true;
         }
 
@@ -103,10 +104,11 @@ public abstract class CommandBase implements ICommand {
             return false;
         }
 
-        if (checkCanUpdate(this.canvas)) {
+        if (checkCanUpdate()) {
             canUndoTry = doOperation(this.canvas);
+
             if (canUndoTry) {
-                setLastWorkedBackup(this.canvas);
+                setLastWorkedBackup();
             }
 
             return canUndoTry;
@@ -117,21 +119,34 @@ public abstract class CommandBase implements ICommand {
 
     // ---
 
-    protected final boolean xIsValid(final int x) {
-        return 0 <= x && x < canvas.getWidth();
-    }
-
-    protected final boolean yIsValid(final int y) {
-        return 0 <= y && y < canvas.getHeight();
-    }
-
-    // ----
-
     protected abstract boolean doOperation(final Canvas canvas);
 
     protected abstract void undoOperation(final Canvas canvas);
 
-    protected abstract boolean checkCanUpdate(final Canvas canvas);
+    // ---
 
-    protected abstract void setLastWorkedBackup(final Canvas canvas);
+    private boolean checkCanUpdate() {
+        if (this.lastWorkedBackup == null) {
+            return false;
+        }
+
+        for (int y = 0; y < canvas.getHeight(); ++y) {
+            for (int x = 0; x < canvas.getWidth(); ++x) {
+                if (this.lastWorkedBackup[y][x] != canvas.getPixel(x, y)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private void setLastWorkedBackup() {
+        for (int y = 0; y < canvas.getHeight(); ++y) {
+            for (int x = 0; x < canvas.getWidth(); ++x) {
+                this.lastWorkedBackup[y][x] = canvas.getPixel(x, y);
+            }
+        }
+    }
+
 }
