@@ -20,7 +20,7 @@ public class FillVerticalLineCommand extends CommandBase {
 
     @Override
     protected final boolean doOperation(final Canvas canvas) {
-        if (this.x < 0 || canvas.getWidth() <= this.x) {
+        if (!xIsValid(this.x)) {
             return false;
         }
 
@@ -49,6 +49,10 @@ public class FillVerticalLineCommand extends CommandBase {
 
     @Override
     protected final boolean checkCanUpdate(final Canvas canvas) {
+        if (this.backup == null) {
+            return false;
+        }
+
         for (int y = 0; y < canvas.getHeight(); ++y) {
             if (this.lastWorkedBackup[y] != canvas.getPixel(this.x, y)) {
                 return false;

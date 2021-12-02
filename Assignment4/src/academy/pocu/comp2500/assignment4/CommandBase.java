@@ -65,7 +65,10 @@ public abstract class CommandBase implements ICommand {
         this.canvas = canvas;
         canUndoTry = doOperation(this.canvas);
 
-        setLastWorkedBackup(this.canvas);
+        if (canUndoTry) {
+            setLastWorkedBackup(this.canvas);
+        }
+
         return canUndoTry;
     }
 
@@ -102,8 +105,10 @@ public abstract class CommandBase implements ICommand {
 
         if (checkCanUpdate(this.canvas)) {
             canUndoTry = doOperation(this.canvas);
+            if (canUndoTry) {
+                setLastWorkedBackup(this.canvas);
+            }
 
-            setLastWorkedBackup(this.canvas);
             return canUndoTry;
         }
 
@@ -112,6 +117,16 @@ public abstract class CommandBase implements ICommand {
 
     // ---
 
+    protected final boolean xIsValid(final int x) {
+        return 0 <= x && x < canvas.getWidth();
+    }
+
+    protected final boolean yIsValid(final int y) {
+        return 0 <= y && y < canvas.getHeight();
+    }
+
+    // ----
+
     protected abstract boolean doOperation(final Canvas canvas);
 
     protected abstract void undoOperation(final Canvas canvas);
@@ -119,5 +134,4 @@ public abstract class CommandBase implements ICommand {
     protected abstract boolean checkCanUpdate(final Canvas canvas);
 
     protected abstract void setLastWorkedBackup(final Canvas canvas);
-
 }

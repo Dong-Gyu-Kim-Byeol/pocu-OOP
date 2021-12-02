@@ -20,7 +20,7 @@ public class FillHorizontalLineCommand extends CommandBase {
 
     @Override
     protected final boolean doOperation(final Canvas canvas) {
-        if (this.y < 0 || canvas.getHeight() <= this.y) {
+        if (!yIsValid(this.y)) {
             return false;
         }
 
@@ -49,6 +49,10 @@ public class FillHorizontalLineCommand extends CommandBase {
 
     @Override
     protected final boolean checkCanUpdate(final Canvas canvas) {
+        if (this.backup == null) {
+            return false;
+        }
+
         for (int x = 0; x < canvas.getWidth(); ++x) {
             if (this.lastWorkedBackup[x] != canvas.getPixel(x, this.y)) {
                 return false;
