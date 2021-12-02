@@ -45,7 +45,16 @@ package academy.pocu.comp2500.assignment4;
 //
 // 이렇듯 '유효한 연산을 책임지는 주체가 누구인가?'
 // (예: 히스토리 매니저 vs 각 커맨드 vs 이걸 사용하는 프로그래머)라는 주제는 언제나 정답이 없고 여러 가지 측면을 고려한 뒤, 팀 내 합의를 통해 진행하는 게 옳습니다.
-
+//
+// 김동규 개체  20시간 전
+// "그나마 유효성 검사"는
+// 각 커맨드들이 덮어쓰기하는 부분 픽셀만 검사하는걸 뜻하나요?
+// 아니면
+// 각 커맨드들이 캔버스 픽셀 전체를 검사하고
+// undo와 redo의 불명확성(?)같은 커맨드 히스토리를 거치지 않아서 생기는 문제를 불리언으로 해결한 것을 뜻하나나요?
+//
+// [강사] 포프  20시간 전
+// 덮어쓰기 하는 부분만 검사하는 걸 의미합니다.
 
 public abstract class CommandBase implements ICommand {
     private boolean canUndoTry;
@@ -125,7 +134,7 @@ public abstract class CommandBase implements ICommand {
         return 0 <= y && y < canvas.getHeight();
     }
 
-    // ----
+    // ---
 
     protected abstract boolean doOperation(final Canvas canvas);
 
