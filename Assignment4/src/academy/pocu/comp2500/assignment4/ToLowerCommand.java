@@ -1,6 +1,6 @@
 package academy.pocu.comp2500.assignment4;
 
-public class ToLowerCommand extends CommandBase{
+public class ToLowerCommand extends CommandBase {
     private char backup;
 
     private final int x;
