@@ -1,5 +1,7 @@
 # pocu OOP
    
+2021년 9월 ~ 12월   
+   
 과제(Assignment)가 실습(Lab) 보다 난이도가 높은 학습 과제 입니다.   
    
 Assignment1 : 블로그 시스템의 OOP (클래스 간의 관계)   
